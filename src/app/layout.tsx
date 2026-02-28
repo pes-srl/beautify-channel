@@ -15,6 +15,7 @@ export const metadata: Metadata = {
 import { HeaderNew } from "@/components/homepagenew/HeaderNew";
 import { FooterNew } from "@/components/homepagenew/FooterNew";
 import { AuthHashCatcher } from "@/components/AuthHashCatcher";
+import { Toaster } from "@/components/ui/sonner";
 
 import { createClient } from "@/utils/supabase/server";
 
@@ -47,6 +48,7 @@ export default async function RootLayout({
           {children}
         </div>
         <FooterNew />
+        <Toaster position="bottom-right" richColors theme="dark" />
       </body>
     </html>
   );

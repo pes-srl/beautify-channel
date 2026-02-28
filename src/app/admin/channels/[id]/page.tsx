@@ -12,6 +12,7 @@ import { format } from "date-fns";
 import { it } from "date-fns/locale";
 import { Badge } from "@/components/ui/badge";
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { MediaLibraryModal } from "@/components/admin/MediaLibraryModal";
 
 interface ChannelData {
     id: string;
@@ -21,6 +22,7 @@ interface ChannelData {
     stream_url_mp3_mobile: string | null;
     subtitle: string | null;
     slug: string | null;
+    card_image_url: string | null;
     is_active: boolean;
     created_at: string;
 }
@@ -304,14 +306,28 @@ export default function SingleChannelAdminPage() {
                                     />
                                 </div>
                                 <div className="space-y-2">
-                                    <Label htmlFor="slug" className="text-zinc-300 font-medium">Slug URL</Label>
-                                    <Input
-                                        id="slug"
-                                        value={channel.slug || ""}
-                                        onChange={(e) => handleInputChange("slug", e.target.value)}
-                                        className="bg-zinc-950 border-white/10 focus-visible:ring-fuchsia-500/50 text-zinc-400 font-mono text-sm"
-                                        placeholder="es. radio-relax"
-                                    />
+                                    <Label htmlFor="card_image" className="text-zinc-300 font-medium whitespace-nowrap">Immagine Copertina</Label>
+                                    <div className="flex gap-2">
+                                        <Input
+                                            id="card_image"
+                                            value={channel.card_image_url || ""}
+                                            onChange={(e) => handleInputChange("card_image_url", e.target.value)}
+                                            className="bg-zinc-950 border-white/10 focus-visible:ring-fuchsia-500/50 text-fuchsia-200 font-mono text-sm flex-1"
+                                            placeholder="https://.../logo.png"
+                                        />
+                                        <MediaLibraryModal
+                                            onSelectImage={(url) => handleInputChange("card_image_url", url)}
+                                        />
+                                    </div>
+                                    {channel.card_image_url && (
+                                        <div className="mt-2 w-16 h-16 rounded-md bg-black border border-white/10 overflow-hidden relative group">
+                                            {/* eslint-disable-next-line @next/next/no-img-element */}
+                                            <img src={channel.card_image_url} alt="Cover Preview" className="w-full h-full object-cover" />
+                                            <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity cursor-pointer text-xs text-red-400 hover:text-red-300" onClick={() => handleInputChange("card_image_url", "")}>
+                                                X
+                                            </div>
+                                        </div>
+                                    )}
                                 </div>
                             </div>
 

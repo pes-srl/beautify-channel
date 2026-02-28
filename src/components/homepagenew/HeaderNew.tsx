@@ -25,11 +25,6 @@ export function HeaderNew({
 } = {}) {
     const pathname = usePathname();
 
-    // Do not render the public header inside the Admin dashboard
-    if (pathname?.startsWith("/admin")) {
-        return null;
-    }
-
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -148,49 +143,37 @@ export function HeaderNew({
         { name: "Vantaggi", href: "#" },
         { name: "Servizio", href: "#" },
         { name: "Prezzo", href: "#pricing" },
-        { name: "Contatto WhatsApp", href: "#" },
     ];
 
     return (
         <header
-            className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b border-transparent ${isScrolled || pathname?.startsWith("/area-riservata") ? "bg-zinc-950/80 backdrop-blur-lg border-white/10 shadow-lg" : "bg-transparent py-4"
+            className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b border-transparent ${isScrolled || pathname?.startsWith("/area-riservata") || pathname?.startsWith("/admin") ? "bg-zinc-950/80 backdrop-blur-lg border-white/10 shadow-lg" : "bg-transparent py-4"
                 }`}
         >
             <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-                {/* Logo - Hide only in admin if sidebar has it, or keep it consistent? 
-                    User asked for "Header del Admin", and Admin Header has no logo on the Left.
-                    But they also said they missed it on the left in Area Riservata.
-                */}
+                {/* Logo */}
                 <div className="flex items-center gap-2">
                     <Link href="/" className="flex items-center gap-2 group">
-                        {pathname?.startsWith("/admin") ? (
-                            <span className="font-bold text-lg bg-linear-to-r from-fuchsia-400 to-indigo-500 text-transparent bg-clip-text">
-                                Beautify Admin
-                            </span>
-                        ) : (
-                            <img
-                                src="https://eufahlzjxbimyiwivoiq.supabase.co/storage/v1/object/public/bucket-assets/Logo-BeautiFyChannel.svg"
-                                alt="Beautify Channel Logo"
-                                className="h-7 w-auto md:h-8 group-hover:scale-105 transition-transform"
-                            />
-                        )}
+                        <img
+                            src="https://eufahlzjxbimyiwivoiq.supabase.co/storage/v1/object/public/bucket-assets/Logo-BeautiFyChannel.svg"
+                            alt="Beautify Channel Logo"
+                            className="h-7 w-auto md:h-8 group-hover:scale-105 transition-transform"
+                        />
                     </Link>
                 </div>
 
-                {/* Desktop Nav - Only show on public pages */}
-                {!pathname?.startsWith("/area-riservata") && (
-                    <nav className="hidden md:flex flex-1 items-center justify-center gap-8">
-                        {navLinks.map((link) => (
-                            <Link
-                                key={link.name}
-                                href={link.href}
-                                className="text-sm font-medium text-zinc-300 hover:text-white transition-colors"
-                            >
-                                {link.name}
-                            </Link>
-                        ))}
-                    </nav>
-                )}
+                {/* Desktop Nav - Show on all pages */}
+                <nav className="hidden md:flex flex-1 items-center justify-center gap-8">
+                    {navLinks.map((link) => (
+                        <Link
+                            key={link.name}
+                            href={link.href}
+                            className="text-sm font-medium text-zinc-300 hover:text-white transition-colors"
+                        >
+                            {link.name}
+                        </Link>
+                    ))}
+                </nav>
 
                 {/* Right Side Buttons & Avatar */}
                 <div className="flex items-center gap-4 ml-auto md:ml-0 flex-1 justify-end">
@@ -226,7 +209,7 @@ export function HeaderNew({
                                         <DropdownMenuItem asChild className="cursor-pointer focus:bg-white/10 rounded-lg px-3 py-2.5">
                                             <Link href="/admin" className="flex items-center gap-3 w-full">
                                                 <Settings className="w-4 h-4 text-zinc-400" />
-                                                <span className="text-zinc-200">Gestione ADMIN</span>
+                                                <span className="text-zinc-200">Gestione Admin</span>
                                             </Link>
                                         </DropdownMenuItem>
                                     </>
@@ -248,14 +231,12 @@ export function HeaderNew({
                 </div>
 
                 {/* Mobile Menu Toggle */}
-                {!pathname?.startsWith("/area-riservata") && (
-                    <button
-                        className="md:hidden text-zinc-300 hover:text-white ml-4"
-                        onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                    >
-                        {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-                    </button>
-                )}
+                <button
+                    className="md:hidden text-zinc-300 hover:text-white ml-4"
+                    onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                >
+                    {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+                </button>
             </div>
 
             {/* Mobile Nav */}

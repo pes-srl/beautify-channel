@@ -226,7 +226,7 @@ export default function AdminChannelsListPage() {
                                         </td>
                                         <td className="p-4">
                                             {channel.stream_url_hls ? (
-                                                <div className="flex items-center gap-2 text-xs font-mono text-fuchsia-300/80 bg-fuchsia-500/10 px-2 py-1 rounded inline-flex truncate max-w-[250px]">
+                                                <div className="flex items-center gap-2 text-xs font-mono text-fuchsia-300/80 bg-fuchsia-500/10 px-2 py-1 rounded truncate max-w-[250px]">
                                                     <LinkIcon className="w-3 h-3 shrink-0" />
                                                     <span className="truncate">{channel.stream_url_hls.split('/').pop()}</span>
                                                 </div>

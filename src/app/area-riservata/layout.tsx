@@ -1,6 +1,7 @@
 import { AudioPlayer } from "@/components/player/AudioPlayer";
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
+import { FooterNew } from "@/components/homepagenew/FooterNew";
 
 export default async function AreaClienteLayout({
     children,
@@ -16,17 +17,13 @@ export default async function AreaClienteLayout({
     }
 
     return (
-        <div className="min-h-screen bg-zinc-950 relative pb-24 pt-16">
-            {/* 
-        Header could go here:
-        <AreaClienteHeader /> 
-      */}
-
-            <main className="mx-auto max-w-7xl pt-8 px-6">
+        <div className="min-h-screen bg-zinc-950 flex flex-col relative pt-16">
+            <main className="flex-1 mx-auto w-full max-w-7xl pt-8 px-6 pb-24">
                 {children}
             </main>
 
             <AudioPlayer />
+            <FooterNew />
         </div>
     );
 }

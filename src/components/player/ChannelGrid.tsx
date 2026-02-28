@@ -115,23 +115,21 @@ export function ChannelGrid() {
                                 />
                             ) : (
                                 <div className="w-full h-full bg-zinc-900 bg-linear-to-b from-zinc-800 to-zinc-900 flex flex-col items-center justify-center border border-white/5">
-                                    <div className="w-16 h-16 rounded-2xl bg-white/5 flex items-center justify-center mb-3">
-                                        <Radio className="w-8 h-8 text-fuchsia-400 opacity-80" />
-                                    </div>
-                                    <span className="text-zinc-500 text-xs tracking-widest font-medium uppercase">{channel.subtitle || "Premium Music"}</span>
+                                    {/* Hide Radio icon entirely to avoid overlap with permanent Play button */}
+                                    <span className="text-zinc-500 text-xs tracking-widest font-medium uppercase mt-24">{channel.subtitle || "Premium Music"}</span>
                                 </div>
                             )}
 
                             {/* Play Button Overlay */}
-                            <div className="absolute inset-0 z-20 flex items-center justify-center">
+                            <div className="absolute inset-0 z-20 flex items-center justify-center pointer-events-none">
                                 <div className={`
-                  w-16 h-16 rounded-full flex items-center justify-center backdrop-blur-md transition-all duration-300
-                  ${isActive ? 'bg-fuchsia-500/80 text-white shadow-lg shadow-fuchsia-500/20' : 'bg-white/10 text-white/0 group-hover:bg-fuchsia-500/80 group-hover:text-white group-hover:scale-110'}
+                  w-16 h-16 rounded-full flex items-center justify-center backdrop-blur-md transition-all duration-300 shadow-lg shadow-fuchsia-500/20
+                  ${isActive ? 'bg-fuchsia-600 outline-4 outline-fuchsia-500/30' : 'bg-fuchsia-500/90 text-white group-hover:scale-110'}
                 `}>
                                     {isCurrentlyPlaying ? (
-                                        <Pause className="w-8 h-8 fill-current" />
+                                        <Pause className="w-8 h-8 fill-current text-white" />
                                     ) : (
-                                        <Play className="w-8 h-8 fill-current ml-1" />
+                                        <Play className="w-8 h-8 fill-current text-white ml-1" />
                                     )}
                                 </div>
                             </div>

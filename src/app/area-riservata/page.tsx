@@ -38,12 +38,6 @@ export default async function AreaClientePage() {
                     <p className="text-zinc-400 text-lg">Seleziona un canale radio per impostare l'atmosfera perfetta nel tuo istituto.</p>
                 </div>
 
-                <form action="/auth/signout" method="post" className="md:mb-2">
-                    <button className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-red-500/10 border border-red-500/20 text-red-400 hover:bg-red-500/20 hover:text-red-300 transition-all font-medium">
-                        <LogOut className="w-4 h-4" />
-                        <span>Disconnetti</span>
-                    </button>
-                </form>
             </div>
 
             <ChannelGrid />

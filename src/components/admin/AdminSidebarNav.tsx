@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { LayoutDashboard, Users, Radio, Settings } from "lucide-react";
+import { LayoutDashboard, Users, Radio, Settings, Image as ImageIcon } from "lucide-react";
 
 export function AdminSidebarNav() {
     const pathname = usePathname();
@@ -22,6 +22,11 @@ export function AdminSidebarNav() {
             name: "Channel Manager",
             href: "/admin/channels",
             icon: Radio
+        },
+        {
+            name: "Media Library",
+            href: "/admin/media",
+            icon: ImageIcon
         }
     ];
 

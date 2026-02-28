@@ -84,10 +84,10 @@ export function FooterNew() {
 
                 <div className="border-t border-white/5 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
                     <p className="text-zinc-500 text-sm text-center md:text-left">
-                        &copy; 2024 Beautify Channel. Tutti i diritti riservati.
+                        &copy; 2026 Beautify Channel. Tutti i diritti riservati.
                     </p>
                     <p className="text-zinc-600 text-xs flex items-center gap-1">
-                        Made with <span className="text-red-500">♥</span> for Beauty Centers
+                        Made with <span className="text-red-500">♥</span> in Italy
                     </p>
                 </div>
             </div>
