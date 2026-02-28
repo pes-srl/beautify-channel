@@ -3,53 +3,91 @@
 import { useAudioStore } from "@/store/useAudioStore";
 import { Play, Pause, Radio } from "lucide-react";
 import { motion } from "framer-motion";
-
-// Temporary mock data until Supabase integration
-const mockChannels = [
-    {
-        id: "1",
-        name: "Relaxing Spa",
-        streamUrl: "https://stream.zeno.fm/t3q59q5q5mruv", // Placeholder valid endless URL or similar
-        imageUrl: "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=500&auto=format&fit=crop",
-        tier: "Basic",
-    },
-    {
-        id: "2",
-        name: "Barber Vibes",
-        streamUrl: "https://stream.zeno.fm/f3yv5z9x5mruv", // Placeholder
-        imageUrl: "https://images.unsplash.com/photo-1622295679905-c3f2d2b6b0c2?w=500&auto=format&fit=crop",
-        tier: "Basic",
-    },
-    {
-        id: "3",
-        name: "Premium Deep Focus",
-        streamUrl: "https://stream.zeno.fm/x5p9c8m25mruv", // Placeholder
-        imageUrl: "https://images.unsplash.com/photo-1517409088424-d1d784df00a4?w=500&auto=format&fit=crop",
-        tier: "Premium",
-    },
-    {
-        id: "4",
-        name: "Ultra Exclusive",
-        streamUrl: "https://stream.zeno.fm/h2v5b3y85mruv", // Placeholder
-        imageUrl: "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=500&auto=format&fit=crop",
-        tier: "Ultra",
-    }
-];
+import { useEffect, useState } from "react";
+import { createClient } from "@/utils/supabase/client";
 
 export function ChannelGrid() {
     const { currentChannel, isPlaying, togglePlay, setChannel } = useAudioStore();
+    const [channels, setChannels] = useState<any[]>([]);
+    const [isLoading, setIsLoading] = useState(true);
+    const [errorState, setErrorState] = useState<string | null>(null);
+    const supabase = createClient();
 
-    const handleChannelClick = (channel: typeof mockChannels[0]) => {
+    useEffect(() => {
+        async function loadChannels() {
+            try {
+                // 1. Get current user
+                const { data: { user } } = await supabase.auth.getUser();
+                if (!user) return;
+
+                // 2. Call our advanced SQL function that merges "Plan Default Channels" + "VIP Custom Assigned Channels"
+                const { data, error } = await supabase
+                    .rpc('get_authorized_channels', { req_user_id: user.id });
+
+                if (error) {
+                    setErrorState(JSON.stringify(error));
+                    throw error;
+                }
+
+                if (!data || data.length === 0) {
+                    setErrorState("No error thrown, but RPC returned 0 rows. Is 'get_authorized_channels' function deployed and are channels active?");
+                }
+
+                setChannels(data || []);
+            } catch (error: any) {
+                console.error("Error fetching authorized channels:", error);
+                if (!errorState) setErrorState(error?.message || "Unknown Error");
+            } finally {
+                setIsLoading(false);
+            }
+        }
+
+        loadChannels();
+    }, []);
+
+    const handleChannelClick = (channel: any) => {
         if (currentChannel?.id === channel.id) {
             togglePlay();
         } else {
-            setChannel(channel);
+            // Mapping the DB column to the expected store property logic
+            const formattedChannel = {
+                id: channel.id,
+                name: channel.name,
+                // Prioritize HLS (.m3u8), fallback to MP3
+                streamUrl: channel.stream_url_hls || channel.stream_url_mp3,
+                subtitle: channel.subtitle || "Premium Music",
+            };
+            setChannel(formattedChannel);
         }
     };
 
+    if (isLoading) {
+        return (
+            <div className="flex justify-center items-center h-48">
+                <span className="text-zinc-500 animate-pulse">Caricamento canali disponibili...</span>
+            </div>
+        );
+    }
+
+    if (errorState || channels.length === 0) {
+        return (
+            <div className="p-8 rounded-2xl border border-red-500/20 bg-red-500/5 text-center mt-8 max-w-2xl mx-auto">
+                <h3 className="text-xl text-red-400 font-bold mb-2">DEBUG MODE: Dati Non Trovati</h3>
+                <p className="text-red-200/70 text-sm font-mono wrap-break-word">{errorState || "0 canali attivi nel DB per questo utente."}</p>
+                <div className="mt-4 p-4 bg-black/40 rounded-lg text-left">
+                    <p className="text-xs text-zinc-500">Istruzioni (Per Mirko):</p>
+                    <ol className="text-xs text-zinc-400 list-decimal pl-4 mt-2 space-y-1">
+                        <li>Se dice "Could not find function get_authorized_channels", significa che non hai eseguito il file SQL en Supabase.</li>
+                        <li>Se dice "0 canali attivi", significa che in Supabase `radio_channels` è vuoto o nessun canale ha `is_active = true`.</li>
+                    </ol>
+                </div>
+            </div>
+        );
+    }
+
     return (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {mockChannels.map((channel, idx) => {
+            {channels.map((channel: any, idx: number) => {
                 const isActive = currentChannel?.id === channel.id;
                 const isCurrentlyPlaying = isActive && isPlaying;
 
@@ -76,8 +114,11 @@ export function ChannelGrid() {
                                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                                 />
                             ) : (
-                                <div className="w-full h-full bg-zinc-900 flex items-center justify-center">
-                                    <Radio className="w-12 h-12 text-zinc-700" />
+                                <div className="w-full h-full bg-zinc-900 bg-linear-to-b from-zinc-800 to-zinc-900 flex flex-col items-center justify-center border border-white/5">
+                                    <div className="w-16 h-16 rounded-2xl bg-white/5 flex items-center justify-center mb-3">
+                                        <Radio className="w-8 h-8 text-fuchsia-400 opacity-80" />
+                                    </div>
+                                    <span className="text-zinc-500 text-xs tracking-widest font-medium uppercase">{channel.subtitle || "Premium Music"}</span>
                                 </div>
                             )}
 
@@ -85,7 +126,7 @@ export function ChannelGrid() {
                             <div className="absolute inset-0 z-20 flex items-center justify-center">
                                 <div className={`
                   w-16 h-16 rounded-full flex items-center justify-center backdrop-blur-md transition-all duration-300
-                  ${isActive ? 'bg-fuchsia-500/80 text-white' : 'bg-white/10 text-white/0 group-hover:bg-white/20 group-hover:text-white'}
+                  ${isActive ? 'bg-fuchsia-500/80 text-white shadow-lg shadow-fuchsia-500/20' : 'bg-white/10 text-white/0 group-hover:bg-fuchsia-500/80 group-hover:text-white group-hover:scale-110'}
                 `}>
                                     {isCurrentlyPlaying ? (
                                         <Pause className="w-8 h-8 fill-current" />
@@ -95,34 +136,32 @@ export function ChannelGrid() {
                                 </div>
                             </div>
 
-                            {/* Tier Badge */}
+                            {/* Status Badge */}
                             <div className="absolute top-4 right-4 z-20">
-                                <span className={`text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full backdrop-blur-md shadow-lg
-                  ${channel.tier === 'Ultra' ? 'bg-zinc-950/80 text-yellow-400 border border-yellow-400/50' :
-                                        channel.tier === 'Premium' ? 'bg-zinc-950/80 text-fuchsia-400 border border-fuchsia-400/50' :
-                                            'bg-zinc-950/80 text-zinc-300 border border-white/20'}
-                `}>
-                                    {channel.tier}
+                                <span className={`text-[10px] font-bold uppercase tracking-wider px-3 py-1.5 rounded-full backdrop-blur-md shadow-lg
+                                    ${isActive ? 'bg-fuchsia-500 text-white border-transparent' : 'bg-black/50 text-white/70 border border-white/10'}
+                                `}>
+                                    {isActive ? 'In Riproduzione' : 'Disponibile'}
                                 </span>
                             </div>
                         </div>
 
                         {/* Content info */}
-                        <div className="absolute bottom-0 left-0 right-0 p-4 bg-linear-to-t from-zinc-950 via-zinc-950/80 to-transparent z-20 pt-12">
-                            <h3 className="text-lg font-semibold text-white truncate">{channel.name}</h3>
+                        <div className="absolute bottom-0 left-0 right-0 p-5 bg-linear-to-t from-black via-black/80 to-transparent z-20 pt-16">
+                            <h3 className="text-lg font-bold text-white truncate drop-shadow-md">{channel.name}</h3>
                             {isActive && (
                                 <div className="flex items-center gap-2 mt-2">
-                                    <div className="flex gap-1">
+                                    <div className="flex gap-1 items-end h-3">
                                         {[1, 2, 3].map((i) => (
                                             <motion.div
                                                 key={i}
-                                                className="w-1 bg-fuchsia-500 rounded-full"
-                                                animate={isCurrentlyPlaying ? { height: ["4px", "16px", "4px"] } : { height: "4px" }}
-                                                transition={{ repeat: Infinity, duration: 1, delay: i * 0.2 }}
+                                                className="w-1 bg-fuchsia-400 rounded-full"
+                                                animate={isCurrentlyPlaying ? { height: ["4px", "12px", "4px"] } : { height: "4px" }}
+                                                transition={{ repeat: Infinity, duration: 1.2, delay: i * 0.2 }}
                                             />
                                         ))}
                                     </div>
-                                    <span className="text-xs text-fuchsia-400 font-medium">Playing</span>
+                                    <span className="text-[11px] uppercase tracking-wider text-fuchsia-400 font-bold">Live</span>
                                 </div>
                             )}
                         </div>

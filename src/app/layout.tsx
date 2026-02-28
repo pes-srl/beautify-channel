@@ -12,17 +12,41 @@ export const metadata: Metadata = {
   description: "Next-gen audio streaming for beauty centers.",
 };
 
-export default function RootLayout({
+import { HeaderNew } from "@/components/homepagenew/HeaderNew";
+import { FooterNew } from "@/components/homepagenew/FooterNew";
+import { AuthHashCatcher } from "@/components/AuthHashCatcher";
+
+import { createClient } from "@/utils/supabase/server";
+
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const supabase = await createClient();
+  const { data: { user } } = await supabase.auth.getUser();
+
+  let profile = null;
+  if (user) {
+    const { data } = await supabase
+      .from("profiles")
+      .select("salon_name, role")
+      .eq("id", user.id)
+      .single();
+    profile = data;
+  }
+
   return (
-    <html lang="en">
+    <html lang="it">
       <body
-        className={`${figtree.variable} font-sans antialiased bg-zinc-950 text-zinc-50`}
+        className={`${figtree.variable} font-sans antialiased bg-zinc-950 text-zinc-50 flex flex-col min-h-screen`}
       >
-        {children}
+        <AuthHashCatcher />
+        <HeaderNew initialUser={user} initialProfile={profile} />
+        <div className="flex-1">
+          {children}
+        </div>
+        <FooterNew />
       </body>
     </html>
   );

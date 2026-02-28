@@ -9,7 +9,7 @@ interface AudioState {
     } | null;
     isPlaying: boolean;
     volume: number;
-    bufferingState: 'idle' | 'buffering' | 'playing' | 'error';
+    bufferingState: 'idle' | 'loading' | 'buffering' | 'playing' | 'error';
     setChannel: (channel: AudioState['currentChannel']) => void;
     togglePlay: () => void;
     setVolume: (volume: number) => void;

@@ -135,4 +135,4 @@
 - **Campi Form:** Nome, Cognome, Email, Numero di Telefono, Messaggio.
 - **Bottone:** INVIA
 - **Footer Links:** Vantaggi, Prezzi, FAQ, Contatti | Privacy Policy, Cookie Policy, Termini e Condizioni
-- **Copyright:** © 2024 Beautify Channel. Tutti i diritti riservati.
+- **Copyright:** © 2026 Beautify Channel. Tutti i diritti riservati.

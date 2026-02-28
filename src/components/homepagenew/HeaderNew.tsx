@@ -1,0 +1,307 @@
+"use client";
+
+import { useState, useEffect } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { Button } from "@/components/ui/button";
+import { Menu, X, User, LogOut, Settings } from "lucide-react";
+import { createClient } from "@/utils/supabase/client";
+import { User as SupabaseUser } from "@supabase/supabase-js";
+import {
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuItem,
+    DropdownMenuSeparator,
+    DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { Badge } from "@/components/ui/badge";
+
+export function HeaderNew({
+    initialUser = null,
+    initialProfile = null
+}: {
+    initialUser?: SupabaseUser | null;
+    initialProfile?: { role: string | null; salon_name: string | null } | null;
+} = {}) {
+    const pathname = usePathname();
+
+    // Do not render the public header inside the Admin dashboard
+    if (pathname?.startsWith("/admin")) {
+        return null;
+    }
+
+    const [isScrolled, setIsScrolled] = useState(false);
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+    // Seed state with SSR props if available, otherwise fetch
+    const [user, setUser] = useState<SupabaseUser | null>(initialUser);
+    const [profile, setProfile] = useState<{ role: string | null; salon_name: string | null } | null>(initialProfile);
+
+    // If we already have a user from SSR, we are not loading.
+    const [isLoading, setIsLoading] = useState(!initialUser);
+
+    const supabase = createClient();
+
+    // Sync SSR props if they change (e.g. during client-side navigation caching)
+    useEffect(() => {
+        if (initialUser !== undefined) {
+            setUser(initialUser);
+            setIsLoading(!initialUser);
+        }
+    }, [initialUser]);
+
+    useEffect(() => {
+        if (initialProfile !== undefined) {
+            setProfile(initialProfile);
+        }
+    }, [initialProfile]);
+
+    const getInitials = (name: string | null, email: string | undefined) => {
+        if (!name) return email?.substring(0, 2).toUpperCase() || 'U';
+        const parts = name.split(" ").filter(w => w.trim().length > 0);
+        if (parts.length >= 2) {
+            return (parts[0][0] + parts[1][0]).toUpperCase();
+        } else if (parts.length === 1) {
+            return parts[0].substring(0, 2).toUpperCase();
+        }
+        return "??";
+    };
+
+    // Use the state values, which correctly reflect SSR or Client hydration
+    const initials = getInitials(profile?.salon_name || null, user?.email || "");
+
+    useEffect(() => {
+        const handleScroll = () => {
+            setIsScrolled(window.scrollY > 10);
+        };
+        window.addEventListener("scroll", handleScroll);
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
+
+    useEffect(() => {
+        // If we already received valid SSR data, don't double fetch on mount unless auth state changes
+        const fetchUserData = async () => {
+            if (initialUser) return; // Skip fetch if SSR gave us the user
+            try {
+                const { data: { user: authUser }, error: authError } = await supabase.auth.getUser();
+                if (authError || !authUser) {
+                    setUser(null);
+                    setProfile(null);
+                    setIsLoading(false);
+                    return;
+                }
+
+                setUser(authUser);
+
+                const { data: profileData, error: profileError } = await supabase
+                    .from('profiles')
+                    .select('role, salon_name')
+                    .eq('id', authUser.id)
+                    .single();
+
+                if (!profileError && profileData) {
+                    setProfile({ role: profileData.role, salon_name: profileData.salon_name });
+                }
+            } catch (err) {
+                console.error("Error in HeaderNew fetchUser:", err);
+            } finally {
+                setIsLoading(false);
+            }
+        };
+
+        fetchUserData();
+
+        const { data: { subscription } } = supabase.auth.onAuthStateChange(
+            async (event, session) => {
+                const currentUser = session?.user || null;
+                setUser(currentUser);
+
+                if (currentUser) {
+                    const { data: profileData } = await supabase
+                        .from('profiles')
+                        .select('role, salon_name')
+                        .eq('id', currentUser.id)
+                        .single();
+                    if (profileData) {
+                        setProfile({ role: profileData.role, salon_name: profileData.salon_name });
+                    }
+                } else {
+                    setProfile(null);
+                }
+                setIsLoading(false);
+            }
+        );
+
+        return () => {
+            subscription.unsubscribe();
+        };
+    }, [supabase, initialUser]);
+
+    const handleSignOut = async () => {
+        await supabase.auth.signOut();
+        window.location.href = "/";
+    };
+
+
+
+    const navLinks = [
+        { name: "Vantaggi", href: "#" },
+        { name: "Servizio", href: "#" },
+        { name: "Prezzo", href: "#pricing" },
+        { name: "Contatto WhatsApp", href: "#" },
+    ];
+
+    return (
+        <header
+            className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b border-transparent ${isScrolled || pathname?.startsWith("/area-riservata") ? "bg-zinc-950/80 backdrop-blur-lg border-white/10 shadow-lg" : "bg-transparent py-4"
+                }`}
+        >
+            <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+                {/* Logo - Hide only in admin if sidebar has it, or keep it consistent? 
+                    User asked for "Header del Admin", and Admin Header has no logo on the Left.
+                    But they also said they missed it on the left in Area Riservata.
+                */}
+                <div className="flex items-center gap-2">
+                    <Link href="/" className="flex items-center gap-2 group">
+                        {pathname?.startsWith("/admin") ? (
+                            <span className="font-bold text-lg bg-linear-to-r from-fuchsia-400 to-indigo-500 text-transparent bg-clip-text">
+                                Beautify Admin
+                            </span>
+                        ) : (
+                            <img
+                                src="https://eufahlzjxbimyiwivoiq.supabase.co/storage/v1/object/public/bucket-assets/Logo-BeautiFyChannel.svg"
+                                alt="Beautify Channel Logo"
+                                className="h-7 w-auto md:h-8 group-hover:scale-105 transition-transform"
+                            />
+                        )}
+                    </Link>
+                </div>
+
+                {/* Desktop Nav - Only show on public pages */}
+                {!pathname?.startsWith("/area-riservata") && (
+                    <nav className="hidden md:flex flex-1 items-center justify-center gap-8">
+                        {navLinks.map((link) => (
+                            <Link
+                                key={link.name}
+                                href={link.href}
+                                className="text-sm font-medium text-zinc-300 hover:text-white transition-colors"
+                            >
+                                {link.name}
+                            </Link>
+                        ))}
+                    </nav>
+                )}
+
+                {/* Right Side Buttons & Avatar */}
+                <div className="flex items-center gap-4 ml-auto md:ml-0 flex-1 justify-end">
+                    {!isLoading && user ? (
+                        <DropdownMenu>
+                            <DropdownMenuTrigger asChild>
+                                <Button variant="ghost" className="relative h-10 w-10 p-0 rounded-full border border-white/10 bg-black/50 hover:bg-white/10 flex items-center justify-center transition-colors outline-none focus-visible:ring-2 focus-visible:ring-fuchsia-500">
+                                    <div className="w-8 h-8 rounded-full bg-amber-500 flex items-center justify-center text-zinc-950 font-bold text-sm uppercase shadow-inner">
+                                        {initials}
+                                    </div>
+                                </Button>
+                            </DropdownMenuTrigger>
+                            <DropdownMenuContent align="end" className="w-64 bg-zinc-950 border border-white/10 shadow-2xl rounded-xl p-2 mt-2">
+                                <div className="px-3 py-3 border-b border-white/5 mb-2">
+                                    <div className="flex items-center justify-between">
+                                        <span className="text-sm font-semibold text-white">Il mio account</span>
+                                        {profile?.role === 'Admin' && (
+                                            <Badge className="bg-red-600 text-white hover:bg-red-700 text-[9px] border-0 px-2 py-0.5 font-bold">ADMIN</Badge>
+                                        )}
+                                    </div>
+                                    <p className="text-xs text-zinc-400 mt-1 truncate">{user.email}</p>
+                                </div>
+                                <DropdownMenuItem asChild className="cursor-pointer focus:bg-white/10 rounded-lg px-3 py-2.5">
+                                    <Link href="/area-riservata" className="flex items-center gap-3 w-full">
+                                        <User className="w-4 h-4 text-zinc-400" />
+                                        <span className="text-zinc-200">Area riservata</span>
+                                    </Link>
+                                </DropdownMenuItem>
+                                {profile?.role === 'Admin' && (
+                                    <>
+                                        <DropdownMenuSeparator className="bg-white/5 my-2" />
+                                        <div className="px-3 py-1.5 text-[10px] font-semibold text-zinc-500 tracking-wider uppercase">Amministrazione</div>
+                                        <DropdownMenuItem asChild className="cursor-pointer focus:bg-white/10 rounded-lg px-3 py-2.5">
+                                            <Link href="/admin" className="flex items-center gap-3 w-full">
+                                                <Settings className="w-4 h-4 text-zinc-400" />
+                                                <span className="text-zinc-200">Gestione ADMIN</span>
+                                            </Link>
+                                        </DropdownMenuItem>
+                                    </>
+                                )}
+                                <DropdownMenuSeparator className="bg-white/5 my-2" />
+                                <DropdownMenuItem onClick={handleSignOut} className="cursor-pointer focus:bg-red-500/20 rounded-lg px-3 py-2.5 text-red-100 focus:text-red-500">
+                                    <div className="flex items-center gap-3 w-full">
+                                        <LogOut className="w-4 h-4" />
+                                        <span>Logout</span>
+                                    </div>
+                                </DropdownMenuItem>
+                            </DropdownMenuContent>
+                        </DropdownMenu>
+                    ) : !isLoading ? (
+                        <Link href="/login" className="text-sm font-medium text-zinc-400 hover:text-white transition-colors">
+                            Accedi
+                        </Link>
+                    ) : null}
+                </div>
+
+                {/* Mobile Menu Toggle */}
+                {!pathname?.startsWith("/area-riservata") && (
+                    <button
+                        className="md:hidden text-zinc-300 hover:text-white ml-4"
+                        onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                    >
+                        {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+                    </button>
+                )}
+            </div>
+
+            {/* Mobile Nav */}
+            {isMobileMenuOpen && (
+                <div className="md:hidden absolute top-full left-0 right-0 bg-zinc-950 border-b border-white/10 p-6 flex flex-col gap-4 shadow-xl">
+                    {navLinks.map((link) => (
+                        <Link
+                            key={link.name}
+                            href={link.href}
+                            className="text-lg font-medium text-zinc-300 hover:text-white py-2 block border-b border-white/5"
+                            onClick={() => setIsMobileMenuOpen(false)}
+                        >
+                            {link.name}
+                        </Link>
+                    ))}
+                    <div className="flex flex-col gap-3 mt-4">
+                        {!isLoading && user ? (
+                            <>
+                                <Link href="/admin" onClick={() => setIsMobileMenuOpen(false)}>
+                                    <Button variant="outline" className="w-full border-white/20 text-white bg-transparent flex items-center justify-center gap-2">
+                                        <User size={18} />
+                                        Area Personale
+                                    </Button>
+                                </Link>
+                                <Button onClick={() => { handleSignOut(); setIsMobileMenuOpen(false); }} className="w-full bg-white/10 hover:bg-white/20 text-white border-0 flex items-center justify-center gap-2 cursor-pointer transition-colors">
+                                    <LogOut size={18} />
+                                    Esci
+                                </Button>
+                            </>
+                        ) : (
+                            <>
+                                <Link href="/login" onClick={() => setIsMobileMenuOpen(false)}>
+                                    <Button variant="outline" className="w-full border-white/20 text-white bg-transparent">
+                                        Accedi
+                                    </Button>
+                                </Link>
+                                <Link href="#pricing" onClick={() => setIsMobileMenuOpen(false)}>
+                                    <Button className="w-full bg-fuchsia-500 hover:bg-fuchsia-600 text-white">
+                                        Prova GRATUITA
+                                    </Button>
+                                </Link>
+                            </>
+                        )}
+                    </div>
+                </div>
+            )}
+        </header>
+    );
+}
