@@ -19,15 +19,30 @@ export async function updateUserProfile(userId: string, targetField: 'role' | 'p
 
     if (adminProfile?.role !== 'Admin') return { error: "Accesso negato. Solo gli admin possono modificare gli utenti." };
 
-    // Update the profile
-    const { error } = await supabase
+    // Create an Admin client using the Service Role Key to bypass RLS for profile updates
+    const supabaseAdmin = createSupabaseClient(
+        process.env.NEXT_PUBLIC_SUPABASE_URL!,
+        process.env.SUPABASE_SERVICE_ROLE_KEY!,
+        {
+            auth: { autoRefreshToken: false, persistSession: false }
+        }
+    );
+
+    // Update the profile bypassing RLS
+    const { data: updatedProfile, error } = await supabaseAdmin
         .from('profiles')
         .update({ [targetField]: newValue })
-        .eq('id', userId);
+        .eq('id', userId)
+        .select()
+        .single();
 
     if (error) {
         console.error("Error updating profile:", error);
         return { error: error.message };
+    }
+
+    if (!updatedProfile) {
+        return { error: "Utente non trovato o aggiornamento fallito (RLS bypass error)." };
     }
 
     revalidatePath('/admin/users');

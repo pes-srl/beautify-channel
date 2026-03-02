@@ -58,7 +58,7 @@ export default async function UsersManagementPage() {
                                 <TableCell className="text-zinc-400">{user.email}</TableCell>
                                 <TableCell>
                                     <Badge variant="outline" className={user.role === 'Admin' ? 'text-red-400 border-red-400/50' : 'text-zinc-300 border-white/20'}>
-                                        {user.role || 'User'}
+                                        {user.role === 'Admin' ? 'Admin' : 'User'}
                                     </Badge>
                                 </TableCell>
                                 <TableCell>

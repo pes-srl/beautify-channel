@@ -11,8 +11,6 @@ interface BasicHeroChannelProps {
 export function BasicHeroChannel({ channel }: BasicHeroChannelProps) {
     const { currentChannel, isPlaying, togglePlay, setChannel } = useAudioStore();
 
-    if (!channel) return null;
-
     const fallbackUrl = "https://canali2.pesstream.eu/hls/beautify-channel/live.m3u8";
 
     // Un canale è "attivo" se l'ID corrisponde O se l'URL in play è il nostro fallback esatto
@@ -29,6 +27,7 @@ export function BasicHeroChannel({ channel }: BasicHeroChannelProps) {
                 name: channel?.name || "Beautify Channel Basic",
                 streamUrl: channel?.stream_url_hls || channel?.stream_url_mp3 || fallbackUrl,
                 subtitle: channel?.subtitle || "Premium Basic Experience",
+                imageUrl: channel?.image_url || null,
             };
             setChannel(formattedChannel);
         }
@@ -79,33 +78,10 @@ export function BasicHeroChannel({ channel }: BasicHeroChannelProps) {
                         Il canale principale progettato per creare l'atmosfera perfetta nel tuo istituto. Musica selezionata per accompagnare l'esperienza dei tuoi clienti.
                     </p>
 
-                    <button
-                        onClick={handlePlayClick}
-                        className={`
-                            flex items-center justify-center gap-3 self-start
-                            px-8 py-4 rounded-2xl font-bold text-lg transition-all duration-300 shadow-xl
-                            ${isActive
-                                ? 'bg-white text-zinc-950 hover:bg-zinc-200 shadow-white/10'
-                                : 'bg-linear-to-r from-fuchsia-600 to-indigo-600 text-white hover:scale-105 hover:shadow-fuchsia-500/25'
-                            }
-                        `}
-                    >
-                        {isCurrentlyPlaying ? (
-                            <>
-                                <Pause className="w-6 h-6 fill-current" />
-                                <span>Metti in Pausa</span>
-                            </>
-                        ) : (
-                            <>
-                                <Play className="w-6 h-6 fill-current ml-1" />
-                                <span>{isActive ? 'Riprendi Ascolto' : 'Ascolta Ora'}</span>
-                            </>
-                        )}
-                    </button>
                 </div>
 
-                {/* Right side: Abstract Art / Vinyl Visualizer */}
-                <div className="hidden md:flex w-1/3 aspect-square relative items-center justify-center p-12">
+                {/* Right side: Abstract Art / Vinyl Visualizer & Play Button */}
+                <div className="hidden md:flex flex-col w-1/3 relative items-center justify-center p-12">
                     <div className="absolute inset-0 bg-linear-to-l from-black/80 to-transparent pointer-events-none" />
 
                     {/* Pulsing rings if active */}
@@ -125,8 +101,9 @@ export function BasicHeroChannel({ channel }: BasicHeroChannelProps) {
                     )}
 
                     {/* Central Vinyl/Icon */}
-                    <div className={`
-                        relative w-3/4 h-3/4 rounded-full flex items-center justify-center
+                    <div
+                        className={`
+                        relative w-3/4 aspect-square rounded-full flex items-center justify-center mb-6
                         bg-linear-to-br from-zinc-800 to-black border-2 border-zinc-700/50 shadow-2xl
                         ${isCurrentlyPlaying ? 'animate-[spin_20s_linear_infinite]' : ''}
                     `}>
@@ -144,6 +121,30 @@ export function BasicHeroChannel({ channel }: BasicHeroChannelProps) {
                             <Radio className={`w-1/2 h-1/2 ${isActive ? 'text-white' : 'text-zinc-500'}`} />
                         </div>
                     </div>
+
+                    <button
+                        onClick={handlePlayClick}
+                        className={`
+                            flex items-center justify-center gap-3 w-3/4
+                            px-8 py-4 rounded-2xl font-bold text-lg transition-all duration-300 shadow-xl relative z-20
+                            ${isActive
+                                ? 'bg-white text-zinc-950 hover:bg-zinc-200 shadow-white/10'
+                                : 'bg-linear-to-r from-fuchsia-600 to-indigo-600 text-white hover:scale-105 hover:shadow-fuchsia-500/25'
+                            }
+                        `}
+                    >
+                        {isCurrentlyPlaying ? (
+                            <>
+                                <Pause className="w-6 h-6 fill-current" />
+                                <span>Metti in Pausa</span>
+                            </>
+                        ) : (
+                            <>
+                                <Play className="w-6 h-6 fill-current ml-1" />
+                                <span>{isActive ? 'Play' : 'Ascolta Ora'}</span>
+                            </>
+                        )}
+                    </button>
                 </div>
 
             </div>

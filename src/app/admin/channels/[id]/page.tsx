@@ -410,14 +410,14 @@ export default function SingleChannelAdminPage() {
                                 <span>Creato il:</span>
                                 <span className="text-zinc-300">{format(new Date(channel.created_at), "dd MMM yyyy, HH:mm", { locale: it })}</span>
                             </div>
-                            <div className="flex justify-between items-center py-2">
+                            <div className="hidden justify-between items-center py-2">
                                 <span>Visibilità:</span>
                                 <span className="text-zinc-300">Solo Utenti Assegnati</span>
                             </div>
                         </div>
                     </div>
 
-                    <div className="p-6 rounded-2xl bg-gradient-to-b from-fuchsia-900/20 to-zinc-900 border border-fuchsia-500/20 shadow-xl relative overflow-hidden">
+                    <div className="hidden p-6 rounded-2xl bg-gradient-to-b from-fuchsia-900/20 to-zinc-900 border border-fuchsia-500/20 shadow-xl relative overflow-hidden">
                         <div className="absolute top-0 right-0 p-4 opacity-5">
                             <Users className="w-24 h-24" />
                         </div>

@@ -105,7 +105,7 @@ export default async function AreaClientePage() {
                                 channel={channels?.find((c: any) =>
                                     c.name.toLowerCase().includes('basic') ||
                                     c.name.toLowerCase() === 'beautify channel basic'
-                                ) || channels?.[0]}
+                                ) || null}
                             />
                             <h3 className="text-xl font-bold text-white mb-4 mt-8 flex items-center gap-2">
                                 <Radio className="w-5 h-5 text-zinc-400" />

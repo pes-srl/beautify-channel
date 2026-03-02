@@ -85,9 +85,9 @@ export function UserRowActions({ user }: UserRowActionsProps) {
                         <span>Cambia Ruolo</span>
                     </DropdownMenuSubTrigger>
                     <DropdownMenuSubContent className="bg-zinc-950 border-white/10">
-                        <DropdownMenuRadioGroup value={user.role || 'User'} onValueChange={(val) => handleUpdate('role', val)}>
-                            <DropdownMenuRadioItem value="User" className="text-zinc-200 focus:bg-white/10 cursor-pointer">User</DropdownMenuRadioItem>
-                            <DropdownMenuRadioItem value="Admin" className="focus:bg-white/10 cursor-pointer text-red-400">Admin</DropdownMenuRadioItem>
+                        <DropdownMenuRadioGroup value={user.role === 'Admin' ? 'Admin' : 'User'}>
+                            <DropdownMenuRadioItem value="User" onSelect={(e) => { e.preventDefault(); handleUpdate('role', 'User'); }} className="text-zinc-200 focus:bg-white/10 cursor-pointer">User</DropdownMenuRadioItem>
+                            <DropdownMenuRadioItem value="Admin" onSelect={(e) => { e.preventDefault(); handleUpdate('role', 'Admin'); }} className="focus:bg-white/10 cursor-pointer text-red-400">Admin</DropdownMenuRadioItem>
                         </DropdownMenuRadioGroup>
                     </DropdownMenuSubContent>
                 </DropdownMenuSub>
@@ -98,11 +98,11 @@ export function UserRowActions({ user }: UserRowActionsProps) {
                         <span>Cambia Abbonamento</span>
                     </DropdownMenuSubTrigger>
                     <DropdownMenuSubContent className="bg-zinc-950 border-white/10">
-                        <DropdownMenuRadioGroup value={user.plan_type || 'free'} onValueChange={(val) => handleUpdate('plan_type', val)}>
-                            <DropdownMenuRadioItem value="free" className="text-zinc-200 focus:bg-white/10 cursor-pointer">Free</DropdownMenuRadioItem>
-                            <DropdownMenuRadioItem value="free_trial" className="text-emerald-400 focus:bg-white/10 cursor-pointer font-medium">Free Trial</DropdownMenuRadioItem>
-                            <DropdownMenuRadioItem value="basic" className="text-indigo-400 focus:bg-white/10 cursor-pointer font-medium">Basic</DropdownMenuRadioItem>
-                            <DropdownMenuRadioItem value="premium" className="text-fuchsia-400 focus:bg-white/10 cursor-pointer font-medium">Premium</DropdownMenuRadioItem>
+                        <DropdownMenuRadioGroup value={user.plan_type || 'free'}>
+                            <DropdownMenuRadioItem value="free" onSelect={(e) => { e.preventDefault(); handleUpdate('plan_type', 'free'); }} className="text-zinc-200 focus:bg-white/10 cursor-pointer">Free</DropdownMenuRadioItem>
+                            <DropdownMenuRadioItem value="free_trial" onSelect={(e) => { e.preventDefault(); handleUpdate('plan_type', 'free_trial'); }} className="text-emerald-400 focus:bg-white/10 cursor-pointer font-medium">Free Trial</DropdownMenuRadioItem>
+                            <DropdownMenuRadioItem value="basic" onSelect={(e) => { e.preventDefault(); handleUpdate('plan_type', 'basic'); }} className="text-indigo-400 focus:bg-white/10 cursor-pointer font-medium">Basic</DropdownMenuRadioItem>
+                            <DropdownMenuRadioItem value="premium" onSelect={(e) => { e.preventDefault(); handleUpdate('plan_type', 'premium'); }} className="text-fuchsia-400 focus:bg-white/10 cursor-pointer font-medium">Premium</DropdownMenuRadioItem>
                         </DropdownMenuRadioGroup>
                     </DropdownMenuSubContent>
                 </DropdownMenuSub>
