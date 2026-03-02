@@ -21,7 +21,7 @@ export function HeaderNew({
     initialProfile = null
 }: {
     initialUser?: SupabaseUser | null;
-    initialProfile?: { role: string | null; salon_name: string | null } | null;
+    initialProfile?: { role: string | null; plan_type: string | null; salon_name: string | null } | null;
 } = {}) {
     const pathname = usePathname();
 
@@ -30,7 +30,7 @@ export function HeaderNew({
 
     // Seed state with SSR props if available, otherwise fetch
     const [user, setUser] = useState<SupabaseUser | null>(initialUser);
-    const [profile, setProfile] = useState<{ role: string | null; salon_name: string | null } | null>(initialProfile);
+    const [profile, setProfile] = useState<{ role: string | null; plan_type: string | null; salon_name: string | null } | null>(initialProfile);
 
     // If we already have a user from SSR, we are not loading.
     const [isLoading, setIsLoading] = useState(!initialUser);
@@ -90,12 +90,12 @@ export function HeaderNew({
 
                 const { data: profileData, error: profileError } = await supabase
                     .from('profiles')
-                    .select('role, salon_name')
+                    .select('role, plan_type, salon_name')
                     .eq('id', authUser.id)
                     .single();
 
                 if (!profileError && profileData) {
-                    setProfile({ role: profileData.role, salon_name: profileData.salon_name });
+                    setProfile({ role: profileData.role, plan_type: profileData.plan_type, salon_name: profileData.salon_name });
                 }
             } catch (err) {
                 console.error("Error in HeaderNew fetchUser:", err);
@@ -114,11 +114,11 @@ export function HeaderNew({
                 if (currentUser) {
                     const { data: profileData } = await supabase
                         .from('profiles')
-                        .select('role, salon_name')
+                        .select('role, plan_type, salon_name')
                         .eq('id', currentUser.id)
                         .single();
                     if (profileData) {
-                        setProfile({ role: profileData.role, salon_name: profileData.salon_name });
+                        setProfile({ role: profileData.role, plan_type: profileData.plan_type, salon_name: profileData.salon_name });
                     }
                 } else {
                     setProfile(null);
@@ -135,6 +135,43 @@ export function HeaderNew({
     const handleSignOut = async () => {
         await supabase.auth.signOut();
         window.location.href = "/";
+    };
+
+    const renderRoleBadge = () => {
+        const roleStr = profile?.role || "User";
+        const planStr = profile?.plan_type || "Free";
+        const isSmall = true;
+        const baseClass = "px-2 py-0.5 text-[9px] uppercase font-bold tracking-wider border-0";
+
+        let planBadge = null;
+        switch (planStr?.toLowerCase()) {
+            case 'premiumcustomizzato':
+            case 'ultra':
+                planBadge = <Badge className={`bg-amber-500 hover:bg-amber-600 text-black ${baseClass}`}>Ultra</Badge>;
+                break;
+            case 'premium':
+                planBadge = <Badge className={`bg-fuchsia-600 hover:bg-fuchsia-700 text-white ${baseClass}`}>Premium</Badge>;
+                break;
+            case 'basic':
+                planBadge = <Badge className={`bg-indigo-600 hover:bg-indigo-700 text-white ${baseClass}`}>Basic</Badge>;
+                break;
+            case 'free_trial':
+                planBadge = <Badge className={`bg-emerald-500 hover:bg-emerald-600 text-black ${baseClass}`}>Trial</Badge>;
+                break;
+            case 'free':
+            default:
+                planBadge = <Badge variant="secondary" className={`bg-zinc-800 text-zinc-300 ${baseClass}`}>Free</Badge>;
+                break;
+        }
+
+        return (
+            <div className="flex gap-1.5 items-center">
+                {planBadge}
+                {roleStr === 'Admin' && (
+                    <Badge className={`bg-red-600 hover:bg-red-700 text-white ${baseClass}`}>Admin</Badge>
+                )}
+            </div>
+        );
     };
 
 
@@ -190,9 +227,7 @@ export function HeaderNew({
                                 <div className="px-3 py-3 border-b border-white/5 mb-2">
                                     <div className="flex items-center justify-between">
                                         <span className="text-sm font-semibold text-white">Il mio account</span>
-                                        {profile?.role === 'Admin' && (
-                                            <Badge className="bg-red-600 text-white hover:bg-red-700 text-[9px] border-0 px-2 py-0.5 font-bold">ADMIN</Badge>
-                                        )}
+                                        {renderRoleBadge()}
                                     </div>
                                     <p className="text-xs text-zinc-400 mt-1 truncate">{user.email}</p>
                                 </div>
@@ -215,7 +250,7 @@ export function HeaderNew({
                                     </>
                                 )}
                                 <DropdownMenuSeparator className="bg-white/5 my-2" />
-                                <DropdownMenuItem onClick={handleSignOut} className="cursor-pointer focus:bg-red-500/20 rounded-lg px-3 py-2.5 text-red-100 focus:text-red-500">
+                                <DropdownMenuItem onSelect={(e) => { e.preventDefault(); handleSignOut(); }} className="cursor-pointer focus:bg-red-500/20 rounded-lg px-3 py-2.5 text-red-100 focus:text-red-500">
                                     <div className="flex items-center gap-3 w-full">
                                         <LogOut className="w-4 h-4" />
                                         <span>Logout</span>

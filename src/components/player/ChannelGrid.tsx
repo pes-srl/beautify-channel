@@ -3,47 +3,15 @@
 import { useAudioStore } from "@/store/useAudioStore";
 import { Play, Pause, Radio } from "lucide-react";
 import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
-import { createClient } from "@/utils/supabase/client";
+import { useState } from "react";
 
-export function ChannelGrid() {
+interface ChannelGridProps {
+    initialChannels: any[];
+    serverError?: string;
+}
+
+export function ChannelGrid({ initialChannels, serverError }: ChannelGridProps) {
     const { currentChannel, isPlaying, togglePlay, setChannel } = useAudioStore();
-    const [channels, setChannels] = useState<any[]>([]);
-    const [isLoading, setIsLoading] = useState(true);
-    const [errorState, setErrorState] = useState<string | null>(null);
-    const supabase = createClient();
-
-    useEffect(() => {
-        async function loadChannels() {
-            try {
-                // 1. Get current user
-                const { data: { user } } = await supabase.auth.getUser();
-                if (!user) return;
-
-                // 2. Call our advanced SQL function that merges "Plan Default Channels" + "VIP Custom Assigned Channels"
-                const { data, error } = await supabase
-                    .rpc('get_authorized_channels', { req_user_id: user.id });
-
-                if (error) {
-                    setErrorState(JSON.stringify(error));
-                    throw error;
-                }
-
-                if (!data || data.length === 0) {
-                    setErrorState("No error thrown, but RPC returned 0 rows. Is 'get_authorized_channels' function deployed and are channels active?");
-                }
-
-                setChannels(data || []);
-            } catch (error: any) {
-                console.error("Error fetching authorized channels:", error);
-                if (!errorState) setErrorState(error?.message || "Unknown Error");
-            } finally {
-                setIsLoading(false);
-            }
-        }
-
-        loadChannels();
-    }, []);
 
     const handleChannelClick = (channel: any) => {
         if (currentChannel?.id === channel.id) {
@@ -61,19 +29,11 @@ export function ChannelGrid() {
         }
     };
 
-    if (isLoading) {
-        return (
-            <div className="flex justify-center items-center h-48">
-                <span className="text-zinc-500 animate-pulse">Caricamento canali disponibili...</span>
-            </div>
-        );
-    }
-
-    if (errorState || channels.length === 0) {
+    if (serverError || initialChannels.length === 0) {
         return (
             <div className="p-8 rounded-2xl border border-red-500/20 bg-red-500/5 text-center mt-8 max-w-2xl mx-auto">
                 <h3 className="text-xl text-red-400 font-bold mb-2">DEBUG MODE: Dati Non Trovati</h3>
-                <p className="text-red-200/70 text-sm font-mono wrap-break-word">{errorState || "0 canali attivi nel DB per questo utente."}</p>
+                <p className="text-red-200/70 text-sm font-mono wrap-break-word">{serverError || "0 canali attivi nel DB per questo utente."}</p>
                 <div className="mt-4 p-4 bg-black/40 rounded-lg text-left">
                     <p className="text-xs text-zinc-500">Istruzioni (Per Mirko):</p>
                     <ol className="text-xs text-zinc-400 list-decimal pl-4 mt-2 space-y-1">
@@ -87,7 +47,7 @@ export function ChannelGrid() {
 
     return (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {channels.map((channel: any, idx: number) => {
+            {initialChannels.map((channel: any, idx: number) => {
                 const isActive = currentChannel?.id === channel.id;
                 const isCurrentlyPlaying = isActive && isPlaying;
 

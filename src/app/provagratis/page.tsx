@@ -10,9 +10,11 @@ import { Sparkles } from "lucide-react";
 import Link from "next/link";
 
 export default function ProvaGratisPage() {
+    const [fullName, setFullName] = useState("");
     const [salonName, setSalonName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [termsAccepted, setTermsAccepted] = useState(false);
     const [error, setError] = useState<string | null>(null);
     const [message, setMessage] = useState<string | null>(null);
     const [isLoading, setIsLoading] = useState(false);
@@ -25,27 +27,51 @@ export default function ProvaGratisPage() {
         setError(null);
         setMessage(null);
 
+        if (!termsAccepted) {
+            setError("Devi accettare i Termini e Condizioni per proseguire.");
+            setIsLoading(false);
+            return;
+        }
+
+        // Calculate trial end date (7 days from now)
+        const trialEndDate = new Date();
+        trialEndDate.setDate(trialEndDate.getDate() + 7);
+
         // This triggers the handle_new_user SQL function with new.raw_user_meta_data variables
         const { data, error } = await supabase.auth.signUp({
             email,
             password,
             options: {
                 data: {
-                    is_trial: true,
-                    salon_name: salonName.trim() !== "" ? salonName : email
+                    plan_type: 'free_trial',
+                    trial_ends_at: trialEndDate.toISOString(),
+                    full_name: fullName,
+                    salon_name: salonName.trim() !== "" ? salonName : fullName || email
                 }
             }
         });
 
         if (error) {
+            console.error("SUPABASE REGISTRATION ERROR:", error);
             setError(error.message);
         } else {
+            // Trigger Welcome Email asynchronously
+            try {
+                fetch("/api/send-welcome", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ email, full_name: fullName })
+                });
+            } catch (err) {
+                console.error("Failed to trigger welcome email:", err);
+            }
+
             // Se l'email confirmation è spenta su Supabase, entra subito
             if (data.session) {
                 setMessage("Attivazione Prova Gratuita in corso...");
                 router.push("/area-riservata");
             } else {
-                setMessage("Prova attivata! (Disattiva 'Confirm Email' su Supabase per entrare subito)");
+                setMessage("Prova attivata! Controlla la tua email per il riepilogo.");
                 setTimeout(() => {
                     router.push("/area-riservata");
                 }, 2000);
@@ -89,6 +115,19 @@ export default function ProvaGratisPage() {
                     <div className="space-y-6">
                         <div className="space-y-4">
                             <div className="space-y-2">
+                                <Label htmlFor="fullName" className="text-zinc-300">Nome Completo</Label>
+                                <Input
+                                    id="fullName"
+                                    type="text"
+                                    placeholder="Es. Mario Rossi"
+                                    value={fullName}
+                                    onChange={(e) => setFullName(e.target.value)}
+                                    required
+                                    className="h-12 bg-black/40 border-white/10 text-white placeholder:text-zinc-600 focus-visible:ring-fuchsia-500/50 rounded-xl"
+                                />
+                            </div>
+
+                            <div className="space-y-2">
                                 <Label htmlFor="salonName" className="text-zinc-300">Nome Salone / Istituto <span className="text-zinc-500 font-normal">(Opzionale)</span></Label>
                                 <Input
                                     id="salonName"
@@ -125,6 +164,19 @@ export default function ProvaGratisPage() {
                                     className="h-12 bg-black/40 border-white/10 text-white placeholder:text-zinc-600 focus-visible:ring-fuchsia-500/50 rounded-xl"
                                 />
                             </div>
+                        </div>
+
+                        <div className="flex items-start space-x-3 pt-2">
+                            <input
+                                type="checkbox"
+                                id="terms"
+                                checked={termsAccepted}
+                                onChange={(e) => setTermsAccepted(e.target.checked)}
+                                className="mt-1 h-4 w-4 rounded border-white/20 bg-black/40 text-fuchsia-600 focus:ring-fuchsia-500 focus:ring-offset-zinc-950"
+                            />
+                            <Label htmlFor="terms" className="text-sm text-zinc-400 font-normal leading-snug cursor-pointer">
+                                Accetto i <Link href="/termini" className="text-fuchsia-400 hover:text-fuchsia-300 underline">Termini e Condizioni</Link> e la <Link href="/privacy" className="text-fuchsia-400 hover:text-fuchsia-300 underline">Privacy Policy</Link> di Beautify Channel.
+                            </Label>
                         </div>
 
                         <Button

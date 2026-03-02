@@ -18,6 +18,7 @@ interface ChannelConfig {
     subtitle?: string | null; // Added for cloning
     stream_url_mp3?: string | null; // Added for cloning
     stream_url_mp3_mobile?: string | null; // Added for cloning
+    is_default: boolean; // Added for default tag
 }
 
 export default function AdminChannelsListPage() {
@@ -56,25 +57,34 @@ export default function AdminChannelsListPage() {
         }
     };
 
+    const fetchChannels = async () => {
+        setIsLoading(true);
+        setErrorStatus(null);
+
+        try {
+            // Seleziona tutto ordina per created_at
+            const { data, error } = await supabase
+                .from("radio_channels")
+                .select("*")
+                .order("created_at", { ascending: true });
+
+            if (error) {
+                console.error("Error fetching channels:", error);
+                setErrorStatus("Errore nel caricamento dei canali. Timeout o problema di rete.");
+            } else if (data) {
+                setChannels(data);
+            }
+        } catch (err: any) {
+            console.error("Unexpected error fetching channels:", err);
+            setErrorStatus("Si è verificato un errore imprevisto durante il caricamento.");
+        } finally {
+            setIsLoading(false);
+        }
+    }
+
     useEffect(() => {
         fetchChannels();
     }, []);
-
-    async function fetchChannels() {
-        setIsLoading(true);
-        const { data, error } = await supabase
-            .from("radio_channels")
-            .select("*") // Fetching all columns to make cloning easier if we need subtitle/mp3 later, though we only strictly need some for the list
-            .order("created_at", { ascending: true });
-
-        if (error) {
-            console.error("Error fetching channels:", error);
-            setErrorStatus("Errore nel caricamento dei canali.");
-        } else if (data) {
-            setChannels(data);
-        }
-        setIsLoading(false);
-    }
 
     const handleDelete = async (id: string, name: string) => {
         if (!window.confirm(`Sei sicuro di voler estinare il canale "${name}"? Questa azione è irreversibile.`)) {
@@ -171,8 +181,18 @@ export default function AdminChannelsListPage() {
             </div>
 
             {errorStatus && (
-                <div className="mb-8 p-4 rounded-xl bg-red-500/10 border border-red-500/20 text-red-300">
-                    {errorStatus}
+                <div className="mb-8 p-4 rounded-xl bg-red-500/10 border border-red-500/20 text-red-300 flex flex-col md:flex-row items-center justify-between gap-4">
+                    <span>{errorStatus}</span>
+                    <Button
+                        onClick={() => {
+                            fetchChannels();
+                        }}
+                        variant="outline"
+                        size="sm"
+                        className="bg-red-500/10 hover:bg-red-500/20 text-red-300 border-red-500/30 whitespace-nowrap"
+                    >
+                        Riprova
+                    </Button>
                 </div>
             )}
 
@@ -202,6 +222,11 @@ export default function AdminChannelsListPage() {
                                         <td className="p-4">
                                             <div className="font-semibold text-white group-hover:text-fuchsia-400 transition-colors flex items-center gap-2">
                                                 {channel.name}
+                                                {channel.is_default && (
+                                                    <span className="bg-fuchsia-500/20 text-fuchsia-400 text-[10px] px-2 py-0.5 rounded-full uppercase tracking-wider font-bold border border-fuchsia-500/30">
+                                                        Default
+                                                    </span>
+                                                )}
                                                 {processingId === channel.id && <Loader2 className="w-3 h-3 animate-spin text-fuchsia-400" />}
                                             </div>
                                             <div className="text-xs text-zinc-500 mt-1 flex gap-3 opacity-0 group-hover:opacity-100 transition-opacity">

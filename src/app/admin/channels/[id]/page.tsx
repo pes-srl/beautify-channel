@@ -24,6 +24,7 @@ interface ChannelData {
     slug: string | null;
     card_image_url: string | null;
     is_active: boolean;
+    is_default: boolean;
     created_at: string;
 }
 
@@ -134,7 +135,7 @@ export default function SingleChannelAdminPage() {
                 stream_url_mp3: channel.stream_url_mp3,
                 stream_url_mp3_mobile: channel.stream_url_mp3_mobile,
                 subtitle: channel.subtitle,
-                updated_at: new Date().toISOString()
+                is_default: channel.is_default
             })
             .eq("id", channel.id);
 
@@ -374,6 +375,34 @@ export default function SingleChannelAdminPage() {
                                         className={`w-10 h-6 rounded-full transition-colors relative ${channel.is_active ? 'bg-green-500' : 'bg-zinc-700'}`}
                                     >
                                         <div className={`w-4 h-4 rounded-full bg-white absolute top-1 transition-transform ${channel.is_active ? 'left-5' : 'left-1'}`} />
+                                    </button>
+                                </div>
+                            </div>
+                            <div className="flex justify-between items-center py-2 border-b border-white/5">
+                                <div className="flex flex-col">
+                                    <span>Canale di Default</span>
+                                    <span className="text-[10px] text-zinc-500">Visibile a tutti in prova/attivi</span>
+                                </div>
+                                <div className="flex items-center gap-3">
+                                    <button
+                                        onClick={() => {
+                                            const isTurningOff = channel.is_default;
+                                            const isTurningOn = !channel.is_default;
+                                            let confirmMessage = "";
+
+                                            if (isTurningOff) {
+                                                confirmMessage = "Sei sicuro di voler DISATTIVARE questo canale di Default? Scomparirà dalla vista base di tutti gli utenti in Prova e degli abbonati.";
+                                            } else {
+                                                confirmMessage = "Vuoi IMPOSTARE questo canale come Default? Diventerà automaticamente visibile a tutti gli utenti in Prova e a tutti gli abbonati.";
+                                            }
+
+                                            if (window.confirm(confirmMessage)) {
+                                                handleInputChange('is_default', isTurningOn as any);
+                                            }
+                                        }}
+                                        className={`w-10 h-6 rounded-full transition-colors relative ${channel.is_default ? 'bg-fuchsia-500' : 'bg-zinc-700'}`}
+                                    >
+                                        <div className={`w-4 h-4 rounded-full bg-white absolute top-1 transition-transform ${channel.is_default ? 'left-5' : 'left-1'}`} />
                                     </button>
                                 </div>
                             </div>
