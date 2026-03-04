@@ -71,6 +71,20 @@ export default async function AreaClientePage() {
     return (
         <div className="pt-12 pb-32">
 
+            {/* DYNAMIC WELCOME BANNER BASED ON PLAN */}
+            {!isAdmin && profile?.plan_type && !isExpired && (
+                <div className="mb-6 p-4 rounded-xl border border-white/5 bg-zinc-900/50 flex items-center justify-center text-center shadow-md">
+                    <p className="text-zinc-300 font-medium text-lg tracking-wide">
+                        Benvenuta nella versione <span className="font-bold text-white uppercase">{
+                            profile.plan_type === 'free_trial' ? 'FREE TRIAL' :
+                                profile.plan_type === 'basic' ? 'BASIC' :
+                                    profile.plan_type === 'premium' ? 'PREMIUM' :
+                                        profile.plan_type
+                        }</span> del tuo account BeautiFy
+                    </p>
+                </div>
+            )}
+
             {/* TRIAL OVERVIEW BANNER */}
             {profile?.plan_type === 'free_trial' && daysLeft > 0 && !isAdmin && (
                 <div className="bg-gradient-to-r from-fuchsia-600 to-indigo-600 text-white px-6 py-4 rounded-2xl mb-10 flex flex-col md:flex-row justify-between items-center shadow-lg shadow-fuchsia-900/20 gap-4 border border-fuchsia-400/30 relative overflow-hidden">
@@ -108,9 +122,7 @@ export default async function AreaClientePage() {
                             </span>
                         )}
                     </div>
-                    {!isExpired || isAdmin ? (
-                        <p className="text-zinc-400 text-lg mt-2">Seleziona un canale radio per impostare l'atmosfera perfetta nel tuo istituto.</p>
-                    ) : (
+                    {!isExpired || isAdmin ? null : (
                         <p className="text-fuchsia-400 text-lg mt-2 font-medium">L'accesso ai canali è bloccato.</p>
                     )}
                 </div>
@@ -139,84 +151,53 @@ export default async function AreaClientePage() {
 
                     <ChannelGrid initialChannels={channels || []} serverError={channelsError?.message} />
 
-                    {/* WELCOME BANNER (Pricing / Account info) */}
-                    <div id="welcome-pricing-banner" className="bg-[#17092b] w-full py-12 px-6 md:px-12 rounded-3xl mt-16 mb-8 flex flex-col items-center shadow-xl border border-white/5">
+                    {/* COME FUNZIONA BANNER */}
+                    <div id="welcome-pricing-banner" className="bg-[#17092b] w-full py-16 px-6 md:px-12 rounded-3xl mt-16 mb-8 flex flex-col items-center shadow-xl border border-white/5 text-center">
 
-                        {/* Header Section */}
-                        <div className="flex flex-col items-center justify-center text-center mb-16">
-                            <h2 className="text-xl md:text-2xl font-black text-white mb-1 uppercase tracking-wider">
-                                Benvenuta su Beautify Channel
-                            </h2>
-                            <p className="text-lg md:text-xl text-zinc-200 font-semibold mb-8 max-w-2xl leading-normal">
-                                il servizio che trasforma<br /> radicalmente l'atmosfera del tuo istituto!
+                        {/* 2-Column Audio Channel Explanation */}
+                        <div className="w-full max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-center gap-10 md:gap-16 mb-16">
+                            {/* Text Content */}
+                            <div className="flex-1 text-left space-y-6">
+                                <h2 className="text-3xl md:text-4xl font-black text-white mb-6 uppercase tracking-wider">
+                                    Come funziona
+                                </h2>
+                                <p className="text-zinc-50 text-base md:text-lg leading-relaxed">
+                                    Il canale audio BeautiFy Channel Basic è il canale principale. Propone una raffinata selezione musicale intervallata da eleganti e generici suggerimenti vocali, studiati per stimolare l’interesse e l’acquisto dei tuoi servizi in istituto.
+                                </p>
+                                <p className="text-zinc-50 text-base md:text-lg leading-relaxed">
+                                    Inoltre, hai a disposizione altri 6 canali per cambiare mood durante la giornata o magari con DEEP SOFT nel weekend, tutti con eleganti suggerimenti per stimolare l’interesse all’acquisto.
+                                </p>
+                            </div>
+                            {/* Image Content */}
+                            <div className="flex-1 w-full max-w-md shrink-0">
+                                <img
+                                    src="https://eufahlzjxbimyiwivoiq.supabase.co/storage/v1/object/public/bucket-assets/1772477138781-nxz25k.jpg"
+                                    alt="BeautiFy Ascolto"
+                                    className="w-full h-auto rounded-3xl border border-white/5 shadow-2xl"
+                                />
+                            </div>
+                        </div>
+
+                        {/* Philosophy / Vision Texts */}
+                        <div className="w-full max-w-4xl mx-auto space-y-10 mt-8 border-t border-white/10 pt-16">
+                            <p className="text-zinc-300 text-lg md:text-xl leading-relaxed italic font-light px-4 md:px-12">
+                                "BeautiFy Channel è un supporto irrinunciabile per la tua professione, perché ti consentirà di non preoccuparti più della comunicazione interna del tuo salone, ma di dedicarti e concentrarti pienamente sullo svolgimento del tuo lavoro."
                             </p>
-                            <button className="text-white font-bold text-lg tracking-widest uppercase hover:text-fuchsia-400 transition-colors">
-                                Come funziona?
-                            </button>
+                            <p className="text-zinc-300 text-lg md:text-xl leading-relaxed italic font-light px-4 md:px-12">
+                                "BeautiFy Channel è la soluzione innovativa di marketing sonoro ideata per aumentare le vendite, la professionalità e la customer experience nel settore del beauty, inducendo una piacevole sensazione di coinvolgimento."
+                            </p>
                         </div>
 
-                        {/* Additional Block: Account BASIC */}
-                        <div className="w-full max-w-5xl mx-auto flex flex-col md:flex-row items-center gap-10 md:gap-16">
-                            {/* Text Content */}
-                            <div className="flex-1 text-left space-y-6">
-                                <h3 className="text-3xl md:text-4xl font-bold text-white tracking-tight">
-                                    Account BASIC
-                                </h3>
-                                <p className="text-zinc-50 text-base md:text-lg leading-relaxed">
-                                    Contiene <span className="font-semibold">BEAUTIFY CHANNEL</span>, il canale principale!
-                                </p>
-                                <p className="text-zinc-50 text-base md:text-lg leading-relaxed">
-                                    Propone una raffinata selezione musicale intervallata da eleganti e generici suggerimenti vocali, studiati per stimolare l'interesse e l'acquisto dei tuoi servizi in istituto.
-                                </p>
-                                <p className="text-zinc-50 text-base md:text-lg leading-relaxed">
-                                    Inoltre hai a disposizione altri 6 canali per cambiare mood durante la giornata o magari con <span className="font-semibold">DEEP SOFT</span> nel weekend, tutti con eleganti suggerimenti per stimolare l'interesse all'acquisto.
-                                </p>
-                                <p className="text-zinc-50 text-base md:text-lg leading-relaxed mt-4">
-                                    Altri servizi di settore prossimamente, stay tuned!
-                                </p>
-                            </div>
-
-                            {/* Image Content */}
-                            <div className="flex-1 w-full max-w-md shrink-0">
-                                <img
-                                    src="https://eufahlzjxbimyiwivoiq.supabase.co/storage/v1/object/public/bucket-assets/1772556955956-qdtntc.webp"
-                                    alt="Account Basic Ambientazione"
-                                    className="w-full h-auto rounded-3xl"
-                                />
-                            </div>
-                        </div>
-
-                        {/* Additional Block: Account PREMIUM */}
-                        <div className="w-full max-w-5xl mx-auto flex flex-col md:flex-row-reverse items-center gap-10 md:gap-16 mt-20">
-                            {/* Text Content */}
-                            <div className="flex-1 text-left space-y-6">
-                                <h3 className="text-3xl md:text-4xl font-bold text-white tracking-tight">
-                                    Account PREMIUM
-                                </h3>
-                                <p className="text-zinc-50 text-base md:text-lg leading-relaxed">
-                                    Tutto quello compreso nell'account BASIC più:
-                                </p>
-                                <p className="text-zinc-50 text-base md:text-lg leading-relaxed font-semibold uppercase tracking-wider">
-                                    SUGGERIMENTI PERSONALIZZATI
-                                </p>
-                                <p className="text-zinc-50 text-base md:text-lg leading-relaxed">
-                                    Oltre ai suggerimenti generici come nell'account BASIC, puoi ordinarci via email 2 suggerimenti (promozioni) al mese del tuo centro che ascolterai successivamente nel tuo canale radio in istituto. Utili da sfruttare quando hai delle promo attive o nei periodi in cui hai nuovi servizi, anche stagionali (estate, inverno, ecc).
-                                </p>
-                            </div>
-
-                            {/* Image Content */}
-                            <div className="flex-1 w-full max-w-md shrink-0">
-                                <img
-                                    src="https://eufahlzjxbimyiwivoiq.supabase.co/storage/v1/object/public/bucket-assets/1772557078224-cv84w3.png"
-                                    alt="Account Premium Assistente"
-                                    className="w-full h-auto rounded-3xl border border-white/5"
-                                />
-                            </div>
+                        {/* Call To Action */}
+                        <div className="mt-16 mb-8 px-4">
+                            <p className="font-bold text-xl md:text-2xl tracking-wide uppercase text-fuchsia-400">
+                                Basta parole, BeautiFy Channel lo si capisce prima schiacciando Play, buon ascolto
+                            </p>
                         </div>
 
                         {/* Upgrade Form for Free Trial Users */}
                         {profile?.plan_type === 'free_trial' && !isAdmin && (
-                            <div className="w-full max-w-4xl mx-auto mt-24">
+                            <div className="w-full max-w-4xl mx-auto mt-16 border-t border-white/10 pt-16">
                                 <UpgradeForm userEmail={user.email} />
                             </div>
                         )}
