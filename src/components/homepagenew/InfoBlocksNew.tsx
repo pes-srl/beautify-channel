@@ -116,51 +116,59 @@ export function InfoBlocksNew() {
                     {/* 4 Elegant Square Blocks */}
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 w-full max-w-3xl pt-8 pb-12">
                         {/* Block 1 */}
-                        <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-8 flex flex-col items-center justify-center text-center aspect-square shadow-2xl hover:bg-white/10 transition-all duration-300">
-                            <div className="w-12 h-12 rounded-full bg-fuchsia-500/20 flex items-center justify-center mb-6 text-fuchsia-400 shrink-0">
+                        <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-6 sm:p-8 flex flex-col items-center justify-start text-center h-full shadow-2xl hover:bg-white/10 transition-all duration-300">
+                            <div className="w-12 h-12 rounded-full bg-fuchsia-500/20 flex items-center justify-center mb-4 sm:mb-6 text-fuchsia-400 shrink-0">
                                 <span className="text-xl font-bold">1</span>
                             </div>
-                            <p className="text-zinc-200 text-sm md:text-base leading-relaxed">
-                                Nel corso di un intrattenimento musicale dal sound ricercato, l’assistente digitale BeautiFy
-                                interviene, con dolcezza e professionalità, per offrire spunti generici legati al mondo della
-                                bellezza e del benessere, regalando così una vera e propria beauty routine sonora
-                            </p>
+                            <div className="flex-1 flex flex-col justify-center">
+                                <p className="text-zinc-200 text-sm md:text-base leading-relaxed">
+                                    Nel corso di un intrattenimento musicale dal sound ricercato, l’assistente digitale BeautiFy
+                                    interviene, con dolcezza e professionalità, per offrire spunti generici legati al mondo della
+                                    bellezza e del benessere, regalando così una vera e propria beauty routine sonora
+                                </p>
+                            </div>
                         </div>
 
                         {/* Block 2 */}
-                        <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-8 flex flex-col items-center justify-center text-center aspect-square shadow-2xl hover:bg-white/10 transition-all duration-300">
-                            <div className="w-12 h-12 rounded-full bg-blue-500/20 flex items-center justify-center mb-6 text-blue-400 shrink-0">
+                        <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-6 sm:p-8 flex flex-col items-center justify-start text-center h-full shadow-2xl hover:bg-white/10 transition-all duration-300">
+                            <div className="w-12 h-12 rounded-full bg-blue-500/20 flex items-center justify-center mb-4 sm:mb-6 text-blue-400 shrink-0">
                                 <span className="text-xl font-bold">2</span>
                             </div>
-                            <p className="text-zinc-200 text-sm md:text-base leading-relaxed">
-                                Questo stimola efficacemente l’interesse delle clienti e sollecita la loro richiesta di informazioni
-                                su prodotti e trattamenti proprio mentre sono nel tuo salone, creando una percezione positiva
-                                dell’ambiente che ne aumenta la fidelizzazione
-                            </p>
+                            <div className="flex-1 flex flex-col justify-center">
+                                <p className="text-zinc-200 text-sm md:text-base leading-relaxed">
+                                    Questo stimola efficacemente l’interesse delle clienti e sollecita la loro richiesta di informazioni
+                                    su prodotti e trattamenti proprio mentre sono nel tuo salone, creando una percezione positiva
+                                    dell’ambiente che ne aumenta la fidelizzazione
+                                </p>
+                            </div>
                         </div>
 
                         {/* Block 3 */}
-                        <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-8 flex flex-col items-center justify-center text-center aspect-square shadow-2xl hover:bg-white/10 transition-all duration-300">
-                            <div className="w-12 h-12 rounded-full bg-blue-500/20 flex items-center justify-center mb-6 text-blue-400 shrink-0">
+                        <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-6 sm:p-8 flex flex-col items-center justify-start text-center h-full shadow-2xl hover:bg-white/10 transition-all duration-300">
+                            <div className="w-12 h-12 rounded-full bg-blue-500/20 flex items-center justify-center mb-4 sm:mb-6 text-blue-400 shrink-0">
                                 <span className="text-xl font-bold">3</span>
                             </div>
-                            <p className="text-zinc-200 text-sm md:text-base leading-relaxed">
-                                BeautiFy Channel è un supporto irrinunciabile per la tua professione, perché ti consentirà di non
-                                preoccuparti più della comunicazione interna del tuo salone, ma di dedicarti e concentrarti
-                                pienamente sullo svolgimento del tuo lavoro
-                            </p>
+                            <div className="flex-1 flex flex-col justify-center">
+                                <p className="text-zinc-200 text-sm md:text-base leading-relaxed">
+                                    BeautiFy Channel è un supporto irrinunciabile per la tua professione, perché ti consentirà di non
+                                    preoccuparti più della comunicazione interna del tuo salone, ma di dedicarti e concentrarti
+                                    pienamente sullo svolgimento del tuo lavoro
+                                </p>
+                            </div>
                         </div>
 
                         {/* Block 4 */}
-                        <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-8 flex flex-col items-center justify-center text-center aspect-square shadow-2xl hover:bg-white/10 transition-all duration-300">
-                            <div className="w-12 h-12 rounded-full bg-fuchsia-500/20 flex items-center justify-center mb-6 text-fuchsia-400 shrink-0">
+                        <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-6 sm:p-8 flex flex-col items-center justify-start text-center h-full shadow-2xl hover:bg-white/10 transition-all duration-300">
+                            <div className="w-12 h-12 rounded-full bg-fuchsia-500/20 flex items-center justify-center mb-4 sm:mb-6 text-fuchsia-400 shrink-0">
                                 <span className="text-xl font-bold">4</span>
                             </div>
-                            <p className="text-zinc-200 text-sm md:text-base leading-relaxed">
-                                Inoltre, BeautiFy Channel ti mette a disposizione altri 6 canali oltre al canale principale, per cambiare mood durante la
-                                giornata, magari con DEEP SOFT nel weekend o Jazz a fine giornata, sempre con il supporto dell’assistente digitale
-                                BeautiFy
-                            </p>
+                            <div className="flex-1 flex flex-col justify-center">
+                                <p className="text-zinc-200 text-sm md:text-base leading-relaxed">
+                                    Inoltre, BeautiFy Channel ti mette a disposizione altri 6 canali oltre al canale principale, per cambiare mood durante la
+                                    giornata, magari con DEEP SOFT nel weekend o Jazz a fine giornata, sempre con il supporto dell’assistente digitale
+                                    BeautiFy
+                                </p>
+                            </div>
                         </div>
                     </div>
 
