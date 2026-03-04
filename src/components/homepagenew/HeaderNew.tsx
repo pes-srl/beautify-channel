@@ -279,7 +279,7 @@ export function HeaderNew({
                             </Link>
                             <Link href="/login" className="hidden md:inline-block">
                                 <Button variant="outline" className="text-zinc-300 border-zinc-700 bg-transparent hover:bg-zinc-800 hover:text-white transition-colors">
-                                    Accedi
+                                    Accedi 2
                                 </Button>
                             </Link>
                         </>
@@ -326,7 +326,7 @@ export function HeaderNew({
                             <>
                                 <Link href="/login" onClick={() => setIsMobileMenuOpen(false)}>
                                     <Button variant="outline" className="w-full border-white/20 text-white bg-transparent">
-                                        Accedi
+                                        Accedi 2
                                     </Button>
                                 </Link>
                                 <Link href="#trial-form" onClick={() => setIsMobileMenuOpen(false)}>
