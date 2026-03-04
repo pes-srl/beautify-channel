@@ -28,13 +28,16 @@ export function HeroNew() {
                     transition={{ duration: 0.8, ease: "easeOut" }}
                     className="w-full md:w-1/2 max-w-2xl"
                 >
-                    <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-white leading-[1.1] mb-8 drop-shadow-lg tracking-tight">
+                    <h1
+                        className="text-4xl md:text-5xl lg:text-6xl font-black bg-linear-to-r from-blue-500 to-fuchsia-500 bg-clip-text text-white leading-[1.1] mb-8 drop-shadow-lg tracking-tight"
+                        style={{ WebkitTextStroke: '2px transparent' }}
+                    >
                         COME FAI SENZA BEAUTIFY?
                     </h1>
 
                     <Link href="#pricing">
                         <Button
-                            className="bg-linear-to-r from-fuchsia-500 to-fuchsia-400 hover:from-fuchsia-400 hover:to-fuchsia-300 text-white font-bold tracking-wider uppercase px-10 py-6 text-lg rounded-full shadow-[0_0_20px_rgba(217,70,239,0.4)] transition-all"
+                            className="bg-linear-to-r from-blue-500 to-fuchsia-500 hover:from-blue-400 hover:to-fuchsia-400 text-white font-bold tracking-wider uppercase px-10 py-6 text-lg rounded-full shadow-[0_0_20px_rgba(217,70,239,0.4)] transition-all"
                         >
                             Scoprimi
                         </Button>
@@ -44,6 +47,6 @@ export function HeroNew() {
 
 
             </div>
-        </section>
+        </section >
     );
 }
