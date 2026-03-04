@@ -18,23 +18,19 @@ export function HeroNew() {
             {/* Dark overlay to make text readable on the background */}
             <div className="absolute inset-0 bg-black/40 md:bg-black/30 w-full h-full"></div>
 
-            {/* Container for Content */}
-            <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 flex items-center h-full">
+            {/* Container for Content: Allineato in basso con il minimo padding possibile */}
+            <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 flex items-end pb-4 h-full">
 
                 {/* Left Side: Text and Buttons */}
                 <motion.div
                     initial={{ opacity: 0, x: -30 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.8, ease: "easeOut" }}
-                    className="w-full md:w-1/2 max-w-2xl pt-20 md:pt-0"
+                    className="w-full md:w-1/2 max-w-2xl"
                 >
-                    <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-white leading-[1.1] mb-6 drop-shadow-lg tracking-tight">
-                        Ciao sono Tati, la tua assistente digitale BeautiFy
+                    <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-white leading-[1.1] mb-8 drop-shadow-lg tracking-tight">
+                        COME FAI SENZA BEAUTIFY?
                     </h1>
-
-                    <p className="text-xl md:text-2xl text-zinc-100 font-medium mb-10 drop-shadow-md">
-                        Scopri come posso esserti utile nel tuo istituto di bellezza!
-                    </p>
 
                     <Link href="#pricing">
                         <Button
