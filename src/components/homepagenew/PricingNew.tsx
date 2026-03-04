@@ -24,54 +24,8 @@ const plans = [
         buttonClasses: "bg-linear-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white shadow-xl shadow-purple-500/20",
         footerText: "Possibilità di abbonamento semestrale a 25,90 mese\nOfferta valida fino a 250mq di Istituto\nPagamento unica soluzione",
         highlight: false,
-    },
-    {
-        name: "Premium",
-        headerColor: "bg-[#DF3745]",
-        headerTextColor: "text-white",
-        subtitle: "Tutto il Basic + l'inserimento delle tue nuove promozioni, offerte speciali per Natale, promo estive e qualsiasi messaggio desideri condividere con le tue clienti.",
-        price: "38,90",
-        period: "/mese",
-        features: [
-            "Licenza di diffusione musica per l'istituto",
-            "Assistenza legale per diritti d'autore musicali",
-            "Atmosfere musicali dedicate al mondo Beauty",
-            "Eleganti suggerimenti vocali istituzionali (social, sito o shop online)",
-            "2 suggerimenti\\promozioni personalizzati al mese per il tuo istituto (non cumulabili) e utilizzabili anche come reel su instagram, facebook o tuoi canali whatsapp",
-            "Accesso a pacchetti aggiuntivi di suggerimenti vocali personalizzati per il tuo istituto",
-            "Promozione dei social tramite suggerimenti vocali",
-            "Oltre al canale principale hai a disposizione altri 6 canali: Relax, Lounge, Jazz, Ambient Massage, Vocal e Deep, inoltre avrai accesso anche a...",
-            "LASER CHANNEL, canale dedicato al Laser*",
-            "COSMETIC CHANNEL, canale dedicato alla Cosmetica**",
-        ],
-        buttonText: "PROVA GRATUITA 7 GIORNI",
-        buttonClasses: "bg-[#DF3745] hover:bg-[#c62837] text-white shadow-xl shadow-red-500/20",
-        footerText: "Possibilità di abbonamento semestrale a 43,90 mese\nOfferta valida fino a 250mq di Istituto\nPagamento unica soluzione",
-        highlight: true,
-    },
-    {
-        name: "Gold",
-        headerColor: "bg-[#FBD44C]",
-        headerTextColor: "text-zinc-900",
-        subtitle: "",
-        price: null,
-        period: null,
-        goldTitle: "CHIEDICI INFO",
-        features: [
-            "Con il piano GOLD hai accesso al massimo livello di personalizzazione del canale!",
-            "La radio viene prodotta completamente su misura per il tuo istituto a partire dal nome",
-            "Comunicazione completamente personalizzata",
-            "Il tuo canale audio con tutte le tue comunicazioni e promozioni che ritieni importanti",
-            "Potrai chiederci di inserire le nuove promozioni dell'istituto, offerte speciali per Natale, promozioni estive e qualsiasi messaggio che desideri condividere!",
-        ],
-        buttonText: "Scrivici su WhatsApp",
-        buttonClasses: "bg-[#25D366] hover:bg-[#20bd5a] text-white shadow-xl shadow-green-500/20",
-        buttonLink: "https://wa.link/5apci9",
-        footerText: "Offerta valida fino a 250mq di Istituto\nPagamento unica soluzione",
-        highlight: false,
-    },
+    }
 ];
-
 export function PricingNew() {
     return (
         <section id="pricing" className="bg-[#1E0C31] py-32 px-6 overflow-hidden">
@@ -87,7 +41,7 @@ export function PricingNew() {
                     </p>
                 </div>
 
-                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 items-start max-w-6xl mx-auto">
+                <div className="flex justify-center max-w-sm lg:max-w-5xl mx-auto">
                     {plans.map((plan, i) => (
                         <motion.div
                             key={plan.name}
@@ -95,79 +49,68 @@ export function PricingNew() {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true, margin: "-100px" }}
                             transition={{ delay: i * 0.15, duration: 0.5 }}
-                            className={`flex flex-col bg-white rounded-3xl overflow-hidden shadow-2xl transition-all
+                            className={`flex flex-col lg:flex-row bg-white rounded-3xl overflow-hidden shadow-2xl transition-all w-full
                                 ${plan.highlight ? 'ring-4 ring-[#DF3745] ring-offset-4 ring-offset-[#1E0C31] scale-100 lg:scale-105 z-10' : 'scale-100'}`}
                         >
                             {/* Color Header */}
-                            <div className={`${plan.headerColor} px-6 pt-10 pb-8 text-center min-h-[170px] flex flex-col justify-center`}>
-                                <h3 className={`text-3xl font-black uppercase tracking-wide mb-3 ${plan.headerTextColor}`}>
+                            <div className={`${plan.headerColor} px-6 pt-10 pb-8 lg:p-12 text-center lg:text-left min-h-[170px] flex flex-col justify-center lg:w-1/3 shrink-0`}>
+                                <h3 className={`text-3xl lg:text-4xl font-black uppercase tracking-wide mb-4 ${plan.headerTextColor}`}>
                                     {plan.name}
                                 </h3>
                                 {plan.subtitle && (
-                                    <p className={`text-sm md:text-[15px] font-medium leading-snug whitespace-pre-line ${plan.headerTextColor} ${plan.name === 'Basic' ? 'opacity-90' : 'opacity-100'} px-2`}>
+                                    <p className={`text-sm md:text-base leading-snug whitespace-pre-line ${plan.headerTextColor} opacity-90`}>
                                         {plan.subtitle}
                                     </p>
                                 )}
                             </div>
 
                             {/* White Body */}
-                            <div className="p-6 md:p-8 flex flex-col">
+                            <div className="p-6 md:p-8 lg:p-12 flex flex-col lg:flex-row gap-8 lg:gap-12 w-full">
 
-                                {/* Price block (if available, Gold relies on custom title) */}
-                                <div className="text-center mb-8 min-h-[90px] flex items-center justify-center">
-                                    {plan.price ? (
-                                        <div className="flex items-start justify-center text-[#9F00FF] font-black">
-                                            <span className={`text-2xl mt-2 mr-1 ${plan.name === 'Premium' ? 'text-[#DF3745]' : ''}`}>€</span>
-                                            <span className={`text-7xl leading-none tracking-tighter ${plan.name === 'Premium' ? 'text-[#DF3745]' : ''}`}>{plan.price}</span>
-                                            <span className="text-zinc-400 text-lg font-medium self-end mb-2 ml-1">{plan.period}</span>
-                                        </div>
-                                    ) : (
-                                        <h4 className="text-[#FBD44C] text-4xl md:text-5xl font-black uppercase tracking-tight drop-shadow-sm">
-                                            {plan.goldTitle}
-                                        </h4>
-                                    )}
-                                </div>
-
-                                {/* Features List */}
-                                <ul className="space-y-5 mb-10">
-                                    {plan.features.map((feat, idx) => (
-                                        <li key={idx} className="flex items-start gap-4">
-                                            <div className={`mt-1 bg-white border border-zinc-200 shadow-sm rounded-full shrink-0 flex items-center justify-center
-                                                ${plan.name === 'Gold' ? 'w-0 h-0 invisible' : 'w-5 h-5'}`}>
-                                                {plan.name !== 'Gold' && (
-                                                    <CheckCircle2 className="w-4 h-4 text-zinc-800" />
-                                                )}
+                                {/* Left Side on PC: Price + CTA */}
+                                <div className="flex flex-col lg:w-1/3 shrink-0 lg:border-r border-zinc-200 lg:pr-8">
+                                    {/* Price block */}
+                                    <div className="text-center lg:text-left mb-8 min-h-[90px] flex items-center justify-center lg:justify-start">
+                                        {plan.price && (
+                                            <div className="flex items-start justify-center text-[#9F00FF] font-black">
+                                                <span className={`text-2xl mt-2 mr-1 ${plan.name === 'Premium' ? 'text-[#DF3745]' : ''}`}>€</span>
+                                                <span className={`text-7xl leading-none tracking-tighter ${plan.name === 'Premium' ? 'text-[#DF3745]' : ''}`}>{plan.price}</span>
+                                                <span className="text-zinc-400 text-lg font-medium self-end mb-2 ml-1">{plan.period}</span>
                                             </div>
-                                            <span className={`text-[#333333] font-medium leading-[1.6] ${plan.name === 'Gold' ? 'text-center w-full text-[15px]' : 'text-[14px]'}`}>
-                                                {feat}
-                                            </span>
-                                        </li>
-                                    ))}
-                                </ul>
+                                        )}
+                                    </div>
 
-                                {/* CTA Button & Footer */}
-                                <div className="mt-auto space-y-6 pt-6 border-t border-zinc-100">
-                                    <div className="flex justify-center">
-                                        {plan.buttonLink ? (
-                                            <a href={plan.buttonLink} target="_blank" rel="noopener noreferrer" className="w-full">
-                                                <Button className={`w-full rounded-md h-14 text-[16px] md:text-lg font-bold uppercase tracking-wide transition-all ${plan.buttonClasses}`}>
-                                                    {plan.buttonText}
-                                                </Button>
-                                            </a>
-                                        ) : (
+                                    {/* CTA Button & Footer */}
+                                    <div className="mt-8 lg:mt-auto space-y-6">
+                                        <div className="flex justify-center">
                                             <Link href="#trial-form" className="w-full">
                                                 <Button className={`w-full rounded-md h-14 text-[16px] md:text-lg font-bold uppercase tracking-wide transition-all ${plan.buttonClasses}`}>
                                                     {plan.buttonText}
                                                 </Button>
                                             </Link>
-                                        )}
-                                    </div>
+                                        </div>
 
-                                    <p className="text-center text-xs text-zinc-600 font-medium whitespace-pre-line leading-relaxed pb-2">
-                                        {plan.footerText}
-                                    </p>
+                                        <p className="text-center lg:text-left text-xs text-zinc-600 font-medium whitespace-pre-line leading-relaxed pb-2">
+                                            {plan.footerText}
+                                        </p>
+                                    </div>
                                 </div>
 
+                                {/* Right Side on PC: Features List */}
+                                <div className="flex-1">
+                                    <ul className="space-y-5">
+                                        {plan.features.map((feat, idx) => (
+                                            <li key={idx} className="flex items-start gap-4">
+                                                <div className={`mt-1 bg-white border border-zinc-200 shadow-sm rounded-full shrink-0 flex items-center justify-center w-5 h-5`}>
+                                                    <CheckCircle2 className="w-4 h-4 text-zinc-800" />
+                                                </div>
+                                                <span className="text-[#333333] font-medium leading-[1.6] text-[14px] lg:text-[15px]">
+                                                    {feat}
+                                                </span>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
                             </div>
                         </motion.div>
                     ))}

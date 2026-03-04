@@ -1,6 +1,5 @@
 import { HeroNew } from "@/components/homepagenew/HeroNew";
 import { InfoBlocksNew } from "@/components/homepagenew/InfoBlocksNew";
-import { PricingNew } from "@/components/homepagenew/PricingNew";
 import { TestimonialsNew } from "@/components/homepagenew/TestimonialsNew";
 import { BottomCTANew } from "@/components/homepagenew/BottomCTANew";
 
@@ -17,7 +16,6 @@ export default function HomePageNew() {
             <div className="relative z-10 w-full overflow-hidden">
                 <HeroNew />
                 <InfoBlocksNew />
-                <PricingNew />
                 <TestimonialsNew />
                 <BottomCTANew />
             </div>
