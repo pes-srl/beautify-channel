@@ -10,6 +10,11 @@ const figtree = Figtree({
 export const metadata: Metadata = {
   title: "Beautify Channel",
   description: "Next-gen audio streaming for beauty centers.",
+  icons: {
+    icon: "/favicon512x512.png",
+    shortcut: "/favicon512x512.png",
+    apple: "/favicon512x512.png",
+  },
 };
 
 import { HeaderNew } from "@/components/homepagenew/HeaderNew";

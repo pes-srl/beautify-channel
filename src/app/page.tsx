@@ -1,6 +1,7 @@
 import { HeroNew } from "@/components/homepagenew/HeroNew";
-import { FeaturesNew } from "@/components/homepagenew/FeaturesNew";
+import { InfoBlocksNew } from "@/components/homepagenew/InfoBlocksNew";
 import { PricingNew } from "@/components/homepagenew/PricingNew";
+import { BottomCTANew } from "@/components/homepagenew/BottomCTANew";
 
 export default function HomePageNew() {
     return (
@@ -14,8 +15,9 @@ export default function HomePageNew() {
             {/* Foreground Content */}
             <div className="relative z-10 w-full overflow-hidden">
                 <HeroNew />
-                <FeaturesNew />
+                <InfoBlocksNew />
                 <PricingNew />
+                <BottomCTANew />
             </div>
         </main>
     );

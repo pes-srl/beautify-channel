@@ -187,7 +187,7 @@ export function HeaderNew({
 
     return (
         <header
-            className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b border-transparent ${isScrolled || pathname?.startsWith("/area-riservata") || pathname?.startsWith("/admin") ? "bg-zinc-950/80 backdrop-blur-lg border-white/10 shadow-lg" : "bg-transparent py-4"
+            className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b bg-zinc-950/80 backdrop-blur-lg shadow-lg ${isScrolled || pathname?.startsWith("/area-riservata") || pathname?.startsWith("/admin") ? "border-white/10" : "border-transparent py-4"
                 }`}
         >
             <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
@@ -317,7 +317,7 @@ export function HeaderNew({
                                         Accedi
                                     </Button>
                                 </Link>
-                                <Link href="#pricing" onClick={() => setIsMobileMenuOpen(false)}>
+                                <Link href="#trial-form" onClick={() => setIsMobileMenuOpen(false)}>
                                     <Button className="w-full bg-fuchsia-500 hover:bg-fuchsia-600 text-white">
                                         Prova GRATUITA
                                     </Button>

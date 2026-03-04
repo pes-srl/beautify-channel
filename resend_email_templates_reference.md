@@ -1,95 +1,95 @@
-# Referencia de Mensajes de Correo (Resend) y Flujo de Actualización (Upgrade)
+# Riferimento Modelli Email (Resend) e Flusso di Upgrade
 
-Este documento sirve como referencia central para todos los correos electrónicos operativos (transaccionales) que se enviarán usando Resend, así como la estrategia recomendada para manejar los cambios de plan de forma manual.
-
----
-
-## 📧 1. Registro de Usuario (Welcome Email)
-**Cuándo se envía:** Cuando un usuario se registra por primera vez en la plataforma.
-**Asunto:** ¡Bienvenido a Beautify Channel! 🎉
-**Contenido sugerido:**
-- **Saludo:** Hola [Nombre],
-- **Mensaje:** ¡Gracias por unirte a Beautify Channel! Estamos muy emocionados de tenerte aquí.
-- **Llamado a la acción (CTA):** Botón para "Ir a mi Panel" o "Completar mi Perfil".
-- **Pie de página:** Soporte técnico y contacto.
-
-## 📧 2. Recuperación de Contraseña
-**Cuándo se envía:** Cuando el usuario hace clic en "Olvidé mi contraseña".
-**Asunto:** Recuperación de tu contraseña - Beautify Channel
-**Contenido sugerido:**
-- **Mensaje:** Hemos recibido una solicitud para restablecer la contraseña de tu cuenta.
-- **CTA:** Botón seguro "Restablecer Contraseña" (Enlace temporal mágico).
-- **Advertencia:** "Si no solicitaste esto, puedes ignorar este correo de forma segura."
-
-## 📧 3. Inicio de Prueba Gratis (Free Trial)
-**Cuándo se envía:** Cuando el usuario activa la creación de su canal de prueba (Free).
-**Asunto:** Tu prueba gratis en Beautify Channel ha comenzado 🚀
-**Contenido sugerido:**
-- **Mensaje:** ¡Tu canal de prueba ya está activo y listo para transmitir! Tienes acceso temporal a nuestras funciones básicas.
-- **Detalles:** Recordatorio de la duración de la prueba (ej. 7 o 14 días).
-- **CTA:** "Ir a mi Canal ahora".
+Questo documento funge da riferimento centrale per tutte le email operative (transazionali) che verranno inviate tramite Resend, nonché per la strategia raccomandata per gestire i cambi di piano in modo manuale.
 
 ---
 
-## 📧 4. Solicitud de Cambio de Plan (Upgrade Request)
-Dado que actualmente el proceso de pago es manual (sin Stripe directo), el usuario llenará un formulario con sus datos de facturación. Esto genera **dos** correos automáticos.
+## 📧 1. Registrazione Utente (Welcome Email)
+**Quando viene inviata:** Quando un utente si registra per la prima volta sulla piattaforma.
+**Oggetto:** Benvenuto su Beautify Channel! 🎉
+**Contenuto suggerito:**
+- **Saluto:** Ciao [Nome],
+- **Messaggio:** Grazie per esserti unito a Beautify Channel! Siamo entusiasti di averti qui.
+- **Call to Action (CTA):** Pulsante per "Vai alla mia Dashboard" o "Completa il mio Profilo".
+- **Piè di pagina:** Supporto tecnico e contatti.
 
-### A. Para el Usuario (Confirmación de Recepción)
-**Cuándo se envía:** Inmediatamente después de enviar el formulario de solicitud de Upgrade.
-**Asunto:** Hemos recibido tu solicitud para pasar a [Nombre del Plan] 🌟
-**Contenido sugerido:**
-- **Mensaje:** Hola [Nombre], hemos recibido correctamente tus datos para hacer el upgrade a **[Plan Premium / Basic]**.
-- **Próximos pasos:** "Nuestro equipo está revisando tus datos y te contactará a la brevedad con las instrucciones de pago y los detalles para proceder. No te preocupes, ¡tu canal actual sigue funcionando mientras tanto!"
+## 📧 2. Recupero Password
+**Quando viene inviata:** Quando l'utente clicca su "Ho dimenticato la password".
+**Oggetto:** Recupero della tua password - Beautify Channel
+**Contenuto suggerito:**
+- **Messaggio:** Abbiamo ricevuto una richiesta per reimpostare la password del tuo account.
+- **CTA:** Pulsante sicuro "Reimposta Password" (Magic link temporaneo).
+- **Avviso:** "Se non hai richiesto tu questa email, puoi ignorarla in modo sicuro."
 
-### B. Para el Equipo / Administrador (Alerta Interna)
-**Cuándo se envía:** Al mismo tiempo que el anterior.
-**Asunto:** 🔔 NUEVA SOLICITUD DE UPGRADE - [Nombre del Usuario]
-**Contenido sugerido:**
-- **Mensaje:** El usuario [Nombre del Usuario] ([Email]) ha solicitado un cambio al plan [Nombre del Plan].
-- **Datos de Facturación:** [Mostrar RUT/DNI, Razón Social, Dirección, etc., recolectados en el form].
-- **Acción requerida:** Contactar al cliente para enviarle el método de pago y luego activar su plan desde el Panel de Admin.
-
-## 📧 5. Confirmación de Pago y Activación (Manual)
-**Cuándo se envía:** Una vez que el administrador valida que el pago manual (transferencia, link de pago externo, etc.) ha sido recibido y le habilita el nivel Premium en el dashboard.
-**Asunto:** ¡Tu plan [Nombre del Plan] ya está activo! 💎
-**Contenido sugerido:**
-- **Mensaje:** ¡Felicidades! Hemos confirmado tu pago. Tu cuenta ha sido actualizada con éxito al nivel **[Plan Premium / Basic]**.
-- **Beneficios:** Pequeño recordatorio de lo que ahora puede hacer (ej. Canal único personalizado, sin interrupciones, etc.).
-- **CTA:** "Acceder a mi nuevo Canal Premium".
+## 📧 3. Inizio Prova Gratuita (Free Trial)
+**Quando viene inviata:** Quando l'utente attiva la creazione del suo canale di prova (Free).
+**Oggetto:** La tua prova gratuita su Beautify Channel è iniziata 🚀
+**Contenuto suggerito:**
+- **Messaggio:** Il tuo canale di prova è ora attivo e pronto per trasmettere! Hai accesso temporaneo alle nostre funzioni di base.
+- **Dettagli:** Promemoria della durata della prova (es. 7 o 14 giorni).
+- **CTA:** "Vai al mio Canale ora".
 
 ---
 
-# 🛠️ Plan Estratégico Recomendado (Flujo Manual)
+## 📧 4. Richiesta di Cambio Piano (Upgrade Request)
+Dato che attualmente il processo di pagamento è manuale (senza Stripe diretto), l'utente compilerà un modulo con i propri dati di fatturazione. Questo genera **due** email automatiche.
 
-Para gestionar este proceso de forma eficiente y profesional sin tener implementado Stripe directamente en el código por ahora, te recomiendo el siguiente flujo:
+### A. Per l'Utente (Conferma di Ricezione)
+**Quando viene inviata:** Immediatamente dopo aver inviato il modulo di richiesta di Upgrade.
+**Oggetto:** Abbiamo ricevuto la tua richiesta per passare a [Nome del Piano] 🌟
+**Contenuto suggerito:**
+- **Messaggio:** Ciao [Nome], abbiamo ricevuto correttamente i tuoi dati per effettuare l'upgrade a **[Piano Premium / Basic]**.
+- **Prossimi passi:** "Il nostro team sta esaminando i tuoi dati e ti contatterà al più presto con le istruzioni di pagamento e i dettagli per procedere. Non preoccuparti, il tuo canale attuale continuerà a funzionare nel frattempo!"
 
-### 1. Interfaz de Usuario (El Formulario de Upgrade)
-Crea una página o un módulo modal (ej. `/area-riservata/upgrade`) al que el usuario pueda acceder cuando es `FREE_TRIAL`.
-- **Qué pedir:** Tipo de plan deseado (Premium, Basic), Datos de Persona Física o Empresa (Razón Social, CIF/NIF/RUT, Dirección Fiscal), y un campo opcional para "Comentarios o requerimientos especiales para el canal".
-- **UX:** Que quede muy claro que *no se les cobrará en ese momento*, sino que es una **solicitud formal**.
+### B. Per il Team / Amministratore (Avviso Interno)
+**Quando viene inviata:** Contemporaneamente alla precedente.
+**Oggetto:** 🔔 NUOVA RICHIESTA DI UPGRADE - [Nome dell'Utente]
+**Contenuto suggerito:**
+- **Messaggio:** L'utente [Nome dell'Utente] ([Email]) ha richiesto un passaggio al piano [Nome del Piano].
+- **Dati di Fatturazione:** [Mostrare P.IVA/CF, Ragione Sociale, Indirizzo, ecc., raccolti nel form].
+- **Azione richiesta:** Contattare il cliente per inviargli il metodo di pagamento e poi attivare il suo piano dal Pannello Admin.
 
-### 2. Base de Datos (Supabase)
-Crea una tabla llamada `upgrade_requests`:
+## 📧 5. Conferma di Pagamento e Attivazione (Manuale)
+**Quando viene inviata:** Una volta che l'amministratore convalida che il pagamento manuale (bonifico, link di pagamento esterno, ecc.) è stato ricevuto e gli abilita il livello Premium nella dashboard.
+**Oggetto:** Il tuo piano [Nome del Piano] è ora attivo! 💎
+**Contenuto suggerito:**
+- **Messaggio:** Congratulazioni! Abbiamo confermato il tuo pagamento. Il tuo account è stato aggiornato con successo al livello **[Piano Premium / Basic]**.
+- **Vantaggi:** Piccolo promemoria di ciò che ora può fare (es. Canale unico personalizzato, senza interruzioni, ecc.).
+- **CTA:** "Accedi al mio nuovo Canale Premium".
+
+---
+
+# 🛠️ Piano Strategico Raccomandato (Flusso Manuale)
+
+Per gestire questo processo in modo efficiente e professionale senza avere Stripe implementato direttamente nel codice per ora, ti raccomando il seguente flusso:
+
+### 1. Interfaccia Utente (Il Modulo di Upgrade)
+Crea una pagina o un modulo modale (es. `/area-riservata/upgrade`) a cui l'utente può accedere quando è `FREE_TRIAL`.
+- **Cosa chiedere:** Tipo di piano desiderato (Premium, Basic), Dati Persona Fisica o Azienda (Ragione Sociale, P.IVA/CF, Indirizzo Fiscale), e un campo opzionale per "Commenti o richieste speciali per il canale".
+- **UX:** Fai in modo che sia molto chiaro che *non gli verrà addebitato nulla in quel momento*, ma che si tratta di una **richiesta formale**.
+
+### 2. Database (Supabase)
+Crea una tabella chiamata `upgrade_requests`:
 - `id`, `user_id`, `requested_plan` (enum: basic, premium), `billing_details` (jsonb), `status` (pending, contacted, approved, rejected), `created_at`.
 
-### 3. El Disparador (Server Action)
-Cuando el usuario envía el formulario:
-1. Se guarda el registro en la tabla `upgrade_requests` con estado `pending`.
-2. Se disparan los dos emails de Resend (Sección 4A para tranquilizar al cliente, 4B para alertarte a ti). *Opcional: Si tienes n8n configurado (como vimos en leads), puedes mandar también un WhatsApp al equipo de admin.*
+### 3. Il Trigger (Server Action)
+Quando l'utente invia il modulo:
+1. Viene salvato il record nella tabella `upgrade_requests` con stato `pending`.
+2. Vengono attivate le due email di Resend (Sezione 4A per tranquillizzare il cliente, 4B per avvisare te). *Opzionale: Se hai n8n configurato (come abbiamo visto per i lead), puoi inviare anche un WhatsApp al team admin.*
 
-### 4. La Gestión en el Área de Admin (Tu Trabajo)
-En tu `/admin`, añade una pestaña de **"Solicitudes de Upgrade"**.
-- Verás las solicitudes pendientes.
-- Contactarás al cliente manualmente (por email o enviándole un enlace de pago de Stripe pre-generado por ti de forma externa, o los datos de transferencia bancaria).
-- Puedes cambiar el estado a `contacted`.
+### 4. La Gestione nell'Area Admin (Il tuo Lavoro)
+Nel tuo `/admin`, aggiungi una scheda **"Richieste di Upgrade"**.
+- Vedrai le richieste in sospeso.
+- Contatterai il cliente manualmente (via email o inviandogli un link di pagamento Stripe pre-generato da te esternamente, o i dati per il bonifico bancario).
+- Puoi cambiare lo stato in `contacted`.
 
-### 5. La Activación Final (Paso a Premium)
-Una vez el cliente te confirma el pago y ves el dinero:
-1. Entras al admin, cambias el role/plan del usuario a `PREMIUM`.
-2. Creas o le asignas su canal final.
-3. Esto dispara (o se pulsa un botón para disparar) el correo de la Sección 5 (Activación).
+### 5. L'Attivazione Finale (Passaggio a Premium)
+Una volta che il cliente ti conferma il pagamento e vedi i soldi:
+1. Entri nell'admin, cambi il ruolo/piano dell'utente in `PREMIUM`.
+2. Crei o gli assegni il suo canale finale.
+3. Questo attiva (o si preme un pulsante per attivare) l'email della Sezione 5 (Attivazione).
 
-**¿Por qué este plan es bueno?**
-- **Control Total:** Al ser manual al inicio, evitas problemas de facturación automática errónea si el producto aún está iterando.
-- **Relación con el cliente:** Tienes la oportunidad de darle un trato VIP, "Hola, vi que quieres pasarte a Premium, aquí tienes cómo hacerlo... ¿qué música te gustaría para tu canal?".
-- **Fácil transición:** Cuando más adelante quieras automatizar con Stripe de verdad, ya tendrás la UI del formulario hecha, solo cambiarás el botón de "Solicitar" por un checkout de Stripe.
+**Perché questo piano è buono?**
+- **Controllo Totale:** Essendo manuale all'inizio, eviti problemi di fatturazione automatica errata se il prodotto è ancora in fase di iterazione.
+- **Relazione con il cliente:** Hai l'opportunità di offrirgli un trattamento VIP: "Ciao, ho visto che vuoi passare a Premium, ecco come fare... che musica vorresti per il tuo canale?".
+- **Transizione facile:** Quando in futuro vorrai automatizzare davvero con Stripe, avrai già pronta l'UI del modulo, ti basterà cambiare il pulsante "Richiedi" con un checkout di Stripe.
