@@ -98,8 +98,8 @@ export function PricingNew() {
                                 </div>
 
                                 {/* Right Side on PC: Features List */}
-                                <div className="flex-1">
-                                    <ul className="space-y-6">
+                                <div className="flex-1 flex flex-col justify-center lg:py-4">
+                                    <ul className="space-y-6 my-auto">
                                         {plan.features.map((feat, idx) => (
                                             <li key={idx} className="flex items-start gap-4">
                                                 <div className={`mt-1.5 bg-[#9F00FF] shadow-sm rounded-full shrink-0 flex items-center justify-center w-[15px] h-[15px]`}>
