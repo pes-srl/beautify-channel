@@ -58,6 +58,42 @@ export async function GET(request: Request) {
             }
         }
 
+        // 1.5. DOWNGRADE EXPIRED SUBSCRIPTIONS (subscription_expiration <= NOW() AND plan_type IN ('basic', 'premium'))
+        const { data: expiredSubs, error: subsError } = await supabase
+            .from('profiles')
+            .select('*')
+            .in('plan_type', ['basic', 'premium'])
+            .lte('subscription_expiration', now.toISOString());
+
+        if (subsError) throw subsError;
+
+        if (expiredSubs && expiredSubs.length > 0) {
+            const expiredSubIds = expiredSubs.map(u => u.id);
+            await supabase
+                .from('profiles')
+                .update({ plan_type: 'free', subscription_expiration: null })
+                .in('id', expiredSubIds);
+
+            // Send Expiration Email for Subscriptions
+            for (const user of expiredSubs) {
+                if (user.email) {
+                    await resend.emails.send({
+                        from: 'Beautify Channel <noreply@beautifychannel.com>',
+                        to: user.email,
+                        subject: 'Il tuo abbonamento è scaduto ⚠️ Riattiva Beautify Channel',
+                        html: `
+                            <div style="font-family: Arial, sans-serif; max-w: 600px; margin: 0 auto; color: #333; padding: 20px;">
+                                <h1 style="color: #ef4444;">Abbonamento Terminato!</h1>
+                                <p>Ciao ${user.salon_name || 'Amico'}, ti informiamo che il tuo abbonamento a Beautify Channel è terminato.</p>
+                                <p>L'accesso ai canali è stato sospeso e il tuo account è passato al piano Free. Rinnova subito per continuare ad offrire la migliore atmosfera al tuo istituto.</p>
+                                <a href="https://beautifychannel.com/area-riservata#pricing" style="background-color: #ef4444; color: #FFFFFF; text-decoration: none; padding: 12px 24px; border-radius: 8px; font-weight: bold; display: inline-block; margin-top: 20px;">Rinnova ora</a>
+                            </div>
+                        `
+                    });
+                }
+            }
+        }
+
         // 2. SEND WARNINGS (trial_ends_at between NOW() and TOMORROW AND plan_type = 'free_trial')
         const { data: warningUsers, error: warningError } = await supabase
             .from('profiles')
@@ -91,6 +127,7 @@ export async function GET(request: Request) {
         return NextResponse.json({
             success: true,
             expiredProcessed: expiredUsers?.length || 0,
+            expiredSubsProcessed: expiredSubs?.length || 0,
             warnedProcessed: warningUsers?.length || 0
         });
 

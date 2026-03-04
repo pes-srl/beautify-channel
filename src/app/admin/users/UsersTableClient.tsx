@@ -15,6 +15,7 @@ import { UserRowActions } from "./UserRowActions";
 import { formatDistanceToNow, differenceInMinutes, parseISO } from "date-fns";
 import { it } from "date-fns/locale";
 import { Search } from "lucide-react";
+import { format } from "date-fns";
 
 export function UsersTableClient({ initialProfiles }: { initialProfiles: any[] }) {
     const [searchTerm, setSearchTerm] = useState("");
@@ -50,6 +51,7 @@ export function UsersTableClient({ initialProfiles }: { initialProfiles: any[] }
                             <TableHead className="text-zinc-400 font-medium">Email</TableHead>
                             <TableHead className="hidden text-zinc-400 font-medium">Role</TableHead>
                             <TableHead className="text-zinc-400 font-medium">Abbonamento</TableHead>
+                            <TableHead className="text-zinc-400 font-medium">Scadenza</TableHead>
                             <TableHead className="text-zinc-400 font-medium">Status Pagamento</TableHead>
                             <TableHead className="text-zinc-400 font-medium">Ultimo Accesso</TableHead>
                             <TableHead className="text-right text-zinc-400 font-medium">Azioni</TableHead>
@@ -91,6 +93,13 @@ export function UsersTableClient({ initialProfiles }: { initialProfiles: any[] }
                                         </Badge>
                                     </TableCell>
                                     <TableCell>
+                                        <span className="text-zinc-300 text-sm whitespace-nowrap">
+                                            {user.subscription_expiration
+                                                ? format(parseISO(user.subscription_expiration), "dd MMM yyyy", { locale: it })
+                                                : "-"}
+                                        </span>
+                                    </TableCell>
+                                    <TableCell>
                                         <div className="flex items-center gap-2 relative pl-4">
                                             <span className={`w-2 h-2 rounded-full absolute left-0 ${user.plan_status === 'active' ? 'bg-green-500 shadow-[0_0_10px_rgba(34,197,94,0.5)]' : 'bg-red-500'}`} />
                                             <span className={user.plan_status === 'active' ? 'text-zinc-300 capitalize' : 'text-zinc-500 capitalize'}>{user.plan_status || 'active'}</span>
@@ -121,7 +130,8 @@ export function UsersTableClient({ initialProfiles }: { initialProfiles: any[] }
                                             id: user.id,
                                             role: user.role,
                                             plan_type: user.plan_type,
-                                            salon_name: user.salon_name
+                                            salon_name: user.salon_name,
+                                            subscription_expiration: user.subscription_expiration
                                         }} />
                                     </TableCell>
                                 </TableRow>

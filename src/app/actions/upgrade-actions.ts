@@ -24,6 +24,9 @@ export async function submitUpgradeRequest(formData: FormData) {
         ? 'Oltre'
         : '0-250 metri quadri'
 
+    const rDuration = formData.get('durataAbbonamento') as string
+    const durataAbbonamento = rDuration || '6 mesi'
+
     const responsabileIstituto = formData.get('responsabileIstituto') as string
     const emailContatto = formData.get('emailContatto') as string
     const telefono = formData.get('telefono') as string
@@ -39,6 +42,7 @@ export async function submitUpgradeRequest(formData: FormData) {
         indirizzo_istituto: indirizzoIstituto,
         nome_istituto: nomeIstituto,
         metri_quadri: metriQuadri,
+        durata_abbonamento: durataAbbonamento,
         responsabile_istituto: responsabileIstituto,
         email_contatto: emailContatto,
         telefono: telefono
@@ -87,6 +91,7 @@ export async function submitUpgradeRequest(formData: FormData) {
             <li><strong>Indirizzo istituto:</strong> ${indirizzoIstituto}</li>
             <li><strong>Nome istituto:</strong> ${nomeIstituto}</li>
             <li><strong>Metri quadri istituto:</strong> ${metriQuadri}</li>
+            <li><strong>Durata abbonamento richiesta:</strong> ${durataAbbonamento}</li>
             <li><strong>Responsabile istituto:</strong> ${responsabileIstituto}</li>
             <li><strong>Email di contatto:</strong> ${emailContatto}</li>
             <li><strong>Telefono:</strong> ${telefono}</li>
@@ -139,6 +144,46 @@ export async function updateUpgradeRequestStatus(requestId: string, newStatus: s
 
     if (profile?.role !== 'Admin') {
         return { error: 'Azione consentita solo agli amministratori' }
+    }
+
+    // Determine the requested plan and duration if the request is approved
+    let expirationDate = null;
+    let requestedPlanStr = null;
+    if (newStatus === 'approved') {
+        const { data: requestData } = await supabase
+            .from('upgrade_requests')
+            .select('requested_plan, user_id, billing_details')
+            .eq('id', requestId)
+            .single();
+
+        if (requestData) {
+            requestedPlanStr = requestData.requested_plan;
+            const duration = requestData.billing_details?.durata_abbonamento === '12 mesi' ? 12 : 6;
+            const targetDate = new Date();
+            targetDate.setMonth(targetDate.getMonth() + duration);
+            expirationDate = targetDate.toISOString();
+
+            // Bypass RLS to update profile
+            const { createClient: createSupabaseClient } = await import('@supabase/supabase-js');
+            const supabaseAdmin = createSupabaseClient(
+                process.env.NEXT_PUBLIC_SUPABASE_URL!,
+                process.env.SUPABASE_SERVICE_ROLE_KEY!,
+                { auth: { autoRefreshToken: false, persistSession: false } }
+            );
+
+            const { error: profileError } = await supabaseAdmin
+                .from('profiles')
+                .update({
+                    plan_type: requestedPlanStr.toLowerCase(),
+                    subscription_expiration: expirationDate
+                })
+                .eq('id', requestData.user_id);
+
+            if (profileError) {
+                console.error('Error updating user profile upon approval:', profileError);
+                return { error: 'Errore durante l\'aggiornamento del profilo utente.' };
+            }
+        }
     }
 
     const { error } = await supabase

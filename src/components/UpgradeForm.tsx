@@ -8,6 +8,7 @@ import { AlertCircle, CheckCircle2 } from "lucide-react";
 export function UpgradeForm({ userEmail }: { userEmail?: string }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [metriQuadriOption, setMetriQuadriOption] = useState<'0-250' | 'oltre'>('0-250');
+  const [durataAbbonamento, setDurataAbbonamento] = useState<'6 mesi' | '12 mesi'>('6 mesi');
   const [status, setStatus] = useState<{
     type: "idle" | "success" | "error";
     message: string;
@@ -180,7 +181,7 @@ export function UpgradeForm({ userEmail }: { userEmail?: string }) {
             </div>
 
             {/* Metri quadri istituto */}
-            <div className="md:col-span-2 space-y-2">
+            <div className="md:col-span-1 space-y-2">
               <label className="block text-sm font-bold text-zinc-300">
                 Metri quadri istituto*
               </label>
@@ -194,7 +195,7 @@ export function UpgradeForm({ userEmail }: { userEmail?: string }) {
                     onChange={() => setMetriQuadriOption('0-250')}
                     className="text-fuchsia-600 focus:ring-fuchsia-500 bg-white/10 border-white/20 w-4 h-4"
                   />
-                  0-250 metri quadri
+                  0-250
                 </label>
                 <label className="flex items-center gap-2 text-white cursor-pointer bg-black/40 px-4 py-3 rounded-xl border border-white/10 hover:bg-white/5 transition-colors">
                   <input
@@ -206,6 +207,37 @@ export function UpgradeForm({ userEmail }: { userEmail?: string }) {
                     className="text-fuchsia-600 focus:ring-fuchsia-500 bg-white/10 border-white/20 w-4 h-4"
                   />
                   Oltre
+                </label>
+              </div>
+            </div>
+
+            {/* Durata abbonamento */}
+            <div className="md:col-span-1 space-y-2">
+              <label className="block text-sm font-bold text-zinc-300">
+                Durata abbonamento*
+              </label>
+              <div className="flex flex-col sm:flex-row gap-4 mb-2">
+                <label className="flex items-center gap-2 text-white cursor-pointer bg-black/40 px-4 py-3 rounded-xl border border-white/10 hover:bg-white/5 transition-colors">
+                  <input
+                    type="radio"
+                    name="durataAbbonamento"
+                    value="6 mesi"
+                    checked={durataAbbonamento === '6 mesi'}
+                    onChange={() => setDurataAbbonamento('6 mesi')}
+                    className="text-fuchsia-600 focus:ring-fuchsia-500 bg-white/10 border-white/20 w-4 h-4"
+                  />
+                  6 mesi
+                </label>
+                <label className="flex items-center gap-2 text-white cursor-pointer bg-black/40 px-4 py-3 rounded-xl border border-white/10 hover:bg-white/5 transition-colors">
+                  <input
+                    type="radio"
+                    name="durataAbbonamento"
+                    value="12 mesi"
+                    checked={durataAbbonamento === '12 mesi'}
+                    onChange={() => setDurataAbbonamento('12 mesi')}
+                    className="text-fuchsia-600 focus:ring-fuchsia-500 bg-white/10 border-white/20 w-4 h-4"
+                  />
+                  12 mesi
                 </label>
               </div>
             </div>

@@ -4,7 +4,7 @@ import { createClient } from "@/utils/supabase/server";
 import { revalidatePath } from "next/cache";
 import { createClient as createSupabaseClient } from "@supabase/supabase-js";
 
-export async function updateUserProfile(userId: string, targetField: 'role' | 'plan_type', newValue: string) {
+export async function updateUserProfile(userId: string, targetField: 'role' | 'plan_type' | 'subscription_expiration', newValue: string) {
     const supabase = await createClient();
 
     // Verify current user is Admin
@@ -28,10 +28,12 @@ export async function updateUserProfile(userId: string, targetField: 'role' | 'p
         }
     );
 
+    const actualValue = newValue === '' ? null : newValue;
+
     // Update the profile bypassing RLS
     const { data: updatedProfile, error } = await supabaseAdmin
         .from('profiles')
-        .update({ [targetField]: newValue })
+        .update({ [targetField]: actualValue })
         .eq('id', userId)
         .select()
         .single();

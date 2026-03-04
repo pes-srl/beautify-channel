@@ -14,9 +14,10 @@ import {
     DropdownMenuRadioGroup,
     DropdownMenuRadioItem,
 } from "@/components/ui/dropdown-menu";
-import { MoreHorizontal, Loader2, UserCog, ScrollText } from "lucide-react";
+import { MoreHorizontal, Loader2, UserCog, ScrollText, CalendarClock } from "lucide-react";
 import { updateUserProfile, deleteUserAccount } from "./actions";
 import { toast } from "sonner";
+import { Input } from "@/components/ui/input";
 
 interface UserRowActionsProps {
     user: {
@@ -24,6 +25,7 @@ interface UserRowActionsProps {
         role: string | null;
         plan_type: string | null;
         salon_name: string | null;
+        subscription_expiration: string | null;
     };
 }
 
@@ -41,6 +43,20 @@ export function UserRowActions({ user }: UserRowActionsProps) {
             toast.success("Profilo aggiornato", {
                 description: `Il ${field === 'role' ? 'ruolo' : 'piano'} di ${user.salon_name || 'questo utente'} è stato modificato in ${value}.`
             });
+        }
+        setIsLoading(false);
+    };
+
+    const handleDateUpdate = async (value: string) => {
+        setIsLoading(true);
+        // Transform the YYYY-MM-DD input string to a proper ISO 8601 string, or null
+        const formattedValue = value ? new Date(value).toISOString() : null;
+        // In updateUserProfile we can't easily pass null to 'value: string', so we can pass empty string and convert it back, or update the Server Action. Let's pass 'formattedValue' as string or empty string.
+        const result = await updateUserProfile(user.id, 'subscription_expiration' as any, formattedValue || '');
+        if (result.error) {
+            toast.error("Errore di aggiornamento", { description: result.error });
+        } else {
+            toast.success("Scadenza aggiornata", { description: "La data di scadenza è stata modificata." });
         }
         setIsLoading(false);
     };
@@ -104,6 +120,42 @@ export function UserRowActions({ user }: UserRowActionsProps) {
                             <DropdownMenuRadioItem value="basic" onSelect={(e) => { e.preventDefault(); handleUpdate('plan_type', 'basic'); }} className="text-indigo-400 focus:bg-white/10 cursor-pointer font-medium">Basic</DropdownMenuRadioItem>
                             <DropdownMenuRadioItem value="premium" onSelect={(e) => { e.preventDefault(); handleUpdate('plan_type', 'premium'); }} className="text-fuchsia-400 focus:bg-white/10 cursor-pointer font-medium">Premium</DropdownMenuRadioItem>
                         </DropdownMenuRadioGroup>
+                    </DropdownMenuSubContent>
+                </DropdownMenuSub>
+
+                <DropdownMenuSub>
+                    <DropdownMenuSubTrigger className="text-zinc-200 focus:bg-white/10">
+                        <CalendarClock className="mr-2 h-4 w-4 text-orange-400" />
+                        <span>Aggiorna Scadenza</span>
+                    </DropdownMenuSubTrigger>
+                    <DropdownMenuSubContent className="bg-zinc-950 border-white/10 p-2 space-y-2 w-48">
+                        <p className="text-xs text-zinc-500 font-bold uppercase ml-1">Nuova Data</p>
+                        <Input
+                            type="date"
+                            defaultValue={user.subscription_expiration ? user.subscription_expiration.substring(0, 10) : ""}
+                            className="bg-white/5 border-white/10 text-white h-8 text-sm"
+                            onChange={(e) => {
+                                // Just a visual update, do nothing directly here. We submit on blur or with a button
+                            }}
+                            onKeyDown={(e) => {
+                                if (e.key === 'Enter') {
+                                    handleDateUpdate(e.currentTarget.value);
+                                }
+                            }}
+                            onBlur={(e) => {
+                                if (e.target.value !== (user.subscription_expiration ? user.subscription_expiration.substring(0, 10) : "")) {
+                                    handleDateUpdate(e.target.value);
+                                }
+                            }}
+                        />
+                        <Button
+                            variant="ghost"
+                            size="sm"
+                            className="w-full text-xs text-red-400 hover:text-red-300 hover:bg-white/5"
+                            onClick={() => handleDateUpdate("")}
+                        >
+                            Rimuovi Scadenza
+                        </Button>
                     </DropdownMenuSubContent>
                 </DropdownMenuSub>
 
