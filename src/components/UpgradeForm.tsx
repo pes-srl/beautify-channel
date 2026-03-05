@@ -240,8 +240,12 @@ export function UpgradeForm({ userEmail }: { userEmail?: string }) {
                   12 mesi
                 </label>
               </div>
+              <div className="mt-1 text-sm text-fuchsia-400 font-medium italic">
+                {durataAbbonamento === '6 mesi'
+                  ? '€ 25,90 / mese (pagamento unica soluzione)'
+                  : '€ 20,90 / mese (pagamento unica soluzione)'}
+              </div>
             </div>
-
             {/* Responsabile istituto */}
             <div className="md:col-span-2 space-y-2">
               <label
