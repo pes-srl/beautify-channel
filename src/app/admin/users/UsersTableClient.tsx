@@ -98,7 +98,7 @@ export function UsersTableClient({ initialProfiles }: { initialProfiles: any[] }
                                     <TableCell>
                                         <div className="flex items-center gap-2 relative pl-4">
                                             <span className={`w-2 h-2 rounded-full absolute left-0 ${user.plan_status === 'active' ? 'bg-green-500 shadow-[0_0_10px_rgba(34,197,94,0.5)]' : 'bg-red-500'}`} />
-                                            <span className={user.plan_status === 'active' ? 'text-zinc-300 capitalize' : 'text-zinc-500 capitalize'}>{user.plan_status || 'active'}</span>
+                                            <span className={user.plan_status === 'active' ? 'text-zinc-300 capitalize' : 'text-zinc-500 capitalize'}>{user.plan_status || 'inattivo'}</span>
                                         </div>
                                     </TableCell>
                                     <TableCell>
