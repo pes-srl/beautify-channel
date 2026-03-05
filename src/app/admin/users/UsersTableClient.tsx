@@ -51,8 +51,8 @@ export function UsersTableClient({ initialProfiles }: { initialProfiles: any[] }
                             <TableHead className="text-zinc-400 font-medium">Email</TableHead>
                             <TableHead className="hidden text-zinc-400 font-medium">Role</TableHead>
                             <TableHead className="text-zinc-400 font-medium">Abbonamento</TableHead>
+                            <TableHead className="text-zinc-400 font-medium">Stato Abbonamento</TableHead>
                             <TableHead className="text-zinc-400 font-medium">Scadenza</TableHead>
-                            <TableHead className="text-zinc-400 font-medium">Status</TableHead>
                             <TableHead className="text-zinc-400 font-medium">Ultimo Accesso</TableHead>
                             <TableHead className="text-right text-zinc-400 font-medium">Azioni</TableHead>
                         </TableRow>
@@ -115,17 +115,17 @@ export function UsersTableClient({ initialProfiles }: { initialProfiles: any[] }
                                         </Badge>
                                     </TableCell>
                                     <TableCell>
+                                        <div className="flex items-center gap-2 relative pl-4">
+                                            <span className={`w-2 h-2 rounded-full absolute left-0 ${isPlanActive ? 'bg-green-500 shadow-[0_0_10px_rgba(34,197,94,0.5)]' : 'bg-red-500'}`} />
+                                            <span className={isPlanActive ? 'text-zinc-300 capitalize' : 'text-zinc-500 capitalize'}>{displayStatus}</span>
+                                        </div>
+                                    </TableCell>
+                                    <TableCell>
                                         <span className="text-zinc-300 text-sm whitespace-nowrap">
                                             {user.subscription_expiration
                                                 ? format(parseISO(user.subscription_expiration), "dd MMM yyyy", { locale: it })
                                                 : "-"}
                                         </span>
-                                    </TableCell>
-                                    <TableCell>
-                                        <div className="flex items-center gap-2 relative pl-4">
-                                            <span className={`w-2 h-2 rounded-full absolute left-0 ${isPlanActive ? 'bg-green-500 shadow-[0_0_10px_rgba(34,197,94,0.5)]' : 'bg-red-500'}`} />
-                                            <span className={isPlanActive ? 'text-zinc-300 capitalize' : 'text-zinc-500 capitalize'}>{displayStatus}</span>
-                                        </div>
                                     </TableCell>
                                     <TableCell>
                                         <div className="flex flex-col gap-1">
