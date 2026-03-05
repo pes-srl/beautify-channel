@@ -98,7 +98,7 @@ export function BottomCTANew() {
                     transition={{ duration: 0.8 }}
                     className="pt-8 flex justify-center w-full"
                 >
-                    <div className="w-full max-w-lg relative z-10">
+                    <div className="w-full max-w-4xl relative z-10">
                         <div className="text-center mb-10">
                             <div className="inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-fuchsia-500/10 border border-fuchsia-500/20 backdrop-blur-md mb-6 shadow-[0_0_30px_rgba(217,70,239,0.2)]">
                                 <Sparkles className="w-8 h-8 text-fuchsia-400" />
@@ -125,7 +125,7 @@ export function BottomCTANew() {
                             )}
 
                             <div className="space-y-6">
-                                <div className="space-y-5">
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-5">
                                     <div className="space-y-2">
                                         <Label htmlFor="fullName" className="text-zinc-300 font-medium ml-1">Nome Completo</Label>
                                         <Input
