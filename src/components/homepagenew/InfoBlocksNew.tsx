@@ -48,7 +48,7 @@ export function InfoBlocksNew() {
                             className="flex-1 w-full"
                         >
                             <img
-                                src="https://eufahlzjxbimyiwivoiq.supabase.co/storage/v1/object/public/bucket-assets/1772628409173-tt0cy7.jpeg"
+                                src="https://eufahlzjxbimyiwivoiq.supabase.co/storage/v1/object/public/bucket-assets/1772718578403-qvhvj.png"
                                 alt="BeautiFy Channel Beauty Room"
                                 className="w-full h-auto rounded-xl shadow-2xl"
                             />
@@ -87,9 +87,9 @@ export function InfoBlocksNew() {
                         >
                             <div className="relative">
                                 <img
-                                    src="https://eufahlzjxbimyiwivoiq.supabase.co/storage/v1/object/public/bucket-assets/1772628443079-ouyhi3.png"
+                                    src="https://eufahlzjxbimyiwivoiq.supabase.co/storage/v1/object/public/bucket-assets/1772719971536-50rxw6.png"
                                     alt="Assistente Tati"
-                                    className="w-full max-w-sm h-auto object-contain drop-shadow-2xl"
+                                    className="w-full h-auto rounded-xl shadow-2xl"
                                 />
                                 {/* Absolute Button matching the mockup layout */}
                                 <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 w-full flex justify-center">
