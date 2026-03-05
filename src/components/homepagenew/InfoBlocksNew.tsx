@@ -166,7 +166,7 @@ export function InfoBlocksNew() {
                             </div>
 
                             {/* Block 4 */}
-                            <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-6 sm:p-8 flex flex-col items-center justify-start text-center h-full shadow-2xl hover:bg-white/10 transition-all duration-300">
+                            <div className="bg-[#7B2CBF] hover:bg-[#6A25A3] backdrop-blur-md border border-white/10 rounded-2xl p-6 sm:p-8 flex flex-col items-center justify-start text-center h-full shadow-2xl transition-all duration-300">
                                 <div className="w-12 h-12 rounded-full bg-white flex items-center justify-center mb-4 sm:mb-6 text-[#2D0A4E] shrink-0">
                                     <span className="text-xl font-bold">4</span>
                                 </div>
