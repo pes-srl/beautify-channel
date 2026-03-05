@@ -122,14 +122,14 @@ export function InfoBlocksNew() {
                         </h2>
 
                         {/* 4 Elegant Square Blocks */}
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 w-full max-w-5xl pt-8 pb-12">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 w-full max-w-6xl pt-8 pb-12">
                             {/* Block 1 */}
                             <div className="bg-[#7B2CBF] hover:bg-[#6A25A3] backdrop-blur-md border border-white/10 rounded-2xl p-6 sm:p-8 flex flex-col items-center justify-start text-center h-full shadow-2xl transition-all duration-300">
                                 <div className="w-12 h-12 rounded-full bg-white flex items-center justify-center mb-4 sm:mb-6 text-[#2D0A4E] shrink-0">
                                     <span className="text-xl font-bold">1</span>
                                 </div>
                                 <div className="flex-1 flex flex-col justify-center">
-                                    <p className="text-zinc-200 text-base leading-relaxed">
+                                    <p className="text-white text-lg sm:text-xl font-medium leading-relaxed drop-shadow-sm">
                                         Nel corso di un intrattenimento musicale dal sound ricercato, l’assistente digitale BeautiFy
                                         interviene, con dolcezza e professionalità, per offrire spunti generici legati al mondo della
                                         bellezza e del benessere, regalando così una vera e propria beauty routine sonora
@@ -143,7 +143,7 @@ export function InfoBlocksNew() {
                                     <span className="text-xl font-bold">2</span>
                                 </div>
                                 <div className="flex-1 flex flex-col justify-center">
-                                    <p className="text-zinc-200 text-base leading-relaxed">
+                                    <p className="text-white text-lg sm:text-xl font-medium leading-relaxed drop-shadow-sm">
                                         Questo stimola efficacemente l’interesse delle clienti e sollecita la loro richiesta di informazioni
                                         su prodotti e trattamenti proprio mentre sono nel tuo salone, creando una percezione positiva
                                         dell’ambiente che ne aumenta la fidelizzazione
@@ -157,7 +157,7 @@ export function InfoBlocksNew() {
                                     <span className="text-xl font-bold">3</span>
                                 </div>
                                 <div className="flex-1 flex flex-col justify-center">
-                                    <p className="text-zinc-200 text-base leading-relaxed">
+                                    <p className="text-white text-lg sm:text-xl font-medium leading-relaxed drop-shadow-sm">
                                         BeautiFy Channel è un supporto irrinunciabile per la tua professione, perché ti consentirà di non
                                         preoccuparti più della comunicazione interna del tuo salone, ma di dedicarti e concentrarti
                                         pienamente sullo svolgimento del tuo lavoro
@@ -171,7 +171,7 @@ export function InfoBlocksNew() {
                                     <span className="text-xl font-bold">4</span>
                                 </div>
                                 <div className="flex-1 flex flex-col justify-center">
-                                    <p className="text-zinc-200 text-base leading-relaxed">
+                                    <p className="text-white text-lg sm:text-xl font-medium leading-relaxed drop-shadow-sm">
                                         Inoltre, BeautiFy Channel ti mette a disposizione altri 6 canali audio oltre al canale principale, per cambiare mood durante la giornata, magari con DEEP SOFT nel weekend o Jazz nell'orario di chiusura, sempre con il supporto di suggerimenti audio dell’assistente digitale BeautiFy
                                     </p>
                                 </div>
