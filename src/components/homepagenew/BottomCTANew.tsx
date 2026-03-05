@@ -104,7 +104,7 @@ export function BottomCTANew() {
                                 <Sparkles className="w-8 h-8 text-fuchsia-400" />
                             </div>
                             <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-3 tracking-tight">
-                                Inizia la Prova Gratuita
+                                Inizia la tua Prova Gratuita
                             </h2>
                             <p className="text-zinc-400 text-lg">
                                 7 giorni di accesso completo. Nessuna carta di credito richiesta.
