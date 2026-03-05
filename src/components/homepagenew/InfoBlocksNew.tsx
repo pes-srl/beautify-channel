@@ -26,14 +26,17 @@ export function InfoBlocksNew() {
                             </h2>
                             <p className="text-zinc-300 text-lg md:text-xl leading-relaxed">
                                 Finalmente anche in Italia un vero must have per gli istituti di bellezza: <br className="block md:hidden" />
-                                <span className="whitespace-nowrap inline-block mt-1 md:mt-0">il <strong className="text-fuchsia-400">MARKETING SONORO</strong></span><br /><br />
+                                <span className="whitespace-nowrap inline-block mt-1 md:mt-0">il <strong className="text-white">MARKETING SONORO</strong></span><br /><br />
                                 Estremamente innovativo, straordinariamente utile, elegantemente coinvolgente. BeautiFy Channel è la soluzione innovativa di marketing sonoro ideata per aumentare le
                                 vendite, la professionalità e la customer experience nel settore del beauty, inducendo una
                                 piacevole sensazione di coinvolgimento
                             </p>
                             <div className="pt-4">
                                 <Link href="#trial-form">
-                                    <Button className="bg-linear-to-r from-blue-500 to-fuchsia-500 hover:from-blue-400 hover:to-fuchsia-400 text-white font-bold rounded-full px-8 py-3 h-auto shadow-[0_0_20px_rgba(217,70,239,0.4)] transition-all uppercase whitespace-nowrap">
+                                    <Button
+                                        className="hover:brightness-110 text-white font-bold tracking-wider uppercase px-8 py-3 h-auto rounded-full shadow-[0_8px_30px_rgba(45,10,78,0.4)] transition-all border-none"
+                                        style={{ background: 'linear-gradient(90deg, #2D0A4E 0%, #7B2CBF 50%, #F5F3F7 100%)' }}
+                                    >
                                         PROVAMI GRATIS 7 GIORNI
                                     </Button>
                                 </Link>
@@ -94,7 +97,10 @@ export function InfoBlocksNew() {
                                 {/* Absolute Button matching the mockup layout */}
                                 <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 w-full flex justify-center">
                                     <Link href="#trial-form">
-                                        <Button className="bg-linear-to-r from-blue-500 to-fuchsia-500 hover:from-blue-400 hover:to-fuchsia-400 text-white font-bold rounded-full px-8 py-3 h-auto shadow-[0_0_20px_rgba(217,70,239,0.4)] transition-all uppercase whitespace-nowrap">
+                                        <Button
+                                            className="hover:brightness-110 text-white font-bold tracking-wider uppercase px-8 py-3 h-auto rounded-full shadow-[0_8px_30px_rgba(45,10,78,0.4)] transition-all border-none"
+                                            style={{ background: 'linear-gradient(90deg, #2D0A4E 0%, #7B2CBF 50%, #F5F3F7 100%)' }}
+                                        >
                                             PROVAMI GRATIS 7 GIORNI
                                         </Button>
                                     </Link>
@@ -121,7 +127,7 @@ export function InfoBlocksNew() {
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 w-full max-w-5xl pt-8 pb-12">
                             {/* Block 1 */}
                             <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-6 sm:p-8 flex flex-col items-center justify-start text-center h-full shadow-2xl hover:bg-white/10 transition-all duration-300">
-                                <div className="w-12 h-12 rounded-full bg-fuchsia-500/20 flex items-center justify-center mb-4 sm:mb-6 text-fuchsia-400 shrink-0">
+                                <div className="w-12 h-12 rounded-full bg-white flex items-center justify-center mb-4 sm:mb-6 text-[#2D0A4E] shrink-0">
                                     <span className="text-xl font-bold">1</span>
                                 </div>
                                 <div className="flex-1 flex flex-col justify-center">
@@ -135,7 +141,7 @@ export function InfoBlocksNew() {
 
                             {/* Block 2 */}
                             <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-6 sm:p-8 flex flex-col items-center justify-start text-center h-full shadow-2xl hover:bg-white/10 transition-all duration-300">
-                                <div className="w-12 h-12 rounded-full bg-blue-500/20 flex items-center justify-center mb-4 sm:mb-6 text-blue-400 shrink-0">
+                                <div className="w-12 h-12 rounded-full bg-white flex items-center justify-center mb-4 sm:mb-6 text-[#2D0A4E] shrink-0">
                                     <span className="text-xl font-bold">2</span>
                                 </div>
                                 <div className="flex-1 flex flex-col justify-center">
@@ -149,7 +155,7 @@ export function InfoBlocksNew() {
 
                             {/* Block 3 */}
                             <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-6 sm:p-8 flex flex-col items-center justify-start text-center h-full shadow-2xl hover:bg-white/10 transition-all duration-300">
-                                <div className="w-12 h-12 rounded-full bg-blue-500/20 flex items-center justify-center mb-4 sm:mb-6 text-blue-400 shrink-0">
+                                <div className="w-12 h-12 rounded-full bg-white flex items-center justify-center mb-4 sm:mb-6 text-[#2D0A4E] shrink-0">
                                     <span className="text-xl font-bold">3</span>
                                 </div>
                                 <div className="flex-1 flex flex-col justify-center">
@@ -163,7 +169,7 @@ export function InfoBlocksNew() {
 
                             {/* Block 4 */}
                             <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-6 sm:p-8 flex flex-col items-center justify-start text-center h-full shadow-2xl hover:bg-white/10 transition-all duration-300">
-                                <div className="w-12 h-12 rounded-full bg-fuchsia-500/20 flex items-center justify-center mb-4 sm:mb-6 text-fuchsia-400 shrink-0">
+                                <div className="w-12 h-12 rounded-full bg-white flex items-center justify-center mb-4 sm:mb-6 text-[#2D0A4E] shrink-0">
                                     <span className="text-xl font-bold">4</span>
                                 </div>
                                 <div className="flex-1 flex flex-col justify-center">

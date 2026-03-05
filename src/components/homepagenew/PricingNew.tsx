@@ -21,7 +21,8 @@ const plans = [
             "Oltre al canale principale hai a disposizione altri 6 canali: Relax, Lounge, Jazz, Ambient Massage, Vocal e Deep",
         ],
         buttonText: "PROVA GRATUITA 7 GIORNI",
-        buttonClasses: "bg-linear-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white shadow-xl shadow-purple-500/20",
+        buttonClasses: "hover:brightness-110 text-white shadow-xl shadow-[#2D0A4E]/20",
+        buttonStyle: { background: 'linear-gradient(90deg, #2D0A4E 0%, #7B2CBF 50%, #F5F3F7 100%)' },
         footerText: "Possibilità di abbonamento semestrale a 25,90 mese\nOfferta valida fino a 250mq di Istituto\nPagamento unica soluzione",
         highlight: false,
     }
@@ -51,7 +52,10 @@ export function PricingNew() {
                                 ${plan.highlight ? 'ring-4 ring-[#DF3745] ring-offset-4 ring-offset-[#1E0C31] scale-100 lg:scale-105 z-10' : 'scale-100'}`}
                         >
                             {/* Color Header */}
-                            <div className={`${plan.headerColor} px-6 pt-10 pb-8 lg:p-12 text-center lg:text-left min-h-[170px] flex flex-col justify-center lg:w-1/3 shrink-0`}>
+                            <div
+                                className={`px-6 pt-10 pb-8 lg:p-12 text-center lg:text-left min-h-[170px] flex flex-col justify-center lg:w-1/3 shrink-0`}
+                                style={plan.name === "Basic" ? { background: 'linear-gradient(90deg, #2D0A4E 0%, #7B2CBF 50%, #F5F3F7 100%)' } : { backgroundColor: '#9F00FF' }}
+                            >
                                 <h3 className={`text-4xl lg:text-5xl font-black uppercase tracking-wide mb-4 text-white`}>
                                     {plan.name}
                                 </h3>
@@ -83,7 +87,10 @@ export function PricingNew() {
                                     <div className="mt-8 lg:mt-auto space-y-6">
                                         <div className="flex justify-center w-full px-0 sm:px-0">
                                             <Link href="#trial-form" className="w-[110%] sm:w-full -ml-[5%] sm:ml-0">
-                                                <Button className={`w-full rounded-md h-auto py-5 sm:py-5 px-1 sm:px-4 text-[9px] sm:text-[13px] font-black uppercase tracking-widest text-center whitespace-normal min-w-0 leading-[1.3] transition-all ${plan.buttonClasses}`}>
+                                                <Button
+                                                    className={`w-full rounded-md h-auto py-5 sm:py-5 px-1 sm:px-4 text-[9px] sm:text-[13px] font-black uppercase tracking-widest text-center whitespace-normal min-w-0 leading-[1.3] transition-all ${plan.buttonClasses}`}
+                                                    style={(plan as any).buttonStyle}
+                                                >
                                                     {plan.buttonText}
                                                 </Button>
                                             </Link>
@@ -186,7 +193,10 @@ export function PricingNew() {
 
                     <div className="flex justify-center pt-8">
                         <Link href="#trial-form">
-                            <Button className="bg-[#DF27F1] hover:bg-[#c31dd6] text-white font-black text-sm md:text-base px-8 py-6 rounded-md uppercase tracking-wide shadow-[0_0_30px_rgba(223,39,241,0.4)] transition-all">
+                            <Button
+                                className="hover:brightness-110 text-white font-black text-sm md:text-base px-8 py-6 rounded-md uppercase tracking-wide shadow-[0_8px_30px_rgba(45,10,78,0.4)] transition-all border-none"
+                                style={{ background: 'linear-gradient(90deg, #2D0A4E 0%, #7B2CBF 50%, #F5F3F7 100%)' }}
+                            >
                                 PROVA GRATUITA 7 GIORNI SENZA IMPEGNO
                             </Button>
                         </Link>

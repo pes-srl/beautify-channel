@@ -30,14 +30,14 @@ export function HeroNew() {
                 >
                     <h1
                         className="text-4xl md:text-5xl lg:text-7xl font-black bg-linear-to-r from-blue-500 to-fuchsia-500 bg-clip-text text-white leading-[1.1] mb-8 drop-shadow-[0_2px_2px_rgba(0,0,0,0.5)] tracking-tight"
-                        style={{ WebkitTextStroke: '0.5px rgba(0,0,0,0.4)' }}
                     >
                         COME FAI SENZA BEAUTIFY?
                     </h1>
 
                     <Link href="#pricing">
                         <Button
-                            className="bg-linear-to-r from-blue-500 to-fuchsia-500 hover:from-blue-400 hover:to-fuchsia-400 text-white font-bold tracking-wider uppercase px-10 py-6 text-lg rounded-full shadow-[0_0_20px_rgba(217,70,239,0.4)] transition-all"
+                            className="hover:brightness-110 text-white font-bold tracking-wider uppercase px-12 py-7 text-xl rounded-full shadow-[0_8px_30px_rgba(45,10,78,0.4)] transition-all border-none"
+                            style={{ background: 'linear-gradient(90deg, #2D0A4E 0%, #7B2CBF 50%, #F5F3F7 100%)' }}
                         >
                             Scoprici
                         </Button>
