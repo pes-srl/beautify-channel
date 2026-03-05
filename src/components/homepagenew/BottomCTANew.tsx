@@ -84,8 +84,8 @@ export function BottomCTANew() {
     };
 
     return (
-        <section className="bg-[#1E0C31] py-24 px-6 md:px-12 overflow-hidden relative">
-            <div className="max-w-6xl mx-auto space-y-24">
+        <section className="bg-[#1E0C31] pt-0 pb-24 px-6 md:px-12 overflow-hidden relative">
+            <div className="max-w-6xl mx-auto space-y-12">
 
 
 
@@ -96,7 +96,7 @@ export function BottomCTANew() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: "-100px" }}
                     transition={{ duration: 0.8 }}
-                    className="pt-24 flex justify-center w-full"
+                    className="pt-8 flex justify-center w-full"
                 >
                     <div className="w-full max-w-lg relative z-10">
                         <div className="text-center mb-10">
@@ -194,7 +194,7 @@ export function BottomCTANew() {
                                 <Button
                                     type="submit"
                                     disabled={isLoading}
-                                    className="w-full h-16 mt-4 bg-[#7B2CBF] hover:bg-[#6A25A3] text-white rounded-2xl font-bold text-lg shadow-[0_8px_30px_rgba(45,10,78,0.4)] transition-all border-none tracking-wide"
+                                    className="w-full h-16 mt-4 bg-[#7B2CBF] hover:bg-[#6A25A3] text-white rounded-2xl font-bold text-sm md:text-base shadow-[0_8px_30px_rgba(45,10,78,0.4)] transition-all border-none tracking-wide"
                                 >
                                     {isLoading ? "Creazione account in corso..." : "INIZIA SUBITO LA PROVA GRATUITA 🚀"}
                                 </Button>
