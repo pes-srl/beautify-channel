@@ -95,6 +95,10 @@ export default async function AdminRichiestePage() {
                                         <p className="text-zinc-200 font-medium">{req.billing_details?.metri_quadri || '-'}</p>
                                     </div>
                                     <div>
+                                        <p className="text-xs font-bold uppercase text-zinc-500 mb-1">Durata Abbonamento</p>
+                                        <p className="text-zinc-200 font-medium">{req.billing_details?.durata_abbonamento || '-'}</p>
+                                    </div>
+                                    <div>
                                         <p className="text-xs font-bold uppercase text-zinc-500 mb-1">Email di Contatto</p>
                                         <p className="text-zinc-200 font-medium">{req.billing_details?.email_contatto || '-'}</p>
                                     </div>
