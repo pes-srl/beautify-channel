@@ -7,7 +7,7 @@ export async function RecentActivityWidget() {
     const { logs, error } = await getRecentActivity(10); // Fetch latest 10 items
 
     return (
-        <div className="p-8 rounded-2xl bg-white/2 border border-white/10 flex flex-col h-full max-h-[500px]">
+        <div className="p-8 rounded-2xl bg-[#17092b] border border-white/5 shadow-xl flex flex-col h-full max-h-[500px]">
             <div className="flex items-center gap-3 mb-6">
                 <div className="p-2 bg-indigo-500/10 rounded-lg">
                     <Activity className="w-5 h-5 text-indigo-400" />
