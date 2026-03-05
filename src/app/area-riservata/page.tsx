@@ -110,7 +110,7 @@ export default async function AreaClientePage() {
                         Area Riservata
                     </h1>
                     <div className="flex flex-wrap items-center gap-3 mt-4 mb-2">
-                        <span className="text-zinc-300 text-lg font-medium">
+                        <span className={`text-lg font-medium ${profile?.plan_type === 'premium' ? 'text-amber-500' : 'text-zinc-300'}`}>
                             {profile?.salon_name || user.email}
                         </span>
                         <span className="px-3 py-1 rounded-full bg-zinc-800 text-zinc-400 text-xs font-bold uppercase tracking-widest border border-white/10">

@@ -106,10 +106,10 @@ export function UsersTableClient({ initialProfiles }: { initialProfiles: any[] }
                                     <TableCell>
                                         <Badge variant="outline" className={`
                                             bg-transparent uppercase text-[10px] font-bold tracking-wider
-                                            ${user.plan_type === 'premium' ? 'text-fuchsia-400 border-fuchsia-400/50' :
+                                            ${user.plan_type === 'premium' ? 'bg-amber-500/10 text-amber-500 border-amber-500/50' :
                                                 user.plan_type === 'free_trial' ? 'text-emerald-400 border-emerald-400/50' :
                                                     user.plan_type === 'basic' ? 'text-indigo-400 border-indigo-400/50' :
-                                                        'text-zinc-400 border-zinc-500/30'}
+                                                        'text-red-500 border-red-500/50'}
                                         `}>
                                             {user.plan_type ? user.plan_type.replace('_', ' ') : 'free'}
                                         </Badge>

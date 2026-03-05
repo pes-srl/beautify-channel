@@ -53,14 +53,14 @@ export function AdminHeader({ profile }: AdminHeaderProps) {
             case 'ultra':
                 return <Badge className={`bg-amber-500 hover:bg-amber-600 text-black ${baseClass}`}>Ultra</Badge>;
             case 'premium':
-                return <Badge className={`bg-fuchsia-600 hover:bg-fuchsia-700 text-white ${baseClass}`}>Premium</Badge>;
+                return <Badge className={`bg-amber-500 hover:bg-amber-600 text-zinc-950 ${baseClass}`}>Premium</Badge>;
             case 'basic':
                 return <Badge className={`bg-indigo-600 hover:bg-indigo-700 text-white ${baseClass}`}>Basic</Badge>;
             case 'free_trial':
                 return <Badge className={`bg-emerald-500 hover:bg-emerald-600 text-black ${baseClass}`}>Trial</Badge>;
             case 'free':
             default:
-                return <Badge variant="secondary" className={`bg-zinc-800 text-zinc-300 ${baseClass}`}>Free</Badge>;
+                return <Badge className={`bg-red-600 hover:bg-red-700 text-white border-0 ${baseClass}`}>Free</Badge>;
         }
     };
 
@@ -72,7 +72,7 @@ export function AdminHeader({ profile }: AdminHeaderProps) {
                 <DropdownMenu>
                     <DropdownMenuTrigger className="flex items-center justify-center hover:bg-white/5 p-1 rounded-full transition-colors outline-none focus-visible:ring-2 focus-visible:ring-fuchsia-500">
                         {/* Circle Avatar */}
-                        <div className="w-8 h-8 rounded-full bg-amber-500 text-zinc-950 font-bold flex items-center justify-center text-sm uppercase shadow-inner">
+                        <div className={`w-8 h-8 rounded-full font-bold flex items-center justify-center text-sm uppercase shadow-inner ${profile.plan_type === 'premium' ? 'bg-amber-500 text-zinc-950' : 'bg-zinc-800 text-zinc-300'}`}>
                             {initials}
                         </div>
                     </DropdownMenuTrigger>

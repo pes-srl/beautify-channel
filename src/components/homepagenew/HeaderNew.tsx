@@ -153,7 +153,7 @@ export function HeaderNew({
                 planBadge = <Badge className={`bg-amber-500 hover:bg-amber-600 text-black ${baseClass}`}>Ultra</Badge>;
                 break;
             case 'premium':
-                planBadge = <Badge className={`bg-fuchsia-600 hover:bg-fuchsia-700 text-white ${baseClass}`}>Premium</Badge>;
+                planBadge = <Badge className={`bg-amber-500 hover:bg-amber-600 text-zinc-950 ${baseClass}`}>Premium</Badge>;
                 break;
             case 'basic':
                 planBadge = <Badge className={`bg-indigo-600 hover:bg-indigo-700 text-white ${baseClass}`}>Basic</Badge>;
@@ -163,7 +163,7 @@ export function HeaderNew({
                 break;
             case 'free':
             default:
-                planBadge = <Badge variant="secondary" className={`bg-zinc-800 text-zinc-300 ${baseClass}`}>Free</Badge>;
+                planBadge = <Badge className={`bg-red-600 hover:bg-red-700 text-white ${baseClass}`}>Free</Badge>;
                 break;
         }
 
@@ -221,7 +221,7 @@ export function HeaderNew({
                         <DropdownMenu>
                             <DropdownMenuTrigger asChild>
                                 <Button variant="ghost" className="relative h-10 w-10 p-0 rounded-full border border-white/10 bg-black/50 hover:bg-white/10 flex items-center justify-center transition-colors outline-none focus-visible:ring-2 focus-visible:ring-fuchsia-500">
-                                    <div className="w-8 h-8 rounded-full bg-amber-500 flex items-center justify-center text-zinc-950 font-bold text-sm uppercase shadow-inner">
+                                    <div className={`w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm uppercase shadow-inner ${profile?.plan_type === 'premium' ? 'bg-amber-500 text-zinc-950' : 'bg-zinc-800 text-zinc-300'}`}>
                                         {initials}
                                     </div>
                                 </Button>
