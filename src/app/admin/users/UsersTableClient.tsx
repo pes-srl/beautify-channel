@@ -52,7 +52,7 @@ export function UsersTableClient({ initialProfiles }: { initialProfiles: any[] }
                             <TableHead className="hidden text-zinc-400 font-medium">Role</TableHead>
                             <TableHead className="text-zinc-400 font-medium">Abbonamento</TableHead>
                             <TableHead className="text-zinc-400 font-medium">Scadenza</TableHead>
-                            <TableHead className="text-zinc-400 font-medium">Status Pagamento</TableHead>
+                            <TableHead className="text-zinc-400 font-medium">Status</TableHead>
                             <TableHead className="text-zinc-400 font-medium">Ultimo Accesso</TableHead>
                             <TableHead className="text-right text-zinc-400 font-medium">Azioni</TableHead>
                         </TableRow>
@@ -67,6 +67,32 @@ export function UsersTableClient({ initialProfiles }: { initialProfiles: any[] }
                                 const lastSeenDate = parseISO(user.last_seen);
                                 lastSeenText = formatDistanceToNow(lastSeenDate, { addSuffix: true, locale: it });
                             }
+
+                            // --- CALCOLO STATUS ABBONAMENTO ---
+                            let isPlanActive = user.plan_status === 'active';
+                            let displayStatus = user.plan_status || 'no active';
+
+                            // Se l'utente è "free" (trial scaduto)
+                            if (!user.plan_type || user.plan_type === 'free') {
+                                isPlanActive = false;
+                                displayStatus = 'no active';
+                            }
+                            // Se l'utente è "free_trial" ma la data di trial è passata
+                            else if (user.plan_type === 'free_trial' && user.trial_ends_at && new Date(user.trial_ends_at) < now) {
+                                isPlanActive = false;
+                                displayStatus = 'no active';
+                            }
+                            // Se l'utente è "basic" o "premium" ma la data di scadenza è passata
+                            else if ((user.plan_type === 'basic' || user.plan_type === 'premium' || user.plan_type === 'premiumcustomizzato') && user.subscription_expiration && new Date(user.subscription_expiration) < now) {
+                                isPlanActive = false;
+                                displayStatus = 'no active';
+                            }
+
+                            // Assicuriamoci che se non è attivo per qualsiasi motivo, e il testo è inattivo o null, stampi "no active"
+                            if (!isPlanActive) {
+                                displayStatus = 'no active';
+                            }
+                            // -----------------------------------
 
                             return (
                                 <TableRow key={user.id} className="border-white/10 hover:bg-white/5 transition-colors">
@@ -97,8 +123,8 @@ export function UsersTableClient({ initialProfiles }: { initialProfiles: any[] }
                                     </TableCell>
                                     <TableCell>
                                         <div className="flex items-center gap-2 relative pl-4">
-                                            <span className={`w-2 h-2 rounded-full absolute left-0 ${user.plan_status === 'active' ? 'bg-green-500 shadow-[0_0_10px_rgba(34,197,94,0.5)]' : 'bg-red-500'}`} />
-                                            <span className={user.plan_status === 'active' ? 'text-zinc-300 capitalize' : 'text-zinc-500 capitalize'}>{user.plan_status || 'inattivo'}</span>
+                                            <span className={`w-2 h-2 rounded-full absolute left-0 ${isPlanActive ? 'bg-green-500 shadow-[0_0_10px_rgba(34,197,94,0.5)]' : 'bg-red-500'}`} />
+                                            <span className={isPlanActive ? 'text-zinc-300 capitalize' : 'text-zinc-500 capitalize'}>{displayStatus}</span>
                                         </div>
                                     </TableCell>
                                     <TableCell>
