@@ -192,8 +192,7 @@ export function PricingNew() {
                     <div className="flex justify-center pt-8">
                         <Link href="#trial-form">
                             <Button
-                                className="hover:brightness-110 text-white font-black text-sm md:text-base px-8 py-6 rounded-md uppercase tracking-wide shadow-[0_8px_30px_rgba(45,10,78,0.4)] transition-all border-none"
-                                style={{ background: 'linear-gradient(90deg, #2D0A4E 0%, #7B2CBF 50%, #F5F3F7 100%)' }}
+                                className="bg-[#7B2CBF] hover:bg-[#6A25A3] text-white font-black text-sm md:text-base px-8 py-6 rounded-md uppercase tracking-wide shadow-[0_8px_30px_rgba(45,10,78,0.4)] transition-all border-none"
                             >
                                 PROVA GRATUITA 7 GIORNI SENZA IMPEGNO
                             </Button>
