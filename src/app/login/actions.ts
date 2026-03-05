@@ -23,6 +23,27 @@ export async function login(formData: FormData) {
     if (user) {
         await logActivity(user.id, 'login');
 
+        // Bypass RLS locally to forcefully set the user online
+        try {
+            const { createClient: createSupabaseClient } = await import('@supabase/supabase-js');
+            const supabaseAdmin = createSupabaseClient(
+                process.env.NEXT_PUBLIC_SUPABASE_URL!,
+                process.env.SUPABASE_SERVICE_ROLE_KEY!,
+                { auth: { autoRefreshToken: false, persistSession: false } }
+            );
+
+            const { error: updateError } = await supabaseAdmin
+                .from('profiles')
+                .update({ is_online: true })
+                .eq('id', user.id);
+
+            if (updateError) {
+                console.error("Error setting user online in DB:", updateError);
+            }
+        } catch (adminErr) {
+            console.error("Critical error setting online state:", adminErr);
+        }
+
         // Redirection based on role
         const { data: profile } = await supabase
             .from("profiles")

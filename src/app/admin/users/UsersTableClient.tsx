@@ -59,16 +59,12 @@ export function UsersTableClient({ initialProfiles }: { initialProfiles: any[] }
                     </TableHeader>
                     <TableBody>
                         {filteredProfiles.map((user) => {
-                            let isOnline = false;
+                            // isOnline dipende direttamente dal DB
+                            const isOnline = user.is_online === true;
                             let lastSeenText = "Mai connesso";
 
                             if (user.last_seen) {
                                 const lastSeenDate = parseISO(user.last_seen);
-                                const diffMinutes = differenceInMinutes(now, lastSeenDate);
-
-                                // Se è stato visto negli ultimi 10 minuti, è considerato Online
-                                isOnline = diffMinutes < 10;
-
                                 lastSeenText = formatDistanceToNow(lastSeenDate, { addSuffix: true, locale: it });
                             }
 
