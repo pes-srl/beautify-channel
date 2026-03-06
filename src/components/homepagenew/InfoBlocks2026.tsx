@@ -166,12 +166,12 @@ export function InfoBlocks2026() {
                                 <h3 className="text-[#5D6676] text-2xl md:text-3xl font-black leading-tight uppercase tracking-tight">
                                     Ascolta una demo<br />del Mood BeautiFy
                                 </h3>
-                                <p className="text-[#5D6676]/70 text-lg font-medium">
-                                    Lasciati avvolgere dall'atmosfera sonora<br className="hidden md:block" /> progettata per il tuo istituto.
+                                <p className="text-[#5D6676]/70 text-lg font-bold">
+                                    La Tua Beauty Routine Sonora
                                 </p>
                                 <div className="pt-2 hidden md:block">
                                     <div className="flex items-center gap-2 text-[#AB7169] font-bold tracking-widest uppercase text-sm">
-                                        <span>Dedicato all'eccellenza</span>
+                                        <span> CON UN SEMPLICE CLIACK ;-)</span>
                                         <div className="h-px w-12 bg-[#AB7169]/30"></div>
                                     </div>
                                 </div>
