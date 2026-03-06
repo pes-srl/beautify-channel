@@ -68,7 +68,7 @@ export function InfoBlocks2026() {
                         <div className="pt-4">
                             <Link href="#trial-form">
                                 <Button
-                                    className="bg-[#AB7169] hover:bg-[#5D6676] text-white font-bold tracking-wider uppercase px-8 md:px-12 py-3 md:py-4 h-auto text-sm md:text-lg rounded-full shadow-[0_8px_30px_rgba(171,113,105,0.4)] transition-all border-none"
+                                    className="bg-[#AB7169] hover:bg-[#5D6676] text-white font-bold tracking-wider uppercase px-8 md:px-12 py-3 md:py-4 h-auto text-sm md:text-lg rounded-[2.5rem] shadow-[0_8px_30px_rgba(171,113,105,0.4)] transition-all border-none"
                                 >
                                     PROVAMI GRATIS 7 GIORNI
                                 </Button>
@@ -86,7 +86,7 @@ export function InfoBlocks2026() {
                         <img
                             src="https://eufahlzjxbimyiwivoiq.supabase.co/storage/v1/object/public/bucket-assets/1772733090547-nfq28.png"
                             alt="BeautiFy Channel Beauty Room"
-                            className="w-full h-auto md:h-[450px] object-cover rounded-xl shadow-2xl"
+                            className="w-full h-auto md:h-[450px] object-cover rounded-[2.5rem] shadow-2xl"
                         />
                     </motion.div>
                 </div>
@@ -125,13 +125,13 @@ export function InfoBlocks2026() {
                             <img
                                 src="https://eufahlzjxbimyiwivoiq.supabase.co/storage/v1/object/public/bucket-assets/1772727853683-sr1147.png"
                                 alt="Assistente Tati"
-                                className="w-full h-auto md:h-[450px] object-cover rounded-xl shadow-2xl"
+                                className="w-full h-auto md:h-[450px] object-cover rounded-[2.5rem] shadow-2xl"
                             />
                             {/* Absolute Button matching the mockup layout */}
                             <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 w-full flex justify-center">
                                 <Link href="#trial-form">
                                     <Button
-                                        className="bg-[#AB7169] hover:bg-[#5D6676] text-white font-bold tracking-wider uppercase px-8 md:px-12 py-3 md:py-4 h-auto text-sm md:text-lg rounded-full shadow-[0_8px_30px_rgba(171,113,105,0.4)] transition-all border-none"
+                                        className="bg-[#AB7169] hover:bg-[#5D6676] text-white font-bold tracking-wider uppercase px-8 md:px-12 py-3 md:py-4 h-auto text-sm md:text-lg rounded-[2.5rem] shadow-[0_8px_30px_rgba(171,113,105,0.4)] transition-all border-none"
                                     >
                                         PROVAMI GRATIS 7 GIORNI
                                     </Button>
@@ -190,62 +190,79 @@ export function InfoBlocks2026() {
                         </div>
                     </div>
 
-                    {/* 4 Elegant Square Blocks */}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 w-full max-w-6xl pt-8 pb-12">
+                    {/* Refined Integrated Info Blocks */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-6xl pt-16 pb-24 mx-auto relative z-10">
+
                         {/* Block 1 */}
-                        <div className="bg-[#FAFAF8]/90 backdrop-blur-md border border-[#D8B2A3] rounded-2xl p-6 sm:p-8 flex flex-col items-center justify-start text-center h-full shadow-2xl transition-all duration-300">
-                            <div className="w-12 h-12 rounded-full bg-[#5D6676] flex items-center justify-center mb-4 sm:mb-6 text-white shrink-0">
-                                <span className="text-xl font-bold">1</span>
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true, margin: "-50px" }}
+                            transition={{ duration: 0.5, delay: 0.1 }}
+                            whileHover={{ y: -5, scale: 1.01 }}
+                            className="bg-[#FAFAF8] rounded-[2rem] p-8 md:p-10 shadow-xl border border-[#D8B2A3]/20 flex flex-col gap-6 transition-all duration-300"
+                        >
+                            <div className="w-14 h-14 rounded-full bg-[#5D6676] flex items-center justify-center text-white text-2xl font-black shrink-0 shadow-md">
+                                1
                             </div>
-                            <div className="flex-1 flex flex-col justify-center">
-                                <p className="text-[#5D6676] text-lg sm:text-xl font-medium leading-relaxed drop-shadow-sm">
-                                    Nel corso di un intrattenimento musicale dal sound ricercato, l’assistente digitale BeautiFy
-                                    interviene, con dolcezza e professionalità, per offrire spunti generici legati al mondo della
-                                    bellezza e del benessere, regalando così una vera e propria beauty routine sonora
-                                </p>
-                            </div>
-                        </div>
+                            <p className="text-[#5D6676] text-lg md:text-xl font-medium leading-relaxed">
+                                Nel corso di un intrattenimento musicale dal sound ricercato, l’assistente digitale <span className="text-[#AB7169] font-bold">BeautiFy</span> interviene, con dolcezza e professionalità, per offrire spunti generici legati al mondo della bellezza e del benessere.
+                            </p>
+                        </motion.div>
 
                         {/* Block 2 */}
-                        <div className="bg-[#FAFAF8]/90 backdrop-blur-md border border-[#D8B2A3] rounded-2xl p-6 sm:p-8 flex flex-col items-center justify-start text-center h-full shadow-2xl hover:bg-white transition-all duration-300">
-                            <div className="w-12 h-12 rounded-full bg-[#5D6676] flex items-center justify-center mb-4 sm:mb-6 text-white shrink-0">
-                                <span className="text-xl font-bold">2</span>
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true, margin: "-50px" }}
+                            transition={{ duration: 0.5, delay: 0.2 }}
+                            whileHover={{ y: -5, scale: 1.01 }}
+                            className="bg-[#FAFAF8] rounded-[2rem] p-8 md:p-10 shadow-xl border border-[#D8B2A3]/20 flex flex-col gap-6 transition-all duration-300"
+                        >
+                            <div className="w-14 h-14 rounded-full bg-[#AB7169] flex items-center justify-center text-white text-2xl font-black shrink-0 shadow-md">
+                                2
                             </div>
-                            <div className="flex-1 flex flex-col justify-center">
-                                <p className="text-[#5D6676] text-lg sm:text-xl font-medium leading-relaxed drop-shadow-sm">
-                                    Questo stimola efficacemente l’interesse delle clienti e sollecita la loro richiesta di informazioni
-                                    su prodotti e trattamenti proprio mentre sono nel tuo salone, creando una percezione positiva
-                                    dell’ambiente che ne aumenta la fidelizzazione
-                                </p>
-                            </div>
-                        </div>
+                            <p className="text-[#5D6676] text-lg md:text-xl font-medium leading-relaxed">
+                                Questo stimola efficacemente l’interesse delle clienti e sollecita la loro richiesta di informazioni su <span className="text-[#AB7169] font-bold">prodotti e trattamenti</span> proprio mentre sono nel tuo salone.
+                            </p>
+                        </motion.div>
 
                         {/* Block 3 */}
-                        <div className="bg-[#FAFAF8]/90 backdrop-blur-md border border-[#D8B2A3] rounded-2xl p-6 sm:p-8 flex flex-col items-center justify-start text-center h-full shadow-2xl hover:bg-white transition-all duration-300">
-                            <div className="w-12 h-12 rounded-full bg-[#5D6676] flex items-center justify-center mb-4 sm:mb-6 text-white shrink-0">
-                                <span className="text-xl font-bold">3</span>
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true, margin: "-50px" }}
+                            transition={{ duration: 0.5, delay: 0.3 }}
+                            whileHover={{ y: -5, scale: 1.01 }}
+                            className="bg-[#FAFAF8] rounded-[2rem] p-8 md:p-10 shadow-xl border border-[#D8B2A3]/20 flex flex-col gap-6 transition-all duration-300"
+                        >
+                            <div className="w-14 h-14 rounded-full bg-[#AB7169] flex items-center justify-center text-white text-2xl font-black shrink-0 shadow-md">
+                                3
                             </div>
-                            <div className="flex-1 flex flex-col justify-center">
-                                <p className="text-[#5D6676] text-lg sm:text-xl font-medium leading-relaxed drop-shadow-sm">
-                                    BeautiFy Channel è un supporto irrinunciabile per la tua professione, perché ti consentirà di non
-                                    preoccuparti più della comunicazione interna del tuo salone, ma di dedicarti e concentrarti
-                                    pienamente sullo svolgimento del tuo lavoro
-                                </p>
-                            </div>
-                        </div>
+                            <p className="text-[#5D6676] text-lg md:text-xl font-medium leading-relaxed">
+                                BeautiFy Channel è un <span className="text-[#AB7169] font-bold">supporto irrinunciabile</span> per la tua professione, perché ti consente di dedicarti pienamente al tuo lavoro senza preoccuparti della comunicazione interna.
+                            </p>
+                        </motion.div>
 
                         {/* Block 4 */}
-                        <div className="bg-[#FAFAF8]/90 backdrop-blur-md border border-[#D8B2A3] rounded-2xl p-6 sm:p-8 flex flex-col items-center justify-start text-center h-full shadow-2xl transition-all duration-300">
-                            <div className="w-12 h-12 rounded-full bg-[#5D6676] flex items-center justify-center mb-4 sm:mb-6 text-white shrink-0">
-                                <span className="text-xl font-bold">4</span>
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true, margin: "-50px" }}
+                            transition={{ duration: 0.5, delay: 0.4 }}
+                            whileHover={{ y: -5, scale: 1.01 }}
+                            className="bg-[#FAFAF8] rounded-[2rem] p-8 md:p-10 shadow-xl border border-[#D8B2A3]/20 flex flex-col gap-6 transition-all duration-300"
+                        >
+                            <div className="w-14 h-14 rounded-full bg-[#5D6676] flex items-center justify-center text-white text-2xl font-black shrink-0 shadow-md">
+                                4
                             </div>
-                            <div className="flex-1 flex flex-col justify-center">
-                                <p className="text-[#5D6676] text-lg sm:text-xl font-medium leading-relaxed drop-shadow-sm">
-                                    Inoltre, BeautiFy Channel ti mette a disposizione altri 6 canali audio oltre al canale principale, per cambiare mood durante la giornata, magari con DEEP SOFT nel weekend o Jazz nell'orario di chiusura, sempre con il supporto di suggerimenti audio dell’assistente digitale BeautiFy
-                                </p>
-                            </div>
-                        </div>
+                            <p className="text-[#5D6676] text-lg md:text-xl font-medium leading-relaxed">
+                                Inoltre, BeautiFy Channel ti mette a disposizione altri <span className="text-[#AB7169] font-bold">6 canali audio</span> oltre al principale, per cambiare mood durante la giornata, sempre con il supporto dell’assistente digitale BeautiFy.
+                            </p>
+                        </motion.div>
                     </div>
+
+
                 </motion.div>
             </div>
         </section>
