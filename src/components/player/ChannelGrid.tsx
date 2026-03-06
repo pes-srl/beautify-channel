@@ -8,9 +8,10 @@ import { useState } from "react";
 interface ChannelGridProps {
     initialChannels: any[];
     serverError?: string;
+    planType?: string;
 }
 
-export function ChannelGrid({ initialChannels, serverError }: ChannelGridProps) {
+export function ChannelGrid({ initialChannels, serverError, planType }: ChannelGridProps) {
     const { currentChannel, isPlaying, togglePlay, setChannel } = useAudioStore();
 
     const handleChannelClick = (channel: any) => {
@@ -46,7 +47,7 @@ export function ChannelGrid({ initialChannels, serverError }: ChannelGridProps) 
     }
 
     return (
-        <div className="grid grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-4 md:gap-6">
+        <div className={`grid grid-cols-2 gap-4 md:gap-6 ${planType === 'free_trial' ? 'md:grid-cols-3 max-w-4xl mx-auto' : 'lg:grid-cols-4 xl:grid-cols-5'}`}>
             {initialChannels.map((channel: any, idx: number) => {
                 const isActive = currentChannel?.id === channel.id;
                 const isCurrentlyPlaying = isActive && isPlaying;

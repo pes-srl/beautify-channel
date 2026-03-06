@@ -113,8 +113,12 @@ export default async function AreaClientePage() {
                         <span className={`text-lg font-medium ${profile?.plan_type === 'premium' ? 'text-amber-500' : 'text-zinc-300'}`}>
                             {profile?.salon_name || user.email}
                         </span>
-                        <span className="px-3 py-1 rounded-full bg-zinc-800 text-zinc-400 text-xs font-bold uppercase tracking-widest border border-white/10">
-                            Piano: {profile?.plan_type || 'Free'}
+                        <span className={`px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest border border-white/10 ${profile?.plan_type === 'premium' ? 'bg-amber-500/10 text-amber-500' :
+                            profile?.plan_type === 'free_trial' ? 'bg-emerald-500/10 text-emerald-400' :
+                                profile?.plan_type === 'basic' ? 'bg-indigo-500/10 text-indigo-400' :
+                                    'bg-zinc-800 text-zinc-400'
+                            }`}>
+                            Piano: {profile?.plan_type?.replace('_', ' ') || 'Free'}
                         </span>
                         {isAdmin && (
                             <span className="px-3 py-1 rounded-full bg-red-500/20 text-red-400 text-xs font-bold uppercase tracking-widest border border-red-500/30">
@@ -142,67 +146,88 @@ export default async function AreaClientePage() {
                                         : (c.name.toLowerCase().includes('basic') || c.name.toLowerCase() === 'beautify channel basic')
                                 ) || null}
                             />
-                            <h3 className="text-xl font-bold text-white mb-4 mt-8 flex items-center gap-2">
-                                <Radio className="w-5 h-5 text-zinc-400" />
-                                Altri Canali Disponibili
+                            {/* INFO BLOCK INNOVATIVO */}
+                            <div id="welcome-pricing-banner" className="w-full mt-12 mb-16 relative">
+                                {/* Sfondo decorativo */}
+                                <div className="absolute inset-0 bg-linear-to-b from-fuchsia-900/10 via-indigo-900/5 to-transparent rounded-[3rem] -z-10 blur-xl pointer-events-none" />
+
+                                <div className="bg-[#0f0518] border border-white/5 rounded-[2.5rem] shadow-2xl p-8 md:p-14 relative overflow-hidden backdrop-blur-xl">
+                                    {/* Overlay di luce */}
+                                    <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-fuchsia-600/10 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/2 pointer-events-none" />
+                                    <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-indigo-600/10 rounded-full blur-[80px] translate-y-1/3 -translate-x-1/3 pointer-events-none" />
+
+                                    <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+
+                                        {/* Colonna Sinistra: Canale Principale */}
+                                        <div className="lg:col-span-5 space-y-6">
+                                            <h2 className="text-3xl md:text-5xl font-black text-transparent bg-clip-text bg-linear-to-br from-white to-zinc-500 tracking-tight leading-tight">
+                                                Come <br />Funziona
+                                            </h2>
+                                            <p className="text-lg md:text-xl text-zinc-300 leading-relaxed font-light">
+                                                Il canale audio <strong className="text-white font-bold">BeautiFy Channel</strong> è il canale principale. Propone una raffinata selezione di diversi generi musicali, intervallata da eleganti, delicati e generici <span className="text-fuchsia-300">suggerimenti vocali</span>.
+                                            </p>
+                                            <p className="text-zinc-400 text-base">
+                                                Studiati per stimolare la curiosità delle tue clienti e l'acquisto dei tuoi servizi.
+                                            </p>
+                                        </div>
+
+                                        {/* Divisore centrale su Desktop */}
+                                        <div className="hidden lg:flex lg:col-span-2 justify-center items-center">
+                                            <div className="w-[1px] h-32 bg-linear-to-b from-transparent via-white/20 to-transparent" />
+                                        </div>
+
+                                        {/* Colonna Destra: Altri Canali */}
+                                        <div className="lg:col-span-5 space-y-6 bg-white/[0.02] p-8 rounded-3xl border border-white/5 relative group hover:bg-white/[0.04] transition-colors">
+                                            <div className="absolute -top-4 -right-4 bg-indigo-500 text-white w-12 h-12 flex items-center justify-center rounded-2xl shadow-lg rotate-12 group-hover:rotate-6 transition-transform">
+                                                <span className="font-black text-2xl">+6</span>
+                                            </div>
+                                            <h3 className="text-2xl font-bold text-white flex items-center gap-3">
+                                                Cambia il tuo Mood
+                                            </h3>
+                                            <p className="text-base md:text-lg text-zinc-300 leading-relaxed font-light">
+                                                Inoltre, hai a disposizione altri <strong className="text-indigo-400">6 canali</strong> per cambiare il tuo mood musicale in istituto durante la giornata.
+                                            </p>
+                                            <ul className="space-y-3 mt-4">
+                                                <li className="flex items-start gap-3">
+                                                    <div className="w-6 h-6 rounded-full bg-fuchsia-500/20 flex items-center justify-center shrink-0 mt-0.5">
+                                                        <div className="w-2 h-2 rounded-full bg-fuchsia-400" />
+                                                    </div>
+                                                    <span className="text-zinc-300 text-sm">Rilassati con <strong className="text-white">DEEP SOFT</strong> nel weekend, o <strong className="text-white">JAZZ</strong> a fine giornata.</span>
+                                                </li>
+                                                <li className="flex items-start gap-3">
+                                                    <div className="w-6 h-6 rounded-full bg-indigo-500/20 flex items-center justify-center shrink-0 mt-0.5">
+                                                        <div className="w-2 h-2 rounded-full bg-indigo-400" />
+                                                    </div>
+                                                    <span className="text-zinc-300 text-sm">Tutti i flussi includono i suggerimenti vocali, tranne <strong className="text-white">RELAX</strong> e <strong className="text-white">MASSAGE</strong>.</span>
+                                                </li>
+                                            </ul>
+                                            <div className="pt-4 mt-2 border-t border-white/5">
+                                                <p className="font-medium text-fuchsia-400 tracking-wide uppercase text-sm flex items-center gap-2">
+                                                    <Radio className="w-4 h-4" /> Buon ascolto
+                                                </p>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <h3 className="text-2xl md:text-3xl font-black text-white mb-8 mt-12 flex flex-col md:flex-row items-center justify-center gap-3 uppercase tracking-wider text-center">
+                                <Radio className="w-6 h-6 text-zinc-400" />
+                                ALTRI CANALI DISPONIBILI
                             </h3>
                         </div>
                     )}
 
-                    <ChannelGrid initialChannels={channels || []} serverError={channelsError?.message} />
+                    <ChannelGrid initialChannels={channels || []} serverError={channelsError?.message} planType={profile?.plan_type} />
 
-                    {/* COME FUNZIONA BANNER */}
-                    <div id="welcome-pricing-banner" className="bg-[#17092b] w-full py-16 px-6 md:px-12 rounded-3xl mt-16 mb-8 flex flex-col items-center shadow-xl border border-white/5 text-center">
-
-                        {/* 2-Column Audio Channel Explanation */}
-                        <div className="w-full max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-center gap-10 md:gap-16 mb-16">
-                            {/* Text Content */}
-                            <div className="flex-1 text-left space-y-6">
-                                <h2 className="text-3xl md:text-4xl font-black text-white mb-6 uppercase tracking-wider">
-                                    Come funziona
-                                </h2>
-                                <p className="text-zinc-50 text-base md:text-lg leading-relaxed">
-                                    Il canale audio BeautiFy Channel Basic è il canale principale. Propone una raffinata selezione musicale intervallata da eleganti e generici suggerimenti vocali, studiati per stimolare l’interesse e l’acquisto dei tuoi servizi in istituto.
-                                </p>
-                                <p className="text-zinc-50 text-base md:text-lg leading-relaxed">
-                                    Inoltre, hai a disposizione altri 6 canali per cambiare mood durante la giornata o magari con DEEP SOFT nel weekend, tutti con eleganti suggerimenti per stimolare l’interesse all’acquisto.
-                                </p>
-                            </div>
-                            {/* Image Content */}
-                            <div className="flex-1 w-full max-w-md shrink-0">
-                                <img
-                                    src="https://eufahlzjxbimyiwivoiq.supabase.co/storage/v1/object/public/bucket-assets/1772477138781-nxz25k.jpg"
-                                    alt="BeautiFy Ascolto"
-                                    className="w-full h-auto rounded-3xl border border-white/5 shadow-2xl"
-                                />
-                            </div>
+                    {/* Upgrade Form for Free Trial Users */}
+                    {profile?.plan_type === 'free_trial' && !isAdmin && (
+                        <div className="w-full max-w-4xl mx-auto mt-16 border-t border-white/10 pt-16">
+                            <UpgradeForm userEmail={user.email} />
                         </div>
+                    )}
 
-                        {/* Philosophy / Vision Texts */}
-                        <div className="w-full max-w-4xl mx-auto space-y-10 mt-8 border-t border-white/10 pt-16">
-                            <p className="text-zinc-300 text-lg md:text-xl leading-relaxed italic font-light px-4 md:px-12">
-                                "BeautiFy Channel è un supporto irrinunciabile per la tua professione, perché ti consentirà di non preoccuparti più della comunicazione interna del tuo salone, ma di dedicarti e concentrarti pienamente sullo svolgimento del tuo lavoro."
-                            </p>
-                            <p className="text-zinc-300 text-lg md:text-xl leading-relaxed italic font-light px-4 md:px-12">
-                                "BeautiFy Channel è la soluzione innovativa di marketing sonoro ideata per aumentare le vendite, la professionalità e la customer experience nel settore del beauty, inducendo una piacevole sensazione di coinvolgimento."
-                            </p>
-                        </div>
-
-                        {/* Call To Action */}
-                        <div className="mt-16 mb-8 px-4">
-                            <p className="font-bold text-xl md:text-2xl tracking-wide uppercase text-fuchsia-400">
-                                Basta parole, BeautiFy Channel lo si capisce prima schiacciando Play, buon ascolto
-                            </p>
-                        </div>
-
-                        {/* Upgrade Form for Free Trial Users */}
-                        {profile?.plan_type === 'free_trial' && !isAdmin && (
-                            <div className="w-full max-w-4xl mx-auto mt-16 border-t border-white/10 pt-16">
-                                <UpgradeForm userEmail={user.email} />
-                            </div>
-                        )}
-
-                    </div>
                 </>
             ) : (
                 <Paywall salonName={profile?.salon_name || user.email || 'Utente'} />

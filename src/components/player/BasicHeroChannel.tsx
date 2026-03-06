@@ -28,7 +28,7 @@ export function BasicHeroChannel({ channel, planType }: BasicHeroChannelProps) {
 
             const formattedChannel = {
                 id: channel?.id || (isPremium ? "premium-hero" : "basic-hero"),
-                name: channel?.name || `Beautify Channel ${isPremium ? 'Premium' : 'Basic'}`,
+                name: channel?.name || `Beautify Channel ${isPremium ? 'Premium' : planType === 'free_trial' ? 'Prova Gratuita' : 'Basic'}`,
                 streamUrl: channel?.stream_url_hls || channel?.stream_url_mp3 || fallbackUrl,
                 subtitle: channel?.subtitle || `Premium ${isPremium ? 'Exclusive' : 'Basic'} Experience`,
                 imageUrl: channel?.image_url || null,
@@ -75,8 +75,8 @@ export function BasicHeroChannel({ channel, planType }: BasicHeroChannelProps) {
 
                     <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-transparent bg-clip-text bg-linear-to-r from-white to-white/70 tracking-tight mb-4">
                         Beautify Channel
-                        <span className={`block ${isPremium ? 'text-amber-400' : 'text-fuchsia-400'}`}>
-                            {isPremium ? 'Premium' : 'Basic'}
+                        <span className={`block ${isPremium ? 'text-amber-400' : planType === 'free_trial' ? 'text-emerald-400' : 'text-fuchsia-400'}`}>
+                            {isPremium ? 'Premium' : planType === 'free_trial' ? 'Prova Gratuita' : 'Basic'}
                         </span>
                     </h2>
 
