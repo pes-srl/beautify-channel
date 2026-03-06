@@ -27,7 +27,7 @@ function AudioPlayerMinimal({ src }: { src: string }) {
             <audio ref={audioRef} src={src} onEnded={() => setIsPlaying(false)} />
             <button
                 onClick={togglePlay}
-                className="w-24 h-24 md:w-32 md:h-32 rounded-full border-2 border-[#FAFAF8] flex items-center justify-center text-[#FAFAF8] hover:scale-110 active:scale-95 transition-all bg-[#FAFAF8]/5 backdrop-blur-sm cursor-pointer group shadow-[0_15px_45px_rgba(0,0,0,0.3),_inset_0_2px_10px_rgba(255,255,255,0.2)] hover:shadow-[0_20px_60px_rgba(255,255,255,0.15),_inset_0_2px_15px_rgba(255,255,255,0.4)]"
+                className="w-24 h-24 md:w-32 md:h-32 rounded-full border-2 border-[#5D6676] flex items-center justify-center text-[#5D6676] hover:scale-110 active:scale-95 transition-all bg-[#5D6676]/5 backdrop-blur-sm cursor-pointer group shadow-[0_0_20px_rgba(255,255,255,0.3),_0_15px_45px_rgba(0,0,0,0.1),_inset_0_2px_10px_rgba(255,255,255,0.1)] hover:shadow-[0_0_30px_rgba(255,255,255,0.5),_0_20px_60px_rgba(93,102,118,0.2),_inset_0_2px_15px_rgba(255,255,255,0.2)]"
                 aria-label={isPlaying ? "Pause" : "Play"}
             >
                 {isPlaying ? (
@@ -150,20 +150,20 @@ export function InfoBlocks2026() {
                     className="flex flex-col items-center justify-center text-center max-w-6xl mx-auto pt-8 md:pt-24 space-y-8"
                 >
                     <h2
-                        className="text-2xl md:text-3xl font-bold text-white leading-snug"
-                        style={{ textShadow: '1px 1px 3px rgba(0,0,0,0.4)' }}
+                        className="text-2xl md:text-3xl font-bold text-[#5D6676] leading-snug"
+                        style={{ textShadow: '1px 1px 3px rgba(255,255,255,0.5)' }}
                     >
-                        <span className="text-4xl md:text-5xl lg:text-6xl block mb-4 text-[#FAFAF8] font-black">COME?</span>
+                        <span className="text-4xl md:text-5xl lg:text-6xl block mb-4 text-[#FAFAF8] font-black" style={{ textShadow: '1px 1px 3px rgba(0,0,0,0.4)' }}>COME?</span>
                         Con un semplice clic accedendo in modo semplice e <br className="hidden md:block" />
                         sicuro a BeautiFy Channel
                     </h2>
 
                     <div className="flex flex-col md:flex-row items-center justify-center gap-8 py-10">
                         <div className="flex flex-col items-center md:items-end text-center md:text-right max-w-sm">
-                            <p className="text-[#FAFAF8] text-lg md:text-2xl font-black tracking-widest leading-tight uppercase" style={{ textShadow: '1px 1px 2px rgba(0,0,0,0.3)' }}>
+                            <p className="text-[#5D6676] text-lg md:text-2xl font-black tracking-widest leading-tight uppercase" style={{ textShadow: '1px 1px 2px rgba(255,255,255,0.5)' }}>
                                 UN SEMPLICE CLICK ANCHE PER<br />ASCOLTARE UNA DEMO DEL MOOD BEAUTIFY
                             </p>
-                            <ArrowRight className="text-[#FAFAF8] mt-4 w-8 h-8 rotate-90 md:rotate-0" strokeWidth={2.5} />
+                            <ArrowRight className="text-[#5D6676] mt-4 w-8 h-8 rotate-90 md:rotate-0" strokeWidth={2.5} />
                         </div>
                         <AudioPlayerMinimal src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" />
                     </div>
