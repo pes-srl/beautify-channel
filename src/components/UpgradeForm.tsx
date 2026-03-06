@@ -229,7 +229,7 @@ export function UpgradeForm({ userEmail }: { userEmail?: string }) {
                     />
                     6 mesi
                   </div>
-                  <div className={`text-xs sm:text-sm pl-6 format-cost ${durataAbbonamento === '6 mesi' ? 'text-fuchsia-300' : 'text-zinc-500'}`}>
+                  <div className={`text-xs sm:text-sm pl-6 format-cost ${durataAbbonamento === '6 mesi' ? 'text-white font-medium' : 'text-zinc-300'}`}>
                     € 25,90 / mese
                     <br />
                     <span className="text-[10px] sm:text-[11px] font-normal leading-tight hidden text-zinc-400 mt-1 block">
@@ -250,7 +250,7 @@ export function UpgradeForm({ userEmail }: { userEmail?: string }) {
                     />
                     12 mesi
                   </div>
-                  <div className={`text-xs sm:text-sm pl-6 format-cost ${durataAbbonamento === '12 mesi' ? 'text-fuchsia-300' : 'text-zinc-500'}`}>
+                  <div className={`text-xs sm:text-sm pl-6 format-cost ${durataAbbonamento === '12 mesi' ? 'text-white font-medium' : 'text-zinc-300'}`}>
                     € 20,90 / mese
                     <br />
                     <span className="text-[10px] sm:text-[11px] font-normal leading-tight hidden text-zinc-400 mt-1 block">
