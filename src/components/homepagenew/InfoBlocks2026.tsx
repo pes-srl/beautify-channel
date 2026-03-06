@@ -70,7 +70,7 @@ export function InfoBlocks2026() {
                                 <Button
                                     className="bg-[#AB7169] hover:bg-[#5D6676] text-white font-bold tracking-wider uppercase px-8 md:px-12 py-3 md:py-4 h-auto text-sm md:text-lg rounded-[2.5rem] shadow-[0_8px_30px_rgba(171,113,105,0.4)] transition-all border-none"
                                 >
-                                    PROVAMI GRATIS 7 GIORNI
+                                    PROVA GRATUITA 7 GIORNI
                                 </Button>
                             </Link>
                         </div>
@@ -117,7 +117,7 @@ export function InfoBlocks2026() {
                                 <Button
                                     className="bg-[#AB7169] hover:bg-[#5D6676] text-white font-bold tracking-wider uppercase px-8 md:px-12 py-3 md:py-4 h-auto text-sm md:text-lg rounded-[2.5rem] shadow-[0_8px_30px_rgba(171,113,105,0.4)] transition-all border-none"
                                 >
-                                    PROVAMI GRATIS 7 GIORNI
+                                    7 GIORNI DI TEST SENZA IMPEGNO
                                 </Button>
                             </Link>
                         </div>
@@ -169,9 +169,11 @@ export function InfoBlocks2026() {
                                     La Tua Beauty Routine Sonora
                                 </p>
                                 <div className="pt-2 hidden md:block">
-                                    <div className="flex items-center gap-2 text-[#AB7169] font-bold tracking-widest uppercase text-sm">
-                                        <span>CON UN SEMPLICE CLICK ;-)</span>
-                                        <div className="h-px w-12 bg-[#AB7169]/30"></div>
+                                    <div className="inline-flex items-center gap-2 bg-[#AB7169] border border-[#AB7169]/20 px-4 py-1.5 rounded-full backdrop-blur-sm shadow-sm hover:bg-[#5D6676] transition-all duration-300">
+                                        <div className="text-white font-bold tracking-widest uppercase text-xs md:text-sm">
+                                            CON UN SEMPLICE CLICK ;-)
+                                        </div>
+                                        <div className="h-px w-8 bg-white/30"></div>
                                     </div>
                                 </div>
                             </div>
