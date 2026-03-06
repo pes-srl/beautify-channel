@@ -130,17 +130,16 @@ export function Pricing2026() {
                     className="mt-6 mb-8 w-full max-w-5xl mx-auto flex flex-col md:flex-row gap-4 px-2"
                 >
                     {/* LASER CHANNEL */}
-                    <div className="flex-1 bg-[#FAFAF8] rounded-2xl md:rounded-3xl p-6 md:p-8 flex flex-col justify-center items-center text-center shadow-xl relative overflow-hidden border border-[#D8B2A3]">
-                        <div className="absolute inset-0 flex items-center justify-center opacity-[0.05] pointer-events-none">
-                            <div className="w-64 h-64 border-[8px] border-[#5D6676] rotate-45 rounded-3xl"></div>
+                    <div className="flex-1 bg-gradient-to-b from-[#8B7D81] to-[#727C8F] rounded-2xl md:rounded-3xl p-6 md:p-8 flex flex-col justify-center items-center text-center shadow-xl relative overflow-hidden border border-white/10">
+                        <div className="absolute inset-0 flex items-center justify-center opacity-[0.1] pointer-events-none">
+                            <div className="w-64 h-64 border-[8px] border-white rotate-45 rounded-3xl"></div>
                         </div>
-                        <h3 className="text-xl md:text-2xl font-black text-[#5D6676] tracking-wide mb-3 relative z-10 uppercase">
+                        <h3 className="text-xl md:text-2xl font-black text-white tracking-wide mb-3 relative z-10 uppercase drop-shadow-sm">
                             LASER CHANNEL
                         </h3>
-                        <p className="text-zinc-600 text-sm md:text-[15px] font-medium leading-snug relative z-10 transition-all">
-                            *Lo ottieni con il piano <span className="text-[#AB7169] font-bold">Premium</span>.<br />
-                            Lo puoi utilizzare quando vuoi promuovere i tuoi<br />
-                            pacchetti dedicati a laser e tecnologie
+                        <p className="text-[#FAFAF8] text-sm md:text-[15px] font-medium leading-snug relative z-10 transition-all drop-shadow-sm">
+                            *Incluso nel piano <span className="text-white font-bold underline decoration-[#AB7169]">Premium</span>.<br />
+                            Puoi utilizzare il canale dedicato al laser quando vuoi promuovere servizi e pacchetti.
                         </p>
                     </div>
 
@@ -153,9 +152,8 @@ export function Pricing2026() {
                             COSMETIC CHANNEL
                         </h3>
                         <p className="text-[#ECE0D4] text-sm md:text-[15px] font-medium leading-snug drop-shadow-sm relative z-10 transition-all">
-                            **Incluso nel piano <span className="text-white font-bold">Premium</span><br />
-                            Lo puoi utilizzare in istituto quando vuoi<br />
-                            promuovere servizi di cosmetica
+                            **Incluso nel piano <span className="text-white font-bold">Premium</span>.<br />
+                            Puoi utilizzare il canale dedicato alla cosmetica, quando vuoi promuovere servizi di cosmetica.
                         </p>
                     </div>
                 </motion.div>
