@@ -15,8 +15,8 @@ export function HeroNew() {
                 backgroundRepeat: 'no-repeat'
             }}
         >
-            {/* Dark overlay to make text readable on the background */}
-            <div className="absolute inset-0 bg-black/40 md:bg-black/30 w-full h-full"></div>
+            {/* Dark overlay to make text readable on the background (minimal 3% opacity) */}
+            <div className="absolute inset-0 bg-black/3 w-full h-full"></div>
 
             {/* Container for Content */}
             <div className="relative z-10 w-full max-w-7xl mx-auto">

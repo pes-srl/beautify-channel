@@ -141,31 +141,53 @@ export function InfoBlocks2026() {
                     </motion.div>
                 </div>
 
-                {/* Block 3: Centered Philosophy and Pricing Block */}
+                {/* Block 3: Modernized Philosophy and Pricing Block */}
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: "-100px" }}
                     transition={{ duration: 0.8 }}
-                    className="flex flex-col items-center justify-center text-center max-w-6xl mx-auto pt-8 md:pt-24 space-y-8"
+                    className="flex flex-col items-center justify-center text-center max-w-6xl mx-auto pt-8 md:pt-24 space-y-12"
                 >
-                    <h2
-                        className="text-2xl md:text-3xl font-bold text-[#5D6676] leading-snug"
-                        style={{ textShadow: '0.5px 0.5px 0 #fff, -0.5px -0.5px 0 #fff, 0.5px -0.5px 0 #fff, -0.5px 0.5px 0 #fff' }}
-                    >
-                        <span className="text-4xl md:text-5xl lg:text-6xl block mb-4 text-[#5D6676] font-black" style={{ textShadow: '1px 1px 0 #fff, -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff' }}>COME?</span>
-                        Con un semplice clic accedendo in modo semplice e <br className="hidden md:block" />
-                        sicuro a BeautiFy Channel
-                    </h2>
+                    <div className="space-y-4">
+                        <h2 className="text-4xl md:text-6xl font-black text-[#5D6676] tracking-tighter uppercase">
+                            COME?
+                        </h2>
+                        <p className="text-xl md:text-2xl text-[#5D6676]/80 font-medium leading-relaxed max-w-3xl mx-auto">
+                            Con un semplice clic accedendo in modo semplice e <br className="hidden md:block" />
+                            sicuro a BeautiFy Channel
+                        </p>
+                    </div>
 
-                    <div className="flex flex-col md:flex-row items-center justify-center gap-8 py-10">
-                        <div className="flex flex-col items-center md:items-end text-center md:text-right max-w-sm">
-                            <p className="text-[#5D6676] text-lg md:text-2xl font-black tracking-widest leading-tight uppercase" style={{ textShadow: '0.5px 0.5px 0 #fff, -0.5px -0.5px 0 #fff, 0.5px -0.5px 0 #fff, -0.5px 0.5px 0 #fff' }}>
-                                UN SEMPLICE CLICK ANCHE PER<br />ASCOLTARE UNA DEMO DEL MOOD BEAUTIFY
-                            </p>
-                            <ArrowRight className="text-[#5D6676] mt-4 w-8 h-8 rotate-90 md:rotate-0" strokeWidth={2.5} />
+                    {/* Glassmorphism Demo Card */}
+                    <div className="relative w-full max-w-4xl p-[1px] rounded-[2.5rem] bg-gradient-to-br from-white/40 to-white/10 shadow-3xl">
+                        <div className="bg-white/10 backdrop-blur-2xl rounded-[2.5rem] p-8 md:p-12 flex flex-col md:flex-row items-center justify-between gap-10 border border-white/20">
+                            <div className="flex-1 text-center md:text-left space-y-4">
+                                <h3 className="text-[#5D6676] text-2xl md:text-3xl font-black leading-tight uppercase tracking-tight">
+                                    Ascolta una demo<br />del Mood BeautiFy
+                                </h3>
+                                <p className="text-[#5D6676]/70 text-lg font-medium">
+                                    Lasciati avvolgere dall'atmosfera sonora<br className="hidden md:block" /> progettata per il tuo istituto.
+                                </p>
+                                <div className="pt-2 hidden md:block">
+                                    <div className="flex items-center gap-2 text-[#AB7169] font-bold tracking-widest uppercase text-sm">
+                                        <span>Dedicato all'eccellenza</span>
+                                        <div className="h-px w-12 bg-[#AB7169]/30"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="relative group">
+                                {/* Pulse Effect Background */}
+                                <div className="absolute inset-0 bg-[#AB7169]/20 rounded-full blur-3xl group-hover:bg-[#AB7169]/30 transition-all duration-500 animate-pulse"></div>
+                                <AudioPlayerMinimal src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" />
+                            </div>
                         </div>
-                        <AudioPlayerMinimal src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" />
+
+                        {/* Decorative floating icon */}
+                        <div className="absolute -top-6 -right-6 w-12 h-12 bg-white rounded-2xl shadow-xl flex items-center justify-center rotate-12 hidden md:flex">
+                            <ArrowRight className="text-[#AB7169] w-6 h-6 rotate-45" />
+                        </div>
                     </div>
 
                     {/* 4 Elegant Square Blocks */}
