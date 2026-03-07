@@ -97,7 +97,7 @@ export function Pricing2026() {
                                                     <span className="text-3xl mt-2 mr-1">€</span>
                                                     <span className="text-7xl leading-none tracking-tighter drop-shadow-sm">{plan.price}</span>
                                                 </div>
-                                                <span className="text-[#AB7169] text-lg md:text-md font-bold mt-1 uppercase tracking-wide block text-center w-full">{plan.period}</span>
+                                                <span className="text-[#F8BBD0] text-lg md:text-md font-bold mt-1 uppercase tracking-wide block text-center w-full">{plan.period}</span>
                                             </div>
                                         )}
                                     </div>

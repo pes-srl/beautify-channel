@@ -215,7 +215,7 @@ export function InfoBlocks2026() {
                                 </div>
                             </div>
 
-                            <div className="relative group">
+                            <div className="relative group mt-6 md:mt-0">
                                 {/* Pulse Effect Background */}
                                 <div className="absolute inset-0 bg-[#AB7169]/20 rounded-full blur-3xl group-hover:bg-[#AB7169]/30 transition-all duration-500 animate-pulse"></div>
                                 <AudioPlayerMinimal src="/audio/beautify-demo.mp3" />
