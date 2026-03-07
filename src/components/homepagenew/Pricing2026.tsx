@@ -94,9 +94,9 @@ export function Pricing2026() {
 
                                 {/* Left Side on PC: Price + CTA */}
                                 <div className="flex flex-col lg:w-1/3 shrink-0 lg:border-r border-[#ECE0D4] lg:pr-8">
-                                    <div className="text-center mb-6 lg:mb-8 min-h-[90px] flex items-center justify-center w-full">
+                                    <div className="text-center mt-2 lg:mt-8 mb-6 lg:mb-8 min-h-[90px] flex items-center justify-center w-full">
                                         {plan.price && (
-                                            <div className="flex flex-col items-center justify-center text-[#5D6676] font-black w-full text-center pr-6 lg:pr-0">
+                                            <div className="flex flex-col items-center justify-center text-[#5D6676] font-black w-full text-center pr-6 lg:pr-0 lg:-translate-x-[9.5px]">
                                                 <div className="flex items-start justify-center">
                                                     <span className="text-3xl mt-2 mr-1">€</span>
                                                     <span className="text-7xl leading-none tracking-tighter drop-shadow-sm">{plan.price}</span>
@@ -107,12 +107,12 @@ export function Pricing2026() {
                                     </div>
 
                                     {/* CTA Button & Footer */}
-                                    <div className="mt-8 lg:mt-auto space-y-6">
+                                    <div className="mt-2 lg:mt-auto space-y-6">
                                         <div className="flex justify-center w-full">
                                             <a
                                                 href="#trial-form"
                                                 onClick={(e) => handleScrollTo(e, "#trial-form")}
-                                                className="w-full"
+                                                className="w-full lg:w-[124%] lg:-ml-[12%]"
                                             >
                                                 <Button
                                                     className={`w-full rounded-[2.5rem] h-auto py-5 sm:py-5 px-4 text-[14px] sm:text-[16px] font-semibold uppercase tracking-widest text-center whitespace-normal leading-[1.3] transition-all bg-gradient-to-r from-[#F8BBD0] to-[#DDA0DD] hover:from-[#F48FB1] hover:to-[#D48DD4] text-white ${plan.buttonClasses} ${montserrat.className}`}
