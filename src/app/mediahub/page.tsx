@@ -7,7 +7,7 @@ const MOCK_DATA = {
     newsAudio: {
         title: "Aggiornamento Sviluppo: Fase 2",
         date: "10 Marzo 2026",
-        audioSrc: "/audio/voice-over.mp3",
+        audioSrc: "/audio/beautify-demo.mp3",
     },
     videos: [
         {

@@ -11,15 +11,22 @@ function AudioPlayerMinimal({ src }: { src: string }) {
     const audioRef = useRef<HTMLAudioElement | null>(null);
 
     const togglePlay = () => {
-        if (audioRef.current) {
-            if (isPlaying) {
-                audioRef.current.pause();
-                setIsPlaying(false);
-            } else {
-                audioRef.current.play().then(() => {
-                    setIsPlaying(true);
-                }).catch(() => {
-                    // Browser blocked or interrupted playback (e.g. autoplay policy)
+        const audio = audioRef.current;
+        if (!audio) return;
+
+        if (isPlaying) {
+            audio.pause();
+            setIsPlaying(false);
+        } else {
+            // Safari/Mobile workaround: if it's the first play, ensure it's loaded
+            if (audio.readyState === 0) {
+                audio.load();
+            }
+
+            const playPromise = audio.play();
+            if (playPromise !== undefined) {
+                playPromise.catch((e) => {
+                    console.error("Playback failed", e);
                     setIsPlaying(false);
                 });
             }
@@ -28,7 +35,14 @@ function AudioPlayerMinimal({ src }: { src: string }) {
 
     return (
         <div className="flex flex-col items-center justify-center">
-            <audio ref={audioRef} src={src} onEnded={() => setIsPlaying(false)} />
+            <audio
+                ref={audioRef}
+                src={src}
+                preload="auto"
+                onPlay={() => setIsPlaying(true)}
+                onPause={() => setIsPlaying(false)}
+                onEnded={() => setIsPlaying(false)}
+            />
             <button
                 onClick={togglePlay}
                 className="w-24 h-24 md:w-32 md:h-32 rounded-full border-2 border-[#5D6676] flex items-center justify-center text-[#5D6676] hover:scale-110 active:scale-95 transition-all bg-[#5D6676]/5 backdrop-blur-sm cursor-pointer group shadow-[0_0_20px_rgba(255,255,255,0.3),_0_15px_45px_rgba(0,0,0,0.1),_inset_0_2px_10px_rgba(255,255,255,0.1)] hover:shadow-[0_0_50px_rgba(255,255,255,0.8),_0_20px_60px_rgba(93,102,118,0.2),_inset_0_2px_15px_rgba(255,255,255,0.3)]"
@@ -185,7 +199,7 @@ export function InfoBlocks2026() {
                             <div className="relative group">
                                 {/* Pulse Effect Background */}
                                 <div className="absolute inset-0 bg-[#AB7169]/20 rounded-full blur-3xl group-hover:bg-[#AB7169]/30 transition-all duration-500 animate-pulse"></div>
-                                <AudioPlayerMinimal src="/audio/voice-over.mp3" />
+                                <AudioPlayerMinimal src="/audio/beautify-demo.mp3" />
                             </div>
                         </div>
 
