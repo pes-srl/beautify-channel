@@ -101,7 +101,7 @@ export function InfoBlocks2026() {
                                 onClick={(e) => handleScrollTo(e, "#trial-form")}
                             >
                                 <Button
-                                    className="bg-[#AB7169] hover:bg-[#5D6676] text-white font-bold tracking-wider uppercase px-8 md:px-12 py-3 md:py-4 h-auto text-sm md:text-lg rounded-[2.5rem] shadow-[0_8px_30px_rgba(171,113,105,0.4)] transition-all border-none"
+                                    className="bg-[#7B2CBF] hover:bg-[#6A25A3] text-white font-bold tracking-wider uppercase px-8 md:px-12 py-3 md:py-4 h-auto text-sm md:text-lg rounded-[2.5rem] shadow-[0_8px_30px_rgba(45,10,78,0.4)] transition-all border-none"
                                 >
                                     PROVA GRATUITA 7 GIORNI
                                 </Button>
@@ -205,7 +205,7 @@ export function InfoBlocks2026() {
                                     La Tua Beauty Routine Sonora
                                 </p>
                                 <div className="pt-2 flex justify-center">
-                                    <div className="inline-flex items-center gap-2 bg-[#AB7169] border border-[#AB7169]/20 px-4 py-1.5 rounded-full backdrop-blur-sm shadow-sm hover:bg-[#5D6676] transition-all duration-300">
+                                    <div className="inline-flex items-center gap-2 bg-[#7B2CBF] border border-[#7B2CBF]/20 px-4 py-1.5 rounded-full backdrop-blur-sm shadow-sm hover:bg-[#6A25A3] transition-all duration-300">
                                         <div className="text-white font-bold tracking-widest uppercase text-xs md:text-sm">
                                             CON UN SEMPLICE CLICK ;-)
                                         </div>

@@ -201,7 +201,7 @@ export function Pricing2026() {
                             { step: "3", text: "Premi Play sul canale che preferisci e lascia che BeautiFy faccia il resto" }
                         ].map((item) => (
                             <div key={item.step} className="bg-[#FAFAF8] rounded-[2.5rem] p-8 text-center shadow-xl space-y-4">
-                                <span className="block text-6xl font-black text-[#AB7169] mb-6 drop-shadow-sm">
+                                <span className="block text-6xl font-black text-[#7B2CBF] mb-6 drop-shadow-sm">
                                     {item.step}
                                 </span>
                                 <p className="text-[#5D6676] font-bold text-lg md:text-xl leading-snug">
