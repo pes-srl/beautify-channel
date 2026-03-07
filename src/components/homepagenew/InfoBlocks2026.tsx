@@ -59,6 +59,25 @@ function AudioPlayerMinimal({ src }: { src: string }) {
 }
 
 export function InfoBlocks2026() {
+    const handleScrollTo = (e: React.MouseEvent, href: string) => {
+        e.preventDefault();
+        const id = href.replace("#", "");
+        const element = document.getElementById(id);
+        if (element) {
+            const offset = 80;
+            const bodyRect = document.body.getBoundingClientRect().top;
+            const elementRect = element.getBoundingClientRect().top;
+            const elementPosition = elementRect - bodyRect;
+            const offsetPosition = elementPosition - offset;
+
+            window.scrollTo({
+                top: offsetPosition,
+                behavior: "smooth"
+            });
+            window.history.pushState(null, "", href);
+        }
+    };
+
     return (
         <section className="bg-gradient-to-b from-[#FAFAFA] via-[#ECE0D4] to-[#AB7169] w-full pt-16 pb-8 md:pt-24 md:pb-10 px-6 md:px-12 overflow-hidden">
             <div className="max-w-7xl mx-auto space-y-24 md:space-y-32">
@@ -84,13 +103,16 @@ export function InfoBlocks2026() {
                             piacevole sensazione di coinvolgimento
                         </p>
                         <div className="pt-4">
-                            <Link href="#trial-form">
+                            <a
+                                href="#trial-form"
+                                onClick={(e) => handleScrollTo(e, "#trial-form")}
+                            >
                                 <Button
                                     className="bg-[#AB7169] hover:bg-[#5D6676] text-white font-bold tracking-wider uppercase px-8 md:px-12 py-3 md:py-4 h-auto text-sm md:text-lg rounded-[2.5rem] shadow-[0_8px_30px_rgba(171,113,105,0.4)] transition-all border-none"
                                 >
                                     PROVA GRATUITA 7 GIORNI
                                 </Button>
-                            </Link>
+                            </a>
                         </div>
                     </motion.div>
 
@@ -131,13 +153,16 @@ export function InfoBlocks2026() {
                             sensazioni, aiutandoti ad aumentare le vendite in un modo mai così smart e godibile!
                         </p>
                         <div className="pt-4 flex justify-center md:justify-start">
-                            <Link href="#trial-form">
+                            <a
+                                href="#trial-form"
+                                onClick={(e) => handleScrollTo(e, "#trial-form")}
+                            >
                                 <Button
                                     className="bg-[#AB7169] hover:bg-[#5D6676] text-white font-bold tracking-wider uppercase px-8 md:px-12 py-3 md:py-4 h-auto text-sm md:text-lg rounded-[2.5rem] shadow-[0_8px_30px_rgba(171,113,105,0.4)] transition-all border-none"
                                 >
                                     7 GIORNI DI TEST SENZA IMPEGNO
                                 </Button>
-                            </Link>
+                            </a>
                         </div>
                     </motion.div>
 

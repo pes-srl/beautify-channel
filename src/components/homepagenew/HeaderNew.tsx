@@ -140,6 +140,30 @@ export function HeaderNew({
         form.submit();
     };
 
+    const handleScrollTo = (e: React.MouseEvent, href: string) => {
+        if (href.startsWith("#")) {
+            e.preventDefault();
+            const id = href.replace("#", "");
+            const element = document.getElementById(id);
+            if (element) {
+                const offset = 80; // Account for header height
+                const bodyRect = document.body.getBoundingClientRect().top;
+                const elementRect = element.getBoundingClientRect().top;
+                const elementPosition = elementRect - bodyRect;
+                const offsetPosition = elementPosition - offset;
+
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: "smooth"
+                });
+
+                // Update hash without jumping
+                window.history.pushState(null, "", href);
+                setIsMobileMenuOpen(false);
+            }
+        }
+    };
+
     const renderRoleBadge = () => {
         const roleStr = profile?.role || "User";
         const planStr = profile?.plan_type || "Free";
@@ -205,13 +229,14 @@ export function HeaderNew({
                 {/* Desktop Nav - Show on all pages */}
                 <nav className="hidden md:flex flex-1 items-center justify-center gap-8">
                     {navLinks.map((link) => (
-                        <Link
+                        <a
                             key={link.name}
                             href={link.href}
-                            className="text-sm font-medium text-zinc-300 hover:text-white transition-colors"
+                            onClick={(e) => handleScrollTo(e, link.href)}
+                            className="text-sm font-medium text-zinc-300 hover:text-white transition-colors cursor-pointer"
                         >
                             {link.name}
-                        </Link>
+                        </a>
                     ))}
                 </nav>
 
@@ -269,13 +294,17 @@ export function HeaderNew({
                         </DropdownMenu>
                     ) : !isLoading ? (
                         <>
-                            <Link href="#trial-form" className="hidden md:inline-block">
+                            <a
+                                href="#trial-form"
+                                onClick={(e) => handleScrollTo(e, "#trial-form")}
+                                className="hidden md:inline-block"
+                            >
                                 <Button
                                     className="bg-[#7B2CBF] hover:bg-[#6A25A3] text-white transition-all font-bold border-0 shadow-lg shadow-[#2D0A4E]/20 rounded-[2.5rem]"
                                 >
                                     Prova GRATUITA
                                 </Button>
-                            </Link>
+                            </a>
                             <Link href="/login" className="hidden md:inline-block">
                                 <Button variant="outline" className="text-zinc-300 border-zinc-700 bg-transparent hover:bg-zinc-800 hover:text-white transition-colors rounded-[2.5rem]">
                                     Accedi
@@ -307,14 +336,14 @@ export function HeaderNew({
             {isMobileMenuOpen && (
                 <div className="md:hidden absolute top-full left-0 right-0 bg-zinc-950 border-b border-white/10 p-6 flex flex-col gap-4 shadow-xl">
                     {navLinks.map((link) => (
-                        <Link
+                        <a
                             key={link.name}
                             href={link.href}
-                            className="text-lg font-medium text-zinc-300 hover:text-white py-2 block border-b border-white/5"
-                            onClick={() => setIsMobileMenuOpen(false)}
+                            className="text-lg font-medium text-zinc-300 hover:text-white py-2 block border-b border-white/5 cursor-pointer"
+                            onClick={(e) => handleScrollTo(e, link.href)}
                         >
                             {link.name}
-                        </Link>
+                        </a>
                     ))}
                     <div className="flex flex-col gap-3 mt-4">
                         {!isLoading && user ? (
@@ -337,13 +366,16 @@ export function HeaderNew({
                                         Accedi
                                     </Button>
                                 </Link>
-                                <Link href="#trial-form" onClick={() => setIsMobileMenuOpen(false)}>
+                                <a
+                                    href="#trial-form"
+                                    onClick={(e) => handleScrollTo(e, "#trial-form")}
+                                >
                                     <Button
                                         className="w-full bg-[#7B2CBF] hover:bg-[#6A25A3] text-white transition-all font-bold border-0 shadow-lg rounded-[2.5rem]"
                                     >
                                         Prova GRATUITA
                                     </Button>
-                                </Link>
+                                </a>
                             </>
                         )}
                     </div>

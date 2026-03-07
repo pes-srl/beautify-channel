@@ -29,6 +29,25 @@ const plans = [
 ];
 
 export function Pricing2026() {
+    const handleScrollTo = (e: React.MouseEvent, href: string) => {
+        e.preventDefault();
+        const id = href.replace("#", "");
+        const element = document.getElementById(id);
+        if (element) {
+            const offset = 80;
+            const bodyRect = document.body.getBoundingClientRect().top;
+            const elementRect = element.getBoundingClientRect().top;
+            const elementPosition = elementRect - bodyRect;
+            const offsetPosition = elementPosition - offset;
+
+            window.scrollTo({
+                top: offsetPosition,
+                behavior: "smooth"
+            });
+            window.history.pushState(null, "", href);
+        }
+    };
+
     return (
         <section id="pricing" className="bg-gradient-to-b from-[#AB7169] via-[#5D6676] to-[#1E0C31] pt-16 md:pt-24 pb-2 md:pb-24 px-6 md:px-12 overflow-hidden">
             <div className="max-w-7xl mx-auto">
@@ -86,13 +105,17 @@ export function Pricing2026() {
                                     {/* CTA Button & Footer */}
                                     <div className="mt-8 lg:mt-auto space-y-6">
                                         <div className="flex justify-center w-full">
-                                            <Link href="#trial-form" className="w-full">
+                                            <a
+                                                href="#trial-form"
+                                                onClick={(e) => handleScrollTo(e, "#trial-form")}
+                                                className="w-full"
+                                            >
                                                 <Button
                                                     className={`w-full rounded-[2.5rem] h-auto py-5 sm:py-5 px-4 text-[14px] sm:text-[16px] font-black uppercase tracking-widest text-center whitespace-normal leading-[1.3] transition-all bg-[#AB7169] hover:bg-[#D8B2A3] ${plan.buttonClasses}`}
                                                 >
                                                     {plan.buttonText}
                                                 </Button>
-                                            </Link>
+                                            </a>
                                         </div>
 
                                         <p className="text-center lg:text-left text-xs text-zinc-600 font-medium whitespace-pre-line leading-relaxed pb-2">
@@ -189,13 +212,16 @@ export function Pricing2026() {
                     </div>
 
                     <div className="flex justify-center pt-8">
-                        <Link href="#trial-form">
+                        <a
+                            href="#trial-form"
+                            onClick={(e) => handleScrollTo(e, "#trial-form")}
+                        >
                             <Button
                                 className="bg-[#AB7169] hover:bg-[#D8B2A3] text-white font-black text-sm md:text-base px-8 py-6 rounded-[2.5rem] uppercase tracking-wide shadow-[0_8px_30px_rgba(171,113,105,0.4)] transition-all border-none"
                             >
                                 PROVA GRATUITA 7 GIORNI SENZA IMPEGNO
                             </Button>
-                        </Link>
+                        </a>
                     </div>
                 </motion.div>
 

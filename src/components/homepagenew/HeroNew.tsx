@@ -5,6 +5,25 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 
 export function HeroNew() {
+    const handleScrollTo = (e: React.MouseEvent, href: string) => {
+        e.preventDefault();
+        const id = href.replace("#", "");
+        const element = document.getElementById(id);
+        if (element) {
+            const offset = 80;
+            const bodyRect = document.body.getBoundingClientRect().top;
+            const elementRect = element.getBoundingClientRect().top;
+            const elementPosition = elementRect - bodyRect;
+            const offsetPosition = elementPosition - offset;
+
+            window.scrollTo({
+                top: offsetPosition,
+                behavior: "smooth"
+            });
+            window.history.pushState(null, "", href);
+        }
+    };
+
     return (
         <section
             className="relative w-full min-h-[60vh] md:min-h-[85vh] flex items-end py-12 md:py-24 flex-col justify-end overflow-hidden px-6 md:px-12"
@@ -37,17 +56,17 @@ export function HeroNew() {
                         COME FAI SENZA BEAUTIFY?
                     </h1>
 
-                    <Link href="#vantaggi">
+                    <a
+                        href="#vantaggi"
+                        onClick={(e) => handleScrollTo(e, "#vantaggi")}
+                    >
                         <Button
                             className="bg-[#7B2CBF] hover:bg-[#6A25A3] text-white font-bold tracking-wider uppercase px-8 md:px-12 py-4 md:py-7 text-base md:text-xl rounded-[2.5rem] shadow-[0_8px_30px_rgba(45,10,78,0.4)] transition-all border-none"
                         >
                             Scoprici
                         </Button>
-                    </Link>
+                    </a>
                 </motion.div>
-
-
-
             </div>
         </section >
     );
