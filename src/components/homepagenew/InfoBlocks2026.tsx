@@ -85,8 +85,9 @@ export function InfoBlocks2026() {
                     >
                         <h2 className="text-3xl md:text-5xl font-bold text-[#5D6676] leading-[1.1] tracking-tight">
                             BeautiFy Channel<br />
-                            La tua Beauty Routine Sonora
+                            <span className="text-xl md:text-3xl">La tua Beauty Routine Sonora</span>
                         </h2>
+
                         <p className="text-zinc-700 text-lg md:text-xl leading-relaxed">
                             Finalmente anche in Italia un vero must have per gli istituti di bellezza: <br className="block md:hidden" />
                             <span className="whitespace-nowrap inline-block mt-1 md:mt-0">il <strong className="text-[#AB7169]">MARKETING SONORO</strong></span><br /><br />
