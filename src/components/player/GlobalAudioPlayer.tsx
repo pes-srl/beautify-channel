@@ -166,6 +166,6 @@ export function GlobalAudioPlayer() {
     }, [setBufferingState]);
 
     return (
-        <audio ref={audioRef} className="hidden" preload="none" />
+        <audio id="global-audio-player" ref={audioRef} className="hidden" preload="none" />
     );
 }

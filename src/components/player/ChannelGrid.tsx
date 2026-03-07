@@ -15,6 +15,12 @@ export function ChannelGrid({ initialChannels, serverError, planType }: ChannelG
     const { currentChannel, isPlaying, togglePlay, setChannel } = useAudioStore();
 
     const handleChannelClick = (channel: any) => {
+        // Unlock audio context for mobile iOS directly on user interaction
+        const audioEl = document.getElementById("global-audio-player") as HTMLAudioElement;
+        if (audioEl) {
+            audioEl.play().catch(() => { });
+        }
+
         if (currentChannel?.id === channel.id) {
             togglePlay();
         } else {

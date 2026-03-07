@@ -67,7 +67,11 @@ export function AudioPlayer() {
                     {/* Center: Play Controls */}
                     <div className="flex-1 flex justify-center items-center">
                         <button
-                            onClick={togglePlay}
+                            onClick={() => {
+                                const audioEl = document.getElementById("global-audio-player") as HTMLAudioElement;
+                                if (audioEl) audioEl.play().catch(() => { });
+                                togglePlay();
+                            }}
                             className={`h-14 w-14 rounded-full flex items-center justify-center transition-all duration-300 ${isPlaying && bufferingState !== 'buffering' && bufferingState !== 'loading'
                                 ? "bg-white text-zinc-950 hover:bg-zinc-200"
                                 : "bg-linear-to-r from-fuchsia-500 to-indigo-500 text-white shadow-[0_0_20px_rgba(217,70,239,0.3)] hover:scale-105"
