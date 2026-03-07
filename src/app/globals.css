@@ -128,4 +128,13 @@
   body {
     @apply bg-background text-foreground;
   }
+
+  button,
+  [role="button"],
+  input[type="submit"],
+  input[type="button"],
+  a[class*="bg-"][class*="text-white"] {
+    font-family: var(--font-montserrat) !important;
+    font-weight: 600 !important;
+  }
 }

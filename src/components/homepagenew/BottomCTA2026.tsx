@@ -4,6 +4,9 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/utils/supabase/client";
 import { Button } from "@/components/ui/button";
+import { Montserrat } from "next/font/google";
+
+const montserrat = Montserrat({ subsets: ["latin"], weight: ["600"] });
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Sparkles } from "lucide-react";
@@ -84,7 +87,7 @@ export function BottomCTA2026() {
                             <div className="inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-[#D8B2A3]/10 border border-[#D8B2A3]/20 backdrop-blur-md mb-6 shadow-[0_0_30px_rgba(216,178,163,0.2)]">
                                 <Sparkles className="w-8 h-8 text-[#D8B2A3]" />
                             </div>
-                            <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-3 tracking-tight">
+                            <h2 className={`text-3xl md:text-5xl lg:text-6xl font-semibold text-white mb-3 tracking-tight ${montserrat.className}`}>
                                 Inizia la tua Prova Gratuita
                             </h2>
                             <p className="text-[#ECE0D4] text-lg">
@@ -175,7 +178,7 @@ export function BottomCTA2026() {
                                 <Button
                                     type="submit"
                                     disabled={isLoading}
-                                    className="w-full h-16 mt-4 bg-white/10 hover:bg-white/20 text-white font-bold text-sm md:text-lg transition-all border border-white/30 rounded-[2.5rem] tracking-wide"
+                                    className="w-full h-16 mt-4 bg-white/10 hover:bg-white/20 text-white text-sm md:text-lg transition-all border border-white/30 rounded-[2.5rem] tracking-wide"
                                 >
                                     {isLoading ? "Creazione account in corso..." : "INIZIA SUBITO LA PROVA GRATUITA"}
                                 </Button>

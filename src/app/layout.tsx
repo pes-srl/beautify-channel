@@ -1,10 +1,16 @@
 import type { Metadata } from "next";
-import { Figtree } from "next/font/google";
+import { Figtree, Montserrat } from "next/font/google";
 import "./globals.css";
 
 const figtree = Figtree({
   variable: "--font-figtree",
   subsets: ["latin"],
+});
+
+const montserrat = Montserrat({
+  variable: "--font-montserrat",
+  subsets: ["latin"],
+  weight: ["600"],
 });
 
 export const metadata: Metadata = {
@@ -46,7 +52,7 @@ export default async function RootLayout({
   return (
     <html lang="it">
       <body
-        className={`${figtree.variable} font-sans antialiased bg-zinc-950 text-zinc-50 flex flex-col min-h-screen`}
+        className={`${figtree.variable} ${montserrat.variable} font-sans antialiased bg-zinc-950 text-zinc-50 flex flex-col min-h-screen`}
       >
         <AuthHashCatcher />
         {user && <PresencePing />}

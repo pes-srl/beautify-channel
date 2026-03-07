@@ -4,6 +4,10 @@ import { motion } from "framer-motion";
 import { Check } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { Montserrat, Inter } from "next/font/google";
+
+const montserrat = Montserrat({ subsets: ["latin"], weight: ["600"] });
+const inter = Inter({ subsets: ["latin"], weight: ["400", "500"] });
 
 const plans = [
     {
@@ -52,10 +56,10 @@ export function Pricing2026() {
         <section id="pricing" className="bg-gradient-to-b from-[#AB7169] via-[#5D6676] to-[#1E0C31] pt-0 md:pt-24 pb-2 md:pb-24 px-6 md:px-12 overflow-hidden">
             <div className="max-w-7xl mx-auto">
                 <div className="text-center mb-24 space-y-4">
-                    <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#FAFAF8] leading-[1.1] tracking-tight">
+                    <h2 className={`text-4xl md:text-5xl lg:text-6xl font-semibold text-[#FAFAF8] leading-[1.1] tracking-tight ${montserrat.className}`}>
                         QUANTO MI COSTA?
                     </h2>
-                    <h2 className="text-3xl md:text-5xl font-bold text-white leading-[1.1] tracking-tight drop-shadow-md">
+                    <h2 className={`text-3xl md:text-5xl font-semibold text-white leading-[1.1] tracking-tight drop-shadow-md ${montserrat.className}`}>
                         Probabilmente ti costa di più non averlo
                     </h2>
                 </div>
@@ -75,11 +79,11 @@ export function Pricing2026() {
                             <div
                                 className={`px-6 pt-10 pb-8 lg:p-12 text-center lg:text-left min-h-[170px] flex flex-col justify-center lg:w-1/3 shrink-0 bg-[#5D6676]`}
                             >
-                                <h3 className={`text-4xl lg:text-5xl font-black uppercase tracking-wide mb-4 text-white`}>
+                                <h3 className={`text-4xl lg:text-5xl font-semibold uppercase tracking-wide mb-4 text-white ${montserrat.className}`}>
                                     {plan.name}
                                 </h3>
                                 {plan.subtitle && (
-                                    <p className={`text-base md:text-lg lg:text-xl font-medium leading-relaxed whitespace-pre-line text-white`}>
+                                    <p className={`text-base md:text-lg lg:text-xl font-semibold leading-relaxed whitespace-pre-line text-white ${montserrat.className}`}>
                                         {plan.subtitle}
                                     </p>
                                 )}
@@ -111,7 +115,7 @@ export function Pricing2026() {
                                                 className="w-full"
                                             >
                                                 <Button
-                                                    className={`w-full rounded-[2.5rem] h-auto py-5 sm:py-5 px-4 text-[14px] sm:text-[16px] font-black uppercase tracking-widest text-center whitespace-normal leading-[1.3] transition-all bg-gradient-to-r from-[#F8BBD0] to-[#DDA0DD] hover:from-[#F48FB1] hover:to-[#D48DD4] text-white ${plan.buttonClasses}`}
+                                                    className={`w-full rounded-[2.5rem] h-auto py-5 sm:py-5 px-4 text-[14px] sm:text-[16px] font-semibold uppercase tracking-widest text-center whitespace-normal leading-[1.3] transition-all bg-gradient-to-r from-[#F8BBD0] to-[#DDA0DD] hover:from-[#F48FB1] hover:to-[#D48DD4] text-white ${plan.buttonClasses} ${montserrat.className}`}
                                                 >
                                                     {plan.buttonText}
                                                 </Button>
@@ -132,7 +136,7 @@ export function Pricing2026() {
                                                 <div className={`mt-1.5 bg-[#5D6676] shadow-sm rounded-full shrink-0 flex items-center justify-center w-[15px] h-[15px]`}>
                                                     <Check className="w-[10px] h-[10px] text-white stroke-[3.5]" />
                                                 </div>
-                                                <span className="text-[#5D6676] font-medium leading-[1.6] text-[16px] lg:text-[18px]">
+                                                <span className={`text-[#5D6676] font-normal leading-[1.6] text-[16px] lg:text-[18px] ${inter.className}`}>
                                                     {feat}
                                                 </span>
                                             </li>
@@ -157,10 +161,10 @@ export function Pricing2026() {
                         <div className="absolute inset-0 flex items-center justify-center opacity-[0.1] pointer-events-none">
                             <div className="w-64 h-64 border-[8px] border-white rotate-45 rounded-3xl"></div>
                         </div>
-                        <h3 className="text-2xl md:text-3xl font-black text-white tracking-wide mb-3 relative z-10 uppercase drop-shadow-sm">
+                        <h3 className={`text-2xl md:text-3xl font-semibold text-white tracking-wide mb-3 relative z-10 uppercase drop-shadow-sm ${montserrat.className}`}>
                             LASER CHANNEL
                         </h3>
-                        <p className="text-white text-[15px] md:text-lg font-medium leading-snug relative z-10 transition-all drop-shadow-sm">
+                        <p className={`text-white text-[15px] md:text-lg font-medium leading-snug relative z-10 transition-all drop-shadow-sm ${inter.className}`}>
                             *Incluso nel piano <span className="text-white font-bold underline decoration-[#D8B2A3]">Premium</span>.<br />
                             Puoi utilizzare il canale dedicato al laser quando vuoi promuovere servizi e pacchetti.
                         </p>
@@ -171,10 +175,10 @@ export function Pricing2026() {
                         <div className="absolute inset-0 flex items-center justify-center opacity-[0.05] pointer-events-none">
                             <div className="w-64 h-64 border-[8px] border-[#FAFAF8] rotate-45 rounded-3xl"></div>
                         </div>
-                        <h3 className="text-2xl md:text-3xl font-black text-white tracking-wide mb-3 drop-shadow-md relative z-10 uppercase">
+                        <h3 className={`text-2xl md:text-3xl font-semibold text-white tracking-wide mb-3 drop-shadow-md relative z-10 uppercase ${montserrat.className}`}>
                             COSMETIC CHANNEL
                         </h3>
-                        <p className="text-[#ECE0D4] text-[15px] md:text-lg font-medium leading-snug drop-shadow-sm relative z-10 transition-all">
+                        <p className={`text-[#ECE0D4] text-[15px] md:text-lg font-medium leading-snug drop-shadow-sm relative z-10 transition-all ${inter.className}`}>
                             **Incluso nel piano <span className="text-white font-bold">Premium</span>.<br />
                             Puoi utilizzare il canale dedicato alla cosmetica, quando vuoi promuovere servizi di cosmetica.
                         </p>
@@ -189,7 +193,7 @@ export function Pricing2026() {
                     transition={{ duration: 0.8 }}
                     className="space-y-12 mt-12 md:mt-16"
                 >
-                    <h2 className="text-2xl md:text-4xl font-black text-white text-center leading-snug tracking-wide px-4">
+                    <h2 className={`text-2xl md:text-4xl font-semibold text-white text-center leading-snug tracking-wide px-4 ${montserrat.className}`}>
                         Accendi un'atmosfera innovativa nel tuo istituto in <br className="hidden md:block" />
                         3 passaggi
                     </h2>
@@ -204,7 +208,7 @@ export function Pricing2026() {
                                 <span className="block text-6xl font-black text-[#7B2CBF] mb-6 drop-shadow-sm">
                                     {item.step}
                                 </span>
-                                <p className="text-[#5D6676] font-bold text-lg md:text-xl leading-snug">
+                                <p className={`text-[#5D6676] font-medium text-lg md:text-xl leading-snug ${inter.className}`}>
                                     {item.text}
                                 </p>
                             </div>
@@ -217,7 +221,7 @@ export function Pricing2026() {
                             onClick={(e) => handleScrollTo(e, "#trial-form")}
                         >
                             <Button
-                                className="bg-gradient-to-r from-[#7B2CBF] to-[#B388E5] hover:from-[#6A25A3] hover:to-[#9F67DB] text-white font-black text-sm md:text-base px-8 py-6 rounded-[2.5rem] uppercase tracking-wide shadow-[0_8px_30px_rgba(123,44,191,0.4)] transition-all border-none"
+                                className={`bg-gradient-to-r from-[#7B2CBF] to-[#B388E5] hover:from-[#6A25A3] hover:to-[#9F67DB] text-white font-semibold text-sm md:text-base px-8 py-6 rounded-[2.5rem] uppercase tracking-wide shadow-[0_8px_30px_rgba(123,44,191,0.4)] transition-all border-none ${montserrat.className}`}
                             >
                                 PROVA GRATUITA 7 GIORNI SENZA IMPEGNO
                             </Button>
@@ -232,11 +236,11 @@ export function Pricing2026() {
                     transition={{ duration: 0.6, delay: 0.4 }}
                     className="text-center mt-16 mb-16 space-y-6"
                 >
-                    <h2 className="text-3xl md:text-5xl font-black mb-2 text-white leading-tight tracking-tight">
+                    <h2 className={`text-3xl md:text-5xl font-semibold mb-2 text-white leading-tight tracking-tight ${montserrat.className}`}>
                         Con BeautiFy acquisisci un potente, elegante <br className="hidden md:block" />
                         strumento di vendita e promozione che...
                     </h2>
-                    <p className="text-[#25D366] max-w-4xl mx-auto text-2xl md:text-4xl font-light italic tracking-wider drop-shadow-md">
+                    <p className={`text-[#25D366] max-w-4xl mx-auto text-2xl md:text-4xl font-semibold italic tracking-wider drop-shadow-md ${montserrat.className}`}>
                         TRASFORMA RADICALMENTE L'ATMOSFERA DEL TUO ISTITUTO!
                     </p>
                 </motion.div>
@@ -249,7 +253,7 @@ export function Pricing2026() {
                     transition={{ duration: 0.8 }}
                     className="py-16 flex flex-col items-center justify-center text-center space-y-6 border-t border-white/10"
                 >
-                    <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold text-white tracking-wide">
+                    <h2 className={`text-2xl md:text-4xl lg:text-5xl font-semibold text-white tracking-wide ${montserrat.className}`}>
                         CHIEDICI ALTRE INFO
                     </h2>
                     <a
