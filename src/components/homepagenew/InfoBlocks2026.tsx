@@ -125,7 +125,7 @@ export function InfoBlocks2026() {
                         <img
                             src="https://eufahlzjxbimyiwivoiq.supabase.co/storage/v1/object/public/bucket-assets/1772733090547-nfq28.png"
                             alt="BeautiFy Channel Beauty Room"
-                            className="w-full h-auto md:h-[450px] aspect-[16/10] md:aspect-auto object-cover rounded-[2.5rem] shadow-2xl"
+                            className="w-full h-auto md:h-[500px] lg:h-[550px] aspect-[16/10] md:aspect-auto object-cover rounded-[2.5rem] shadow-2xl lg:scale-105"
                         />
                     </motion.div>
                 </div>
@@ -176,7 +176,7 @@ export function InfoBlocks2026() {
                             <img
                                 src="https://eufahlzjxbimyiwivoiq.supabase.co/storage/v1/object/public/bucket-assets/1772727853683-sr1147.png"
                                 alt="Assistente Tati"
-                                className="w-full h-auto md:h-[450px] aspect-[16/10] md:aspect-auto object-cover rounded-[2.5rem] shadow-2xl"
+                                className="w-full h-auto md:h-[500px] lg:h-[550px] aspect-[16/10] md:aspect-auto object-cover rounded-[2.5rem] shadow-2xl lg:scale-105"
                             />
                         </div>
                     </motion.div>
