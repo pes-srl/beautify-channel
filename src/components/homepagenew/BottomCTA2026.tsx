@@ -68,7 +68,7 @@ export function BottomCTA2026() {
     };
 
     return (
-        <section className="bg-[#1E0C31] pt-0 pb-24 px-6 md:px-12 overflow-hidden relative">
+        <section className="bg-[#1E0C31] py-16 px-6 md:px-12 overflow-hidden relative">
             <div className="max-w-6xl mx-auto space-y-12">
                 {/* 3. Registration Form (Imported from provagratis) */}
                 <motion.div

@@ -11,7 +11,7 @@ export function FooterNew() {
     if (isDashboard) return null;
 
     return (
-        <footer className="bg-zinc-950 border-t border-white/5 pt-20 pb-10 px-6 overflow-hidden relative">
+        <footer className="bg-zinc-950 border-t border-white/5 py-16 px-6 overflow-hidden relative">
             {/* Background embellishments */}
             <div className="absolute top-0 right-[-10%] w-[30%] h-[50%] bg-fuchsia-600/10 blur-[120px] rounded-full mix-blend-screen pointer-events-none" />
 

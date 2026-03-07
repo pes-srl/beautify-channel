@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 export function HeroNew() {
     return (
         <section
-            className="relative w-full min-h-[60vh] md:min-h-[85vh] flex items-end pb-12 md:pb-24 flex-col justify-end overflow-hidden px-6 md:px-12"
+            className="relative w-full min-h-[60vh] md:min-h-[85vh] flex items-end py-12 md:py-24 flex-col justify-end overflow-hidden px-6 md:px-12"
             style={{
                 backgroundImage: `url('https://eufahlzjxbimyiwivoiq.supabase.co/storage/v1/object/public/bucket-assets/1772477085817-oajaaf.png')`,
                 backgroundSize: 'cover',
@@ -17,6 +17,9 @@ export function HeroNew() {
         >
             {/* Dark overlay to make text readable on the background (minimal 3% opacity) */}
             <div className="absolute inset-0 bg-black/3 w-full h-full"></div>
+
+            {/* Bottom fade to white – softens transition to next section */}
+            <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-[#FAFAFA] to-transparent pointer-events-none"></div>
 
             {/* Container for Content */}
             <div className="relative z-10 w-full max-w-7xl mx-auto">

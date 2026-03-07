@@ -16,8 +16,12 @@ function AudioPlayerMinimal({ src }: { src: string }) {
                 audioRef.current.pause();
                 setIsPlaying(false);
             } else {
-                audioRef.current.play();
-                setIsPlaying(true);
+                audioRef.current.play().then(() => {
+                    setIsPlaying(true);
+                }).catch(() => {
+                    // Browser blocked or interrupted playback (e.g. autoplay policy)
+                    setIsPlaying(false);
+                });
             }
         }
     };
@@ -42,7 +46,7 @@ function AudioPlayerMinimal({ src }: { src: string }) {
 
 export function InfoBlocks2026() {
     return (
-        <section className="bg-gradient-to-b from-[#FAFAF8] via-[#ECE0D4] to-[#AB7169] w-full pt-24 pb-2 md:pb-16 px-6 md:px-12 overflow-hidden">
+        <section className="bg-gradient-to-b from-[#FAFAFA] via-[#ECE0D4] to-[#AB7169] w-full pt-16 pb-8 md:pt-24 md:pb-10 px-6 md:px-12 overflow-hidden">
             <div className="max-w-7xl mx-auto space-y-24 md:space-y-32">
 
                 {/* Block 1: Text Left, Image Right */}
@@ -146,7 +150,7 @@ export function InfoBlocks2026() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: "-100px" }}
                     transition={{ duration: 0.8 }}
-                    className="flex flex-col items-center justify-center text-center max-w-6xl mx-auto pt-8 md:pt-24 space-y-12"
+                    className="flex flex-col items-center justify-center text-center max-w-6xl mx-auto py-8 md:py-24 space-y-12"
                 >
                     <div className="space-y-4">
                         <h2 className="text-4xl md:text-6xl font-black text-[#5D6676] tracking-tighter uppercase">
@@ -192,7 +196,7 @@ export function InfoBlocks2026() {
                     </div>
 
                     {/* Refined Integrated Info Blocks */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-6xl pt-16 pb-24 mx-auto relative z-10">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-6xl py-16 mx-auto relative z-10">
 
                         {/* Block 1 */}
                         <motion.div

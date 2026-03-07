@@ -30,7 +30,7 @@ const plans = [
 
 export function Pricing2026() {
     return (
-        <section id="pricing" className="bg-gradient-to-b from-[#AB7169] via-[#5D6676] to-[#1E0C31] pt-2 md:pt-16 pb-8 px-6 md:px-12 overflow-hidden">
+        <section id="pricing" className="bg-gradient-to-b from-[#AB7169] via-[#5D6676] to-[#1E0C31] pt-8 pb-16 md:pt-10 md:pb-24 px-6 md:px-12 overflow-hidden">
             <div className="max-w-7xl mx-auto">
                 <div className="text-center mb-16 space-y-4">
                     <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold text-[#FAFAF8] leading-[1.1] tracking-tight">
@@ -164,7 +164,7 @@ export function Pricing2026() {
                     whileInView={{ opacity: 1, scale: 1 }}
                     viewport={{ once: true, margin: "-100px" }}
                     transition={{ duration: 0.8 }}
-                    className="space-y-12 mt-12 md:mt-24"
+                    className="space-y-12 mt-12 md:mt-16"
                 >
                     <h2 className="text-2xl md:text-4xl font-black text-white text-center leading-snug tracking-wide px-4">
                         Accendi un'atmosfera innovativa nel tuo istituto in <br className="hidden md:block" />
@@ -204,13 +204,13 @@ export function Pricing2026() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.6, delay: 0.4 }}
-                    className="text-center mt-24 mb-6 space-y-6"
+                    className="text-center mt-16 mb-16 space-y-6"
                 >
                     <h2 className="text-3xl md:text-5xl font-black mb-2 text-white leading-tight tracking-tight">
                         Con BeautiFy acquisisci un potente, elegante <br className="hidden md:block" />
                         strumento di vendita e promozione che...
                     </h2>
-                    <p className="text-[#D8B2A3] max-w-4xl mx-auto text-2xl md:text-4xl font-light italic tracking-wider drop-shadow-md">
+                    <p className="text-[#25D366] max-w-4xl mx-auto text-2xl md:text-4xl font-light italic tracking-wider drop-shadow-md">
                         TRASFORMA RADICALMENTE L'ATMOSFERA DEL TUO ISTITUTO!
                     </p>
                 </motion.div>
@@ -221,7 +221,7 @@ export function Pricing2026() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: "-100px" }}
                     transition={{ duration: 0.8 }}
-                    className="pt-16 pb-0 flex flex-col items-center justify-center text-center space-y-6 border-t border-white/10"
+                    className="py-16 flex flex-col items-center justify-center text-center space-y-6 border-t border-white/10"
                 >
                     <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold text-white tracking-wide">
                         CHIEDICI ALTRE INFO
