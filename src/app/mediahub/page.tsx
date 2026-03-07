@@ -7,7 +7,7 @@ const MOCK_DATA = {
     newsAudio: {
         title: "Aggiornamento Sviluppo: Fase 2",
         date: "10 Marzo 2026",
-        audioSrc: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
+        audioSrc: "/audio/voice-over.mp3",
     },
     videos: [
         {

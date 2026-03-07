@@ -185,7 +185,7 @@ export function InfoBlocks2026() {
                             <div className="relative group">
                                 {/* Pulse Effect Background */}
                                 <div className="absolute inset-0 bg-[#AB7169]/20 rounded-full blur-3xl group-hover:bg-[#AB7169]/30 transition-all duration-500 animate-pulse"></div>
-                                <AudioPlayerMinimal src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" />
+                                <AudioPlayerMinimal src="/audio/voice-over.mp3" />
                             </div>
                         </div>
 
