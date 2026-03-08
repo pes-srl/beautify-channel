@@ -78,10 +78,19 @@ export function UpgradeFormTrial({ userEmail }: { userEmail?: string }) {
             <h2 className="text-3xl font-semibold font-[family-name:var(--font-montserrat)] text-white mb-3 uppercase tracking-wide">
               MIGLIORA IL TUO PIANO
             </h2>
-            <p className="text-zinc-300 font-normal font-[family-name:var(--font-montserrat)] mt-2 leading-relaxed">
-              Conclusa la tua prova gratuita di 7 giorni, puoi scegliere qui sotto uno dei nostri 2 abbonamenti. Questi sono i dati che ci servono. Nessuna carta di credito, nessun addebito, dopo la richiesta del piano verrai contattata da un nostro responsabile per la finalizzazione dell'abbonamento scelto, grazie!<br /><br />
-              BeautiFy Staff
-            </p>
+            <div className="text-zinc-200 text-lg font-light font-[family-name:var(--font-montserrat)] mt-4 leading-relaxed bg-black/20 p-6 rounded-2xl border border-emerald-500/20 shadow-inner max-w-2xl mx-auto">
+              <p className="mb-3">
+                Conclusa la tua prova gratuita di 7 giorni, puoi scegliere qui sotto uno dei nostri <strong className="text-white font-semibold">2 abbonamenti</strong>. Questi sono i dati base che ci servono.
+              </p>
+              <p className="text-emerald-100 font-medium mb-3">
+                <span className="px-2 py-0.5 bg-emerald-500/20 text-emerald-300 rounded font-bold uppercase tracking-widest text-sm mr-2 shadow-[0_0_10px_rgba(16,185,129,0.2)]">Gratis</span>
+                Nessuna carta di credito, nessun addebito.
+              </p>
+              <p className="text-zinc-300 text-base">
+                Dopo la richiesta del piano verrai contattata da un nostro responsabile per la finalizzazione dell'abbonamento scelto, grazie!<br /><br />
+                <span className="italic opacity-80">BeautiFy Staff</span>
+              </p>
+            </div>
           </div>
 
           <form action={handleSubmit} className="space-y-6">

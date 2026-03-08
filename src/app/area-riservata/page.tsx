@@ -1,7 +1,7 @@
 import { ChannelGrid } from "@/components/player/ChannelGrid";
 import { BasicHeroChannel } from "@/components/player/BasicHeroChannel";
 import { createClient } from "@/utils/supabase/server";
-import { LogOut, Sparkles, AlertCircle, CheckCircle2, Lock, Radio } from "lucide-react";
+import { LogOut, Sparkles, AlertCircle, CheckCircle2, Lock, Radio, ArrowDown } from "lucide-react";
 import { redirect } from "next/navigation";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -209,6 +209,23 @@ export default async function AreaClientePage() {
                     {/* Basic/Premium Channel Hero */}
                     {(profile?.plan_type === 'free_trial' || profile?.plan_type === 'basic' || profile?.plan_type === 'premium') && (
                         <div className="mb-8">
+                            <div className="text-center mb-8 flex flex-col items-center justify-center">
+                                <h3 className={`text-xl md:text-2xl font-black text-transparent bg-clip-text uppercase mb-4 tracking-[0.15em] md:tracking-[0.2em] ${profile?.plan_type === 'premium' ? 'bg-gradient-to-r from-amber-300 to-orange-100 drop-shadow-[0_0_10px_rgba(251,191,36,0.5)]' :
+                                        profile?.plan_type === 'basic' ? 'bg-gradient-to-r from-sky-300 to-indigo-200 drop-shadow-[0_0_10px_rgba(56,189,248,0.5)]' :
+                                            'bg-gradient-to-r from-emerald-300 to-teal-100 drop-shadow-[0_0_10px_rgba(52,211,153,0.5)]'
+                                    }`}>
+                                    QUESTO E' IL TUO CANALE AUDIO PRINCIPALE
+                                </h3>
+                                <div className={`p-3 rounded-full border animate-bounce ${profile?.plan_type === 'premium' ? 'bg-amber-500/20 border-amber-500/30 shadow-[0_0_15px_rgba(251,191,36,0.3)]' :
+                                        profile?.plan_type === 'basic' ? 'bg-sky-500/20 border-sky-500/30 shadow-[0_0_15px_rgba(56,189,248,0.3)]' :
+                                            'bg-emerald-500/20 border-emerald-500/30 shadow-[0_0_15px_rgba(52,211,153,0.3)]'
+                                    }`}>
+                                    <ArrowDown className={`w-6 h-6 md:w-8 md:h-8 ${profile?.plan_type === 'premium' ? 'text-amber-300' :
+                                            profile?.plan_type === 'basic' ? 'text-sky-300' :
+                                                'text-emerald-300'
+                                        }`} />
+                                </div>
+                            </div>
                             <BasicHeroChannel
                                 planType={profile?.plan_type}
                                 channel={channels?.find((c: any) =>
