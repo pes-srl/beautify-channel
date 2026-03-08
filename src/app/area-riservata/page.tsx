@@ -1,7 +1,7 @@
 import { ChannelGrid } from "@/components/player/ChannelGrid";
 import { BasicHeroChannel } from "@/components/player/BasicHeroChannel";
 import { createClient } from "@/utils/supabase/server";
-import { LogOut, Sparkles, AlertCircle, CheckCircle2, Lock, Radio, ArrowDown, ChevronDown } from "lucide-react";
+import { LogOut, Sparkles, AlertCircle, CheckCircle2, Lock, Radio, ArrowDown, ChevronDown, PlayCircle } from "lucide-react";
 import { redirect } from "next/navigation";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -231,9 +231,12 @@ export default async function AreaClientePage() {
                                 <details className={`group border border-white/5 rounded-[35px] shadow-2xl p-6 md:p-10 relative overflow-hidden backdrop-blur-xl ${profile?.plan_type === 'free_trial' ? 'bg-gradient-to-br from-[#061e16] to-[#010906]' : 'bg-[#0f0518]'} transition-all duration-300`}>
                                     <summary className="cursor-pointer list-none flex justify-center items-center w-full outline-none select-none relative z-20">
                                         <div className="flex items-center justify-between w-full gap-4 px-2">
-                                            <span className="text-2xl md:text-4xl text-white font-black font-[family-name:var(--font-montserrat)] tracking-[0.2em] md:tracking-[0.3em] uppercase drop-shadow-sm">
-                                                COME FUNZIONA
-                                            </span>
+                                            <div className="flex items-center gap-3 md:gap-4">
+                                                <PlayCircle className={`w-8 h-8 md:w-10 md:h-10 shrink-0 ${profile?.plan_type === 'free_trial' ? 'text-emerald-400' : 'text-sky-400'}`} />
+                                                <span className="text-2xl md:text-4xl text-white font-black font-[family-name:var(--font-montserrat)] tracking-[0.2em] md:tracking-[0.3em] uppercase drop-shadow-sm">
+                                                    COME FUNZIONA
+                                                </span>
+                                            </div>
                                             <div className={`p-2 md:p-3 rounded-full border transition-transform duration-300 group-open:rotate-180 flex-shrink-0 ${profile?.plan_type === 'free_trial' ? 'bg-emerald-500/10 border-emerald-500/20 text-emerald-400' : 'bg-sky-500/10 border-sky-500/20 text-sky-400'}`}>
                                                 <ChevronDown className="w-5 h-5 md:w-6 md:h-6" />
                                             </div>
@@ -313,7 +316,7 @@ export default async function AreaClientePage() {
                         <summary className="cursor-pointer list-none flex justify-start items-center w-full outline-none select-none mb-10 text-left relative z-20 pl-4 md:pl-0">
                             <div className="inline-flex items-center justify-start gap-3 md:gap-4 px-6 md:px-10 py-4 rounded-[2rem] border border-white/5 bg-white/[0.02] backdrop-blur-md shadow-xl transition-all duration-300 hover:bg-white/[0.05] hover:border-white/10 relative overflow-hidden group/btn">
                                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full group-hover/btn:translate-x-full transition-transform duration-1000"></div>
-                                <Radio className={`w-5 h-5 md:w-6 md:h-6 ${profile?.plan_type === 'free_trial' ? 'text-emerald-400' : 'text-sky-400'}`} />
+                                <Radio className={`w-8 h-8 md:w-10 md:h-10 shrink-0 ${profile?.plan_type === 'free_trial' ? 'text-emerald-400' : 'text-sky-400'}`} />
                                 <span className="text-2xl md:text-4xl text-white font-black font-[family-name:var(--font-montserrat)] tracking-[0.2em] md:tracking-[0.3em] uppercase drop-shadow-sm">
                                     ALTRI CANALI DISPONIBILI
                                 </span>
