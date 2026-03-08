@@ -141,24 +141,30 @@ export function HeaderNew({
     };
 
     const handleScrollTo = (e: React.MouseEvent, href: string) => {
-        if (href.startsWith("#")) {
-            e.preventDefault();
-            const id = href.replace("#", "");
-            const element = document.getElementById(id);
-            if (element) {
-                const offset = 80; // Account for header height
-                const bodyRect = document.body.getBoundingClientRect().top;
-                const elementRect = element.getBoundingClientRect().top;
-                const elementPosition = elementRect - bodyRect;
-                const offsetPosition = elementPosition - offset;
+        const hashIndex = href.indexOf("#");
+        if (hashIndex !== -1) {
+            const id = href.substring(hashIndex + 1);
+            if (pathname === "/") {
+                e.preventDefault();
+                const element = document.getElementById(id);
+                if (element) {
+                    const offset = 80; // Account for header height
+                    const bodyRect = document.body.getBoundingClientRect().top;
+                    const elementRect = element.getBoundingClientRect().top;
+                    const elementPosition = elementRect - bodyRect;
+                    const offsetPosition = elementPosition - offset;
 
-                window.scrollTo({
-                    top: offsetPosition,
-                    behavior: "smooth"
-                });
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: "smooth"
+                    });
 
-                // Update hash without jumping
-                window.history.pushState(null, "", href);
+                    // Update hash without jumping
+                    window.history.pushState(null, "", `#${id}`);
+                    setIsMobileMenuOpen(false);
+                }
+            } else {
+                // Not on homepage, let default navigation run
                 setIsMobileMenuOpen(false);
             }
         }
@@ -204,9 +210,9 @@ export function HeaderNew({
 
 
     const navLinks = [
-        { name: "Vantaggi", href: "#vantaggi" },
-        { name: "Servizio", href: "#servizio" },
-        { name: "Prezzo", href: "#pricing" },
+        { name: "Vantaggi", href: "/#vantaggi" },
+        { name: "Servizio", href: "/#servizio" },
+        { name: "Prezzo", href: "/#pricing" },
     ];
 
     return (
@@ -229,14 +235,14 @@ export function HeaderNew({
                 {/* Desktop Nav - Show on all pages */}
                 <nav className="hidden md:flex flex-1 items-center justify-center gap-8">
                     {navLinks.map((link) => (
-                        <a
+                        <Link
                             key={link.name}
                             href={link.href}
                             onClick={(e) => handleScrollTo(e, link.href)}
                             className="text-sm font-medium text-zinc-300 hover:text-white transition-colors cursor-pointer"
                         >
                             {link.name}
-                        </a>
+                        </Link>
                     ))}
                 </nav>
 
@@ -294,9 +300,9 @@ export function HeaderNew({
                         </DropdownMenu>
                     ) : !isLoading ? (
                         <>
-                            <a
-                                href="#trial-form"
-                                onClick={(e) => handleScrollTo(e, "#trial-form")}
+                            <Link
+                                href="/#trial-form"
+                                onClick={(e) => handleScrollTo(e, "/#trial-form")}
                                 className="hidden md:inline-block"
                             >
                                 <Button
@@ -304,7 +310,7 @@ export function HeaderNew({
                                 >
                                     Prova GRATUITA
                                 </Button>
-                            </a>
+                            </Link>
                             <Link href="/login" className="hidden md:inline-block">
                                 <Button className="bg-[#7B2CBF] hover:bg-[#6A25A3] text-white transition-all font-bold border-0 shadow-lg shadow-[#2D0A4E]/20 rounded-[35px] flex items-center gap-2">
                                     <User className="w-4 h-4 text-white" />
@@ -337,14 +343,14 @@ export function HeaderNew({
             {isMobileMenuOpen && (
                 <div className="md:hidden absolute top-full left-0 right-0 bg-zinc-950 border-b border-white/10 p-6 flex flex-col gap-4 shadow-xl">
                     {navLinks.map((link) => (
-                        <a
+                        <Link
                             key={link.name}
                             href={link.href}
                             className="text-lg font-medium text-zinc-300 hover:text-white py-2 block border-b border-white/5 cursor-pointer"
                             onClick={(e) => handleScrollTo(e, link.href)}
                         >
                             {link.name}
-                        </a>
+                        </Link>
                     ))}
                     <div className="flex flex-col gap-3 mt-4">
                         {!isLoading && user ? (
@@ -367,16 +373,16 @@ export function HeaderNew({
                                         Accedi
                                     </Button>
                                 </Link>
-                                <a
-                                    href="#trial-form"
-                                    onClick={(e) => handleScrollTo(e, "#trial-form")}
+                                <Link
+                                    href="/#trial-form"
+                                    onClick={(e) => handleScrollTo(e, "/#trial-form")}
                                 >
                                     <Button
                                         className="w-full bg-[#7B2CBF] hover:bg-[#6A25A3] text-white transition-all font-bold border-0 shadow-lg rounded-[35px]"
                                     >
                                         Prova GRATUITA
                                     </Button>
-                                </a>
+                                </Link>
                             </>
                         )}
                     </div>
