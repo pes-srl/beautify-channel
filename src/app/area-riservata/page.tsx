@@ -1,7 +1,7 @@
 import { ChannelGrid } from "@/components/player/ChannelGrid";
 import { BasicHeroChannel } from "@/components/player/BasicHeroChannel";
 import { createClient } from "@/utils/supabase/server";
-import { LogOut, Sparkles, AlertCircle, CheckCircle2, Lock, Radio, ArrowDown } from "lucide-react";
+import { LogOut, Sparkles, AlertCircle, CheckCircle2, Lock, Radio, ArrowDown, ChevronDown } from "lucide-react";
 import { redirect } from "next/navigation";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -113,7 +113,7 @@ export default async function AreaClientePage() {
                                             FREE TRIAL
                                         </span>
                                         <span className="relative z-10 text-emerald-300/70 italic font-light text-xs md:text-sm mt-1">
-                                            7 giorni
+                                            {daysLeft} {daysLeft === 1 ? 'giorno' : 'giorni'}
                                         </span>
                                     </div>
                                 </div>
@@ -163,7 +163,7 @@ export default async function AreaClientePage() {
                         </div>
                         <div className="flex-1">
                             <h3 className="font-bold text-base md:text-lg leading-tight mb-1">La tua prova gratuita è attiva</h3>
-                            <p className="text-fuchsia-100 text-xs">Scade tra <strong className="text-emerald-400 bg-black/20 px-1.5 py-0.5 rounded-sm mx-1">{daysLeft} giorni</strong> prima della scadenza.</p>
+                            <p className="text-fuchsia-100 text-base md:text-lg">Scade tra <strong className="text-emerald-400 bg-black/20 px-1.5 py-0.5 rounded-md mx-1 text-lg md:text-xl font-black">{daysLeft} {daysLeft === 1 ? 'giorno' : 'giorni'}</strong>.</p>
                         </div>
                     </div>
                     <Link href="#upgrade-section" className="relative z-10 shrink-0 w-full md:w-auto bg-white text-zinc-950 px-5 py-2.5 rounded-lg font-bold text-sm tracking-wide hover:bg-zinc-100 transition-colors shadow-md text-center mt-3 md:mt-0">
@@ -236,17 +236,25 @@ export default async function AreaClientePage() {
                                 {/* Sfondo decorativo */}
                                 <div className={`absolute inset-0 bg-linear-to-b ${profile?.plan_type === 'free_trial' ? 'from-emerald-900/10 via-teal-900/5' : 'from-fuchsia-900/10 via-indigo-900/5'} to-transparent rounded-[3rem] -z-10 blur-xl pointer-events-none`} />
 
-                                <div className={`border border-white/5 rounded-[35px] shadow-2xl p-8 md:p-14 relative overflow-hidden backdrop-blur-xl ${profile?.plan_type === 'free_trial' ? 'bg-gradient-to-br from-[#061e16] to-[#010906]' : 'bg-[#0f0518]'}`}>
-                                    {/* Overlay di luce */}
-                                    <div className={`absolute top-0 right-0 w-[500px] h-[500px] rounded-full blur-[80px] -translate-y-1/2 translate-x-1/2 pointer-events-none ${profile?.plan_type === 'free_trial' ? 'bg-emerald-600/10' : 'bg-fuchsia-600/10'}`} />
-                                    <div className={`absolute bottom-0 left-0 w-[400px] h-[400px] rounded-full blur-[80px] translate-y-1/3 -translate-x-1/3 pointer-events-none ${profile?.plan_type === 'free_trial' ? 'bg-teal-600/10' : 'bg-indigo-600/10'}`} />
+                                <details className={`group border border-white/5 rounded-[35px] shadow-2xl p-6 md:p-10 relative overflow-hidden backdrop-blur-xl ${profile?.plan_type === 'free_trial' ? 'bg-gradient-to-br from-[#061e16] to-[#010906]' : 'bg-[#0f0518]'} transition-all duration-300`}>
+                                    <summary className="cursor-pointer list-none flex justify-center items-center w-full outline-none select-none relative z-20">
+                                        <div className="flex items-center justify-between w-full gap-4 px-2">
+                                            <span className="text-2xl md:text-4xl text-white font-black font-[family-name:var(--font-montserrat)] tracking-[0.2em] md:tracking-[0.3em] uppercase drop-shadow-sm">
+                                                COME FUNZIONA
+                                            </span>
+                                            <div className={`p-2 md:p-3 rounded-full border transition-transform duration-300 group-open:rotate-180 flex-shrink-0 ${profile?.plan_type === 'free_trial' ? 'bg-emerald-500/10 border-emerald-500/20 text-emerald-400' : 'bg-sky-500/10 border-sky-500/20 text-sky-400'}`}>
+                                                <ChevronDown className="w-5 h-5 md:w-6 md:h-6" />
+                                            </div>
+                                        </div>
+                                    </summary>
 
-                                    <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                                    {/* Overlay di luce */}
+                                    <div className={`absolute top-0 right-0 w-[500px] h-[500px] rounded-full blur-[80px] -translate-y-1/2 translate-x-1/2 pointer-events-none opacity-0 group-open:opacity-100 transition-opacity duration-500 ${profile?.plan_type === 'free_trial' ? 'bg-emerald-600/10' : 'bg-fuchsia-600/10'}`} />
+                                    <div className={`absolute bottom-0 left-0 w-[400px] h-[400px] rounded-full blur-[80px] translate-y-1/3 -translate-x-1/3 pointer-events-none opacity-0 group-open:opacity-100 transition-opacity duration-500 ${profile?.plan_type === 'free_trial' ? 'bg-teal-600/10' : 'bg-indigo-600/10'}`} />
+
+                                    <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center pt-10 mt-6 border-t border-white/5 animate-in fade-in slide-in-from-top-4 duration-500">
 
                                         <div className="lg:col-span-5 space-y-6">
-                                            <h2 className={`text-2xl md:text-3xl font-black font-[family-name:var(--font-montserrat)] tracking-[0.3em] uppercase mb-4 ${profile?.plan_type === 'free_trial' ? 'text-emerald-400' : 'text-sky-400'}`}>
-                                                Come Funziona
-                                            </h2>
                                             <p className="text-xl md:text-2xl text-zinc-200 font-light leading-relaxed">
                                                 Nulla di più semplice!<br /><strong className="text-white font-semibold">Collega il tuo pc / smartphone / tablet</strong> all'impianto audio del tuo istituto o a delle <strong className="text-white font-semibold">casse Bluetooth</strong>.<br /><br /><strong className="text-white font-semibold">Premi play sul canale principale</strong> qui sopra, imposta il giusto volume in salone e <strong className="font-semibold text-white">dimenticatene</strong>, il resto lo fa <strong className="text-white font-semibold">BeautiFy</strong>.
                                             </p>
@@ -303,7 +311,7 @@ export default async function AreaClientePage() {
                                         </div>
 
                                     </div>
-                                </div>
+                                </details>
                             </div>
 
                             <h3 className="text-2xl md:text-3xl font-semibold font-[family-name:var(--font-montserrat)] text-white mb-8 mt-12 md:mt-24 lg:mt-32 flex flex-col md:flex-row items-center justify-center gap-3 uppercase tracking-wider text-center">
@@ -376,7 +384,8 @@ export default async function AreaClientePage() {
                 </>
             ) : (
                 <Paywall salonName={profile?.salon_name || user.email || 'Utente'} userEmail={user.email} />
-            )}
-        </div>
+            )
+            }
+        </div >
     );
 }
