@@ -1,7 +1,7 @@
 "use client";
 
 import { Lock } from "lucide-react";
-import { UpgradeForm } from "@/components/UpgradeForm";
+import { UpgradeFormTrial } from "@/components/UpgradeFormTrial";
 
 interface PaywallProps {
     salonName: string;
@@ -27,7 +27,7 @@ export function Paywall({ salonName, userEmail }: PaywallProps) {
                 </p>
 
                 <div className="max-w-4xl mx-auto text-left">
-                    <UpgradeForm userEmail={userEmail} />
+                    <UpgradeFormTrial userEmail={userEmail} />
                 </div>
             </div>
         </div>

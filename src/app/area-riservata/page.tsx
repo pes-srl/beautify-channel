@@ -6,7 +6,7 @@ import { redirect } from "next/navigation";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Paywall } from "./Paywall";
-import { UpgradeForm } from "@/components/UpgradeForm";
+import { UpgradeFormTrial } from "@/components/UpgradeFormTrial";
 import { UpgradeFormBasic } from "@/components/UpgradeFormBasic";
 
 export const dynamic = "force-dynamic";
@@ -89,9 +89,37 @@ export default async function AreaClientePage() {
                                     />
                                 </h2>
                                 <div className="w-24 h-[1px] bg-gradient-to-r from-transparent via-fuchsia-500/50 to-transparent" />
-                                <p className="text-zinc-300 font-medium text-lg tracking-wide leading-relaxed">
-                                    Al momento il tuo piano è il <span className="font-bold text-emerald-400 uppercase text-2xl px-1">FREE TRIAL</span> della durata di 7 giorni
-                                </p>
+                                <div className="flex flex-col items-center justify-center text-center max-w-4xl mx-auto mt-6">
+                                    <h3 className="font-[family-name:var(--font-montserrat)] text-center w-full max-w-4xl mx-auto mb-12">
+                                        <span className="block text-2xl md:text-4xl xl:text-5xl text-white font-semibold leading-tight tracking-tight mb-4 drop-shadow-md">
+                                            <strong className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-300 font-black tracking-wider">GRAZIE</strong> per la fiducia nel <strong className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-300 font-black tracking-wider">TESTARE</strong> il nostro servizio!
+                                        </span>
+                                        <span className="block text-xl md:text-2xl text-zinc-200 font-light leading-relaxed mb-6 mt-6 flex flex-col md:flex-row items-center justify-center gap-3">
+                                            <strong className="px-4 py-1.5 bg-emerald-500/20 text-emerald-300 font-black tracking-widest uppercase rounded-xl border border-emerald-500/30 shadow-[0_0_15px_rgba(16,185,129,0.3)]">
+                                                Non perdere tempo!
+                                            </strong>
+                                            <span>Organizzati per poter diffondere l'audio dei nostri canali in istituto.</span>
+                                        </span>
+                                        <span className="block text-2xl md:text-3xl xl:text-4xl text-zinc-100 font-medium leading-relaxed mt-6">
+                                            Solo così potrai provare le <strong className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 to-teal-200 font-black italic tracking-wider px-1">reali potenzialità</strong> di <strong className="text-white font-black tracking-widest uppercase border-b-2 border-emerald-400 pb-1 ml-1">BeautiFy Channel</strong>.
+                                        </span>
+                                    </h3>
+
+                                    <div className="relative inline-flex flex-col items-center justify-center p-8 md:p-10 rounded-[2.5rem] border border-emerald-500/20 bg-emerald-950/20 shadow-[0_0_50px_rgba(16,185,129,0.15)] overflow-hidden w-full max-w-3xl">
+                                        <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/10 to-transparent pointer-events-none" />
+                                        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-emerald-500/20 blur-[80px] rounded-full pointer-events-none" />
+
+                                        <span className="relative z-10 text-lg md:text-xl text-zinc-300 font-medium tracking-widest uppercase mb-2">
+                                            Al momento il tuo piano è il
+                                        </span>
+                                        <span className="relative z-10 font-black text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 via-emerald-400 to-teal-400 text-5xl md:text-7xl tracking-[0.15em] py-2 drop-shadow-sm font-[family-name:var(--font-montserrat)]">
+                                            FREE TRIAL
+                                        </span>
+                                        <span className="relative z-10 text-emerald-300/80 italic font-medium text-lg md:text-xl mt-3">
+                                            della durata di 7 giorni
+                                        </span>
+                                    </div>
+                                </div>
                             </div>
                         ) : profile.plan_type === 'basic' ? (
                             <div className="flex flex-col items-center justify-center space-y-4 py-4">
@@ -326,7 +354,7 @@ export default async function AreaClientePage() {
                             {profile?.plan_type === 'basic' ? (
                                 <UpgradeFormBasic userEmail={user.email} />
                             ) : (
-                                <UpgradeForm userEmail={user.email} />
+                                <UpgradeFormTrial userEmail={user.email} />
                             )}
                         </div>
                     )}
