@@ -69,7 +69,7 @@ export function ChannelGrid2({ initialChannels, serverError, planType }: Channel
                         onClick={() => handleChannelClick(channel)}
                         className={`
               relative overflow-hidden rounded-2xl cursor-pointer group transition-all duration-300
-              ${isActive ? 'ring-2 ring-[#AB7169] shadow-[0_0_30px_-5px_#AB7169]' : 'border border-white/10 hover:border-white/30'}
+              ${isActive ? (planType === 'free_trial' ? 'border-2 border-emerald-400 shadow-[0_0_20px_rgba(52,211,153,0.6)]' : 'border-2 border-[#AB7169] shadow-[0_0_20px_#AB7169]') : 'border border-white/10 hover:border-white/30'}
               ${idx === 7 && initialChannels.length === 8 ? 'lg:col-start-3' : ''}
             `}
                     >
@@ -97,8 +97,9 @@ export function ChannelGrid2({ initialChannels, serverError, planType }: Channel
                             {/* Play Button Overlay */}
                             <div className="absolute inset-0 z-20 flex items-center justify-center pointer-events-none">
                                 <div className={`
-                                    w-16 h-16 rounded-full flex items-center justify-center backdrop-blur-md transition-all duration-300 shadow-lg shadow-[#AB7169]/20 bg-white
-                                    ${isActive ? 'outline-4 outline-[#AB7169]/30 ring-2 ring-[#AB7169]' : 'group-hover:scale-110'}
+                                    w-16 h-16 rounded-full flex items-center justify-center backdrop-blur-md transition-all duration-300 shadow-lg bg-white
+                                    ${planType === 'free_trial' ? 'shadow-emerald-400/20' : 'shadow-[#AB7169]/20'}
+                                    ${isActive ? (planType === 'free_trial' ? 'outline-4 outline-emerald-400/30 border-2 border-emerald-400' : 'outline-4 outline-[#AB7169]/30 border-2 border-[#AB7169]') : 'group-hover:scale-110 border-none'}
                                 `}>
                                     {isCurrentlyPlaying ? (
                                         <Pause className="w-8 h-8 fill-white stroke-black stroke-[2px]" />
@@ -111,7 +112,7 @@ export function ChannelGrid2({ initialChannels, serverError, planType }: Channel
                             {/* Status Badge */}
                             <div className="absolute top-4 right-4 z-20">
                                 {isActive && (
-                                    <span className="text-[10px] font-bold uppercase tracking-wider px-3 py-1.5 rounded-full backdrop-blur-md shadow-lg bg-[#AB7169] text-white border-transparent">
+                                    <span className={`text-[10px] font-bold uppercase tracking-wider px-3 py-1.5 rounded-full backdrop-blur-md shadow-lg border ${planType === 'free_trial' ? 'text-emerald-400 border-emerald-400/40 bg-emerald-400/10' : 'text-[#AB7169] border-[#AB7169]/40 bg-[#AB7169]/10'}`}>
                                         In Riproduzione
                                     </span>
                                 )}
@@ -127,13 +128,13 @@ export function ChannelGrid2({ initialChannels, serverError, planType }: Channel
                                         {[1, 2, 3].map((i) => (
                                             <motion.div
                                                 key={i}
-                                                className="w-1 bg-[#AB7169] rounded-full"
+                                                className={`w-1 rounded-full ${planType === 'free_trial' ? 'bg-emerald-400' : 'bg-[#AB7169]'}`}
                                                 animate={isCurrentlyPlaying ? { height: ["4px", "12px", "4px"] } : { height: "4px" }}
                                                 transition={{ repeat: Infinity, duration: 1.2, delay: i * 0.2 }}
                                             />
                                         ))}
                                     </div>
-                                    <span className="text-[11px] uppercase tracking-wider text-[#AB7169] font-bold">Live</span>
+                                    <span className={`text-[11px] uppercase tracking-wider font-bold ${planType === 'free_trial' ? 'text-emerald-400' : 'text-[#AB7169]'}`}>Live</span>
                                 </div>
                             )}
                         </div>

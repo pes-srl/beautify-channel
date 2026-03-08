@@ -79,3 +79,53 @@ export async function getTopChannels(days: number = 7) {
 
     return { topChannels: sortedChannels };
 }
+
+/**
+ * Gets unique listeners for each channel in the last N days.
+ */
+export async function getRecentListenersPerChannel(days: number = 7) {
+    const supabase = await createClient();
+    const dateLimit = new Date();
+    dateLimit.setDate(dateLimit.getDate() - days);
+
+    const { data, error } = await supabase
+        .from('channel_analytics')
+        .select(`
+            channel_id,
+            user_id,
+            profiles (
+                salon_name,
+                email
+            )
+        `)
+        .gte('created_at', dateLimit.toISOString())
+        .eq('action', 'play');
+
+    if (error || !data) {
+        return { listenersMap: {}, error };
+    }
+
+    // Group by channel_id and unique user_id
+    const listenersMap: Record<string, { id: string, salon_name: string, email: string }[]> = {};
+
+    data.forEach((row: any) => {
+        const cId = row.channel_id;
+        const uId = row.user_id;
+        if (!cId || !uId) return;
+
+        if (!listenersMap[cId]) {
+            listenersMap[cId] = [];
+        }
+
+        // Avoid duplicates
+        if (!listenersMap[cId].find(u => u.id === uId)) {
+            listenersMap[cId].push({
+                id: uId,
+                salon_name: row.profiles?.salon_name || 'Utente Sconosciuto',
+                email: row.profiles?.email || 'N/D'
+            });
+        }
+    });
+
+    return { listenersMap };
+}

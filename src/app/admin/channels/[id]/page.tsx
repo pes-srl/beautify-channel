@@ -6,7 +6,7 @@ import { createClient } from "@/utils/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { ArrowLeft, Save, CheckCircle2, AlertCircle, Settings, Users, Power, Check } from "lucide-react";
+import { ArrowLeft, Save, CheckCircle2, AlertCircle, Settings, Users, Power, Check, Radio } from "lucide-react";
 import Link from "next/link";
 import { format } from "date-fns";
 import { it } from "date-fns/locale";
@@ -15,6 +15,7 @@ import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, D
 import { MediaLibraryModal } from "@/components/admin/MediaLibraryModal";
 
 import { updateChannelAdmin } from "../actions";
+import { getRecentListenersPerChannel } from "@/app/actions/analytics-actions";
 
 interface ChannelData {
     id: string;
@@ -47,6 +48,9 @@ export default function SingleChannelAdminPage() {
     const [selectedUserIds, setSelectedUserIds] = useState<string[]>([]);
     const [isSavingAssignments, setIsSavingAssignments] = useState(false);
     const [successMessage, setSuccessMessage] = useState<string | null>(null);
+
+    // Listeners State
+    const [recentListeners, setRecentListeners] = useState<{ id: string, salon_name: string, email: string }[]>([]);
 
     const supabase = createClient();
 
@@ -85,6 +89,12 @@ export default function SingleChannelAdminPage() {
                 setAvailableUsers(profilesData || []);
                 const currentlyAssignedIds = (assignmentsData || []).map(a => a.profile_id);
                 setSelectedUserIds(currentlyAssignedIds);
+
+                // 4. Fetch recent listeners
+                const { listenersMap, error: lError } = await getRecentListenersPerChannel(7);
+                if (!lError && listenersMap && listenersMap[channelId]) {
+                    setRecentListeners(listenersMap[channelId]);
+                }
 
             } catch (err: any) {
                 console.error("Error fetching data:", err);
@@ -500,6 +510,37 @@ export default function SingleChannelAdminPage() {
                                 </DialogFooter>
                             </DialogContent>
                         </Dialog>
+                    </div>
+
+                    {/* Listeners degli ultimi 7 giorni */}
+                    <div className="p-6 rounded-2xl bg-zinc-900 border border-white/5 shadow-xl">
+                        <h2 className="text-lg font-semibold mb-4 text-white flex items-center justify-between">
+                            <div className="flex items-center gap-2">
+                                <Radio className="w-5 h-5 text-emerald-400" />
+                                Ascoltatori (7 Giorni)
+                            </div>
+                            <Badge variant="outline" className="bg-emerald-500/10 text-emerald-400 border-emerald-500/20">{recentListeners.length}</Badge>
+                        </h2>
+
+                        {recentListeners.length > 0 ? (
+                            <div className="space-y-3 max-h-[300px] overflow-y-auto pr-2 custom-scrollbar">
+                                {recentListeners.map((user) => (
+                                    <div key={user.id} className="flex items-center gap-3 p-3 rounded-xl bg-black/40 border border-white/5">
+                                        <div className="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold text-xs uppercase shrink-0">
+                                            {user.salon_name.substring(0, 1) || "U"}
+                                        </div>
+                                        <div className="flex flex-col overflow-hidden">
+                                            <span className="text-sm font-semibold text-white truncate">{user.salon_name}</span>
+                                            <span className="text-xs text-zinc-500 truncate">{user.email}</span>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        ) : (
+                            <div className="py-8 text-center text-sm text-zinc-500 bg-black/20 rounded-xl border border-white/5 border-dashed">
+                                Nessun ascolto in questi giorni.
+                            </div>
+                        )}
                     </div>
                 </div>
             </div>
