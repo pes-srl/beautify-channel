@@ -90,29 +90,29 @@ export default async function AreaClientePage() {
                                 </h2>
                                 <div className="w-24 h-[1px] bg-gradient-to-r from-transparent via-fuchsia-500/50 to-transparent" />
                                 <div className="flex flex-col items-center justify-center text-center max-w-4xl mx-auto mt-6">
-                                    <h3 className="font-[family-name:var(--font-montserrat)] text-center w-full max-w-4xl mx-auto mb-12">
-                                        <span className="block text-2xl md:text-4xl xl:text-5xl text-white font-semibold leading-tight tracking-tight mb-4 drop-shadow-md">
+                                    <h3 className="font-[family-name:var(--font-montserrat)] text-center w-full max-w-4xl mx-auto mb-10 md:mb-12">
+                                        <span className="block text-xl md:text-4xl xl:text-5xl text-white font-semibold leading-tight tracking-tight mb-4 drop-shadow-md">
                                             <strong className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-300 font-black tracking-wider">GRAZIE</strong> per la fiducia nel <strong className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-300 font-black tracking-wider">TESTARE</strong> il nostro servizio!
                                         </span>
-                                        <span className="block text-xl md:text-2xl text-zinc-200 font-light leading-relaxed mb-6 mt-6 flex flex-col md:flex-row items-center justify-center gap-3">
-                                            <strong className="px-4 py-1.5 bg-emerald-500/20 text-emerald-300 font-black tracking-widest uppercase rounded-xl border border-emerald-500/30 shadow-[0_0_15px_rgba(16,185,129,0.3)]">
+                                        <span className="block text-base md:text-2xl text-zinc-200 font-light leading-relaxed mb-6 mt-6 flex flex-col md:flex-row items-center justify-center gap-3">
+                                            <strong className="px-3 py-1 md:px-4 md:py-1.5 bg-emerald-500/20 text-emerald-300 font-black tracking-widest uppercase rounded-xl border border-emerald-500/30 shadow-[0_0_15px_rgba(16,185,129,0.3)] text-sm md:text-base">
                                                 Non perdere tempo!
                                             </strong>
                                             <span>Organizzati per poter diffondere l'audio dei nostri canali in istituto.</span>
                                         </span>
-                                        <span className="block text-2xl md:text-3xl xl:text-4xl text-zinc-100 font-medium leading-relaxed mt-6">
+                                        <span className="block text-lg md:text-3xl xl:text-4xl text-zinc-100 font-medium leading-relaxed mt-4 md:mt-6">
                                             Solo così potrai provare le <strong className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 to-teal-200 font-black italic tracking-wider px-1">reali potenzialità</strong> di <strong className="text-white font-black tracking-widest uppercase border-b-2 border-emerald-400 pb-1 ml-1">BeautiFy Channel</strong>.
                                         </span>
                                     </h3>
 
-                                    <div className="relative inline-flex flex-col items-center justify-center p-8 md:p-10 rounded-[2.5rem] border border-emerald-500/20 bg-emerald-950/20 shadow-[0_0_50px_rgba(16,185,129,0.15)] overflow-hidden w-full max-w-3xl">
+                                    <div className="relative inline-flex flex-col items-center justify-center p-6 md:p-10 rounded-[2.5rem] border border-emerald-500/20 bg-emerald-950/20 shadow-[0_0_50px_rgba(16,185,129,0.15)] overflow-hidden w-full max-w-3xl">
                                         <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/10 to-transparent pointer-events-none" />
-                                        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-emerald-500/20 blur-[80px] rounded-full pointer-events-none" />
+                                        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 md:w-64 h-48 md:h-64 bg-emerald-500/20 blur-[80px] rounded-full pointer-events-none" />
 
-                                        <span className="relative z-10 text-lg md:text-xl text-zinc-300 font-medium tracking-widest uppercase mb-2">
+                                        <span className="relative z-10 text-sm md:text-xl text-zinc-300 font-medium tracking-widest uppercase mb-2">
                                             Al momento il tuo piano è il
                                         </span>
-                                        <span className="relative z-10 font-black text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 via-emerald-400 to-teal-400 text-5xl md:text-7xl tracking-[0.15em] py-2 drop-shadow-sm font-[family-name:var(--font-montserrat)]">
+                                        <span className="relative z-10 font-black text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 via-emerald-400 to-teal-400 text-3xl md:text-7xl tracking-[0.1em] md:tracking-[0.15em] py-2 drop-shadow-sm font-[family-name:var(--font-montserrat)]">
                                             FREE TRIAL
                                         </span>
                                         <span className="relative z-10 text-emerald-300/80 italic font-medium text-lg md:text-xl mt-3">
@@ -132,7 +132,7 @@ export default async function AreaClientePage() {
                                     />
                                 </h2>
                                 <div className="w-24 h-[1px] bg-gradient-to-r from-transparent via-sky-500/50 to-transparent" />
-                                <p className="text-zinc-300 font-medium text-xl tracking-wide leading-relaxed">
+                                <p className="text-zinc-300 font-medium text-base md:text-xl tracking-wide leading-relaxed">
                                     <strong className="text-sky-400 font-black">GRAZIE PER LA FIDUCIA</strong> in BeautiFy Channel <strong className="text-sky-400 font-black">ORA</strong>, hai a disposizione il <strong className="text-sky-400 font-black">NUOVO</strong> e unico<br className="md:hidden" /> strumento di <strong className="text-sky-400 font-black">MARKETING SENSORIALE</strong> dedicato al settore, con le sue potenzialità.
                                 </p>
                             </div>
@@ -211,18 +211,18 @@ export default async function AreaClientePage() {
                         <div className="mb-8">
                             <div className="text-center mb-8 flex flex-col items-center justify-center">
                                 <h3 className={`text-xl md:text-2xl font-black text-transparent bg-clip-text uppercase mb-4 tracking-[0.15em] md:tracking-[0.2em] ${profile?.plan_type === 'premium' ? 'bg-gradient-to-r from-amber-300 to-orange-100 drop-shadow-[0_0_10px_rgba(251,191,36,0.5)]' :
-                                        profile?.plan_type === 'basic' ? 'bg-gradient-to-r from-sky-300 to-indigo-200 drop-shadow-[0_0_10px_rgba(56,189,248,0.5)]' :
-                                            'bg-gradient-to-r from-emerald-300 to-teal-100 drop-shadow-[0_0_10px_rgba(52,211,153,0.5)]'
+                                    profile?.plan_type === 'basic' ? 'bg-gradient-to-r from-sky-300 to-indigo-200 drop-shadow-[0_0_10px_rgba(56,189,248,0.5)]' :
+                                        'bg-gradient-to-r from-emerald-300 to-teal-100 drop-shadow-[0_0_10px_rgba(52,211,153,0.5)]'
                                     }`}>
                                     QUESTO E' IL TUO CANALE AUDIO PRINCIPALE
                                 </h3>
                                 <div className={`p-3 rounded-full border animate-bounce ${profile?.plan_type === 'premium' ? 'bg-amber-500/20 border-amber-500/30 shadow-[0_0_15px_rgba(251,191,36,0.3)]' :
-                                        profile?.plan_type === 'basic' ? 'bg-sky-500/20 border-sky-500/30 shadow-[0_0_15px_rgba(56,189,248,0.3)]' :
-                                            'bg-emerald-500/20 border-emerald-500/30 shadow-[0_0_15px_rgba(52,211,153,0.3)]'
+                                    profile?.plan_type === 'basic' ? 'bg-sky-500/20 border-sky-500/30 shadow-[0_0_15px_rgba(56,189,248,0.3)]' :
+                                        'bg-emerald-500/20 border-emerald-500/30 shadow-[0_0_15px_rgba(52,211,153,0.3)]'
                                     }`}>
                                     <ArrowDown className={`w-6 h-6 md:w-8 md:h-8 ${profile?.plan_type === 'premium' ? 'text-amber-300' :
-                                            profile?.plan_type === 'basic' ? 'text-sky-300' :
-                                                'text-emerald-300'
+                                        profile?.plan_type === 'basic' ? 'text-sky-300' :
+                                            'text-emerald-300'
                                         }`} />
                                 </div>
                             </div>
@@ -247,7 +247,7 @@ export default async function AreaClientePage() {
                                     <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
 
                                         <div className="lg:col-span-5 space-y-6">
-                                            <h2 className={`text-sm md:text-base font-black font-[family-name:var(--font-montserrat)] tracking-[0.3em] uppercase mb-2 ${profile?.plan_type === 'free_trial' ? 'text-emerald-400' : 'text-sky-400'}`}>
+                                            <h2 className={`text-base md:text-xl lg:text-2xl font-black font-[family-name:var(--font-montserrat)] tracking-[0.3em] uppercase mb-3 drop-shadow-sm ${profile?.plan_type === 'free_trial' ? 'text-emerald-400' : 'text-sky-400'}`}>
                                                 Come Funziona
                                             </h2>
                                             <p className="text-xl md:text-2xl text-zinc-200 font-light leading-relaxed">
@@ -299,7 +299,7 @@ export default async function AreaClientePage() {
                                                 </div>
                                             </div>
                                             <div className="pt-4 mt-2 border-t border-white/5">
-                                                <p className={`font-bold font-[family-name:var(--font-montserrat)] tracking-wider uppercase text-lg flex items-center gap-2 ${profile?.plan_type === 'free_trial' ? 'text-emerald-400' : 'text-sky-400'}`}>
+                                                <p className="font-bold font-[family-name:var(--font-montserrat)] text-sky-300 tracking-wider uppercase text-lg flex items-center gap-2 drop-shadow-[0_0_8px_rgba(125,211,252,0.5)]">
                                                     <Radio className="w-5 h-5" /> Buon ascolto
                                                 </p>
                                             </div>
