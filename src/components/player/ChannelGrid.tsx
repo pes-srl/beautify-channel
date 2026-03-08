@@ -119,7 +119,7 @@ export function ChannelGrid({ initialChannels, serverError, planType }: ChannelG
 
                         {/* Content info */}
                         <div className="absolute bottom-0 left-0 right-0 p-3 md:p-5 bg-linear-to-t from-black via-black/80 to-transparent z-20 pt-12 text-center md:text-left">
-                            <h3 className="text-[13px] md:text-lg leading-tight font-bold text-white md:truncate drop-shadow-md mt-[3px] line-clamp-2 md:line-clamp-none">{channel.name}</h3>
+                            <h3 className="text-[13px] md:text-lg leading-tight font-semibold font-[family-name:var(--font-montserrat)] text-white md:truncate drop-shadow-md mt-[3px] line-clamp-2 md:line-clamp-none">{channel.name}</h3>
                             {isActive && (
                                 <div className="flex items-center gap-2 mt-2">
                                     <div className="flex gap-1 items-end h-3">

@@ -108,7 +108,7 @@ export default async function AreaClientePage() {
 
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 border-b border-white/10 pb-8">
                 <div>
-                    <h1 className="text-4xl md:text-5xl font-bold text-white mb-3 tracking-tight flex items-center gap-3">
+                    <h1 className="text-4xl md:text-5xl font-semibold font-[family-name:var(--font-montserrat)] text-white mb-3 tracking-tight flex items-center gap-3">
                         Area Riservata
                     </h1>
                     <div className="flex flex-wrap items-center gap-3 mt-4 mb-2">
@@ -162,7 +162,7 @@ export default async function AreaClientePage() {
 
                                         {/* Colonna Sinistra: Canale Principale */}
                                         <div className="lg:col-span-5 space-y-6">
-                                            <h2 className="text-3xl md:text-5xl font-black text-transparent bg-clip-text bg-linear-to-br from-white to-zinc-500 tracking-tight leading-tight">
+                                            <h2 className="text-3xl md:text-5xl font-semibold font-[family-name:var(--font-montserrat)] text-transparent bg-clip-text bg-linear-to-br from-white to-zinc-500 tracking-tight leading-tight">
                                                 Come <br />Funziona
                                             </h2>
                                             <p className="text-lg md:text-xl text-zinc-300 leading-relaxed font-light">
@@ -183,7 +183,7 @@ export default async function AreaClientePage() {
                                             <div className="absolute -top-4 -right-4 bg-indigo-500 text-white w-12 h-12 flex items-center justify-center rounded-2xl shadow-lg rotate-12 group-hover:rotate-6 transition-transform">
                                                 <span className="font-black text-2xl">+6</span>
                                             </div>
-                                            <h3 className="text-2xl font-bold text-white flex items-center gap-3">
+                                            <h3 className="text-2xl font-semibold font-[family-name:var(--font-montserrat)] text-white flex items-center gap-3">
                                                 Cambia il tuo Mood
                                             </h3>
                                             <p className="text-base md:text-lg text-zinc-300 leading-relaxed font-light">
@@ -194,17 +194,17 @@ export default async function AreaClientePage() {
                                                     <div className="w-6 h-6 rounded-full bg-fuchsia-500/20 flex items-center justify-center shrink-0 mt-0.5">
                                                         <div className="w-2 h-2 rounded-full bg-fuchsia-400" />
                                                     </div>
-                                                    <span className="text-zinc-300 text-sm">Rilassati con <strong className="text-white">DEEP SOFT</strong> nel weekend, o <strong className="text-white">JAZZ</strong> a fine giornata.</span>
+                                                    <span className="text-zinc-300 text-sm">Rilassati con <strong className="text-white font-semibold font-[family-name:var(--font-montserrat)]">DEEP SOFT</strong> nel weekend, o <strong className="text-white font-semibold font-[family-name:var(--font-montserrat)]">JAZZ</strong> a fine giornata.</span>
                                                 </li>
                                                 <li className="flex items-start gap-3">
                                                     <div className="w-6 h-6 rounded-full bg-indigo-500/20 flex items-center justify-center shrink-0 mt-0.5">
                                                         <div className="w-2 h-2 rounded-full bg-indigo-400" />
                                                     </div>
-                                                    <span className="text-zinc-300 text-sm">Tutti i flussi includono i suggerimenti vocali, tranne <strong className="text-white">RELAX</strong> e <strong className="text-white">MASSAGE</strong>.</span>
+                                                    <span className="text-zinc-300 text-sm">Tutti i flussi includono i suggerimenti vocali, tranne <strong className="text-white font-semibold font-[family-name:var(--font-montserrat)]">RELAX</strong> e <strong className="text-white font-semibold font-[family-name:var(--font-montserrat)]">MASSAGE</strong>.</span>
                                                 </li>
                                             </ul>
                                             <div className="pt-4 mt-2 border-t border-white/5">
-                                                <p className="font-medium text-fuchsia-400 tracking-wide uppercase text-sm flex items-center gap-2">
+                                                <p className="font-semibold font-[family-name:var(--font-montserrat)] text-fuchsia-400 tracking-wide uppercase text-sm flex items-center gap-2">
                                                     <Radio className="w-4 h-4" /> Buon ascolto
                                                 </p>
                                             </div>
@@ -214,7 +214,7 @@ export default async function AreaClientePage() {
                                 </div>
                             </div>
 
-                            <h3 className="text-2xl md:text-3xl font-black text-white mb-8 mt-12 md:mt-24 lg:mt-32 flex flex-col md:flex-row items-center justify-center gap-3 uppercase tracking-wider text-center">
+                            <h3 className="text-2xl md:text-3xl font-semibold font-[family-name:var(--font-montserrat)] text-white mb-8 mt-12 md:mt-24 lg:mt-32 flex flex-col md:flex-row items-center justify-center gap-3 uppercase tracking-wider text-center">
                                 <Radio className="w-6 h-6 text-zinc-400" />
                                 ALTRI CANALI DISPONIBILI
                             </h3>

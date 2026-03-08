@@ -60,10 +60,10 @@ export function UpgradeForm({ userEmail }: { userEmail?: string }) {
 
       <div className="relative z-10 max-w-3xl mx-auto">
         <div className="text-center mb-10">
-          <h2 className="text-3xl font-black text-white mb-3">
+          <h2 className="text-3xl font-semibold font-[family-name:var(--font-montserrat)] text-white mb-3">
             Migliora il tuo Piano
           </h2>
-          <p className="text-fuchsia-200">
+          <p className="text-fuchsia-200 font-semibold font-[family-name:var(--font-montserrat)]">
             Compila questo breve modulo per richiedere il passaggio a un piano a
             pagamento. Non ti verrà addebitato nulla ora; ti contatteremo
             manualmente con il contratto e il metodo di pagamento.
@@ -322,7 +322,7 @@ export function UpgradeForm({ userEmail }: { userEmail?: string }) {
             <Button
               type="submit"
               disabled={isSubmitting}
-              className="bg-fuchsia-600 hover:bg-fuchsia-500 text-white font-bold py-6 px-10 rounded-xl text-lg shadow-[0_0_20px_rgba(192,38,211,0.4)] transition-all disabled:opacity-50"
+              className="bg-fuchsia-600 hover:bg-fuchsia-500 text-white font-semibold font-[family-name:var(--font-montserrat)] py-6 px-10 rounded-xl text-lg shadow-[0_0_20px_rgba(192,38,211,0.4)] transition-all disabled:opacity-50"
             >
               {isSubmitting
                 ? "Invio richiesta in corso..."
