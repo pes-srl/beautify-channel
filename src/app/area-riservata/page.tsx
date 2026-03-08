@@ -276,13 +276,21 @@ export default async function AreaClientePage() {
                     {/* Upgrade Form for Free Trial and Basic Users */}
                     {(profile?.plan_type === 'free_trial' || profile?.plan_type === 'basic') && !isAdmin && (
                         <div className="w-full max-w-4xl mx-auto mt-0 md:mt-16 border-t border-white/10 pt-4 md:pt-16">
-                            {profile?.plan_type === 'basic' && (
+                            {(profile?.plan_type === 'basic' || profile?.plan_type === 'free_trial') && (
                                 <div className="text-center mb-16 px-4">
+                                    {/* Elegant Divider */}
+                                    <div className="flex items-center justify-center w-full mb-16 relative">
+                                        {/* Core line */}
+                                        <div className={`w-11/12 max-w-4xl h-[3px] rounded-full z-10 ${profile?.plan_type === 'basic' ? 'bg-gradient-to-r from-transparent via-sky-400 to-transparent' : 'bg-gradient-to-r from-transparent via-emerald-400 to-transparent'}`} />
+                                        {/* Glow effect */}
+                                        <div className={`absolute w-11/12 max-w-4xl h-[12px] blur-[8px] rounded-full ${profile?.plan_type === 'basic' ? 'bg-gradient-to-r from-transparent via-sky-500/60 to-transparent' : 'bg-gradient-to-r from-transparent via-emerald-500/60 to-transparent'}`} />
+                                    </div>
+
                                     <h2 className="text-xl md:text-3xl font-black uppercase text-white tracking-widest leading-tight mb-6">
                                         IL MESE PROSSIMO HAI PIANIFICATO UNA PROMOZIONE SU UN TUO SERVIZIO PER LE TUE CLIENTI?
                                     </h2>
-                                    <p className="text-zinc-300 text-lg max-w-2xl mx-auto leading-relaxed mb-12">
-                                        Facendo upgrade al <strong className="text-amber-400 font-bold uppercase tracking-wider">Piano Premium</strong> puoi chiederci di realizzare delle promo audio personalizzate con le tue promozioni.
+                                    <p className="text-zinc-200 text-xl max-w-2xl mx-auto leading-relaxed mb-12 font-medium">
+                                        Facendo upgrade al <strong className="text-amber-400 font-black uppercase tracking-wider">Piano Premium</strong> puoi chiederci di realizzare delle <span className="text-white font-bold underline decoration-amber-500/50 underline-offset-4">promo audio personalizzate</span> con le tue promozioni.
                                     </p>
 
                                     {/* Premium Plan Layout */}
