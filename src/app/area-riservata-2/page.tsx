@@ -72,50 +72,67 @@ export default async function AreaClientePage2() {
     }
 
     return (
-        <div className="pt-12 pb-32">
+        <div className="pt-12 pb-32 min-h-screen relative z-0 text-white overflow-hidden w-full">
+            {/* Sfondo fluttuante e lunghissimo: segue la discesa della pagina e mescola i colori a nuvola */}
+            <div className="absolute inset-0 -z-10 bg-[#0a0a0a]">
+                {/* Gradiente verticale morbidissimo (spalmato su migliaia di pixel) */}
+                <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a0a] via-[#2a130f]/60 to-[#D8B2A3]/30" />
+
+                {/* Nuvola 1: Marrone caldo / Terra al centro-alto */}
+                <div className="absolute top-[15%] left-[-20%] w-[80vw] h-[1200px] bg-[#3d1c15]/40 blur-[160px] rounded-full pointer-events-none mix-blend-screen" />
+
+                {/* Nuvola 2: Rosa spento a mezza via */}
+                <div className="absolute top-[45%] right-[-20%] w-[90vw] h-[1400px] bg-[#AB7169]/20 blur-[200px] rounded-full pointer-events-none mix-blend-screen" />
+
+                {/* Nuvola 3: Bagliore Bianco/Rosa verso il basso del documento */}
+                <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[120vw] h-[1500px] bg-[#D8B2A3]/15 blur-[250px] rounded-full pointer-events-none mix-blend-screen" />
+
+                {/* Velatura sottile per legare tutti i colori */}
+                <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/[0.03] to-white/[0.05] pointer-events-none" />
+            </div>
 
             {/* DYNAMIC WELCOME BANNER BASED ON PLAN */}
             {!isAdmin && profile?.plan_type && !isExpired && (
                 <div className="mb-6 p-4 rounded-xl border border-white/5 bg-zinc-900/50 flex items-center justify-center text-center shadow-md">
                     <div className="w-full">
                         {profile.plan_type === 'free_trial' ? (
-                            <div className="flex flex-col items-center justify-center space-y-4 py-4">
-                                <h2 className="text-2xl md:text-4xl uppercase tracking-[0.15em] text-zinc-100 font-[family-name:var(--font-montserrat)] font-light flex flex-col md:flex-row items-center gap-2 md:gap-3 text-center md:text-left">
+                            <div className="flex flex-col items-center justify-center space-y-3 py-2">
+                                <h2 className="text-xl md:text-2xl uppercase tracking-[0.1em] text-zinc-100 font-[family-name:var(--font-montserrat)] font-light flex flex-col md:flex-row items-center gap-2 text-center md:text-left">
                                     <span>BENVENUTA NEL TUO ACCOUNT</span>
                                     <img
                                         src="https://eufahlzjxbimyiwivoiq.supabase.co/storage/v1/object/public/bucket-assets/Logo-BeautiFyChannel.svg"
                                         alt="BeautiFy Channel Logo"
-                                        className="h-8 md:h-10 lg:h-12 w-auto mt-2 md:mt-0"
+                                        className="h-6 md:h-8 w-auto mt-2 md:mt-0"
                                     />
                                 </h2>
-                                <div className="w-24 h-[1px] bg-gradient-to-r from-transparent via-[#AB7169]/50 to-transparent" />
-                                <div className="flex flex-col items-center justify-center text-center max-w-4xl mx-auto mt-6">
-                                    <h3 className="font-[family-name:var(--font-montserrat)] text-center w-full max-w-4xl mx-auto mb-12">
-                                        <span className="block text-2xl md:text-4xl xl:text-5xl text-white font-semibold leading-tight tracking-tight mb-4 drop-shadow-md">
+                                <div className="w-16 h-[1px] bg-gradient-to-r from-transparent via-[#AB7169]/50 to-transparent" />
+                                <div className="flex flex-col items-center justify-center text-center max-w-4xl mx-auto mt-4">
+                                    <h3 className="font-[family-name:var(--font-montserrat)] text-center w-full max-w-4xl mx-auto mb-8">
+                                        <span className="block text-lg md:text-2xl text-white font-semibold leading-tight tracking-tight mb-3 drop-shadow-md">
                                             <strong className="text-transparent bg-clip-text bg-gradient-to-r from-[#D8B2A3] to-[#AB7169] font-black tracking-wider">GRAZIE</strong> per la fiducia nel <strong className="text-transparent bg-clip-text bg-gradient-to-r from-[#D8B2A3] to-[#AB7169] font-black tracking-wider">TESTARE</strong> il nostro servizio!
                                         </span>
-                                        <span className="block text-xl md:text-2xl text-zinc-200 font-light leading-relaxed mb-6 mt-6 flex flex-col md:flex-row items-center justify-center gap-3">
-                                            <strong className="px-4 py-1.5 bg-[#D8B2A3]/20 text-[#D8B2A3] font-black tracking-widest uppercase rounded-xl border border-[#D8B2A3]/30 shadow-[0_0_15px_rgba(16,185,129,0.3)]">
+                                        <span className="block text-base md:text-xl text-zinc-200 font-light leading-relaxed mb-4 mt-4 flex flex-col md:flex-row items-center justify-center gap-2">
+                                            <strong className="px-3 py-1 bg-[#D8B2A3]/20 text-[#D8B2A3] text-sm font-black tracking-widest uppercase rounded-lg border border-[#D8B2A3]/30 shadow-[0_0_15px_rgba(16,185,129,0.3)]">
                                                 Non perdere tempo!
                                             </strong>
                                             <span>Organizzati per poter diffondere l'audio dei nostri canali in istituto.</span>
                                         </span>
-                                        <span className="block text-2xl md:text-3xl xl:text-4xl text-zinc-100 font-medium leading-relaxed mt-6">
-                                            Solo così potrai provare le <strong className="text-transparent bg-clip-text bg-gradient-to-r from-[#D8B2A3] to-[#AB7169] font-black italic tracking-wider px-1">reali potenzialità</strong> di <strong className="text-white font-black tracking-widest uppercase border-b-2 border-[#D8B2A3] pb-1 ml-1">BeautiFy Channel</strong>.
+                                        <span className="block text-lg md:text-xl xl:text-2xl text-zinc-100 font-medium leading-relaxed mt-4">
+                                            Solo così potrai provare le <strong className="text-transparent bg-clip-text bg-gradient-to-r from-[#D8B2A3] to-[#AB7169] font-black italic tracking-wider px-1">reali potenzialità</strong> di <strong className="text-white font-black tracking-widest uppercase border-b border-[#D8B2A3] pb-0.5 ml-1">BeautiFy Channel</strong>.
                                         </span>
                                     </h3>
 
-                                    <div className="relative inline-flex flex-col items-center justify-center p-8 md:p-10 rounded-[2.5rem] border border-[#D8B2A3]/20 bg-[#D8B2A3]/20 shadow-[0_0_50px_rgba(16,185,129,0.15)] overflow-hidden w-full max-w-3xl">
+                                    <div className="relative inline-flex flex-col items-center justify-center p-6 md:p-8 rounded-[2rem] border border-[#D8B2A3]/20 bg-[#D8B2A3]/20 shadow-[0_0_50px_rgba(16,185,129,0.15)] overflow-hidden w-full max-w-xl">
                                         <div className="absolute inset-0 bg-gradient-to-br from-[#D8B2A3]/10 to-transparent pointer-events-none" />
-                                        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-[#D8B2A3]/20 blur-[80px] rounded-full pointer-events-none" />
+                                        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 bg-[#D8B2A3]/20 blur-[60px] rounded-full pointer-events-none" />
 
-                                        <span className="relative z-10 text-lg md:text-xl text-zinc-300 font-medium tracking-widest uppercase mb-2">
+                                        <span className="relative z-10 text-base md:text-lg text-zinc-300 font-medium tracking-widest uppercase mb-1">
                                             Al momento il tuo piano è il
                                         </span>
-                                        <span className="relative z-10 font-black text-transparent bg-clip-text bg-gradient-to-r from-[#D8B2A3] via-[#D8B2A3] to-[#AB7169] text-5xl md:text-7xl tracking-[0.15em] py-2 drop-shadow-sm font-[family-name:var(--font-montserrat)]">
+                                        <span className="relative z-10 font-black text-transparent bg-clip-text bg-gradient-to-r from-[#D8B2A3] via-[#D8B2A3] to-[#AB7169] text-3xl md:text-5xl tracking-[0.1em] py-1 drop-shadow-sm font-[family-name:var(--font-montserrat)]">
                                             FREE TRIAL
                                         </span>
-                                        <span className="relative z-10 text-[#D8B2A3]/80 italic font-medium text-lg md:text-xl mt-3">
+                                        <span className="relative z-10 text-[#D8B2A3]/80 italic font-medium text-sm md:text-base mt-2">
                                             della durata di 7 giorni
                                         </span>
                                     </div>
@@ -158,29 +175,29 @@ export default async function AreaClientePage2() {
 
             {/* TRIAL OVERVIEW BANNER */}
             {profile?.plan_type === 'free_trial' && daysLeft > 0 && !isAdmin && (
-                <div className="bg-gradient-to-r from-[#AB7169] to-[#5D6676] text-white px-6 py-4 rounded-2xl mb-10 flex flex-col md:flex-row justify-between items-center shadow-lg shadow-[#AB7169]/20 gap-4 border border-[#AB7169]/30 relative overflow-hidden">
-                    <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 blur-[50px] rounded-full mix-blend-screen -translate-y-1/2 translate-x-1/3 pointer-events-none" />
-                    <div className="flex items-center gap-4 relative z-10">
-                        <div className="p-2 bg-white/20 rounded-full backdrop-blur-md">
-                            <Sparkles className="w-6 h-6" />
+                <div className="bg-gradient-to-r from-[#AB7169] to-[#5D6676] text-white px-6 py-5 rounded-xl mb-8 flex flex-col md:flex-row justify-between items-center shadow-lg shadow-[#AB7169]/20 gap-4 border border-[#AB7169]/30 relative overflow-hidden max-w-3xl mx-auto w-full">
+                    <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 blur-[30px] rounded-full mix-blend-screen -translate-y-1/2 translate-x-1/3 pointer-events-none" />
+                    <div className="flex items-center gap-4 relative z-10 w-full md:w-auto">
+                        <div className="p-2 bg-white/20 rounded-full backdrop-blur-md shrink-0">
+                            <Sparkles className="w-5 h-5" />
                         </div>
-                        <div>
-                            <h3 className="font-bold text-lg leading-tight">La tua prova gratuita è attiva</h3>
-                            <p className="text-[#AB7169] text-sm">Scade tra <strong className="text-[#D8B2A3] bg-black/20 px-2 py-0.5 rounded-md mx-1">{daysLeft} giorni</strong>. Sblocca tutto prima della scadenza.</p>
+                        <div className="flex-1">
+                            <h3 className="font-bold text-base md:text-lg leading-tight mb-1">La tua prova gratuita è attiva</h3>
+                            <p className="text-[#AB7169] text-xs">Scade tra <strong className="text-[#D8B2A3] bg-black/20 px-1.5 py-0.5 rounded-sm mx-1">{daysLeft} giorni</strong>.</p>
                         </div>
                     </div>
-                    <Link href="#upgrade-section" className="relative z-10 shrink-0 bg-white text-zinc-950 px-6 py-3 rounded-xl font-bold text-sm tracking-wide hover:bg-zinc-100 transition-colors shadow-xl text-center">
+                    <Link href="#upgrade-section" className="relative z-10 shrink-0 w-full md:w-auto bg-white text-zinc-950 px-5 py-2.5 rounded-lg font-bold text-sm tracking-wide hover:bg-zinc-100 transition-colors shadow-md text-center mt-3 md:mt-0">
                         SCEGLI UN PIANO
                     </Link>
                 </div>
             )}
 
-            <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 border-b border-white/10 pb-8">
-                <div className="flex flex-col items-center md:items-start w-full text-center md:text-left">
-                    <h1 className="text-4xl md:text-5xl font-semibold font-[family-name:var(--font-montserrat)] text-white mb-3 tracking-tight flex items-center justify-center md:justify-start gap-3 w-full">
+            <div className="flex flex-col items-center justify-center gap-6 mb-12 border-b border-white/10 pb-8 mt-4">
+                <div className="flex flex-col items-center w-full text-center">
+                    <h1 className="text-4xl md:text-5xl font-semibold font-[family-name:var(--font-montserrat)] text-white mb-3 tracking-tight flex items-center justify-center gap-3 w-full">
                         Area Riservata
                     </h1>
-                    <div className="flex flex-wrap items-center justify-center md:justify-start gap-3 mt-4 mb-2">
+                    <div className="flex flex-wrap items-center justify-center gap-3 mt-4 mb-2">
                         <span className="text-lg font-medium text-white">
                             {profile?.salon_name || user.email}
                         </span>
@@ -235,18 +252,18 @@ export default async function AreaClientePage2() {
                                 ) || null}
                             />
                             {/* INFO BLOCK INNOVATIVO */}
-                            <div id="welcome-pricing-banner" className="w-full mt-12 mb-16 relative">
+                            <div id="welcome-pricing-banner" className="w-full max-w-6xl mx-auto mt-10 mb-12 relative">
                                 {/* Sfondo decorativo */}
                                 <div className={`absolute inset-0 bg-linear-to-b ${profile?.plan_type === 'free_trial' ? 'from-[#D8B2A3]/10 via-[#AB7169]/5' : 'from-[#AB7169]/10 via-[#5D6676]/5'} to-transparent rounded-[3rem] -z-10 blur-xl pointer-events-none`} />
 
-                                <div className={`border border-white/5 rounded-[35px] shadow-2xl p-8 md:p-14 relative overflow-hidden backdrop-blur-xl ${profile?.plan_type === 'free_trial' ? 'bg-gradient-to-br from-[#AB7169]/10 to-[#2e1d1b]' : 'bg-[#2b2730]'}`}>
+                                <div className={`border border-white/5 rounded-[35px] shadow-2xl p-6 md:p-10 relative overflow-hidden backdrop-blur-xl ${profile?.plan_type === 'free_trial' ? 'bg-gradient-to-br from-[#AB7169]/10 to-[#2e1d1b]' : 'bg-[#2b2730]'}`}>
                                     {/* Overlay di luce */}
                                     <div className={`absolute top-0 right-0 w-[500px] h-[500px] rounded-full blur-[80px] -translate-y-1/2 translate-x-1/2 pointer-events-none ${profile?.plan_type === 'free_trial' ? 'bg-[#D8B2A3]/10' : 'bg-[#AB7169]/10'}`} />
                                     <div className={`absolute bottom-0 left-0 w-[400px] h-[400px] rounded-full blur-[80px] translate-y-1/3 -translate-x-1/3 pointer-events-none ${profile?.plan_type === 'free_trial' ? 'bg-[#AB7169]/10' : 'bg-[#5D6676]/10'}`} />
 
-                                    <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                                    <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
 
-                                        <div className="lg:col-span-5 space-y-6">
+                                        <div className="lg:col-span-5 space-y-5">
                                             <h2 className={`text-sm md:text-base font-black font-[family-name:var(--font-montserrat)] tracking-[0.3em] uppercase mb-2 ${profile?.plan_type === 'free_trial' ? 'text-[#D8B2A3]' : 'text-[#D8B2A3]'}`}>
                                                 Come Funziona
                                             </h2>
@@ -269,11 +286,11 @@ export default async function AreaClientePage2() {
                                         </div>
 
                                         {/* Colonna Destra: Altri Canali */}
-                                        <div className="lg:col-span-5 space-y-6 bg-white/[0.02] p-8 md:p-10 rounded-[2.5rem] border border-white/5 relative group hover:bg-white/[0.04] transition-all duration-500 hover:border-[#5D6676]/20 shadow-xl">
+                                        <div className="lg:col-span-5 space-y-5 bg-white/[0.02] p-6 md:p-8 rounded-[2rem] border border-white/5 relative group hover:bg-white/[0.04] transition-all duration-500 hover:border-[#5D6676]/20 shadow-xl">
                                             <div className="absolute -top-4 -right-4 bg-gradient-to-br from-[#5D6676] to-[#5D6676] text-white w-14 h-14 flex items-center justify-center rounded-2xl shadow-xl shadow-[#5D6676]/30 rotate-12 group-hover:rotate-6 transition-transform">
                                                 <span className="font-black text-2xl font-[family-name:var(--font-montserrat)]">+6</span>
                                             </div>
-                                            <h3 className="text-2xl md:text-4xl font-semibold font-[family-name:var(--font-montserrat)] text-transparent bg-clip-text bg-gradient-to-br from-[#5D6676] to-[#5D6676] flex items-center gap-3 drop-shadow-sm leading-tight mb-2">
+                                            <h3 className="text-2xl md:text-4xl font-semibold font-[family-name:var(--font-montserrat)] text-white flex items-center gap-3 drop-shadow-md leading-tight mb-2">
                                                 Cambia il tuo Mood
                                             </h3>
                                             <p className="text-lg md:text-xl text-zinc-300 leading-relaxed font-light">
@@ -316,7 +333,16 @@ export default async function AreaClientePage2() {
                         </div>
                     )}
 
-                    <ChannelGrid2 initialChannels={channels || []} serverError={channelsError?.message} planType={profile?.plan_type} />
+                    <div className="relative w-full py-20 -mx-4 px-4 sm:mx-0 sm:px-0 mt-8 mb-12" style={{ width: 'calc(100% + 2rem)' }}>
+                        {/* Sfondo sfumato bianco dall'alto più visibile e diffuso */}
+                        <div className="absolute inset-0 bg-gradient-to-b from-white/10 via-white/5 to-transparent pointer-events-none -z-10 rounded-[3rem]" />
+                        {/* Bagliore alto */}
+                        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[90%] max-w-5xl h-72 bg-white/5 blur-[100px] pointer-events-none -z-10" />
+                        {/* Bagliore basso per diffonderlo in fondo */}
+                        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[70%] max-w-4xl h-72 bg-white/5 blur-[120px] pointer-events-none -z-10" />
+
+                        <ChannelGrid2 initialChannels={channels || []} serverError={channelsError?.message} planType={profile?.plan_type} />
+                    </div>
 
                     {/* Upgrade Form for Free Trial and Basic Users */}
                     {(profile?.plan_type === 'free_trial' || profile?.plan_type === 'basic') && !isAdmin && (
@@ -335,7 +361,7 @@ export default async function AreaClientePage2() {
                                         IL MESE PROSSIMO HAI PIANIFICATO UNA PROMOZIONE SU UN TUO SERVIZIO PER LE TUE CLIENTI?
                                     </h2>
                                     <p className="text-zinc-200 text-xl w-full max-w-4xl mx-auto leading-relaxed mb-12 font-medium">
-                                        Facendo upgrade al <strong className="text-[#D8B2A3] font-black uppercase tracking-wider">Piano Premium</strong> puoi chiederci di realizzare delle <span className="text-white font-bold underline decoration-[#D8B2A3]/50 underline-offset-4">promo audio personalizzate</span> con le tue promozioni.
+                                        Facendo upgrade al <strong className="text-amber-400 font-black uppercase tracking-wider">Piano Premium</strong> puoi chiederci di realizzare delle <span className="text-white font-bold underline decoration-amber-400/50 underline-offset-4">promo audio personalizzate</span> con le tue promozioni.
                                     </p>
 
                                     {/* Premium Plan Layout */}
@@ -343,12 +369,12 @@ export default async function AreaClientePage2() {
                                         <div className="relative mb-8 flex flex-col items-center justify-center px-4 shrink-0">
                                             <h3 className="font-[family-name:var(--font-montserrat)] text-center w-full max-w-4xl mx-auto">
                                                 <span className="block text-xs md:text-sm text-zinc-400 uppercase tracking-[0.3em] mb-4">
-                                                    Con il <strong className="text-[#D8B2A3] font-black">Piano Premium</strong>
+                                                    Con il <strong className="text-amber-400 font-black">Piano Premium</strong>
                                                 </span>
                                                 <span className="block text-xl md:text-2xl xl:text-3xl text-white font-semibold leading-tight tracking-tight opacity-90 mb-1">
                                                     puoi aggiungere ai canali audio
                                                 </span>
-                                                <span className="block text-transparent bg-clip-text bg-gradient-to-r from-[#D8B2A3] via-[#D8B2A3] to-[#D8B2A3] font-bold text-3xl md:text-4xl xl:text-5xl py-2 drop-shadow-sm">
+                                                <span className="block text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-amber-400 to-amber-500 font-bold text-3xl md:text-4xl xl:text-5xl py-2 drop-shadow-sm">
                                                     eleganti suggerimenti vocali
                                                 </span>
                                                 <span className="block text-base md:text-lg text-zinc-300 mt-4 font-light italic">

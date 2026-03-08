@@ -43,20 +43,20 @@ export function BasicHeroChannel2({ channel, planType }: BasicHeroChannel2Props)
     };
 
     return (
-        <div className={`relative w-full rounded-3xl overflow-hidden shadow-2xl mb-12 group ${isPremium ? 'shadow-[#D8B2A3]/20' : planType === 'free_trial' ? 'shadow-[#D8B2A3]/20' : 'shadow-[#D8B2A3]/20'}`}>
+        <div className="relative w-full max-w-4xl mx-auto rounded-3xl overflow-hidden mb-12 group border border-white/10 bg-white/[0.05] backdrop-blur-md">
             {/* Animated Gradient Background */}
-            <div className={`absolute inset-0 bg-linear-to-br z-0 ${isPremium ? 'from-[#D8B2A3] via-zinc-900 to-black' : planType === 'free_trial' ? 'from-[#D8B2A3] via-[#AB7169] to-black' : 'from-[#D8B2A3] via-[#5D6676] to-black'}`} />
+            <div className={`absolute inset-0 bg-linear-to-br z-0 opacity-40 ${isPremium ? 'from-[#D8B2A3]/80 via-transparent to-transparent' : planType === 'free_trial' ? 'from-[#D8B2A3]/80 via-transparent to-transparent' : 'from-[#D8B2A3]/80 via-transparent to-transparent'}`} />
 
             {/* Glowing Orbs */}
             <div className={`absolute top-0 right-0 w-[500px] h-[500px] blur-[100px] rounded-full mix-blend-screen -translate-y-1/2 translate-x-1/3 pointer-events-none ${isPremium ? 'bg-[#D8B2A3]/20' : planType === 'free_trial' ? 'bg-[#D8B2A3]/20' : 'bg-[#D8B2A3]/20'}`} />
             <div className={`absolute bottom-0 left-0 w-[300px] h-[300px] blur-[80px] rounded-full mix-blend-screen translate-y-1/2 -translate-x-1/3 pointer-events-none ${isPremium ? 'bg-[#D8B2A3]/20' : planType === 'free_trial' ? 'bg-[#AB7169]/20' : 'bg-[#5D6676]/20'}`} />
 
             {/* Content Container */}
-            <div className="relative z-10 flex flex-col md:flex-row items-center border border-white/10 rounded-3xl bg-black/20 backdrop-blur-sm">
+            <div className="relative z-10 flex flex-col md:flex-row items-center rounded-3xl">
 
                 {/* Left side: Premium Badge & Info */}
-                <div className="flex-1 p-8 md:p-12 flex flex-col justify-center">
-                    <div className="flex items-center gap-3 mb-6">
+                <div className="flex-1 p-6 md:p-8 flex flex-col justify-center">
+                    <div className="flex items-center gap-3 mb-4">
                         <div className="flex items-center gap-1.5 bg-white/10 text-white px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest border border-white/20 backdrop-blur-md">
                             <Sparkles className={`w-3.5 h-3.5 ${isPremium ? 'text-[#D8B2A3]' : planType === 'free_trial' ? 'text-[#D8B2A3]' : 'text-[#D8B2A3]'}`} />
                             <span>CANALE PRINCIPALE</span>
@@ -78,14 +78,14 @@ export function BasicHeroChannel2({ channel, planType }: BasicHeroChannel2Props)
                         )}
                     </div>
 
-                    <h2 className="text-4xl md:text-5xl lg:text-6xl font-semibold font-[family-name:var(--font-montserrat)] text-transparent bg-clip-text bg-linear-to-r from-white to-white/70 tracking-tight mb-4">
+                    <h2 className="text-2xl md:text-3xl font-semibold font-[family-name:var(--font-montserrat)] text-transparent bg-clip-text bg-linear-to-r from-white to-white/70 tracking-tight mb-2">
                         Beautify Channel
                         <span className={`block ${isPremium ? 'text-[#D8B2A3]' : planType === 'free_trial' ? 'text-[#D8B2A3]' : 'text-[#D8B2A3]'}`}>
                             {isPremium ? 'Premium' : planType === 'free_trial' ? 'Prova Gratuita' : 'Basic'}
                         </span>
                     </h2>
 
-                    <p className="text-zinc-300 text-lg md:text-lg max-w-xl leading-relaxed mb-8">
+                    <p className="text-zinc-300 text-sm md:text-sm max-w-xl leading-relaxed mb-2">
                         {isPremium ? (
                             <>Questo è il <strong className="text-[#D8B2A3] font-black">CANALE AUDIO PRINCIPALE</strong> che contiene tutte le <strong className="text-[#D8B2A3] font-black">TUE PROMO PERSONALIZZATE</strong> dei prossimi mesi e che trasforma radicalmente l'atmosfera del tuo istituto!<br />Sotto altri canali settoriali!</>
                         ) : (
@@ -96,19 +96,19 @@ export function BasicHeroChannel2({ channel, planType }: BasicHeroChannel2Props)
                 </div>
 
                 {/* Right side: Abstract Art / Vinyl Visualizer & Play Button */}
-                <div className="flex flex-col w-full md:w-1/3 relative items-center justify-center p-8 md:p-12 border-t md:border-t-0 md:border-l border-white/5 bg-black/10">
-                    <div className="absolute inset-0 bg-linear-to-b md:bg-linear-to-l from-black/80 to-transparent pointer-events-none" />
+                <div className="flex flex-col w-full md:w-5/12 relative items-center justify-center p-6 md:p-8 border-t md:border-t-0 md:border-l border-white/10 bg-white/[0.02]">
+                    <div className="absolute inset-0 bg-linear-to-b md:bg-linear-to-l from-white/[0.02] to-transparent pointer-events-none" />
 
                     {/* Pulsing rings if active */}
                     {isCurrentlyPlaying && (
                         <>
                             <motion.div
-                                className={`absolute w-[80%] h-[80%] rounded-full border ${isPremium ? 'border-[#D8B2A3]/20' : 'border-[#AB7169]/20'}`}
+                                className={`absolute w-[60%] h-[60%] rounded-full border ${isPremium ? 'border-[#D8B2A3]/20' : 'border-[#AB7169]/20'}`}
                                 animate={{ scale: [1, 1.2, 1], opacity: [0.5, 0, 0.5] }}
                                 transition={{ repeat: Infinity, duration: 3, ease: "linear" }}
                             />
                             <motion.div
-                                className={`absolute w-[60%] h-[60%] rounded-full border ${isPremium ? 'border-[#D8B2A3]/20' : 'border-[#5D6676]/20'}`}
+                                className={`absolute w-[40%] h-[40%] rounded-full border ${isPremium ? 'border-[#D8B2A3]/20' : 'border-[#5D6676]/20'}`}
                                 animate={{ scale: [1, 1.3, 1], opacity: [0.5, 0, 0.5] }}
                                 transition={{ repeat: Infinity, duration: 2.5, ease: "linear", delay: 0.5 }}
                             />
@@ -118,15 +118,15 @@ export function BasicHeroChannel2({ channel, planType }: BasicHeroChannel2Props)
                     {/* Central Vinyl/Icon */}
                     <div
                         className={`
-                        relative w-3/4 aspect-square rounded-full flex items-center justify-center mb-6
+                        relative w-[120px] aspect-square rounded-full flex items-center justify-center mb-5
                         bg-linear-to-br from-zinc-800 to-black border-2 border-zinc-700/50 shadow-2xl
                         ${isCurrentlyPlaying ? 'animate-[spin_20s_linear_infinite]' : ''}
                     `}>
                         {/* Grooves */}
+                        <div className="absolute inset-2 rounded-full border border-white/5" />
                         <div className="absolute inset-4 rounded-full border border-white/5" />
                         <div className="absolute inset-8 rounded-full border border-white/5" />
-                        <div className="absolute inset-12 rounded-full border border-white/5" />
-                        <div className="absolute inset-16 rounded-full border border-white/5" />
+                        <div className="absolute inset-10 rounded-full border border-white/5" />
 
                         {/* Center label */}
                         <div className="w-1/3 h-1/3 rounded-full flex items-center justify-center overflow-hidden bg-white z-10 shadow-[0_0_15px_rgba(0,0,0,0.5)]">
@@ -141,8 +141,8 @@ export function BasicHeroChannel2({ channel, planType }: BasicHeroChannel2Props)
                     <button
                         onClick={handlePlayClick}
                         className={`
-                            flex items-center justify-center gap-3 w-3/4
-                            px-8 py-4 rounded-2xl font-semibold font-[family-name:var(--font-montserrat)] text-xl transition-all duration-300 shadow-xl relative z-20 bg-white text-zinc-800
+                            flex items-center justify-center gap-1.5 w-auto min-w-[145px]
+                            px-5 py-3 rounded-xl font-semibold font-[family-name:var(--font-montserrat)] text-sm transition-all duration-300 shadow-xl relative z-20 bg-white text-zinc-800
                             ${isActive
                                 ? 'hover:bg-zinc-200'
                                 : 'hover:scale-105 hover:bg-zinc-100'
@@ -151,12 +151,12 @@ export function BasicHeroChannel2({ channel, planType }: BasicHeroChannel2Props)
                     >
                         {isCurrentlyPlaying ? (
                             <>
-                                <Pause className="w-6 h-6 fill-zinc-800 stroke-zinc-800 stroke-[2px]" />
+                                <Pause className="w-5 h-5 fill-zinc-800 stroke-zinc-800 stroke-[2px]" />
                                 <span>Metti in Pausa</span>
                             </>
                         ) : (
                             <>
-                                <Play className="w-6 h-6 fill-zinc-800 stroke-zinc-800 stroke-[2px] ml-1" />
+                                <Play className="w-5 h-5 fill-zinc-800 stroke-zinc-800 stroke-[2px] ml-1" />
                                 <span>{isActive ? 'Play' : 'Ascolta Ora'}</span>
                             </>
                         )}
