@@ -80,7 +80,10 @@ export default async function AreaClientePage() {
                     <div className="w-full">
                         {profile.plan_type === 'free_trial' ? (
                             <div className="flex flex-col items-center justify-center space-y-4 py-4">
-                                <h2 className="text-2xl md:text-4xl uppercase tracking-[0.15em] text-zinc-100 font-[family-name:var(--font-montserrat)] font-light flex flex-col md:flex-row items-center gap-2 md:gap-3 text-center md:text-left">
+                                <h1 className="text-5xl md:text-7xl uppercase tracking-[0.2em] font-[family-name:var(--font-montserrat)] font-black text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-300 drop-shadow-sm mb-2">
+                                    GRAZIE
+                                </h1>
+                                <h2 className="text-2xl md:text-4xl uppercase tracking-[0.15em] text-zinc-100 font-[family-name:var(--font-montserrat)] font-light flex flex-col md:flex-row items-center gap-2 md:gap-3 text-center md:text-left mb-6">
                                     <span>BENVENUTA NEL TUO ACCOUNT</span>
                                     <img
                                         src="https://eufahlzjxbimyiwivoiq.supabase.co/storage/v1/object/public/bucket-assets/Logo-BeautiFyChannel.svg"
@@ -88,19 +91,8 @@ export default async function AreaClientePage() {
                                         className="h-8 md:h-10 lg:h-12 w-auto mt-2 md:mt-0"
                                     />
                                 </h2>
-                                <div className="w-24 h-[1px] bg-gradient-to-r from-transparent via-fuchsia-500/50 to-transparent" />
+                                <div className="w-24 h-[1px] bg-gradient-to-r from-transparent via-fuchsia-500/50 to-transparent mt-2 mb-8" />
                                 <div className="flex flex-col items-center justify-center text-center max-w-3xl mx-auto mt-4">
-                                    <h3 className="font-[family-name:var(--font-montserrat)] text-center w-full mb-6 relative">
-                                        <span className="block text-lg md:text-2xl text-white font-light leading-relaxed mb-4">
-                                            <strong className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-300 font-black tracking-widest uppercase text-2xl md:text-4xl drop-shadow-sm mr-2">GRAZIE</strong> per la fiducia nel testare il nostro servizio!
-                                        </span>
-                                        <span className="block text-sm md:text-base text-zinc-300 font-light leading-relaxed mb-4 flex flex-col md:flex-row items-center justify-center gap-3">
-                                            <strong className="px-3 py-1 bg-emerald-500/10 text-emerald-300 text-xs font-bold tracking-widest uppercase rounded-full border border-emerald-500/20 shadow-sm">
-                                                Consiglio
-                                            </strong>
-                                            <span>Diffondi subito l'audio nei tuoi spazi per capirne le reali potenzialità.</span>
-                                        </span>
-                                    </h3>
 
                                     <div className="relative inline-flex flex-col items-center justify-center p-4 md:p-6 rounded-3xl border border-emerald-500/20 bg-emerald-950/20 shadow-[0_0_30px_rgba(16,185,129,0.1)] overflow-hidden w-full max-w-sm">
                                         <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/5 to-transparent pointer-events-none" />
@@ -318,8 +310,8 @@ export default async function AreaClientePage() {
                     )}
 
                     <details className="group w-full max-w-7xl mx-auto mt-12 md:mt-24 lg:mt-32 mb-16">
-                        <summary className="cursor-pointer list-none flex justify-center items-center w-full outline-none select-none mb-10 text-center relative z-20">
-                            <div className="inline-flex items-center justify-center gap-3 md:gap-4 px-6 md:px-10 py-4 rounded-[2rem] border border-white/5 bg-white/[0.02] backdrop-blur-md shadow-xl transition-all duration-300 hover:bg-white/[0.05] hover:border-white/10 relative overflow-hidden group/btn">
+                        <summary className="cursor-pointer list-none flex justify-start items-center w-full outline-none select-none mb-10 text-left relative z-20 pl-4 md:pl-0">
+                            <div className="inline-flex items-center justify-start gap-3 md:gap-4 px-6 md:px-10 py-4 rounded-[2rem] border border-white/5 bg-white/[0.02] backdrop-blur-md shadow-xl transition-all duration-300 hover:bg-white/[0.05] hover:border-white/10 relative overflow-hidden group/btn">
                                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full group-hover/btn:translate-x-full transition-transform duration-1000"></div>
                                 <Radio className={`w-5 h-5 md:w-6 md:h-6 ${profile?.plan_type === 'free_trial' ? 'text-emerald-400' : 'text-sky-400'}`} />
                                 <span className="text-2xl md:text-4xl text-white font-black font-[family-name:var(--font-montserrat)] tracking-[0.2em] md:tracking-[0.3em] uppercase drop-shadow-sm">
