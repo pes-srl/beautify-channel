@@ -76,22 +76,34 @@ export default async function AreaClientePage() {
             {/* DYNAMIC WELCOME BANNER BASED ON PLAN */}
             {!isAdmin && profile?.plan_type && !isExpired && (
                 <div className="mb-6 p-4 rounded-xl border border-white/5 bg-zinc-900/50 flex items-center justify-center text-center shadow-md">
-                    <p className="text-zinc-300 font-medium text-lg tracking-wide w-full leading-relaxed">
-                        Benvenuta nella versione{' '}
+                    <div className="w-full">
                         {profile.plan_type === 'free_trial' ? (
-                            <>
-                                <br />
-                                <span className="font-bold text-emerald-400 uppercase text-2xl">FREE TRIAL</span>
-                            </>
+                            <div className="flex flex-col items-center justify-center space-y-4 py-4">
+                                <h2 className="text-2xl md:text-4xl uppercase tracking-[0.15em] text-zinc-100 font-[family-name:var(--font-montserrat)] font-light flex flex-col md:flex-row items-center gap-2 md:gap-3 text-center md:text-left">
+                                    <span>BENVENUTA NEL TUO ACCOUNT</span>
+                                    <img
+                                        src="https://eufahlzjxbimyiwivoiq.supabase.co/storage/v1/object/public/bucket-assets/Logo-BeautiFyChannel.svg"
+                                        alt="BeautiFy Channel Logo"
+                                        className="h-8 md:h-10 lg:h-12 w-auto mt-2 md:mt-0"
+                                    />
+                                </h2>
+                                <div className="w-24 h-[1px] bg-gradient-to-r from-transparent via-fuchsia-500/50 to-transparent" />
+                                <p className="text-zinc-300 font-medium text-lg tracking-wide leading-relaxed">
+                                    Al momento il tuo piano è il <span className="font-bold text-emerald-400 uppercase text-2xl px-1">FREE TRIAL</span> della durata di 7 giorni
+                                </p>
+                            </div>
                         ) : (
-                            <span className="font-bold text-white uppercase">
-                                {profile.plan_type === 'basic' ? 'BASIC' :
-                                    profile.plan_type === 'premium' ? 'PREMIUM' :
-                                        profile.plan_type}
-                            </span>
+                            <p className="text-zinc-300 font-medium text-lg tracking-wide w-full leading-relaxed">
+                                Benvenuta nella versione{' '}
+                                <span className="font-bold text-white uppercase">
+                                    {profile.plan_type === 'basic' ? 'BASIC' :
+                                        profile.plan_type === 'premium' ? 'PREMIUM' :
+                                            profile.plan_type}
+                                </span>
+                                {' '}del tuo account BeautiFy
+                            </p>
                         )}
-                        {' '}del tuo account BeautiFy
-                    </p>
+                    </div>
                 </div>
             )}
 
@@ -105,7 +117,7 @@ export default async function AreaClientePage() {
                         </div>
                         <div>
                             <h3 className="font-bold text-lg leading-tight">La tua prova gratuita è attiva</h3>
-                            <p className="text-fuchsia-100 text-sm">Scade tra <strong className="text-white bg-black/20 px-2 py-0.5 rounded-md mx-1">{daysLeft} giorni</strong>. Sblocca tutto prima della scadenza.</p>
+                            <p className="text-fuchsia-100 text-sm">Scade tra <strong className="text-emerald-400 bg-black/20 px-2 py-0.5 rounded-md mx-1">{daysLeft} giorni</strong>. Sblocca tutto prima della scadenza.</p>
                         </div>
                     </div>
                     <Link href="#upgrade-section" className="relative z-10 shrink-0 bg-white text-zinc-950 px-6 py-3 rounded-xl font-bold text-sm tracking-wide hover:bg-zinc-100 transition-colors shadow-xl text-center">
