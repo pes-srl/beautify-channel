@@ -132,7 +132,7 @@ export function UpgradeFormTrial2({ userEmail }: { userEmail?: string }) {
                       checked={requestedPlan === 'premium'}
                       onChange={() => setRequestedPlan('premium')}
                     />
-                    <div className="py-2.5 px-4 rounded-lg font-bold text-sm text-zinc-400 peer-checked:bg-[#D8B2A3] peer-checked:text-zinc-950 transition-all peer-checked:shadow-md">
+                    <div className="py-2.5 px-4 rounded-lg font-bold text-sm text-zinc-400 peer-checked:bg-amber-400 peer-checked:text-zinc-950 transition-all peer-checked:shadow-[0_0_15px_rgba(251,191,36,0.3)]">
                       Premium
                     </div>
                   </label>
@@ -358,7 +358,7 @@ export function UpgradeFormTrial2({ userEmail }: { userEmail?: string }) {
               <Button
                 type="submit"
                 disabled={isSubmitting}
-                className="bg-gradient-to-r from-[#AB7169] to-[#AB7169] hover:from-[#AB7169] hover:to-white text-[#AB7169] font-bold font-[family-name:var(--font-montserrat)] py-6 px-10 rounded-xl text-lg shadow-[0_0_20px_rgba(45,212,191,0.4)] transition-all disabled:opacity-50 border-none"
+                className="bg-[#AB7169] hover:bg-[#AB7169]/80 text-white font-bold font-[family-name:var(--font-montserrat)] py-6 px-10 rounded-xl text-lg shadow-[0_0_20px_rgba(171,113,105,0.4)] transition-all disabled:opacity-50 border-none"
               >
                 {isSubmitting
                   ? "Invio richiesta in corso..."

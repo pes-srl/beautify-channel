@@ -106,34 +106,31 @@ export default async function AreaClientePage2() {
                                     />
                                 </h2>
                                 <div className="w-16 h-[1px] bg-gradient-to-r from-transparent via-[#AB7169]/50 to-transparent" />
-                                <div className="flex flex-col items-center justify-center text-center max-w-4xl mx-auto mt-4">
-                                    <h3 className="font-[family-name:var(--font-montserrat)] text-center w-full max-w-4xl mx-auto mb-8">
-                                        <span className="block text-lg md:text-2xl text-white font-semibold leading-tight tracking-tight mb-3 drop-shadow-md">
-                                            <strong className="text-transparent bg-clip-text bg-gradient-to-r from-[#D8B2A3] to-[#AB7169] font-black tracking-wider">GRAZIE</strong> per la fiducia nel <strong className="text-transparent bg-clip-text bg-gradient-to-r from-[#D8B2A3] to-[#AB7169] font-black tracking-wider">TESTARE</strong> il nostro servizio!
+                                <div className="flex flex-col items-center justify-center text-center max-w-3xl mx-auto mt-4">
+                                    <h3 className="font-[family-name:var(--font-montserrat)] text-center w-full mb-6">
+                                        <span className="block text-base md:text-lg text-white font-light leading-relaxed mb-3">
+                                            <strong className="text-transparent bg-clip-text bg-gradient-to-r from-[#D8B2A3] to-[#AB7169] font-bold tracking-widest uppercase">Grazie</strong> per la fiducia nel <strong className="text-transparent bg-clip-text bg-gradient-to-r from-[#D8B2A3] to-[#AB7169] font-bold tracking-widest uppercase">testare</strong> il nostro servizio!
                                         </span>
-                                        <span className="block text-base md:text-xl text-zinc-200 font-light leading-relaxed mb-4 mt-4 flex flex-col md:flex-row items-center justify-center gap-2">
-                                            <strong className="px-3 py-1 bg-[#D8B2A3]/20 text-[#D8B2A3] text-sm font-black tracking-widest uppercase rounded-lg border border-[#D8B2A3]/30 shadow-[0_0_15px_rgba(16,185,129,0.3)]">
-                                                Non perdere tempo!
+                                        <span className="block text-sm md:text-base text-zinc-300 font-light leading-relaxed mb-4 flex flex-col md:flex-row items-center justify-center gap-3">
+                                            <strong className="px-3 py-1 bg-[#D8B2A3]/10 text-[#D8B2A3] text-xs font-bold tracking-widest uppercase rounded-full border border-[#D8B2A3]/20 shadow-sm">
+                                                Consiglio
                                             </strong>
-                                            <span>Organizzati per poter diffondere l'audio dei nostri canali in istituto.</span>
-                                        </span>
-                                        <span className="block text-lg md:text-xl xl:text-2xl text-zinc-100 font-medium leading-relaxed mt-4">
-                                            Solo così potrai provare le <strong className="text-transparent bg-clip-text bg-gradient-to-r from-[#D8B2A3] to-[#AB7169] font-black italic tracking-wider px-1">reali potenzialità</strong> di <strong className="text-white font-black tracking-widest uppercase border-b border-[#D8B2A3] pb-0.5 ml-1">BeautiFy Channel</strong>.
+                                            <span>Diffondi subito l'audio nei tuoi spazi per capirne le reali potenzialità.</span>
                                         </span>
                                     </h3>
 
-                                    <div className="relative inline-flex flex-col items-center justify-center p-6 md:p-8 rounded-[2rem] border border-[#D8B2A3]/20 bg-[#D8B2A3]/20 shadow-[0_0_50px_rgba(16,185,129,0.15)] overflow-hidden w-full max-w-xl">
-                                        <div className="absolute inset-0 bg-gradient-to-br from-[#D8B2A3]/10 to-transparent pointer-events-none" />
-                                        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 bg-[#D8B2A3]/20 blur-[60px] rounded-full pointer-events-none" />
+                                    <div className="relative inline-flex flex-col items-center justify-center p-4 md:p-6 rounded-3xl border border-[#D8B2A3]/20 bg-[#D8B2A3]/10 shadow-[0_0_30px_rgba(216,178,163,0.1)] overflow-hidden w-full max-w-sm">
+                                        <div className="absolute inset-0 bg-gradient-to-br from-[#D8B2A3]/5 to-transparent pointer-events-none" />
+                                        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 bg-[#D8B2A3]/10 blur-[40px] rounded-full pointer-events-none" />
 
-                                        <span className="relative z-10 text-base md:text-lg text-zinc-300 font-medium tracking-widest uppercase mb-1">
-                                            Al momento il tuo piano è il
+                                        <span className="relative z-10 text-xs md:text-sm text-zinc-400 font-medium tracking-widest uppercase mb-1">
+                                            Il tuo piano attuale
                                         </span>
-                                        <span className="relative z-10 font-black text-transparent bg-clip-text bg-gradient-to-r from-[#D8B2A3] via-[#D8B2A3] to-[#AB7169] text-3xl md:text-5xl tracking-[0.1em] py-1 drop-shadow-sm font-[family-name:var(--font-montserrat)]">
+                                        <span className="relative z-10 font-black text-transparent bg-clip-text bg-gradient-to-r from-[#D8B2A3] via-[#E4C8BD] to-[#AB7169] text-2xl md:text-3xl tracking-[0.1em] py-0.5 drop-shadow-sm font-[family-name:var(--font-montserrat)]">
                                             FREE TRIAL
                                         </span>
-                                        <span className="relative z-10 text-[#D8B2A3]/80 italic font-medium text-sm md:text-base mt-2">
-                                            della durata di 7 giorni
+                                        <span className="relative z-10 text-[#D8B2A3]/70 italic font-light text-xs md:text-sm mt-1">
+                                            7 giorni
                                         </span>
                                     </div>
                                 </div>
@@ -378,16 +375,15 @@ export default async function AreaClientePage2() {
                                                     eleganti suggerimenti vocali
                                                 </span>
                                                 <span className="block text-base md:text-lg text-zinc-300 mt-4 font-light italic">
-                                                    con le tue promozioni e i tuoi servizi personalizzati.
+                                                    con le <strong className="text-amber-400 font-semibold not-italic">tue promozioni</strong> e i tuoi <strong className="text-amber-400 font-semibold not-italic">servizi personalizzati</strong>.
                                                 </span>
                                             </h3>
                                         </div>
-                                        <div className="relative rounded-3xl overflow-hidden shadow-2xl shadow-[#D8B2A3]/20 w-full border border-white/10 group mt-auto aspect-[4/3] lg:aspect-video mb-16">
-                                            <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-40 z-10 pointer-events-none"></div>
+                                        <div className="relative rounded-3xl overflow-hidden shadow-2xl shadow-[#D8B2A3]/20 w-full mt-auto aspect-[4/3] lg:aspect-video mb-16">
                                             <img
                                                 src="https://eufahlzjxbimyiwivoiq.supabase.co/storage/v1/object/public/bucket-assets/1772934286210-zjhcxj.png"
                                                 alt="Servizi Personalizzati Premium"
-                                                className="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-105"
+                                                className="w-full h-full object-cover scale-[1.15]"
                                             />
                                         </div>
                                     </div>
