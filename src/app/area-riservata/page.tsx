@@ -89,34 +89,31 @@ export default async function AreaClientePage() {
                                     />
                                 </h2>
                                 <div className="w-24 h-[1px] bg-gradient-to-r from-transparent via-fuchsia-500/50 to-transparent" />
-                                <div className="flex flex-col items-center justify-center text-center max-w-4xl mx-auto mt-6">
-                                    <h3 className="font-[family-name:var(--font-montserrat)] text-center w-full max-w-4xl mx-auto mb-12">
-                                        <span className="block text-2xl md:text-4xl xl:text-5xl text-white font-semibold leading-tight tracking-tight mb-4 drop-shadow-md">
-                                            <strong className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-300 font-black tracking-wider">GRAZIE</strong> per la fiducia nel <strong className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-300 font-black tracking-wider">TESTARE</strong> il nostro servizio!
+                                <div className="flex flex-col items-center justify-center text-center max-w-3xl mx-auto mt-4">
+                                    <h3 className="font-[family-name:var(--font-montserrat)] text-center w-full mb-6 relative">
+                                        <span className="block text-lg md:text-2xl text-white font-light leading-relaxed mb-4">
+                                            <strong className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-300 font-black tracking-widest uppercase text-2xl md:text-4xl drop-shadow-sm mr-2">GRAZIE</strong> per la fiducia nel testare il nostro servizio!
                                         </span>
-                                        <span className="block text-xl md:text-2xl text-zinc-200 font-light leading-relaxed mb-6 mt-6 flex flex-col md:flex-row items-center justify-center gap-3">
-                                            <strong className="px-4 py-1.5 bg-emerald-500/20 text-emerald-300 font-black tracking-widest uppercase rounded-xl border border-emerald-500/30 shadow-[0_0_15px_rgba(16,185,129,0.3)]">
-                                                Non perdere tempo!
+                                        <span className="block text-sm md:text-base text-zinc-300 font-light leading-relaxed mb-4 flex flex-col md:flex-row items-center justify-center gap-3">
+                                            <strong className="px-3 py-1 bg-emerald-500/10 text-emerald-300 text-xs font-bold tracking-widest uppercase rounded-full border border-emerald-500/20 shadow-sm">
+                                                Consiglio
                                             </strong>
-                                            <span>Organizzati per poter diffondere l'audio dei nostri canali in istituto.</span>
-                                        </span>
-                                        <span className="block text-2xl md:text-3xl xl:text-4xl text-zinc-100 font-medium leading-relaxed mt-6">
-                                            Solo così potrai provare le <strong className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 to-teal-200 font-black italic tracking-wider px-1">reali potenzialità</strong> di <strong className="text-white font-black tracking-widest uppercase border-b-2 border-emerald-400 pb-1 ml-1">BeautiFy Channel</strong>.
+                                            <span>Diffondi subito l'audio nei tuoi spazi per capirne le reali potenzialità.</span>
                                         </span>
                                     </h3>
 
-                                    <div className="relative inline-flex flex-col items-center justify-center p-8 md:p-10 rounded-[2.5rem] border border-emerald-500/20 bg-emerald-950/20 shadow-[0_0_50px_rgba(16,185,129,0.15)] overflow-hidden w-full max-w-3xl">
-                                        <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/10 to-transparent pointer-events-none" />
-                                        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-emerald-500/20 blur-[80px] rounded-full pointer-events-none" />
+                                    <div className="relative inline-flex flex-col items-center justify-center p-4 md:p-6 rounded-3xl border border-emerald-500/20 bg-emerald-950/20 shadow-[0_0_30px_rgba(16,185,129,0.1)] overflow-hidden w-full max-w-sm">
+                                        <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/5 to-transparent pointer-events-none" />
+                                        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 bg-emerald-500/10 blur-[40px] rounded-full pointer-events-none" />
 
-                                        <span className="relative z-10 text-lg md:text-xl text-zinc-300 font-medium tracking-widest uppercase mb-2">
-                                            Al momento il tuo piano è il
+                                        <span className="relative z-10 text-xs md:text-sm text-zinc-400 font-medium tracking-widest uppercase mb-1">
+                                            Il tuo piano attuale
                                         </span>
-                                        <span className="relative z-10 font-black text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 via-emerald-400 to-teal-400 text-5xl md:text-7xl tracking-[0.15em] py-2 drop-shadow-sm font-[family-name:var(--font-montserrat)]">
+                                        <span className="relative z-10 font-black text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 via-emerald-400 to-teal-400 text-2xl md:text-3xl tracking-[0.1em] py-0.5 drop-shadow-sm font-[family-name:var(--font-montserrat)]">
                                             FREE TRIAL
                                         </span>
-                                        <span className="relative z-10 text-emerald-300/80 italic font-medium text-lg md:text-xl mt-3">
-                                            della durata di 7 giorni
+                                        <span className="relative z-10 text-emerald-300/70 italic font-light text-xs md:text-sm mt-1">
+                                            7 giorni
                                         </span>
                                     </div>
                                 </div>
@@ -158,18 +155,18 @@ export default async function AreaClientePage() {
 
             {/* TRIAL OVERVIEW BANNER */}
             {profile?.plan_type === 'free_trial' && daysLeft > 0 && !isAdmin && (
-                <div className="bg-gradient-to-r from-fuchsia-600 to-indigo-600 text-white px-6 py-4 rounded-2xl mb-10 flex flex-col md:flex-row justify-between items-center shadow-lg shadow-fuchsia-900/20 gap-4 border border-fuchsia-400/30 relative overflow-hidden">
-                    <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 blur-[50px] rounded-full mix-blend-screen -translate-y-1/2 translate-x-1/3 pointer-events-none" />
-                    <div className="flex items-center gap-4 relative z-10">
-                        <div className="p-2 bg-white/20 rounded-full backdrop-blur-md">
-                            <Sparkles className="w-6 h-6" />
+                <div className="bg-gradient-to-r from-fuchsia-600 to-indigo-600 text-white px-6 py-5 rounded-xl mb-8 flex flex-col md:flex-row justify-between items-center shadow-lg shadow-fuchsia-900/20 gap-4 border border-fuchsia-400/30 relative overflow-hidden max-w-3xl mx-auto w-full">
+                    <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 blur-[30px] rounded-full mix-blend-screen -translate-y-1/2 translate-x-1/3 pointer-events-none" />
+                    <div className="flex items-center gap-4 relative z-10 w-full md:w-auto">
+                        <div className="p-2 bg-white/20 rounded-full backdrop-blur-md shrink-0">
+                            <Sparkles className="w-5 h-5" />
                         </div>
-                        <div>
-                            <h3 className="font-bold text-lg leading-tight">La tua prova gratuita è attiva</h3>
-                            <p className="text-fuchsia-100 text-sm">Scade tra <strong className="text-emerald-400 bg-black/20 px-2 py-0.5 rounded-md mx-1">{daysLeft} giorni</strong>. Sblocca tutto prima della scadenza.</p>
+                        <div className="flex-1">
+                            <h3 className="font-bold text-base md:text-lg leading-tight mb-1">La tua prova gratuita è attiva</h3>
+                            <p className="text-fuchsia-100 text-xs">Scade tra <strong className="text-emerald-400 bg-black/20 px-1.5 py-0.5 rounded-sm mx-1">{daysLeft} giorni</strong> prima della scadenza.</p>
                         </div>
                     </div>
-                    <Link href="#upgrade-section" className="relative z-10 shrink-0 bg-white text-zinc-950 px-6 py-3 rounded-xl font-bold text-sm tracking-wide hover:bg-zinc-100 transition-colors shadow-xl text-center">
+                    <Link href="#upgrade-section" className="relative z-10 shrink-0 w-full md:w-auto bg-white text-zinc-950 px-5 py-2.5 rounded-lg font-bold text-sm tracking-wide hover:bg-zinc-100 transition-colors shadow-md text-center mt-3 md:mt-0">
                         SCEGLI UN PIANO
                     </Link>
                 </div>
@@ -247,15 +244,15 @@ export default async function AreaClientePage() {
                                     <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
 
                                         <div className="lg:col-span-5 space-y-6">
-                                            <h2 className={`text-sm md:text-base font-black font-[family-name:var(--font-montserrat)] tracking-[0.3em] uppercase mb-2 ${profile?.plan_type === 'free_trial' ? 'text-emerald-400' : 'text-sky-400'}`}>
+                                            <h2 className={`text-2xl md:text-3xl font-black font-[family-name:var(--font-montserrat)] tracking-[0.3em] uppercase mb-4 ${profile?.plan_type === 'free_trial' ? 'text-emerald-400' : 'text-sky-400'}`}>
                                                 Come Funziona
                                             </h2>
                                             <p className="text-xl md:text-2xl text-zinc-200 font-light leading-relaxed">
-                                                Nulla di più semplice! Collega il tuo pc / smartphone / tablet all'impianto audio del tuo istituto. Premi play sul canale principale qui sopra, imposta il giusto volume in salone e <strong className="font-semibold text-white">dimenticatene</strong>, il resto lo fa BeautiFy.
+                                                Nulla di più semplice!<br /><strong className="text-white font-semibold">Collega il tuo pc / smartphone / tablet</strong> all'impianto audio del tuo istituto o a delle <strong className="text-white font-semibold">casse Bluetooth</strong>.<br /><br /><strong className="text-white font-semibold">Premi play sul canale principale</strong> qui sopra, imposta il giusto volume in salone e <strong className="font-semibold text-white">dimenticatene</strong>, il resto lo fa <strong className="text-white font-semibold">BeautiFy</strong>.
                                             </p>
                                             <div className={`pl-6 border-l-2 py-1 space-y-4 ${profile?.plan_type === 'free_trial' ? 'border-teal-500/30' : 'border-indigo-500/30'}`}>
                                                 <p className="text-lg md:text-xl text-zinc-200 leading-relaxed font-light">
-                                                    I nostri canali audio propongono una <strong className={`font-semibold ${profile?.plan_type === 'free_trial' ? 'text-emerald-200' : 'text-sky-200'}`}>raffinata selezione di diversi generi musicali</strong>, intervallata da <strong className={`font-semibold ${profile?.plan_type === 'free_trial' ? 'text-emerald-200' : 'text-sky-200'}`}>eleganti, delicati e generici</strong> <span className={`font-bold ${profile?.plan_type === 'free_trial' ? 'text-emerald-400' : 'text-sky-400'}`}>suggerimenti vocali</span>.
+                                                    I nostri canali audio propongono una <strong className="font-semibold text-white">raffinata selezione</strong> <strong className={`font-semibold ${profile?.plan_type === 'free_trial' ? 'text-emerald-200' : 'text-sky-200'}`}>di diversi generi musicali</strong>, intervallata da <strong className={`font-semibold ${profile?.plan_type === 'free_trial' ? 'text-emerald-200' : 'text-sky-200'}`}>eleganti, delicati e generici</strong> <span className={`font-bold ${profile?.plan_type === 'free_trial' ? 'text-emerald-400' : 'text-sky-400'}`}>suggerimenti vocali</span>.
                                                 </p>
                                                 <p className={`text-lg font-medium tracking-wide mt-2 ${profile?.plan_type === 'free_trial' ? 'text-emerald-300/90' : 'text-sky-300/90'}`}>
                                                     Studiati per <strong className="text-white font-bold">stimolare la curiosità</strong> delle tue clienti e l'<strong className="text-white font-bold">acquisto dei tuoi servizi</strong>.
