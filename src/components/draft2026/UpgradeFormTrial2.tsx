@@ -4,8 +4,10 @@ import { useState } from "react";
 import { submitUpgradeRequest } from "@/app/actions/upgrade-actions";
 import { Button } from "@/components/ui/button";
 import { AlertCircle, CheckCircle2, Heart } from "lucide-react";
+import { UpgradeFormBasic } from "../UpgradeFormBasic";
 
 export function UpgradeFormTrial2({ userEmail }: { userEmail?: string }) {
+  const [showPremiumForm, setShowPremiumForm] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const requestedPlan = 'basic';
   const [metriQuadriOption, setMetriQuadriOption] = useState<'0-250' | 'oltre'>('0-250');
@@ -44,6 +46,10 @@ export function UpgradeFormTrial2({ userEmail }: { userEmail?: string }) {
     setIsSubmitting(false);
   }
 
+  if (showPremiumForm) {
+    return <UpgradeFormBasic userEmail={userEmail} onBack={() => setShowPremiumForm(false)} />;
+  }
+
   if (status.type === "success") {
     return (
       <div className="bg-[#D8B2A3]/30 border border-[#D8B2A3]/50 rounded-2xl p-8 text-center mt-6">
@@ -79,7 +85,7 @@ export function UpgradeFormTrial2({ userEmail }: { userEmail?: string }) {
                 Conclusa la tua prova gratuita di 7 giorni, puoi scegliere il nostro <strong className="text-white font-semibold">abbonamento Basic</strong>. Questi sono i dati base che ci servono.
               </p>
               <p className="text-zinc-300 text-base">
-                Se invece desideri l'abbonamento Premium con le Promo Sonore Personalizzate dei tuoi servizi, clicca qui: <strong className="text-amber-400 font-bold underline cursor-pointer hover:text-amber-300">PREMIUM</strong><br /><br />
+                Se invece desideri l'abbonamento Premium con le Promo Sonore Personalizzate dei tuoi servizi, clicca qui: <strong onClick={() => setShowPremiumForm(true)} className="text-amber-400 font-bold underline cursor-pointer hover:text-amber-300">PREMIUM</strong><br /><br />
                 Grazie<br />
                 <span className="italic opacity-80">BeautiFy Staff</span>
               </p>

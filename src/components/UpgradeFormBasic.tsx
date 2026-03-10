@@ -3,9 +3,9 @@
 import { useState } from "react";
 import { submitUpgradeRequest } from "@/app/actions/upgrade-actions";
 import { Button } from "@/components/ui/button";
-import { AlertCircle, CheckCircle2, Heart } from "lucide-react";
+import { AlertCircle, CheckCircle2, Heart, ArrowLeft } from "lucide-react";
 
-export function UpgradeFormBasic({ userEmail }: { userEmail?: string }) {
+export function UpgradeFormBasic({ userEmail, onBack }: { userEmail?: string, onBack?: () => void }) {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [metriQuadriOption, setMetriQuadriOption] = useState<'0-250' | 'oltre'>('0-250');
     const [durataAbbonamento, setDurataAbbonamento] = useState<'6 mesi' | '12 mesi'>('6 mesi');
@@ -70,6 +70,16 @@ export function UpgradeFormBasic({ userEmail }: { userEmail?: string }) {
             <div className="absolute top-0 right-0 w-96 h-96 bg-amber-600/10 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/2 pointer-events-none" />
 
             <div className="relative z-10 max-w-3xl mx-auto">
+                {onBack && (
+                    <button 
+                        onClick={onBack}
+                        className="mb-8 flex items-center gap-2 text-zinc-400 hover:text-white transition-colors group text-sm font-medium tracking-widest uppercase font-[family-name:var(--font-montserrat)]"
+                        type="button"
+                    >
+                        <ArrowLeft className="w-4 h-4 stroke-[3] group-hover:-translate-x-1 transition-transform" />
+                        Torna al BASIC
+                    </button>
+                )}
                 <div className="text-center mb-10">
                     <h2 className="text-3xl font-semibold font-[family-name:var(--font-montserrat)] text-white mb-3 uppercase tracking-wide">
                         MIGLIORA IL TUO PIANO
