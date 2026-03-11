@@ -12,6 +12,7 @@ export function UpgradeFormTrial({ userEmail }: { userEmail?: string }) {
   const requestedPlan = 'basic';
   const [metriQuadriOption, setMetriQuadriOption] = useState<'0-250' | 'oltre'>('0-250');
   const [durataAbbonamento, setDurataAbbonamento] = useState<'6 mesi' | '12 mesi'>('6 mesi');
+  const [currentStep, setCurrentStep] = useState(1);
   const [status, setStatus] = useState<{
     type: "idle" | "success" | "error";
     message: string;
@@ -45,6 +46,29 @@ export function UpgradeFormTrial({ userEmail }: { userEmail?: string }) {
 
     setIsSubmitting(false);
   }
+
+  const handleNextStep = (e: React.MouseEvent) => {
+    e.preventDefault();
+    const container = document.getElementById('step-1-container');
+    if (container) {
+      const inputs = container.querySelectorAll<HTMLInputElement>('input[required]');
+      let isValid = true;
+      for (let i = 0; i < inputs.length; i++) {
+        if (!inputs[i].checkValidity()) {
+          inputs[i].reportValidity();
+          isValid = false;
+          break;
+        }
+      }
+      if (!isValid) return;
+    }
+    setCurrentStep(2);
+  };
+
+  const handlePrevStep = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setCurrentStep(1);
+  };
 
   if (showPremiumForm) {
     return <UpgradeFormBasic userEmail={userEmail} onBack={() => setShowPremiumForm(false)} />;
@@ -100,242 +124,320 @@ export function UpgradeFormTrial({ userEmail }: { userEmail?: string }) {
               </div>
             )}
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {/* Plan Selection */}
-              {/* Plan Selection Area removed */}
-              <div className="md:col-span-2 mb-2 text-center py-4">
-                <div className="inline-block px-6 py-2.5 bg-sky-500/20 text-sky-400 border border-sky-500/50 rounded-lg font-bold font-[family-name:var(--font-montserrat)] tracking-wide shadow-[0_0_15px_rgba(56,189,248,0.2)]">
-                  Piano Selezionato: <span className="uppercase">Basic</span>
-                </div>
-                <input type="hidden" name="requested_plan" value="basic" />
-              </div>
-
-              {/* Ragione Sociale */}
-              <div className="space-y-2">
-                <label
-                  htmlFor="ragioneSociale"
-                  className="block text-base font-semibold font-[family-name:var(--font-montserrat)] text-zinc-300"
-                >
-                  Ragione Sociale<span className="text-emerald-500">*</span>
-                </label>
-                <input
-                  id="ragioneSociale"
-                  name="ragioneSociale"
-                  type="text"
-                  required
-                  className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-zinc-600 focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all"
-                />
-              </div>
-
-              {/* Partita IVA */}
-              <div className="space-y-2">
-                <label
-                  htmlFor="partitaIva"
-                  className="block text-base font-semibold font-[family-name:var(--font-montserrat)] text-zinc-300"
-                >
-                  Partita IVA*
-                </label>
-                <input
-                  id="partitaIva"
-                  name="partitaIva"
-                  type="text"
-                  required
-                  className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-zinc-600 focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all"
-                />
-              </div>
-
-              {/* Indirizzo istituto */}
-              <div className="space-y-2">
-                <label
-                  htmlFor="indirizzoIstituto"
-                  className="block text-base font-semibold font-[family-name:var(--font-montserrat)] text-zinc-300"
-                >
-                  Indirizzo istituto*
-                </label>
-                <input
-                  id="indirizzoIstituto"
-                  name="indirizzoIstituto"
-                  type="text"
-                  required
-                  className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-zinc-600 focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all"
-                />
-              </div>
-
-              {/* Nome istituto */}
-              <div className="space-y-2">
-                <label
-                  htmlFor="nomeIstituto"
-                  className="block text-base font-semibold font-[family-name:var(--font-montserrat)] text-zinc-300"
-                >
-                  Nome istituto*
-                </label>
-                <input
-                  id="nomeIstituto"
-                  name="nomeIstituto"
-                  type="text"
-                  required
-                  className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-zinc-600 focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all"
-                />
-              </div>
-
-              {/* Metri quadri istituto */}
-              <div className="md:col-span-1 space-y-2">
-                <label className="block text-base font-semibold font-[family-name:var(--font-montserrat)] text-zinc-300">
-                  Metri quadri istituto*
-                </label>
-                <div className="flex flex-col sm:flex-row gap-4 mb-2">
-                  <label className="flex items-center gap-2 text-white cursor-pointer bg-black/40 px-4 py-3 rounded-xl border border-white/10 hover:bg-white/5 transition-colors">
-                    <input
-                      type="radio"
-                      name="metriQuadriRadio"
-                      value="0-250"
-                      checked={metriQuadriOption === '0-250'}
-                      onChange={() => setMetriQuadriOption('0-250')}
-                      className="text-emerald-600 focus:ring-emerald-500 bg-white/10 border-white/20 w-4 h-4"
-                    />
-                    0-250
-                  </label>
-                  <label className="flex items-center gap-2 text-white cursor-pointer bg-black/40 px-4 py-3 rounded-xl border border-white/10 hover:bg-white/5 transition-colors">
-                    <input
-                      type="radio"
-                      name="metriQuadriRadio"
-                      value="oltre"
-                      checked={metriQuadriOption === 'oltre'}
-                      onChange={() => setMetriQuadriOption('oltre')}
-                      className="text-emerald-600 focus:ring-emerald-500 bg-white/10 border-white/20 w-4 h-4"
-                    />
-                    Oltre
-                  </label>
-                </div>
-              </div>
-
-              {/* Durata abbonamento */}
-              <div className="md:col-span-1 space-y-2">
-                <label className="block text-base font-semibold font-[family-name:var(--font-montserrat)] text-zinc-300">
-                  Durata abbonamento*
-                </label>
-                <div className="flex flex-col sm:flex-row gap-4 mb-2">
-                  <label className={`flex-1 flex flex-col items-start gap-1 p-4 rounded-xl border cursor-pointer transition-colors ${durataAbbonamento === '6 mesi' ? 'bg-emerald-600/20 border-emerald-500/50 shadow-[0_0_15px_rgba(16,185,129,0.2)]' : 'bg-black/40 border-white/10 hover:bg-white/5'}`}>
-                    <div className="flex items-center gap-2 text-white font-bold text-lg">
-                      <input
-                        type="radio"
-                        name="durataAbbonamento"
-                        value="6 mesi"
-                        checked={durataAbbonamento === '6 mesi'}
-                        onChange={() => setDurataAbbonamento('6 mesi')}
-                        className="text-emerald-600 focus:ring-emerald-500 bg-white/10 border-white/20 w-4 h-4"
-                      />
-                      6 mesi
-                    </div>
-                    <div className={`text-xs sm:text-sm pl-6 format-cost ${durataAbbonamento === '6 mesi' ? 'text-white font-medium' : 'text-zinc-300'}`}>
-                      € 25,90 / mese
-                      <br />
-                      <span className="text-[10px] sm:text-[11px] font-normal leading-tight text-white mt-1 block">
-                        Unica Soluzione
-                      </span>
-                    </div>
-                  </label>
-
-                  <label className={`flex-1 flex flex-col items-start gap-1 p-4 rounded-xl border cursor-pointer transition-colors ${durataAbbonamento === '12 mesi' ? 'bg-emerald-600/20 border-emerald-500/50 shadow-[0_0_15px_rgba(16,185,129,0.2)]' : 'bg-black/40 border-white/10 hover:bg-white/5'}`}>
-                    <div className="flex items-center gap-2 text-white font-bold text-lg">
-                      <input
-                        type="radio"
-                        name="durataAbbonamento"
-                        value="12 mesi"
-                        checked={durataAbbonamento === '12 mesi'}
-                        onChange={() => setDurataAbbonamento('12 mesi')}
-                        className="text-emerald-600 focus:ring-emerald-500 bg-white/10 border-white/20 w-4 h-4"
-                      />
-                      12 mesi
-                    </div>
-                    <div className={`text-xs sm:text-sm pl-6 format-cost ${durataAbbonamento === '12 mesi' ? 'text-white font-medium' : 'text-zinc-300'}`}>
-                      € 20,90 / mese
-                      <br />
-                      <span className="text-[10px] sm:text-[11px] font-normal leading-tight text-white mt-1 block">
-                        Unica Soluzione
-                      </span>
-                    </div>
-                  </label>
-                </div>
-              </div>
-
-              {/* Box Totale da saldare */}
-              <div className="md:col-span-2 mt-4 mb-2 flex justify-center text-center">
-                <div className="bg-black/30 border border-emerald-500/20 rounded-2xl p-6 w-full max-w-sm shadow-[0_0_15px_rgba(16,185,129,0.1)]">
-                  <p className="text-white font-semibold mb-1 uppercase tracking-wider text-sm font-[family-name:var(--font-montserrat)]">{durataAbbonamento === '6 mesi' ? 'Totale complessivo 6 mesi' : 'Totale complessivo 12 mesi'}</p>
-                  <p className="font-bold mb-3 uppercase tracking-wide text-sky-400">Piano Basic</p>
-                  <p className="text-4xl font-bold font-[family-name:var(--font-montserrat)] text-sky-400"><span className="text-3xl font-medium pr-1">€</span>{totalPrice}</p>
-                  <p className="text-base text-white mt-3 font-semibold">*{getMonths()} mesi a € {getMonthlyPrice().toFixed(2).replace('.', ',')} / mese</p>
-                  <p className="text-sm text-emerald-200 mt-2 italic font-medium">I prezzi sono da considerarsi IVA esclusa</p>
-                </div>
-              </div>
-
-              {/* Responsabile istituto */}
-              <div className="md:col-span-2 space-y-2">
-                <label
-                  htmlFor="responsabileIstituto"
-                  className="block text-base font-semibold font-[family-name:var(--font-montserrat)] text-zinc-300"
-                >
-                  Responsabile istituto*
-                </label>
-                <input
-                  id="responsabileIstituto"
-                  name="responsabileIstituto"
-                  type="text"
-                  required
-                  className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-zinc-600 focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all"
-                />
-              </div>
-
-              {/* La tua email */}
-              <div className="md:col-span-2 space-y-2">
-                <label
-                  htmlFor="emailContatto"
-                  className="block text-base font-semibold font-[family-name:var(--font-montserrat)] text-zinc-300"
-                >
-                  La tua email*
-                </label>
-                <input
-                  id="emailContatto"
-                  name="emailContatto"
-                  type="email"
-                  required
-                  readOnly
-                  defaultValue={userEmail || ""}
-                  className="w-full bg-black/20 border border-white/5 rounded-xl px-4 py-3 text-zinc-500 cursor-not-allowed focus:outline-none transition-all"
-                />
-              </div>
-
-              {/* Il Tuo telefono */}
-              <div className="md:col-span-2 space-y-2">
-                <label
-                  htmlFor="telefono"
-                  className="block text-base font-semibold font-[family-name:var(--font-montserrat)] text-zinc-300"
-                >
-                  Il Tuo telefono*
-                </label>
-                <input
-                  id="telefono"
-                  name="telefono"
-                  type="tel"
-                  required
-                  className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-zinc-600 focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all"
-                />
-              </div>
-            </div>
-
-
-
-            <div className="pt-4 flex justify-center w-full">
-              <Button
-                type="submit"
-                disabled={isSubmitting}
-                className="bg-gradient-to-r from-teal-300 to-teal-100 hover:from-teal-200 hover:to-white text-teal-950 font-bold font-[family-name:var(--font-montserrat)] py-6 px-10 rounded-xl text-lg shadow-[0_0_20px_rgba(45,212,191,0.4)] transition-all disabled:opacity-50 border-none"
+            <div className="overflow-hidden relative w-full">
+              <div
+                className="flex transition-transform duration-500 ease-in-out"
+                style={{ transform: currentStep === 1 ? 'translateX(0)' : 'translateX(-100%)' }}
               >
-                {isSubmitting
-                  ? "Invio richiesta in corso..."
-                  : "Richiedi Upgrade"}
-              </Button>
+                {/* STEP 1: Dati Istituto */}
+                <div id="step-1-container" className="w-full shrink-0 grid grid-cols-1 md:grid-cols-2 gap-6 p-1">
+
+                  {/* Plan Selection hidden */}
+                  <input type="hidden" name="requested_plan" value="basic" />
+
+                  {/* Durata abbonamento */}
+                  <div className="md:col-span-2 space-y-2">
+                    <label className="block text-base font-semibold font-[family-name:var(--font-montserrat)] text-zinc-300">
+                      Durata abbonamento*
+                    </label>
+                    <div className="flex flex-col sm:flex-row gap-4 mb-2">
+                      <label className={`flex-1 flex flex-col items-start gap-1 p-4 rounded-xl border cursor-pointer transition-colors ${durataAbbonamento === '6 mesi' ? 'bg-emerald-600/20 border-emerald-500/50 shadow-[0_0_15px_rgba(16,185,129,0.2)]' : 'bg-black/40 border-white/10 hover:bg-white/5'}`}>
+                        <div className="flex items-center gap-2 text-white font-bold text-lg">
+                          <input
+                            type="radio"
+                            name="durataAbbonamento"
+                            value="6 mesi"
+                            checked={durataAbbonamento === '6 mesi'}
+                            onChange={() => setDurataAbbonamento('6 mesi')}
+                            className="text-emerald-600 focus:ring-emerald-500 bg-white/10 border-white/20 w-4 h-4"
+                          />
+                          6 mesi
+                        </div>
+                        <div className={`text-xs sm:text-sm pl-6 format-cost ${durataAbbonamento === '6 mesi' ? 'text-white font-medium' : 'text-zinc-300'}`}>
+                          € 25,90 / mese
+                          <br />
+                          <span className="text-[10px] sm:text-[11px] font-normal leading-tight text-white mt-1 block">
+                            Unica Soluzione
+                          </span>
+                        </div>
+                      </label>
+
+                      <label className={`flex-1 flex flex-col items-start gap-1 p-4 rounded-xl border cursor-pointer transition-colors ${durataAbbonamento === '12 mesi' ? 'bg-emerald-600/20 border-emerald-500/50 shadow-[0_0_15px_rgba(16,185,129,0.2)]' : 'bg-black/40 border-white/10 hover:bg-white/5'}`}>
+                        <div className="flex items-center gap-2 text-white font-bold text-lg">
+                          <input
+                            type="radio"
+                            name="durataAbbonamento"
+                            value="12 mesi"
+                            checked={durataAbbonamento === '12 mesi'}
+                            onChange={() => setDurataAbbonamento('12 mesi')}
+                            className="text-emerald-600 focus:ring-emerald-500 bg-white/10 border-white/20 w-4 h-4"
+                          />
+                          12 mesi
+                        </div>
+                        <div className={`text-xs sm:text-sm pl-6 format-cost ${durataAbbonamento === '12 mesi' ? 'text-white font-medium' : 'text-zinc-300'}`}>
+                          € 20,90 / mese
+                          <br />
+                          <span className="text-[10px] sm:text-[11px] font-normal leading-tight text-white mt-1 block">
+                            Unica Soluzione
+                          </span>
+                        </div>
+                      </label>
+                    </div>
+                  </div>
+
+                  {/* Nome istituto */}
+                  <div className="md:col-span-2 space-y-2">
+                    <label
+                      htmlFor="nomeIstituto"
+                      className="block text-base font-semibold font-[family-name:var(--font-montserrat)] text-zinc-300"
+                    >
+                      Nome istituto*
+                    </label>
+                    <input
+                      id="nomeIstituto"
+                      name="nomeIstituto"
+                      type="text"
+                      required
+                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-zinc-600 focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all"
+                    />
+                  </div>
+
+                  {/* Indirizzo istituto diviso */}
+                  <div className="md:col-span-2 space-y-2">
+                    <label className="block text-base font-semibold font-[family-name:var(--font-montserrat)] text-zinc-300">
+                      Indirizzo istituto*
+                    </label>
+                    <div className="grid grid-cols-12 gap-4">
+                      <div className="col-span-12 md:col-span-10">
+                        <input
+                          name="indirizzoVia"
+                          type="text"
+                          placeholder="Via/Piazza"
+                          required
+                          className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-zinc-600 focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all"
+                        />
+                      </div>
+                      <div className="col-span-6 md:col-span-2">
+                        <input
+                          name="indirizzoCivico"
+                          type="text"
+                          placeholder="N°"
+                          required
+                          className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-zinc-600 focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all"
+                        />
+                      </div>
+                      <div className="col-span-6 md:col-span-3">
+                        <input
+                          name="indirizzoCap"
+                          type="text"
+                          placeholder="CAP"
+                          required
+                          className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-zinc-600 focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all"
+                        />
+                      </div>
+                      <div className="col-span-8 md:col-span-7">
+                        <input
+                          name="indirizzoCitta"
+                          type="text"
+                          placeholder="Città"
+                          required
+                          className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-zinc-600 focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all"
+                        />
+                      </div>
+                      <div className="col-span-4 md:col-span-2">
+                        <input
+                          name="indirizzoProvincia"
+                          type="text"
+                          placeholder="Pr(Mi)"
+                          required
+                          maxLength={2}
+                          className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-zinc-600 focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all uppercase"
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Metri quadri istituto */}
+                  <div className="md:col-span-2 space-y-2">
+                    <label className="block text-base font-semibold font-[family-name:var(--font-montserrat)] text-zinc-300">
+                      Metri quadri istituto*
+                    </label>
+                    <div className="flex flex-col sm:flex-row gap-4 mb-2">
+                      <label className="flex items-center gap-2 text-white cursor-pointer bg-black/40 px-4 py-3 rounded-xl border border-white/10 hover:bg-white/5 transition-colors">
+                        <input
+                          type="radio"
+                          name="metriQuadriRadio"
+                          value="0-250"
+                          checked={metriQuadriOption === '0-250'}
+                          onChange={() => setMetriQuadriOption('0-250')}
+                          className="text-emerald-600 focus:ring-emerald-500 bg-white/10 border-white/20 w-4 h-4"
+                        />
+                        0-250 mq
+                      </label>
+                      <label className="flex items-center gap-2 text-white cursor-pointer bg-black/40 px-4 py-3 rounded-xl border border-white/10 hover:bg-white/5 transition-colors">
+                        <input
+                          type="radio"
+                          name="metriQuadriRadio"
+                          value="oltre"
+                          checked={metriQuadriOption === 'oltre'}
+                          onChange={() => setMetriQuadriOption('oltre')}
+                          className="text-emerald-600 focus:ring-emerald-500 bg-white/10 border-white/20 w-4 h-4"
+                        />
+                        Oltre 250 mq
+                      </label>
+                    </div>
+                  </div>
+
+                  {/* Responsabile istituto */}
+                  <div className="md:col-span-2 space-y-2">
+                    <label
+                      htmlFor="responsabileIstituto"
+                      className="block text-base font-semibold font-[family-name:var(--font-montserrat)] text-zinc-300"
+                    >
+                      Responsabile istituto*
+                    </label>
+                    <input
+                      id="responsabileIstituto"
+                      name="responsabileIstituto"
+                      type="text"
+                      required
+                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-zinc-600 focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all"
+                    />
+                  </div>
+
+                  {/* Pulsante Avanti */}
+                  <div className="md:col-span-2 pt-4 flex justify-end w-full">
+                    <Button
+                      onClick={handleNextStep}
+                      className="bg-zinc-800 hover:bg-zinc-700 text-white font-bold font-[family-name:var(--font-montserrat)] py-6 px-10 rounded-xl text-lg transition-all border border-white/10"
+                    >
+                      Prosegui &rarr;
+                    </Button>
+                  </div>
+                </div>
+
+                {/* STEP 2: Fatturazione & Contatti */}
+                <div id="step-2-container" className="w-full shrink-0 grid grid-cols-1 md:grid-cols-2 gap-6 p-1">
+
+                  {/* Ragione Sociale */}
+                  <div className="md:col-span-2 space-y-2">
+                    <label
+                      htmlFor="ragioneSociale"
+                      className="block text-base font-semibold font-[family-name:var(--font-montserrat)] text-zinc-300"
+                    >
+                      Ragione Sociale*
+                    </label>
+                    <input
+                      id="ragioneSociale"
+                      name="ragioneSociale"
+                      type="text"
+                      required
+                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-zinc-600 focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all"
+                    />
+                  </div>
+
+                  {/* Partita IVA / CF */}
+                  <div className="space-y-2">
+                    <label
+                      htmlFor="partitaIva"
+                      className="block text-base font-semibold font-[family-name:var(--font-montserrat)] text-zinc-300"
+                    >
+                      CF - Partita IVA*
+                    </label>
+                    <input
+                      id="partitaIva"
+                      name="partitaIva"
+                      type="text"
+                      required
+                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-zinc-600 focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all"
+                    />
+                  </div>
+
+                  {/* Codice Destinatario/SDI */}
+                  <div className="space-y-2">
+                    <label
+                      htmlFor="codiceSdi"
+                      className="block text-base font-semibold font-[family-name:var(--font-montserrat)] text-zinc-300"
+                    >
+                      Codice Destinatario/SDI
+                    </label>
+                    <input
+                      id="codiceSdi"
+                      name="codiceSdi"
+                      type="text"
+                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-zinc-600 focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all"
+                    />
+                  </div>
+
+                  {/* La tua email */}
+                  <div className="space-y-2">
+                    <label
+                      htmlFor="emailContatto"
+                      className="block text-base font-semibold font-[family-name:var(--font-montserrat)] text-zinc-300"
+                    >
+                      La tua email*
+                    </label>
+                    <input
+                      id="emailContatto"
+                      name="emailContatto"
+                      type="email"
+                      required
+                      readOnly
+                      defaultValue={userEmail || ""}
+                      className="w-full bg-black/20 border border-white/5 rounded-xl px-4 py-3 text-zinc-500 cursor-not-allowed focus:outline-none transition-all"
+                    />
+                  </div>
+
+                  {/* Il Tuo telefono */}
+                  <div className="space-y-2">
+                    <label
+                      htmlFor="telefono"
+                      className="block text-base font-semibold font-[family-name:var(--font-montserrat)] text-zinc-300"
+                    >
+                      Il Tuo telefono*
+                    </label>
+                    <input
+                      id="telefono"
+                      name="telefono"
+                      type="tel"
+                      required
+                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-zinc-600 focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all"
+                    />
+                  </div>
+
+                  {/* Box Totale da saldare */}
+                  <div className="md:col-span-2 mt-4 mb-2 flex justify-center text-center">
+                    <div className="bg-black/30 border border-emerald-500/20 rounded-2xl p-6 w-full max-w-sm shadow-[0_0_15px_rgba(16,185,129,0.1)]">
+                      <p className="text-white font-semibold mb-1 uppercase tracking-wider text-sm font-[family-name:var(--font-montserrat)]">{durataAbbonamento === '6 mesi' ? 'Totale complessivo 6 mesi' : 'Totale complessivo 12 mesi'}</p>
+                      <p className="font-bold mb-3 uppercase tracking-wide text-sky-400">Piano Basic</p>
+                      <p className="text-4xl font-bold font-[family-name:var(--font-montserrat)] text-sky-400"><span className="text-3xl font-medium pr-1">€</span>{totalPrice}</p>
+                      <p className="text-base text-white mt-3 font-semibold">*{getMonths()} mesi a € {getMonthlyPrice().toFixed(2).replace('.', ',')} / mese</p>
+                      <p className="text-sm text-emerald-200 mt-2 italic font-medium">I prezzi sono da considerarsi IVA esclusa</p>
+                    </div>
+                  </div>
+
+                  {/* Pulsanti Step 2 */}
+                  <div className="md:col-span-2 pt-4 flex flex-col-reverse md:flex-row justify-between w-full gap-4">
+                    <Button
+                      onClick={handlePrevStep}
+                      type="button"
+                      className="bg-transparent hover:bg-white/5 text-white font-semibold py-6 px-6 md:px-10 rounded-xl transition-all border border-white/10"
+                    >
+                      &larr; Indietro
+                    </Button>
+                    <Button
+                      type="submit"
+                      disabled={isSubmitting}
+                      className="bg-gradient-to-r from-teal-300 to-teal-100 hover:from-teal-200 hover:to-white text-teal-950 font-bold font-[family-name:var(--font-montserrat)] py-6 px-6 md:px-10 rounded-xl shadow-[0_0_20px_rgba(45,212,191,0.4)] transition-all disabled:opacity-50 border-none flex-1 md:flex-none text-lg"
+                    >
+                      {isSubmitting
+                        ? "Invio in corso..."
+                        : "Richiedi Upgrade"}
+                    </Button>
+                  </div>
+
+                </div>
+              </div>
             </div>
           </form>
 
