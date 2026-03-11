@@ -85,6 +85,7 @@ export function UsersTableClient({ initialProfiles }: { initialProfiles: any[] }
                             }
 
                             // --- CALCOLO STATUS ABBONAMENTO ---
+                            let computedPlanType = user.plan_type;
                             let isPlanActive = user.plan_status === 'active';
                             let displayStatus = user.plan_status || 'no active';
 
@@ -92,11 +93,13 @@ export function UsersTableClient({ initialProfiles }: { initialProfiles: any[] }
                             if (!user.plan_type || user.plan_type === 'free') {
                                 isPlanActive = false;
                                 displayStatus = 'no active';
+                                computedPlanType = 'free';
                             }
                             // Se l'utente è "free_trial" ma la data di trial è passata
                             else if (user.plan_type === 'free_trial' && user.trial_ends_at && new Date(user.trial_ends_at) < now) {
                                 isPlanActive = false;
                                 displayStatus = 'no active';
+                                computedPlanType = 'free';
                             }
                             // Se l'utente è "basic" o "premium" ma la data di scadenza è passata
                             else if ((user.plan_type === 'basic' || user.plan_type === 'premium' || user.plan_type === 'premiumcustomizzato') && user.subscription_expiration && new Date(user.subscription_expiration) < now) {
@@ -166,12 +169,12 @@ export function UsersTableClient({ initialProfiles }: { initialProfiles: any[] }
                                     <TableCell>
                                         <Badge variant="outline" className={`
                                             bg-transparent uppercase text-[10px] font-bold tracking-wider
-                                            ${user.plan_type === 'premium' ? 'bg-amber-500/10 text-amber-500 border-amber-500/50' :
-                                                user.plan_type === 'free_trial' ? 'text-emerald-400 border-emerald-400/50' :
-                                                    user.plan_type === 'basic' ? 'text-indigo-400 border-indigo-400/50' :
+                                            ${computedPlanType === 'premium' ? 'bg-amber-500/10 text-amber-500 border-amber-500/50' :
+                                                computedPlanType === 'free_trial' ? 'text-emerald-400 border-emerald-400/50' :
+                                                    computedPlanType === 'basic' ? 'text-indigo-400 border-indigo-400/50' :
                                                         'text-red-500 border-red-500/50'}
                                         `}>
-                                            {user.plan_type ? user.plan_type.replace('_', ' ') : 'free'}
+                                            {computedPlanType ? computedPlanType.replace('_', ' ') : 'free'}
                                         </Badge>
                                     </TableCell>
                                     <TableCell>
@@ -217,7 +220,7 @@ export function UsersTableClient({ initialProfiles }: { initialProfiles: any[] }
                                         <UserRowActions user={{
                                             id: user.id,
                                             role: user.role,
-                                            plan_type: user.plan_type,
+                                            plan_type: computedPlanType,
                                             salon_name: user.salon_name,
                                             subscription_expiration: user.subscription_expiration
                                         }} />

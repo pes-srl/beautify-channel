@@ -29,11 +29,18 @@ export async function updateUserProfile(userId: string, targetField: 'role' | 'p
     );
 
     const actualValue = newValue === '' ? null : newValue;
+    const updateData: any = { [targetField]: actualValue };
+
+    if (targetField === 'plan_type' && newValue === 'free_trial') {
+        const trialEndDate = new Date();
+        trialEndDate.setDate(trialEndDate.getDate() + 7);
+        updateData.trial_ends_at = trialEndDate.toISOString();
+    }
 
     // Update the profile bypassing RLS
     const { data: updatedProfile, error } = await supabaseAdmin
         .from('profiles')
-        .update({ [targetField]: actualValue })
+        .update(updateData)
         .eq('id', userId)
         .select()
         .single();

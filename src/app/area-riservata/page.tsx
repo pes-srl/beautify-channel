@@ -34,6 +34,7 @@ export default async function AreaClientePage() {
             daysLeft = Math.ceil((trialEndDate.getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24));
             if (daysLeft <= 0) {
                 isExpired = true;
+                profile.plan_type = 'free';
             }
         } else {
             // Fallback for old accounts without date: assume active but give 0 days visual
@@ -176,7 +177,8 @@ export default async function AreaClientePage() {
                         <span className={`px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest border border-white/10 ${profile?.plan_type === 'premium' ? 'bg-amber-500/10 text-amber-500' :
                             profile?.plan_type === 'free_trial' ? 'bg-emerald-500/10 text-emerald-400' :
                                 profile?.plan_type === 'basic' ? 'bg-indigo-500/10 text-indigo-400' :
-                                    'bg-zinc-800 text-zinc-400'
+                                    profile?.plan_type === 'free' ? 'bg-red-500/10 text-red-500 border border-red-500/30' :
+                                        'bg-zinc-800 text-zinc-400'
                             }`}>
                             Piano: {profile?.plan_type?.replace('_', ' ') || 'Free'}
                         </span>

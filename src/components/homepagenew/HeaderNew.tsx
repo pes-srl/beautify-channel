@@ -21,7 +21,7 @@ export function HeaderNew({
     initialProfile = null
 }: {
     initialUser?: SupabaseUser | null;
-    initialProfile?: { role: string | null; plan_type: string | null; salon_name: string | null } | null;
+    initialProfile?: { role: string | null; plan_type: string | null; salon_name: string | null; trial_ends_at?: string | null } | null;
 } = {}) {
     const pathname = usePathname();
 
@@ -30,7 +30,7 @@ export function HeaderNew({
 
     // Seed state with SSR props if available, otherwise fetch
     const [user, setUser] = useState<SupabaseUser | null>(initialUser);
-    const [profile, setProfile] = useState<{ role: string | null; plan_type: string | null; salon_name: string | null } | null>(initialProfile);
+    const [profile, setProfile] = useState<{ role: string | null; plan_type: string | null; salon_name: string | null; trial_ends_at?: string | null } | null>(initialProfile);
 
     // If we already have a user from SSR, we are not loading.
     const [isLoading, setIsLoading] = useState(!initialUser);
@@ -90,12 +90,18 @@ export function HeaderNew({
 
                 const { data: profileData, error: profileError } = await supabase
                     .from('profiles')
-                    .select('role, plan_type, salon_name')
+                    .select('role, plan_type, salon_name, trial_ends_at')
                     .eq('id', authUser.id)
                     .single();
 
                 if (!profileError && profileData) {
-                    setProfile({ role: profileData.role, plan_type: profileData.plan_type, salon_name: profileData.salon_name });
+                    let pType = profileData.plan_type;
+                    if (pType === 'free_trial' && profileData.trial_ends_at) {
+                        const trialEndDate = new Date(profileData.trial_ends_at);
+                        const daysLeft = Math.ceil((trialEndDate.getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24));
+                        if (daysLeft <= 0) pType = 'free';
+                    }
+                    setProfile({ role: profileData.role, plan_type: pType, salon_name: profileData.salon_name, trial_ends_at: profileData.trial_ends_at });
                 }
             } catch (err) {
                 console.error("Error in HeaderNew fetchUser:", err);
@@ -114,11 +120,17 @@ export function HeaderNew({
                 if (currentUser) {
                     const { data: profileData } = await supabase
                         .from('profiles')
-                        .select('role, plan_type, salon_name')
+                        .select('role, plan_type, salon_name, trial_ends_at')
                         .eq('id', currentUser.id)
                         .single();
                     if (profileData) {
-                        setProfile({ role: profileData.role, plan_type: profileData.plan_type, salon_name: profileData.salon_name });
+                        let pType = profileData.plan_type;
+                        if (pType === 'free_trial' && profileData.trial_ends_at) {
+                            const trialEndDate = new Date(profileData.trial_ends_at);
+                            const daysLeft = Math.ceil((trialEndDate.getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24));
+                            if (daysLeft <= 0) pType = 'free';
+                        }
+                        setProfile({ role: profileData.role, plan_type: pType, salon_name: profileData.salon_name, trial_ends_at: profileData.trial_ends_at });
                     }
                 } else {
                     setProfile(null);
