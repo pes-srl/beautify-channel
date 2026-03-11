@@ -49,19 +49,6 @@ export function UpgradeFormTrial({ userEmail }: { userEmail?: string }) {
 
   const handleNextStep = (e: React.MouseEvent) => {
     e.preventDefault();
-    const container = document.getElementById('step-1-container');
-    if (container) {
-      const inputs = container.querySelectorAll<HTMLInputElement>('input[required]');
-      let isValid = true;
-      for (let i = 0; i < inputs.length; i++) {
-        if (!inputs[i].checkValidity()) {
-          inputs[i].reportValidity();
-          isValid = false;
-          break;
-        }
-      }
-      if (!isValid) return;
-    }
     setCurrentStep(2);
   };
 
@@ -198,7 +185,7 @@ export function UpgradeFormTrial({ userEmail }: { userEmail?: string }) {
                       name="nomeIstituto"
                       type="text"
                       required
-                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-zinc-600 focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all"
+                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-zinc-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all"
                     />
                   </div>
 
@@ -214,7 +201,7 @@ export function UpgradeFormTrial({ userEmail }: { userEmail?: string }) {
                           type="text"
                           placeholder="Via/Piazza"
                           required
-                          className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-zinc-600 focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all"
+                          className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-zinc-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all"
                         />
                       </div>
                       <div className="col-span-6 md:col-span-2">
@@ -223,7 +210,7 @@ export function UpgradeFormTrial({ userEmail }: { userEmail?: string }) {
                           type="text"
                           placeholder="N°"
                           required
-                          className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-zinc-600 focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all"
+                          className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-zinc-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all"
                         />
                       </div>
                       <div className="col-span-6 md:col-span-3">
@@ -232,7 +219,7 @@ export function UpgradeFormTrial({ userEmail }: { userEmail?: string }) {
                           type="text"
                           placeholder="CAP"
                           required
-                          className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-zinc-600 focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all"
+                          className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-zinc-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all"
                         />
                       </div>
                       <div className="col-span-8 md:col-span-7">
@@ -241,7 +228,7 @@ export function UpgradeFormTrial({ userEmail }: { userEmail?: string }) {
                           type="text"
                           placeholder="Città"
                           required
-                          className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-zinc-600 focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all"
+                          className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-zinc-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all"
                         />
                       </div>
                       <div className="col-span-4 md:col-span-2">
@@ -251,7 +238,7 @@ export function UpgradeFormTrial({ userEmail }: { userEmail?: string }) {
                           placeholder="Pr(Mi)"
                           required
                           maxLength={2}
-                          className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-zinc-600 focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all uppercase"
+                          className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-zinc-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all uppercase"
                         />
                       </div>
                     </div>
@@ -301,7 +288,7 @@ export function UpgradeFormTrial({ userEmail }: { userEmail?: string }) {
                       name="responsabileIstituto"
                       type="text"
                       required
-                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-zinc-600 focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all"
+                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-zinc-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all"
                     />
                   </div>
 
@@ -332,7 +319,7 @@ export function UpgradeFormTrial({ userEmail }: { userEmail?: string }) {
                       name="ragioneSociale"
                       type="text"
                       required
-                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-zinc-600 focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all"
+                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-zinc-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all"
                     />
                   </div>
 
@@ -349,7 +336,7 @@ export function UpgradeFormTrial({ userEmail }: { userEmail?: string }) {
                       name="partitaIva"
                       type="text"
                       required
-                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-zinc-600 focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all"
+                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-zinc-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all"
                     />
                   </div>
 
@@ -365,7 +352,7 @@ export function UpgradeFormTrial({ userEmail }: { userEmail?: string }) {
                       id="codiceSdi"
                       name="codiceSdi"
                       type="text"
-                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-zinc-600 focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all"
+                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-zinc-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all"
                     />
                   </div>
 
@@ -384,7 +371,7 @@ export function UpgradeFormTrial({ userEmail }: { userEmail?: string }) {
                       required
                       readOnly
                       defaultValue={userEmail || ""}
-                      className="w-full bg-black/20 border border-white/5 rounded-xl px-4 py-3 text-zinc-500 cursor-not-allowed focus:outline-none transition-all"
+                      className="w-full bg-black/20 border border-white/5 rounded-xl px-4 py-3 text-zinc-300 cursor-not-allowed focus:outline-none transition-all"
                     />
                   </div>
 
@@ -401,18 +388,33 @@ export function UpgradeFormTrial({ userEmail }: { userEmail?: string }) {
                       name="telefono"
                       type="tel"
                       required
-                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-zinc-600 focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all"
+                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-zinc-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all"
                     />
                   </div>
 
                   {/* Box Totale da saldare */}
-                  <div className="md:col-span-2 mt-4 mb-2 flex justify-center text-center">
-                    <div className="bg-black/30 border border-emerald-500/20 rounded-2xl p-6 w-full max-w-sm shadow-[0_0_15px_rgba(16,185,129,0.1)]">
+                  <div className="md:col-span-2 mt-4 mb-2 flex flex-col md:flex-row justify-center items-stretch gap-6 text-center">
+                    
+                    {/* Switcher 6/12 mesi (DUPLICATO) */}
+                    <div className="flex flex-col gap-3 w-full max-w-[200px] justify-center">
+                      <label className={`cursor-pointer px-4 py-3 rounded-xl transition-all border font-semibold flex items-center justify-center gap-2 ${durataAbbonamento === '6 mesi' ? 'bg-fuchsia-600/30 border-fuchsia-400 text-white shadow-[0_0_10px_rgba(232,121,249,0.3)]' : 'bg-black/30 border-white/10 text-zinc-400 hover:bg-white/5'}`}>
+                        <input type="radio" name="durataAbbonamentoStep2" value="6 mesi" checked={durataAbbonamento === '6 mesi'} onChange={() => setDurataAbbonamento('6 mesi')} className="hidden" />
+                        <div className={`w-3 h-3 rounded-full border border-fuchsia-400 ${durataAbbonamento === '6 mesi' ? 'bg-fuchsia-400' : 'bg-transparent'}`}></div>
+                        6 mesi
+                      </label>
+                      <label className={`cursor-pointer px-4 py-3 rounded-xl transition-all border font-semibold flex items-center justify-center gap-2 ${durataAbbonamento === '12 mesi' ? 'bg-fuchsia-600/30 border-fuchsia-400 text-white shadow-[0_0_10px_rgba(232,121,249,0.3)]' : 'bg-black/30 border-white/10 text-zinc-400 hover:bg-white/5'}`}>
+                        <input type="radio" name="durataAbbonamentoStep2" value="12 mesi" checked={durataAbbonamento === '12 mesi'} onChange={() => setDurataAbbonamento('12 mesi')} className="hidden" />
+                        <div className={`w-3 h-3 rounded-full border border-fuchsia-400 ${durataAbbonamento === '12 mesi' ? 'bg-fuchsia-400' : 'bg-transparent'}`}></div>
+                        12 mesi
+                      </label>
+                    </div>
+
+                    <div className="bg-black/30 border border-fuchsia-400/20 rounded-2xl p-6 w-full max-w-sm shadow-[0_0_15px_rgba(232,121,249,0.1)] flex flex-col justify-center">
                       <p className="text-white font-semibold mb-1 uppercase tracking-wider text-sm font-[family-name:var(--font-montserrat)]">{durataAbbonamento === '6 mesi' ? 'Totale complessivo 6 mesi' : 'Totale complessivo 12 mesi'}</p>
-                      <p className="font-bold mb-3 uppercase tracking-wide text-sky-400">Piano Basic</p>
-                      <p className="text-4xl font-bold font-[family-name:var(--font-montserrat)] text-sky-400"><span className="text-3xl font-medium pr-1">€</span>{totalPrice}</p>
+                      <p className="font-bold mb-3 uppercase tracking-wide text-fuchsia-300">Piano Basic</p>
+                      <p className="text-4xl font-bold font-[family-name:var(--font-montserrat)] text-fuchsia-300"><span className="text-3xl font-medium pr-1">€</span>{totalPrice}</p>
                       <p className="text-base text-white mt-3 font-semibold">*{getMonths()} mesi a € {getMonthlyPrice().toFixed(2).replace('.', ',')} / mese</p>
-                      <p className="text-sm text-emerald-200 mt-2 italic font-medium">I prezzi sono da considerarsi IVA esclusa</p>
+                      <p className="text-sm text-fuchsia-200 mt-2 italic font-medium">I prezzi sono da considerarsi IVA esclusa</p>
                     </div>
                   </div>
 
