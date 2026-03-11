@@ -26,10 +26,7 @@ export default async function AreaClienteLayout({
         .eq("id", user.id)
         .single();
 
-    const isFreeTrial = profile?.plan_type === 'free_trial';
-    const bgClass = isFreeTrial 
-        ? "bg-gradient-to-br from-[#2E1A38] via-[#5F1CD3] to-[#CC3B5F]"
-        : "bg-gradient-to-b from-[#2e035b] via-[#6b423d] to-[#b9adad]";
+    const bgClass = "bg-[#1e0c31]";
 
     return (
         <div className={`min-h-screen ${bgClass} flex flex-col relative pt-16 ${inter.className}`}>
