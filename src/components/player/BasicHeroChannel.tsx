@@ -43,13 +43,13 @@ export function BasicHeroChannel({ channel, planType }: BasicHeroChannelProps) {
     };
 
     return (
-        <div className={`relative w-full rounded-3xl overflow-hidden shadow-2xl mb-12 group ${isPremium ? 'shadow-amber-900/20' : planType === 'free_trial' ? 'shadow-purple-900/40 border border-[#FAFAFA]/20' : 'shadow-sky-900/20'}`}>
+        <div className={`relative w-full rounded-3xl overflow-hidden shadow-2xl mb-12 group transition-all duration-700 ${isPremium ? 'shadow-amber-900/20' : planType === 'free_trial' ? 'shadow-purple-900/40 border border-[#FAFAFA]/20' : planType === 'basic' ? 'shadow-[#dfa3fb]/30 border border-white/30 hover:border-white/50' : 'shadow-sky-900/20'}`}>
             {/* Animated Gradient Background */}
-            <div className={`absolute inset-0 bg-linear-to-br z-0 ${isPremium ? 'from-amber-900 via-zinc-900 to-black' : planType === 'free_trial' ? 'from-black/40 via-purple-900/30 to-black/20 backdrop-blur-md' : 'from-sky-900 via-indigo-950 to-black'}`} />
+            <div className={`absolute inset-0 bg-gradient-to-r z-0 ${isPremium ? 'from-amber-900 via-zinc-900 to-black' : planType === 'free_trial' ? 'from-black/40 via-purple-900/30 to-black/20 backdrop-blur-md' : planType === 'basic' ? 'from-[#fba5cc] to-[#dfa3fb]' : 'from-sky-900 via-indigo-950 to-black'}`} />
 
             {/* Glowing Orbs */}
-            <div className={`absolute top-0 right-0 w-[500px] h-[500px] blur-[100px] rounded-full mix-blend-screen -translate-y-1/2 translate-x-1/3 pointer-events-none ${isPremium ? 'bg-amber-600/20' : planType === 'free_trial' ? 'bg-[#FAFAFA]/20' : 'bg-sky-600/20'}`} />
-            <div className={`absolute bottom-0 left-0 w-[300px] h-[300px] blur-[80px] rounded-full mix-blend-screen translate-y-1/2 -translate-x-1/3 pointer-events-none ${isPremium ? 'bg-orange-600/20' : planType === 'free_trial' ? 'bg-[#DDA0DD]/20' : 'bg-purple-600/20'}`} />
+            <div className={`absolute top-0 right-0 w-[500px] h-[500px] blur-[100px] rounded-full mix-blend-screen -translate-y-1/2 translate-x-1/3 pointer-events-none ${isPremium ? 'bg-amber-600/20' : planType === 'free_trial' ? 'bg-[#FAFAFA]/20' : planType === 'basic' ? 'bg-white/30' : 'bg-sky-600/20'}`} />
+            <div className={`absolute bottom-0 left-0 w-[300px] h-[300px] blur-[80px] rounded-full mix-blend-screen translate-y-1/2 -translate-x-1/3 pointer-events-none ${isPremium ? 'bg-orange-600/20' : planType === 'free_trial' ? 'bg-[#DDA0DD]/20' : planType === 'basic' ? 'bg-white/20' : 'bg-purple-600/20'}`} />
 
             {/* Content Container */}
             <div className="relative z-10 flex flex-col md:flex-row items-center border border-white/10 rounded-3xl bg-black/20 backdrop-blur-sm">
@@ -57,17 +57,17 @@ export function BasicHeroChannel({ channel, planType }: BasicHeroChannelProps) {
                 {/* Left side: Premium Badge & Info */}
                 <div className="flex-1 p-8 md:p-12 flex flex-col justify-center">
                     <div className="flex items-center gap-3 mb-6">
-                        <div className="flex items-center gap-1.5 bg-white/10 text-white px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest border border-white/20 backdrop-blur-md">
-                            <Sparkles className={`w-3.5 h-3.5 ${isPremium ? 'text-amber-400' : planType === 'free_trial' ? 'text-purple-300' : 'text-sky-400'}`} />
+                        <div className={`flex items-center gap-1.5 bg-white/10 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest border border-white/20 backdrop-blur-md ${planType === 'basic' ? '!bg-white/20 !border-white/30 text-[#5B21B6]' : 'text-white'}`}>
+                            <Sparkles className={`w-3.5 h-3.5 ${isPremium ? 'text-amber-400' : planType === 'free_trial' ? 'text-purple-300' : planType === 'basic' ? 'text-[#5B21B6]' : 'text-sky-400'}`} />
                             <span>CANALE PRINCIPALE</span>
                         </div>
                         {isActive && (
-                            <div className={`flex items-center gap-2 border px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest ${isPremium ? 'bg-amber-500/20 text-amber-400 border-amber-500/30' : planType === 'free_trial' ? 'bg-purple-500/20 text-purple-300 border-purple-500/30' : 'bg-sky-500/20 text-sky-400 border-sky-500/30'}`}>
+                            <div className={`flex items-center gap-2 border px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest ${isPremium ? 'bg-amber-500/20 text-amber-400 border-amber-500/30' : planType === 'free_trial' ? 'bg-purple-500/20 text-purple-300 border-purple-500/30' : planType === 'basic' ? 'bg-white/20 text-white border-white/30 drop-shadow-sm' : 'bg-sky-500/20 text-sky-400 border-sky-500/30'}`}>
                                 <div className="flex gap-0.5 items-end h-3">
                                     {[1, 2, 3].map((i) => (
                                         <motion.div
                                             key={`wave-${i}`}
-                                            className={`w-0.5 rounded-full ${isPremium ? 'bg-amber-400' : planType === 'free_trial' ? 'bg-purple-300' : 'bg-sky-400'}`}
+                                            className={`w-0.5 rounded-full ${isPremium ? 'bg-amber-400' : planType === 'free_trial' ? 'bg-purple-300' : planType === 'basic' ? 'bg-white' : 'bg-white'}`}
                                             animate={isCurrentlyPlaying ? { height: ["4px", "10px", "4px"] } : { height: "4px" }}
                                             transition={{ repeat: Infinity, duration: 1.2, delay: i * 0.2 }}
                                         />
@@ -78,37 +78,37 @@ export function BasicHeroChannel({ channel, planType }: BasicHeroChannelProps) {
                         )}
                     </div>
 
-                    <h2 className="text-4xl md:text-5xl lg:text-6xl font-semibold font-[family-name:var(--font-montserrat)] text-transparent bg-clip-text bg-linear-to-r from-white to-white/70 tracking-tight mb-4">
+                    <h2 className="text-4xl md:text-5xl lg:text-6xl font-semibold font-[family-name:var(--font-montserrat)] text-transparent bg-clip-text bg-linear-to-r from-white to-zinc-200 tracking-tight mb-4 drop-shadow-sm">
                         Beautify Channel
-                        <span className={`block ${isPremium ? 'text-amber-400' : planType === 'free_trial' ? 'text-[#FF4D79]' : 'text-sky-400'}`}>
+                        <span className={`block ${isPremium ? 'text-amber-400' : planType === 'free_trial' ? 'text-[#FF4D79]' : planType === 'basic' ? 'text-[#5B21B6]' : 'text-sky-400'}`}>
                             {isPremium ? 'Premium' : planType === 'free_trial' ? 'Prova Gratuita' : 'Basic'}
                         </span>
                     </h2>
 
-                    <p className="text-zinc-300 text-lg md:text-lg max-w-xl leading-relaxed mb-8">
+                    <p className={`text-lg md:text-lg max-w-xl leading-relaxed mb-8 ${planType === 'basic' ? 'text-white/90 font-medium' : 'text-zinc-300'}`}>
                         {isPremium ? (
                             <>Questo è il <strong className="text-white font-black">CANALE AUDIO PRINCIPALE</strong> che contiene tutte le <strong className="text-amber-400 font-black">TUE PROMO PERSONALIZZATE</strong> dei prossimi mesi e che trasforma radicalmente l'atmosfera del tuo istituto!<br />Sotto altri canali settoriali!</>
                         ) : (
-                            <>Questo è il <strong className={`font-black ${planType === 'free_trial' ? 'text-[#FF4D79]' : 'text-white'}`}>CANALE AUDIO PRINCIPALE</strong> che trasforma <strong className={`font-black ${planType === 'free_trial' ? 'text-[#FF4D79]' : 'text-white'}`}>RADICALMENTE</strong> l'atmosfera del tuo istituto!<br />Sotto altri canali settoriali!</>
+                            <>Questo è il <strong className={`font-black ${planType === 'free_trial' ? 'text-[#FF4D79]' : planType === 'basic' ? 'text-[#5B21B6]' : 'text-white'}`}>CANALE AUDIO PRINCIPALE</strong> che trasforma <strong className={`font-black ${planType === 'free_trial' ? 'text-[#FF4D79]' : planType === 'basic' ? 'text-[#5B21B6]' : 'text-white'}`}>RADICALMENTE</strong> l'atmosfera del tuo istituto!<br />Sotto altri canali settoriali!</>
                         )}
                     </p>
 
                 </div>
 
                 {/* Right side: Abstract Art / Vinyl Visualizer & Play Button */}
-                <div className="flex flex-col w-full md:w-1/3 relative items-center justify-center p-8 md:p-12 border-t md:border-t-0 md:border-l border-white/5 bg-black/10">
-                    <div className="absolute inset-0 bg-linear-to-b md:bg-linear-to-l from-black/80 to-transparent pointer-events-none" />
+                <div className={`flex flex-col w-full md:w-1/3 relative items-center justify-center p-8 md:p-12 border-t md:border-t-0 ${planType === 'basic' ? '' : 'md:border-l border-white/5 bg-black/10'}`}>
+                    <div className={`absolute inset-0 md:bg-gradient-to-l pointer-events-none ${planType === 'basic' ? 'bg-gradient-to-b from-black/50 to-transparent' : 'bg-gradient-to-b from-black/80 to-transparent'}`} />
 
                     {/* Pulsing rings if active */}
                     {isCurrentlyPlaying && (
                         <>
                             <motion.div
-                                className={`absolute w-[80%] h-[80%] rounded-full border ${isPremium ? 'border-amber-500/20' : 'border-fuchsia-500/20'}`}
+                                className={`absolute w-[80%] h-[80%] rounded-full border ${isPremium ? 'border-amber-500/20' : planType === 'basic' ? 'border-white/30' : 'border-fuchsia-500/20'}`}
                                 animate={{ scale: [1, 1.2, 1], opacity: [0.5, 0, 0.5] }}
                                 transition={{ repeat: Infinity, duration: 3, ease: "linear" }}
                             />
                             <motion.div
-                                className={`absolute w-[60%] h-[60%] rounded-full border ${isPremium ? 'border-orange-500/20' : 'border-indigo-500/20'}`}
+                                className={`absolute w-[60%] h-[60%] rounded-full border ${isPremium ? 'border-orange-500/20' : planType === 'basic' ? 'border-white/20' : 'border-indigo-500/20'}`}
                                 animate={{ scale: [1, 1.3, 1], opacity: [0.5, 0, 0.5] }}
                                 transition={{ repeat: Infinity, duration: 2.5, ease: "linear", delay: 0.5 }}
                             />

@@ -77,7 +77,13 @@ export default async function AreaClientePage() {
 
             {/* DYNAMIC WELCOME BANNER BASED ON PLAN */}
             {!isAdmin && profile?.plan_type && !isExpired && (
-                <div className="mb-6 p-4 rounded-xl border border-purple-500/30 bg-gradient-to-r from-fuchsia-900/20 to-purple-900/80 backdrop-blur-md flex items-center justify-center text-center shadow-lg shadow-purple-900/20">
+                <div className={`mb-6 p-4 rounded-xl border backdrop-blur-md flex items-center justify-center text-center shadow-lg ${
+                    profile.plan_type === 'free_trial' 
+                        ? 'border-purple-500/30 bg-gradient-to-r from-fuchsia-900/20 to-purple-900/80 shadow-purple-900/20'
+                        : profile.plan_type === 'basic'
+                        ? 'border-sky-500/30 bg-gradient-to-r from-indigo-900/20 to-sky-900/80 shadow-sky-900/20'
+                        : 'border-white/5 bg-zinc-900/50 shadow-md'
+                }`}>
                     <div className="w-full">
                         {profile.plan_type === 'free_trial' ? (
                             <div className="flex flex-col items-center justify-center space-y-4 py-4">
@@ -116,7 +122,10 @@ export default async function AreaClientePage() {
                             </div>
                         ) : profile.plan_type === 'basic' ? (
                             <div className="flex flex-col items-center justify-center space-y-4 py-4">
-                                <h2 className="text-2xl md:text-4xl uppercase tracking-[0.15em] text-zinc-100 font-[family-name:var(--font-montserrat)] font-light flex flex-col md:flex-row items-center gap-2 md:gap-3 text-center md:text-left">
+                                <h1 className="text-5xl md:text-7xl uppercase tracking-[0.2em] font-[family-name:var(--font-montserrat)] font-black text-[#00E5FF] drop-shadow-sm mb-2">
+                                    GRAZIE
+                                </h1>
+                                <h2 className="text-2xl md:text-4xl uppercase tracking-[0.15em] text-zinc-100 font-[family-name:var(--font-montserrat)] font-light flex flex-col md:flex-row items-center gap-2 md:gap-3 text-center md:text-left mb-6">
                                     <span>BENVENUTA NEL TUO ACCOUNT</span>
                                     <img
                                         src="https://eufahlzjxbimyiwivoiq.supabase.co/storage/v1/object/public/bucket-assets/Logo-BeautiFyChannel.svg"
@@ -124,10 +133,27 @@ export default async function AreaClientePage() {
                                         className="h-8 md:h-10 lg:h-12 w-auto mt-2 md:mt-0"
                                     />
                                 </h2>
-                                <div className="w-24 h-[1px] bg-gradient-to-r from-transparent via-white/50 to-transparent" />
-                                <p className="text-zinc-300 font-medium text-xl tracking-wide leading-relaxed">
-                                    <strong className="text-sky-400 font-black">GRAZIE PER LA FIDUCIA</strong> in BeautiFy Channel <strong className="text-sky-400 font-black">ORA</strong>, hai a disposizione il <strong className="text-sky-400 font-black">NUOVO</strong> e unico<br className="md:hidden" /> strumento di <strong className="text-sky-400 font-black">MARKETING SENSORIALE</strong> dedicato al settore, con le sue potenzialità.
-                                </p>
+                                <div className="w-24 h-[1px] bg-gradient-to-r from-transparent via-white/50 to-transparent mt-2 mb-8" />
+                                <div className="flex flex-col items-center justify-center text-center max-w-3xl mx-auto mt-4">
+
+                                    <div className="relative inline-flex flex-col items-center justify-center p-6 md:p-8 rounded-3xl border border-sky-500/20 bg-sky-950/20 shadow-[0_0_40px_rgba(0,229,255,0.15)] overflow-hidden w-full max-w-lg mb-6">
+                                        <div className="absolute inset-0 bg-gradient-to-br from-sky-500/5 to-transparent pointer-events-none" />
+                                        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 bg-[#00E5FF]/10 blur-[50px] rounded-full pointer-events-none" />
+
+                                        <span className="relative z-10 text-sm md:text-base text-white font-medium tracking-widest uppercase mb-1">
+                                            Il tuo piano attuale
+                                        </span>
+                                        <span className="relative z-10 font-black text-[#00E5FF] text-4xl md:text-5xl tracking-[0.1em] py-2 drop-shadow-sm font-[family-name:var(--font-montserrat)]">
+                                            PIANO BASIC
+                                        </span>
+                                        <span className="relative z-10 text-white italic font-light text-base md:text-lg mt-1">
+                                            Accesso illimitato al marketing sensoriale
+                                        </span>
+                                    </div>
+                                    <p className="text-zinc-200 font-medium text-lg md:text-xl tracking-wide leading-relaxed mt-2 max-w-2xl mx-auto">
+                                        Hai a disposizione il <strong className="text-[#00E5FF] font-black">NUOVO E UNICO</strong> strumento dedicato al settore. Sfrutta a pieno le sue enormi potenzialità!
+                                    </p>
+                                </div>
                             </div>
                         ) : (
                             <div className="flex flex-col items-center justify-center space-y-4 py-4">
@@ -212,18 +238,18 @@ export default async function AreaClientePage() {
                     {(profile?.plan_type === 'free_trial' || profile?.plan_type === 'basic' || profile?.plan_type === 'premium') && (
                         <div className="mb-8">
                             <div className="text-center mb-8 flex flex-col items-center justify-center">
-                                <h3 className={`text-xl md:text-2xl font-black font-[family-name:var(--font-montserrat)] text-transparent bg-clip-text uppercase mb-4 tracking-[0.15em] md:tracking-[0.2em] ${profile?.plan_type === 'premium' ? 'bg-gradient-to-r from-amber-300 to-orange-100 drop-shadow-[0_0_10px_rgba(251,191,36,0.5)]' :
-                                    profile?.plan_type === 'basic' ? 'bg-gradient-to-r from-sky-300 to-indigo-200 drop-shadow-[0_0_10px_rgba(56,189,248,0.5)]' :
-                                        'bg-gradient-to-r from-white to-gray-200 drop-shadow-[0_0_10px_rgba(255,255,255,0.5)]'
+                                <h3 className={`text-xl md:text-2xl font-black font-[family-name:var(--font-montserrat)] uppercase mb-4 tracking-[0.15em] md:tracking-[0.2em] ${profile?.plan_type === 'premium' ? 'text-transparent bg-clip-text bg-gradient-to-r from-amber-300 to-orange-100 drop-shadow-[0_0_10px_rgba(251,191,36,0.5)]' :
+                                    profile?.plan_type === 'basic' ? 'text-[#5B21B6] drop-shadow-sm' :
+                                        'text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-200 drop-shadow-[0_0_10px_rgba(255,255,255,0.5)]'
                                     }`}>
                                     QUESTO E' IL TUO CANALE AUDIO PRINCIPALE
                                 </h3>
                                 <div className={`p-3 rounded-full border animate-bounce ${profile?.plan_type === 'premium' ? 'bg-amber-500/20 border-amber-500/30 shadow-[0_0_15px_rgba(251,191,36,0.3)]' :
-                                    profile?.plan_type === 'basic' ? 'bg-sky-500/20 border-sky-500/30 shadow-[0_0_15px_rgba(56,189,248,0.3)]' :
+                                    profile?.plan_type === 'basic' ? 'bg-[#5B21B6]/20 border-[#5B21B6]/30 shadow-[0_0_15px_rgba(91,33,182,0.3)]' :
                                         'bg-white/10 border-white/30 shadow-[0_0_15px_rgba(255,255,255,0.3)]'
                                     }`}>
                                     <ArrowDown className={`w-6 h-6 md:w-8 md:h-8 ${profile?.plan_type === 'premium' ? 'text-amber-300' :
-                                        profile?.plan_type === 'basic' ? 'text-sky-300' :
+                                        profile?.plan_type === 'basic' ? 'text-[#5B21B6]' :
                                             'text-white'
                                         }`} />
                                 </div>
@@ -243,22 +269,22 @@ export default async function AreaClientePage() {
 
                                 <details className="group w-full max-w-7xl mx-auto relative z-20">
                                     <summary className="cursor-pointer list-none flex justify-center items-center w-full outline-none select-none mb-4 text-center relative z-20">
-                                        <div className={`flex items-center justify-between w-full max-w-[360px] md:max-w-[640px] px-6 md:px-10 py-4 rounded-[2rem] border border-white/5 backdrop-blur-md shadow-xl transition-all duration-300 hover:border-white/10 relative overflow-hidden group/btn ${profile?.plan_type === 'free_trial' ? 'bg-gradient-to-br from-[#FAFAFA]/20 via-purple-300/10 to-[#DDA0DD]/5' : 'bg-white/[0.02] hover:bg-white/[0.05]'}`}>
+                                        <div className={`flex items-center justify-between w-full max-w-[360px] md:max-w-[640px] px-6 md:px-10 py-4 rounded-[2rem] border border-white/5 backdrop-blur-md shadow-xl transition-all duration-300 hover:border-white/10 relative overflow-hidden group/btn ${profile?.plan_type === 'free_trial' ? 'bg-gradient-to-br from-[#FAFAFA]/20 via-purple-300/10 to-[#DDA0DD]/5' : profile?.plan_type === 'basic' ? 'bg-gradient-to-br from-[#00E5FF]/[0.05] via-[#00E5FF]/[0.08] to-indigo-500/[0.05]' : 'bg-white/[0.02] hover:bg-white/[0.05]'}`}>
                                             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full group-hover/btn:translate-x-full transition-transform duration-1000"></div>
                                             <div className="flex items-center gap-3 md:gap-4 flex-1 text-left">
-                                                <PlayCircle className={`w-8 h-8 md:w-10 md:h-10 shrink-0 ${profile?.plan_type === 'free_trial' ? 'text-purple-300' : 'text-sky-400'}`} />
+                                                <PlayCircle className={`w-8 h-8 md:w-10 md:h-10 shrink-0 ${profile?.plan_type === 'free_trial' ? 'text-purple-300' : profile?.plan_type === 'basic' ? 'text-[#00E5FF]' : 'text-sky-400'}`} />
                                                 <span className="text-2xl md:text-4xl text-white font-[family-name:var(--font-montserrat)] tracking-[0.2em] md:tracking-[0.3em] uppercase drop-shadow-sm whitespace-nowrap">
                                                     COME FUNZIONA
                                                 </span>
                                             </div>
-                                            <div className={`p-1.5 md:p-2 rounded-full border transition-transform duration-300 group-open:rotate-180 flex-shrink-0 ${profile?.plan_type === 'free_trial' ? 'bg-purple-500/10 border-purple-500/20 text-purple-300' : 'bg-sky-500/10 border-sky-500/20 text-sky-400'}`}>
+                                            <div className={`p-1.5 md:p-2 rounded-full border transition-transform duration-300 group-open:rotate-180 flex-shrink-0 ${profile?.plan_type === 'free_trial' ? 'bg-purple-500/10 border-purple-500/20 text-purple-300' : profile?.plan_type === 'basic' ? 'bg-[#00E5FF]/10 border-[#00E5FF]/20 text-[#00E5FF]' : 'bg-sky-500/10 border-sky-500/20 text-sky-400'}`}>
                                                 <ChevronDown className="w-5 h-5 md:w-6 md:h-6" />
                                             </div>
                                         </div>
                                     </summary>
 
                                     {/* Content Wrapper */}
-                                    <div className={`border border-white/5 rounded-[35px] shadow-2xl p-6 md:p-10 relative overflow-hidden backdrop-blur-xl ${profile?.plan_type === 'free_trial' ? 'bg-gradient-to-br from-[#FAFAFA]/20 via-purple-300/10 to-[#DDA0DD]/5' : 'bg-[#0f0518]'} animate-in fade-in slide-in-from-top-4 duration-500`}>
+                                    <div className={`border border-white/5 rounded-[35px] shadow-2xl p-6 md:p-10 relative overflow-hidden backdrop-blur-xl ${profile?.plan_type === 'free_trial' ? 'bg-gradient-to-br from-[#FAFAFA]/20 via-purple-300/10 to-[#DDA0DD]/5' : profile?.plan_type === 'basic' ? 'bg-[#312344]' : 'bg-[#0f0518]'} animate-in fade-in slide-in-from-top-4 duration-500`}>
                                         {/* Overlay di luce */}
                                         <div className={`absolute top-0 right-0 w-[500px] h-[500px] rounded-full blur-[80px] -translate-y-1/2 translate-x-1/2 pointer-events-none ${profile?.plan_type === 'free_trial' ? 'bg-[#FAFAFA]/10' : 'bg-fuchsia-600/10'}`} />
                                         <div className={`absolute bottom-0 left-0 w-[400px] h-[400px] rounded-full blur-[80px] translate-y-1/3 -translate-x-1/3 pointer-events-none ${profile?.plan_type === 'free_trial' ? 'bg-purple-400/10' : 'bg-indigo-600/10'}`} />
@@ -269,11 +295,11 @@ export default async function AreaClientePage() {
                                             <p className="text-xl md:text-2xl text-zinc-200 font-light leading-relaxed">
                                                 Nulla di più semplice!<br /><span className="text-white font-medium">Collega il tuo pc / smartphone / tablet</span> all'impianto audio del tuo istituto o a delle <span className="text-white font-medium">casse Bluetooth</span>.<br /><br /><span className="text-white font-medium">Premi play sul canale principale</span> qui sopra, imposta il giusto volume in salone e <span className="text-white font-medium">dimenticatene</span>, il resto lo fa <span className="text-white font-medium">BeautiFy</span>.
                                             </p>
-                                            <div className={`pl-6 border-l-2 py-1 space-y-4 ${profile?.plan_type === 'free_trial' ? 'border-purple-500/30' : 'border-indigo-500/30'}`}>
+                                            <div className={`pl-6 border-l-2 py-1 space-y-4 ${profile?.plan_type === 'free_trial' ? 'border-purple-500/30' : profile?.plan_type === 'basic' ? 'border-[#00E5FF]/30' : 'border-indigo-500/30'}`}>
                                                 <p className="text-lg md:text-xl text-zinc-200 leading-relaxed font-light">
-                                                    I nostri canali audio propongono una <span className="text-white font-medium">raffinata selezione</span> <span className={`font-medium ${profile?.plan_type === 'free_trial' ? 'text-purple-200' : 'text-sky-200'}`}>di diversi generi musicali</span>, intervallata da <span className={`font-medium ${profile?.plan_type === 'free_trial' ? 'text-purple-200' : 'text-sky-200'}`}>eleganti, delicati e generici</span> <span className={`font-medium ${profile?.plan_type === 'free_trial' ? 'text-purple-300' : 'text-sky-400'}`}>suggerimenti vocali</span>.
+                                                    I nostri canali audio propongono una <span className="text-white font-medium">raffinata selezione</span> <span className={`font-medium ${profile?.plan_type === 'free_trial' ? 'text-purple-200' : profile?.plan_type === 'basic' ? 'text-[#00E5FF]/80' : 'text-sky-200'}`}>di diversi generi musicali</span>, intervallata da <span className={`font-medium ${profile?.plan_type === 'free_trial' ? 'text-purple-200' : profile?.plan_type === 'basic' ? 'text-[#00E5FF]/80' : 'text-sky-200'}`}>eleganti, delicati e generici</span> <span className={`font-medium ${profile?.plan_type === 'free_trial' ? 'text-purple-300' : profile?.plan_type === 'basic' ? 'text-[#00E5FF]' : 'text-sky-400'}`}>suggerimenti vocali</span>.
                                                 </p>
-                                                <p className={`text-lg tracking-wide mt-2 font-light ${profile?.plan_type === 'free_trial' ? 'text-purple-300/90' : 'text-sky-300/90'}`}>
+                                                <p className={`text-lg tracking-wide mt-2 font-light ${profile?.plan_type === 'free_trial' ? 'text-purple-300/90' : profile?.plan_type === 'basic' ? 'text-[#00E5FF]/90' : 'text-sky-300/90'}`}>
                                                     Studiati per <span className="text-white font-medium">stimolare la curiosità</span> delle tue clienti e l'<span className="text-white font-medium">acquisto dei tuoi servizi</span>.
                                                 </p>
                                             </div>
@@ -315,7 +341,7 @@ export default async function AreaClientePage() {
                                                 </div>
                                             </div>
                                             <div className="pt-4 mt-2 border-t border-white/5">
-                                                <p className={`font-bold font-[family-name:var(--font-montserrat)] tracking-wider uppercase text-lg flex items-center gap-2 ${profile?.plan_type === 'free_trial' ? 'text-purple-300' : 'text-sky-400'}`}>
+                                                <p className={`font-bold font-[family-name:var(--font-montserrat)] tracking-wider uppercase text-lg flex items-center gap-2 ${profile?.plan_type === 'free_trial' ? 'text-purple-300' : profile?.plan_type === 'basic' ? 'text-[#00E5FF]' : 'text-sky-400'}`}>
                                                     <Radio className="w-5 h-5" /> Buon ascolto
                                                 </p>
                                             </div>
@@ -331,15 +357,15 @@ export default async function AreaClientePage() {
 
                     <details className="group w-full max-w-7xl mx-auto mt-2 mb-16 relative z-10">
                         <summary className="cursor-pointer list-none flex justify-center items-center w-full outline-none select-none mb-10 text-center relative z-20">
-                            <div className={`flex items-center justify-between w-full max-w-[360px] md:max-w-[640px] px-6 md:px-10 py-4 rounded-[2rem] border border-white/5 backdrop-blur-md shadow-xl transition-all duration-300 hover:border-white/10 relative overflow-hidden group/btn ${profile?.plan_type === 'free_trial' ? 'bg-gradient-to-br from-[#FAFAFA]/20 via-purple-300/10 to-[#DDA0DD]/5' : 'bg-white/[0.02] hover:bg-white/[0.05]'}`}>
+                            <div className={`flex items-center justify-between w-full max-w-[360px] md:max-w-[640px] px-6 md:px-10 py-4 rounded-[2rem] border border-white/5 backdrop-blur-md shadow-xl transition-all duration-300 hover:border-white/10 relative overflow-hidden group/btn ${profile?.plan_type === 'free_trial' ? 'bg-gradient-to-br from-[#FAFAFA]/20 via-purple-300/10 to-[#DDA0DD]/5' : profile?.plan_type === 'basic' ? 'bg-gradient-to-br from-[#00E5FF]/[0.05] via-[#00E5FF]/[0.08] to-indigo-500/[0.05]' : 'bg-white/[0.02] hover:bg-white/[0.05]'}`}>
                                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full group-hover/btn:translate-x-full transition-transform duration-1000"></div>
                                 <div className="flex items-center gap-3 md:gap-4 flex-1 text-left">
-                                    <Radio className={`w-8 h-8 md:w-10 md:h-10 shrink-0 ${profile?.plan_type === 'free_trial' ? 'text-purple-300' : 'text-sky-400'}`} />
+                                    <Radio className={`w-8 h-8 md:w-10 md:h-10 shrink-0 ${profile?.plan_type === 'free_trial' ? 'text-purple-300' : profile?.plan_type === 'basic' ? 'text-[#00E5FF]' : 'text-sky-400'}`} />
                                     <span className="text-2xl md:text-4xl text-white font-[family-name:var(--font-montserrat)] tracking-[0.2em] md:tracking-[0.3em] uppercase drop-shadow-sm whitespace-nowrap pt-1">
                                         ALTRI CANALI
                                     </span>
                                 </div>
-                                <div className={`p-1.5 md:p-2 rounded-full border transition-transform duration-300 group-open:rotate-180 flex-shrink-0 ${profile?.plan_type === 'free_trial' ? 'bg-purple-500/10 border-purple-500/20 text-purple-300' : 'bg-sky-500/10 border-sky-500/20 text-sky-400'}`}>
+                                <div className={`p-1.5 md:p-2 rounded-full border transition-transform duration-300 group-open:rotate-180 flex-shrink-0 ${profile?.plan_type === 'free_trial' ? 'bg-purple-500/10 border-purple-500/20 text-purple-300' : profile?.plan_type === 'basic' ? 'bg-[#00E5FF]/10 border-[#00E5FF]/20 text-[#00E5FF]' : 'bg-sky-500/10 border-sky-500/20 text-sky-400'}`}>
                                     <ChevronDown className="w-5 h-5 md:w-6 md:h-6" />
                                 </div>
                             </div>
