@@ -96,7 +96,7 @@ export default async function AreaClientePage2() {
                                             className="h-6 md:h-8 w-auto mt-2 md:mt-0"
                                         />
                                     </h2>
-                                    <div className="w-16 h-[1px] bg-gradient-to-r from-transparent via-[#AB7169]/50 to-transparent" />
+                                    <div className="w-16 h-[1px] bg-gradient-to-r from-transparent via-white/50 to-transparent" />
                                     <div className="flex flex-col items-center justify-center text-center max-w-3xl mx-auto mt-4">
                                         <h3 className="font-[family-name:var(--font-montserrat)] text-center w-full mb-6">
                                             <span className="block text-base md:text-lg text-white font-light leading-relaxed mb-3">
@@ -136,7 +136,7 @@ export default async function AreaClientePage2() {
                                             className="h-8 md:h-10 lg:h-12 w-auto mt-2 md:mt-0"
                                         />
                                     </h2>
-                                    <div className="w-24 h-[1px] bg-gradient-to-r from-transparent via-[#D8B2A3]/50 to-transparent" />
+                                    <div className="w-24 h-[1px] bg-gradient-to-r from-transparent via-white/50 to-transparent" />
                                     <p className="text-zinc-300 font-medium text-xl tracking-wide leading-relaxed">
                                         <strong className="text-[#D8B2A3] font-black">GRAZIE PER LA FIDUCIA</strong> in BeautiFy Channel <strong className="text-[#D8B2A3] font-black">ORA</strong>, hai a disposizione il <strong className="text-[#D8B2A3] font-black">NUOVO</strong> e unico<br className="md:hidden" /> strumento di <strong className="text-[#D8B2A3] font-black">MARKETING SENSORIALE</strong> dedicato al settore, con le sue potenzialità.
                                     </p>
@@ -151,7 +151,7 @@ export default async function AreaClientePage2() {
                                             className="h-8 md:h-10 lg:h-12 w-auto mt-2 md:mt-0"
                                         />
                                     </h2>
-                                    <div className="w-24 h-[1px] bg-gradient-to-r from-transparent via-[#D8B2A3]/50 to-transparent" />
+                                    <div className="w-24 h-[1px] bg-gradient-to-r from-transparent via-white/50 to-transparent" />
                                     <p className="text-zinc-300 font-medium text-lg tracking-wide leading-relaxed">
                                         Hai attivo il piano <span className="font-black text-transparent bg-clip-text bg-gradient-to-r from-[#D8B2A3] to-[#D8B2A3] uppercase text-2xl px-1 tracking-wider">PREMIUM</span>. COMPLIMENTI! Hai a disposizione il <strong className="text-[#D8B2A3] font-black">TOP</strong> delle potenzialità di BeautiFy
                                     </p>
@@ -340,9 +340,9 @@ export default async function AreaClientePage2() {
                                         {/* Elegant Divider */}
                                         <div className="flex items-center justify-center w-full mb-16 relative">
                                             {/* Core line */}
-                                            <div className={`w-11/12 max-w-4xl h-[3px] rounded-full z-10 ${profile?.plan_type === 'basic' ? 'bg-gradient-to-r from-transparent via-[#D8B2A3] to-transparent' : 'bg-gradient-to-r from-transparent via-[#D8B2A3] to-transparent'}`} />
+                                            <div className="w-11/12 max-w-4xl h-[3px] rounded-full z-10 bg-gradient-to-r from-transparent via-white/60 to-transparent" />
                                             {/* Glow effect */}
-                                            <div className={`absolute w-11/12 max-w-4xl h-[12px] blur-[8px] rounded-full ${profile?.plan_type === 'basic' ? 'bg-gradient-to-r from-transparent via-[#D8B2A3]/60 to-transparent' : 'bg-gradient-to-r from-transparent via-[#D8B2A3]/60 to-transparent'}`} />
+                                            <div className="absolute w-11/12 max-w-4xl h-[12px] blur-[8px] rounded-full bg-gradient-to-r from-transparent via-white/30 to-transparent" />
                                         </div>
 
                                         <h2 className="text-xl md:text-3xl font-black uppercase text-white tracking-widest leading-tight mb-6 w-full max-w-5xl mx-auto">

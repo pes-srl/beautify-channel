@@ -75,13 +75,13 @@ export function UpgradeFormTrial2({ userEmail }: { userEmail?: string }) {
 
   if (status.type === "success") {
     return (
-      <div className="bg-[#D8B2A3]/30 border border-[#D8B2A3]/50 rounded-2xl p-8 text-center mt-6">
-        <CheckCircle2 className="w-12 h-12 text-[#D8B2A3] mx-auto mb-4" />
+      <div className="bg-[pink-300]/30 border border-[pink-300]/50 rounded-2xl p-8 text-center mt-6">
+        <CheckCircle2 className="w-12 h-12 text-[pink-300] mx-auto mb-4" />
         <h3 className="text-2xl font-bold text-white mb-2">
           Richiesta Ricevuta!
         </h3>
-        <p className="text-[#D8B2A3]">{status.message}</p>
-        <p className="text-[#D8B2A3]/70 text-sm mt-4">
+        <p className="text-[pink-300]">{status.message}</p>
+        <p className="text-[pink-300]/70 text-sm mt-4">
           Il nostro team esaminerà i tuoi dati e ti invierà al più presto
           un'e-mail con il contratto e il link per il pagamento sicuro.
         </p>
@@ -93,17 +93,17 @@ export function UpgradeFormTrial2({ userEmail }: { userEmail?: string }) {
     <>
       <div
         id="upgrade-section"
-        className="bg-gradient-to-br from-[#AB7169]/10 to-[#2e1d1b] border border-[#D8B2A3]/30 rounded-3xl p-6 md:p-10 my-16 shadow-2xl relative overflow-hidden"
+        className="bg-gradient-to-br from-fuchsia-900/10 via-purple-900/10 to-pink-900/10 backdrop-blur-md border border-[pink-300]/30 rounded-3xl p-6 md:p-10 my-16 shadow-2xl relative overflow-hidden"
       >
         {/* Background elements */}
-        <div className="absolute top-0 right-0 w-96 h-96 bg-[#D8B2A3]/10 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/2 pointer-events-none" />
+        <div className="absolute top-0 right-0 w-96 h-96 bg-[pink-300]/10 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/2 pointer-events-none" />
 
         <div className="relative z-10 max-w-3xl mx-auto">
           <div className="text-center mb-10">
             <h2 className="text-3xl font-semibold font-[family-name:var(--font-montserrat)] text-white mb-3 uppercase tracking-wide">
               MIGLIORA IL TUO PIANO
             </h2>
-            <div className="text-zinc-200 text-lg font-light font-[family-name:var(--font-montserrat)] mt-4 leading-relaxed bg-black/20 p-6 rounded-2xl border border-[#D8B2A3]/20 shadow-inner max-w-2xl mx-auto">
+            <div className="text-zinc-200 text-lg font-light font-[family-name:var(--font-montserrat)] mt-4 leading-relaxed bg-black/20 p-6 rounded-2xl border border-[pink-300]/20 shadow-inner max-w-2xl mx-auto">
               <p className="mb-3">
                 Conclusa la tua prova gratuita di 7 giorni, puoi scegliere il nostro <strong className="text-white font-semibold">abbonamento Basic</strong>. Questi sono i dati base che ci servono.
               </p>
@@ -117,7 +117,7 @@ export function UpgradeFormTrial2({ userEmail }: { userEmail?: string }) {
 
           <form action={handleSubmit} className="space-y-6">
             {status.type === "error" && (
-              <div className="bg-[#AB7169]/10 border border-[#AB7169]/50 text-[#AB7169] p-4 rounded-xl flex items-center gap-3">
+              <div className="bg-[fuchsia-500]/10 border border-[fuchsia-500]/50 text-[fuchsia-500] p-4 rounded-xl flex items-center gap-3">
                 <AlertCircle className="w-5 h-5 shrink-0" />
                 <p className="text-sm font-medium">{status.message}</p>
               </div>
@@ -140,7 +140,7 @@ export function UpgradeFormTrial2({ userEmail }: { userEmail?: string }) {
                       Durata abbonamento*
                     </label>
                     <div className="flex flex-col sm:flex-row gap-4 mb-2">
-                      <label className={`flex-1 flex flex-col items-start gap-1 p-4 rounded-xl border cursor-pointer transition-colors ${durataAbbonamento === '6 mesi' ? 'bg-[#D8B2A3]/20 border-[#D8B2A3]/50 shadow-[0_0_15px_rgba(216,178,163,0.2)]' : 'bg-black/40 border-white/10 hover:bg-white/5'}`}>
+                      <label className={`flex-1 flex flex-col items-start gap-1 p-4 rounded-xl border cursor-pointer transition-colors ${durataAbbonamento === '6 mesi' ? 'bg-[pink-300]/20 border-[pink-300]/50 shadow-[0_0_15px_rgba(216,178,163,0.2)]' : 'bg-black/40 border-white/10 hover:bg-white/5'}`}>
                         <div className="flex items-center gap-2 text-white font-bold text-lg">
                           <input
                             type="radio"
@@ -148,7 +148,7 @@ export function UpgradeFormTrial2({ userEmail }: { userEmail?: string }) {
                             value="6 mesi"
                             checked={durataAbbonamento === '6 mesi'}
                             onChange={() => setDurataAbbonamento('6 mesi')}
-                            className="text-[#D8B2A3] focus:ring-[#D8B2A3] bg-white/10 border-white/20 w-4 h-4"
+                            className="text-purple-500 focus:ring-purple-500 bg-white/10 border-white/20 w-4 h-4"
                           />
                           6 mesi
                         </div>
@@ -161,7 +161,7 @@ export function UpgradeFormTrial2({ userEmail }: { userEmail?: string }) {
                         </div>
                       </label>
 
-                      <label className={`flex-1 flex flex-col items-start gap-1 p-4 rounded-xl border cursor-pointer transition-colors ${durataAbbonamento === '12 mesi' ? 'bg-[#D8B2A3]/20 border-[#D8B2A3]/50 shadow-[0_0_15px_rgba(216,178,163,0.2)]' : 'bg-black/40 border-white/10 hover:bg-white/5'}`}>
+                      <label className={`flex-1 flex flex-col items-start gap-1 p-4 rounded-xl border cursor-pointer transition-colors ${durataAbbonamento === '12 mesi' ? 'bg-[pink-300]/20 border-[pink-300]/50 shadow-[0_0_15px_rgba(216,178,163,0.2)]' : 'bg-black/40 border-white/10 hover:bg-white/5'}`}>
                         <div className="flex items-center gap-2 text-white font-bold text-lg">
                           <input
                             type="radio"
@@ -169,7 +169,7 @@ export function UpgradeFormTrial2({ userEmail }: { userEmail?: string }) {
                             value="12 mesi"
                             checked={durataAbbonamento === '12 mesi'}
                             onChange={() => setDurataAbbonamento('12 mesi')}
-                            className="text-[#D8B2A3] focus:ring-[#D8B2A3] bg-white/10 border-white/20 w-4 h-4"
+                            className="text-purple-500 focus:ring-purple-500 bg-white/10 border-white/20 w-4 h-4"
                           />
                           12 mesi
                         </div>
@@ -197,7 +197,7 @@ export function UpgradeFormTrial2({ userEmail }: { userEmail?: string }) {
                       name="nomeIstituto"
                       type="text"
                       required
-                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-zinc-600 focus:outline-none focus:ring-2 focus:ring-[#D8B2A3] transition-all"
+                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-zinc-600 focus:outline-none focus:ring-2 focus:ring-[pink-300] transition-all"
                     />
                   </div>
 
@@ -213,7 +213,7 @@ export function UpgradeFormTrial2({ userEmail }: { userEmail?: string }) {
                           type="text"
                           placeholder="Via/Piazza"
                           required
-                          className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-zinc-600 focus:outline-none focus:ring-2 focus:ring-[#D8B2A3] transition-all"
+                          className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-zinc-600 focus:outline-none focus:ring-2 focus:ring-[pink-300] transition-all"
                         />
                       </div>
                       <div className="col-span-6 md:col-span-2">
@@ -222,7 +222,7 @@ export function UpgradeFormTrial2({ userEmail }: { userEmail?: string }) {
                           type="text"
                           placeholder="N°"
                           required
-                          className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-zinc-600 focus:outline-none focus:ring-2 focus:ring-[#D8B2A3] transition-all"
+                          className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-zinc-600 focus:outline-none focus:ring-2 focus:ring-[pink-300] transition-all"
                         />
                       </div>
                       <div className="col-span-6 md:col-span-3">
@@ -231,7 +231,7 @@ export function UpgradeFormTrial2({ userEmail }: { userEmail?: string }) {
                           type="text"
                           placeholder="CAP"
                           required
-                          className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-zinc-600 focus:outline-none focus:ring-2 focus:ring-[#D8B2A3] transition-all"
+                          className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-zinc-600 focus:outline-none focus:ring-2 focus:ring-[pink-300] transition-all"
                         />
                       </div>
                       <div className="col-span-8 md:col-span-7">
@@ -240,7 +240,7 @@ export function UpgradeFormTrial2({ userEmail }: { userEmail?: string }) {
                           type="text"
                           placeholder="Città"
                           required
-                          className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-zinc-600 focus:outline-none focus:ring-2 focus:ring-[#D8B2A3] transition-all"
+                          className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-zinc-600 focus:outline-none focus:ring-2 focus:ring-[pink-300] transition-all"
                         />
                       </div>
                       <div className="col-span-4 md:col-span-2">
@@ -250,7 +250,7 @@ export function UpgradeFormTrial2({ userEmail }: { userEmail?: string }) {
                           placeholder="Pr(Mi)"
                           required
                           maxLength={2}
-                          className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-zinc-600 focus:outline-none focus:ring-2 focus:ring-[#D8B2A3] transition-all uppercase"
+                          className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-zinc-600 focus:outline-none focus:ring-2 focus:ring-[pink-300] transition-all uppercase"
                         />
                       </div>
                     </div>
@@ -269,7 +269,7 @@ export function UpgradeFormTrial2({ userEmail }: { userEmail?: string }) {
                           value="0-250"
                           checked={metriQuadriOption === '0-250'}
                           onChange={() => setMetriQuadriOption('0-250')}
-                          className="text-[#D8B2A3] focus:ring-[#D8B2A3] bg-white/10 border-white/20 w-4 h-4"
+                          className="text-purple-500 focus:ring-purple-500 bg-white/10 border-white/20 w-4 h-4"
                         />
                         0-250 mq
                       </label>
@@ -280,7 +280,7 @@ export function UpgradeFormTrial2({ userEmail }: { userEmail?: string }) {
                           value="oltre"
                           checked={metriQuadriOption === 'oltre'}
                           onChange={() => setMetriQuadriOption('oltre')}
-                          className="text-[#D8B2A3] focus:ring-[#D8B2A3] bg-white/10 border-white/20 w-4 h-4"
+                          className="text-purple-500 focus:ring-purple-500 bg-white/10 border-white/20 w-4 h-4"
                         />
                         Oltre 250 mq
                       </label>
@@ -300,7 +300,7 @@ export function UpgradeFormTrial2({ userEmail }: { userEmail?: string }) {
                       name="responsabileIstituto"
                       type="text"
                       required
-                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-zinc-600 focus:outline-none focus:ring-2 focus:ring-[#D8B2A3] transition-all"
+                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-zinc-600 focus:outline-none focus:ring-2 focus:ring-[pink-300] transition-all"
                     />
                   </div>
 
@@ -331,7 +331,7 @@ export function UpgradeFormTrial2({ userEmail }: { userEmail?: string }) {
                       name="ragioneSociale"
                       type="text"
                       required
-                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-zinc-600 focus:outline-none focus:ring-2 focus:ring-[#D8B2A3] transition-all"
+                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-zinc-600 focus:outline-none focus:ring-2 focus:ring-[pink-300] transition-all"
                     />
                   </div>
 
@@ -348,7 +348,7 @@ export function UpgradeFormTrial2({ userEmail }: { userEmail?: string }) {
                       name="partitaIva"
                       type="text"
                       required
-                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-zinc-600 focus:outline-none focus:ring-2 focus:ring-[#D8B2A3] transition-all"
+                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-zinc-600 focus:outline-none focus:ring-2 focus:ring-[pink-300] transition-all"
                     />
                   </div>
 
@@ -364,7 +364,7 @@ export function UpgradeFormTrial2({ userEmail }: { userEmail?: string }) {
                       id="codiceSdi"
                       name="codiceSdi"
                       type="text"
-                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-zinc-600 focus:outline-none focus:ring-2 focus:ring-[#D8B2A3] transition-all"
+                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-zinc-600 focus:outline-none focus:ring-2 focus:ring-[pink-300] transition-all"
                     />
                   </div>
 
@@ -400,18 +400,18 @@ export function UpgradeFormTrial2({ userEmail }: { userEmail?: string }) {
                       name="telefono"
                       type="tel"
                       required
-                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-zinc-600 focus:outline-none focus:ring-2 focus:ring-[#D8B2A3] transition-all"
+                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-zinc-600 focus:outline-none focus:ring-2 focus:ring-[pink-300] transition-all"
                     />
                   </div>
 
                   {/* Box Totale da saldare */}
                   <div className="md:col-span-2 mt-4 mb-2 flex justify-center text-center">
-                    <div className="bg-black/30 border border-[#D8B2A3]/20 rounded-2xl p-6 w-full max-w-sm shadow-[0_0_15px_rgba(216,178,163,0.1)]">
+                    <div className="bg-black/30 border border-[pink-300]/20 rounded-2xl p-6 w-full max-w-sm shadow-[0_0_15px_rgba(216,178,163,0.1)]">
                       <p className="text-white font-semibold mb-1 uppercase tracking-wider text-sm font-[family-name:var(--font-montserrat)]">{durataAbbonamento === '6 mesi' ? 'Totale complessivo 6 mesi' : 'Totale complessivo 12 mesi'}</p>
-                      <p className="font-bold mb-3 uppercase tracking-wide text-[#D8B2A3]">Piano Basic</p>
-                      <p className="text-4xl font-bold font-[family-name:var(--font-montserrat)] text-[#D8B2A3]"><span className="text-3xl font-medium pr-1">€</span>{totalPrice}</p>
+                      <p className="font-bold mb-3 uppercase tracking-wide text-[pink-300]">Piano Basic</p>
+                      <p className="text-4xl font-bold font-[family-name:var(--font-montserrat)] text-[pink-300]"><span className="text-3xl font-medium pr-1">€</span>{totalPrice}</p>
                       <p className="text-base text-white mt-3 font-semibold">*{getMonths()} mesi a € {getMonthlyPrice().toFixed(2).replace('.', ',')} / mese</p>
-                      <p className="text-sm text-[#D8B2A3] mt-2 italic font-medium">I prezzi sono da considerarsi IVA esclusa</p>
+                      <p className="text-sm text-[pink-300] mt-2 italic font-medium">I prezzi sono da considerarsi IVA esclusa</p>
                     </div>
                   </div>
 
@@ -427,7 +427,7 @@ export function UpgradeFormTrial2({ userEmail }: { userEmail?: string }) {
                     <Button
                       type="submit"
                       disabled={isSubmitting}
-                      className="bg-gradient-to-r from-[#AB7169] to-[#D8B2A3] hover:from-[#9c635d] hover:to-[#c4a193] text-white font-bold font-[family-name:var(--font-montserrat)] py-6 px-6 md:px-10 rounded-xl shadow-[0_0_20px_rgba(171,113,105,0.4)] transition-all disabled:opacity-50 border-none flex-1 md:flex-none text-lg"
+                      className="bg-gradient-to-r from-[fuchsia-500] to-[pink-300] hover:from-[#9c635d] hover:to-[#c4a193] text-white font-bold font-[family-name:var(--font-montserrat)] py-6 px-6 md:px-10 rounded-xl shadow-[0_0_20px_rgba(171,113,105,0.4)] transition-all disabled:opacity-50 border-none flex-1 md:flex-none text-lg"
                     >
                       {isSubmitting
                         ? "Invio in corso..."
@@ -442,14 +442,14 @@ export function UpgradeFormTrial2({ userEmail }: { userEmail?: string }) {
 
           {/* GRAZIE Section */}
           <div className="mt-16 text-center relative flex flex-col items-center justify-center">
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 bg-[#D8B2A3]/20 blur-[50px] rounded-full pointer-events-none" />
-            <h3 className="text-4xl md:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-[#D8B2A3] to-[#AB7169] font-[family-name:var(--font-montserrat)] tracking-[0.2em] md:tracking-[0.4em] uppercase mb-2 relative z-10">
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 bg-[pink-300]/20 blur-[50px] rounded-full pointer-events-none" />
+            <h3 className="text-4xl md:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-[pink-300] to-[fuchsia-500] font-[family-name:var(--font-montserrat)] tracking-[0.2em] md:tracking-[0.4em] uppercase mb-2 relative z-10">
               GRAZIE
             </h3>
-            <p className="text-[#D8B2A3]/50 text-sm md:text-base flex items-center justify-center gap-2 relative z-10 font-medium">
-              <Heart className="w-4 h-4 text-[#D8B2A3]/70 fill-[#D8B2A3]/20" />
+            <p className="text-[pink-300]/50 text-sm md:text-base flex items-center justify-center gap-2 relative z-10 font-medium">
+              <Heart className="w-4 h-4 text-[pink-300]/70 fill-[pink-300]/20" />
               Il giusto mood fa la differenza in istituto
-              <Heart className="w-4 h-4 text-[#D8B2A3]/70 fill-[#D8B2A3]/20" />
+              <Heart className="w-4 h-4 text-[pink-300]/70 fill-[pink-300]/20" />
             </p>
           </div>
         </div>
