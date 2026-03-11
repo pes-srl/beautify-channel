@@ -26,7 +26,7 @@ export default async function AreaClienteLayout({
         .eq("id", user.id)
         .single();
 
-    const bgClass = "bg-[#1e0c31]";
+    const bgClass = profile?.plan_type === 'premium' ? "bg-black" : "bg-[#1e0c31]";
 
     return (
         <div className={`min-h-screen ${bgClass} flex flex-col relative pt-16 ${inter.className}`}>

@@ -88,7 +88,7 @@ export function BasicHeroChannel({ channel, planType }: BasicHeroChannelProps) {
                     <div className={`max-w-xl leading-relaxed mb-8 ${planType === 'basic' ? 'text-white/95 font-medium' : 'text-zinc-300'}`}>
                         {isPremium ? (
                             <p className="text-lg md:text-lg">
-                                Questo è il <strong className="text-white font-black">CANALE AUDIO PRINCIPALE</strong> che contiene tutte le <strong className="text-amber-400 font-black">TUE PROMO PERSONALIZZATE</strong> dei prossimi mesi e che trasforma radicalmente l'atmosfera del tuo istituto!<br />Sotto altri canali settoriali!
+                                Questo è il <span className="text-xl md:text-2xl"><strong className="text-white font-black">CANALE AUDIO PRINCIPALE</strong> che contiene tutte le <strong className="text-amber-400 font-black">TUE PROMO PERSONALIZZATE</strong></span> dei prossimi mesi e che trasforma radicalmente l'atmosfera del tuo istituto!<br />Sotto altri canali settoriali!
                             </p>
                         ) : planType === 'basic' ? (
                             <>
@@ -130,16 +130,17 @@ export function BasicHeroChannel({ channel, planType }: BasicHeroChannelProps) {
 
                     {/* Central Vinyl/Icon */}
                     <div
+                        onClick={handlePlayClick}
                         className={`
-                        relative w-3/4 aspect-square rounded-full flex items-center justify-center mb-6
+                        relative w-3/4 aspect-square rounded-full flex items-center justify-center cursor-pointer transition-transform duration-300 hover:scale-[1.02] mb-6
                         bg-linear-to-br from-zinc-800 to-black border-2 border-zinc-700/50 shadow-2xl
                         ${isCurrentlyPlaying ? 'animate-[spin_20s_linear_infinite]' : ''}
                     `}>
                         {/* Grooves */}
-                        <div className="absolute inset-4 rounded-full border border-white/5" />
-                        <div className="absolute inset-8 rounded-full border border-white/5" />
-                        <div className="absolute inset-12 rounded-full border border-white/5" />
-                        <div className="absolute inset-16 rounded-full border border-white/5" />
+                        <div className="absolute inset-4 rounded-full border border-white/5 pointer-events-none" />
+                        <div className="absolute inset-8 rounded-full border border-white/5 pointer-events-none" />
+                        <div className="absolute inset-12 rounded-full border border-white/5 pointer-events-none" />
+                        <div className="absolute inset-16 rounded-full border border-white/5 pointer-events-none" />
 
                         {/* Center label */}
                         <div className="w-1/3 h-1/3 rounded-full flex items-center justify-center overflow-hidden bg-white z-10 shadow-[0_0_15px_rgba(0,0,0,0.5)]">
@@ -165,12 +166,12 @@ export function BasicHeroChannel({ channel, planType }: BasicHeroChannelProps) {
                         {isCurrentlyPlaying ? (
                             <>
                                 <Pause className="w-6 h-6 fill-zinc-800 stroke-zinc-800 stroke-[2px]" />
-                                <span>Metti in Pausa</span>
+                                <span>Pausa</span>
                             </>
                         ) : (
                             <>
                                 <Play className="w-6 h-6 fill-zinc-800 stroke-zinc-800 stroke-[2px] ml-1" />
-                                <span>{isActive ? 'Play' : 'Ascolta Ora'}</span>
+                                <span>{isActive ? 'Play' : 'Ascolta'}</span>
                             </>
                         )}
                     </button>

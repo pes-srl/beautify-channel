@@ -43,7 +43,7 @@ export function BasicHeroChannel2({ channel, planType }: BasicHeroChannel2Props)
     };
 
     return (
-        <div className={`relative w-full md:max-w-[50%] mx-auto rounded-3xl overflow-hidden shadow-2xl mb-12 group ${isPremium ? 'shadow-[#D8B2A3]/20' : planType === 'free_trial' ? 'shadow-[#D8B2A3]/20' : 'shadow-[#D8B2A3]/20'}`}>
+        <div className={`relative w-full rounded-3xl overflow-hidden shadow-2xl mb-12 group transition-all duration-700 ${isPremium ? 'shadow-[#D8B2A3]/20' : planType === 'free_trial' ? 'shadow-[#D8B2A3]/20' : 'shadow-[#D8B2A3]/20'}`}>
             {/* Animated Gradient Background */}
             <div className={`absolute inset-0 bg-linear-to-br z-0 ${isPremium ? 'from-[#D8B2A3] via-zinc-900 to-black' : planType === 'free_trial' ? 'from-[#D8B2A3] via-[#AB7169] to-black' : 'from-[#D8B2A3] via-[#5D6676] to-black'}`} />
 
@@ -55,7 +55,7 @@ export function BasicHeroChannel2({ channel, planType }: BasicHeroChannel2Props)
             <div className="relative z-10 flex flex-col md:flex-row items-center border border-white/10 rounded-3xl bg-black/20 backdrop-blur-sm">
 
                 {/* Left side: Premium Badge & Info */}
-                <div className="flex-1 p-6 md:p-8 flex flex-col justify-center">
+                <div className="flex-1 p-8 md:p-12 flex flex-col justify-center">
                     <div className="flex flex-wrap items-center gap-2 mb-4">
                         <div className="flex items-center gap-1.5 bg-white/10 text-white px-2.5 py-1 rounded-full text-[10px] md:text-xs font-bold uppercase tracking-widest border border-white/20 backdrop-blur-md">
                             <Sparkles className={`w-3 h-3 ${isPremium ? 'text-[#D8B2A3]' : planType === 'free_trial' ? 'text-[#D8B2A3]' : 'text-[#D8B2A3]'}`} />
@@ -78,25 +78,29 @@ export function BasicHeroChannel2({ channel, planType }: BasicHeroChannel2Props)
                         )}
                     </div>
 
-                    <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold font-[family-name:var(--font-montserrat)] text-transparent bg-clip-text bg-linear-to-r from-white to-white/70 tracking-tight mb-3 mt-2">
+                    <h2 className="text-4xl md:text-5xl lg:text-6xl font-semibold font-[family-name:var(--font-montserrat)] text-transparent bg-clip-text bg-linear-to-r from-white to-zinc-200 tracking-tight mb-4 drop-shadow-sm">
                         Beautify Channel
                         <span className={`block ${isPremium ? 'text-[#D8B2A3]' : planType === 'free_trial' ? 'text-[#D8B2A3]' : 'text-[#D8B2A3]'}`}>
                             {isPremium ? 'Premium' : planType === 'free_trial' ? 'Prova Gratuita' : 'Basic'}
                         </span>
                     </h2>
 
-                    <p className="text-zinc-300 text-sm md:text-base max-w-sm leading-relaxed mb-4">
+                    <div className="max-w-xl leading-relaxed mb-8 text-zinc-300">
                         {isPremium ? (
-                            <>Questo è il <strong className="text-white font-black">CANALE AUDIO PRINCIPALE</strong> che contiene <strong className="text-[#D8B2A3] font-black">TUE PROMO PERSONALIZZATE</strong>.</>
+                            <p className="text-lg md:text-lg">
+                                Questo è il <span className="text-xl md:text-2xl"><strong className="text-white font-black">CANALE AUDIO PRINCIPALE</strong> che contiene tutte le <strong className="text-[#D8B2A3] font-black">TUE PROMO PERSONALIZZATE</strong></span> dei prossimi mesi e che trasforma radicalmente l'atmosfera del tuo istituto.<br />Sotto altri canali settoriali!
+                            </p>
                         ) : (
-                            <>Questo è il <strong className="text-white font-black">CANALE AUDIO PRINCIPALE</strong> che trasforma l'atmosfera del tuo istituto.</>
+                            <p className="text-lg md:text-lg">
+                                Questo è il <strong className="text-white font-black">CANALE AUDIO PRINCIPALE</strong> che trasforma radicalmente l'atmosfera del tuo istituto.<br />Sotto altri canali settoriali!
+                            </p>
                         )}
-                    </p>
+                    </div>
 
                 </div>
 
                 {/* Right side: Abstract Art / Vinyl Visualizer & Play Button */}
-                <div className="flex flex-col w-full md:w-[45%] relative items-center justify-center p-6 md:p-8 border-t md:border-t-0 md:border-l border-white/5 bg-black/10">
+                <div className="flex flex-col w-full md:w-1/3 relative items-center justify-center p-8 md:p-12 border-t md:border-t-0 md:border-l border-white/5 bg-black/10">
                     <div className="absolute inset-0 bg-linear-to-b md:bg-linear-to-l from-black/80 to-transparent pointer-events-none" />
 
                     {/* Pulsing rings if active */}
@@ -117,16 +121,17 @@ export function BasicHeroChannel2({ channel, planType }: BasicHeroChannel2Props)
 
                     {/* Central Vinyl/Icon */}
                     <div
+                        onClick={handlePlayClick}
                         className={`
-                        relative w-3/4 aspect-square rounded-full flex items-center justify-center mb-6
+                        relative w-3/4 aspect-square rounded-full flex items-center justify-center cursor-pointer transition-transform duration-300 hover:scale-[1.02] mb-6
                         bg-linear-to-br from-zinc-800 to-black border-2 border-zinc-700/50 shadow-2xl
                         ${isCurrentlyPlaying ? 'animate-[spin_20s_linear_infinite]' : ''}
                     `}>
                         {/* Grooves */}
-                        <div className="absolute inset-4 rounded-full border border-white/5" />
-                        <div className="absolute inset-8 rounded-full border border-white/5" />
-                        <div className="absolute inset-12 rounded-full border border-white/5" />
-                        <div className="absolute inset-16 rounded-full border border-white/5" />
+                        <div className="absolute inset-4 rounded-full border border-white/5 pointer-events-none" />
+                        <div className="absolute inset-8 rounded-full border border-white/5 pointer-events-none" />
+                        <div className="absolute inset-12 rounded-full border border-white/5 pointer-events-none" />
+                        <div className="absolute inset-16 rounded-full border border-white/5 pointer-events-none" />
 
                         {/* Center label */}
                         <div className="w-1/3 h-1/3 rounded-full flex items-center justify-center overflow-hidden bg-white z-10 shadow-[0_0_15px_rgba(0,0,0,0.5)]">
@@ -141,8 +146,8 @@ export function BasicHeroChannel2({ channel, planType }: BasicHeroChannel2Props)
                     <button
                         onClick={handlePlayClick}
                         className={`
-                            flex items-center justify-center gap-2 w-3/4
-                            px-4 py-3 rounded-xl font-semibold font-[family-name:var(--font-montserrat)] text-base transition-all duration-300 shadow-xl relative z-20 bg-white text-zinc-800
+                            flex items-center justify-center gap-3 w-3/4
+                            px-8 py-4 rounded-2xl font-semibold font-[family-name:var(--font-montserrat)] text-xl transition-all duration-300 shadow-xl relative z-20 bg-white text-zinc-800
                             ${isActive
                                 ? 'hover:bg-zinc-200'
                                 : 'hover:scale-105 hover:bg-zinc-100'
@@ -151,12 +156,12 @@ export function BasicHeroChannel2({ channel, planType }: BasicHeroChannel2Props)
                     >
                         {isCurrentlyPlaying ? (
                             <>
-                                <Pause className="w-5 h-5 fill-zinc-800 stroke-zinc-800 stroke-[2px]" />
+                                <Pause className="w-6 h-6 fill-zinc-800 stroke-zinc-800 stroke-[2px]" />
                                 <span>Pausa</span>
                             </>
                         ) : (
                             <>
-                                <Play className="w-5 h-5 fill-zinc-800 stroke-zinc-800 stroke-[2px] ml-0.5" />
+                                <Play className="w-6 h-6 fill-zinc-800 stroke-zinc-800 stroke-[2px] ml-1" />
                                 <span>{isActive ? 'Play' : 'Ascolta'}</span>
                             </>
                         )}
