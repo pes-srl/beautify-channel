@@ -44,7 +44,7 @@ export async function GET(request: Request) {
             for (const user of expiredUsers) {
                 if (user.email) {
                     await resend.emails.send({
-                        from: 'Beautify Channel <noreply@beautifychannel.com>',
+                        from: process.env.RESEND_FROM_EMAIL || 'Beautify Channel <info@beautify-channel.com>',
                         to: user.email,
                         subject: 'La tua prova è scaduta ⚠️ Riattiva Beautify Channel',
                         html: `
@@ -80,7 +80,7 @@ export async function GET(request: Request) {
             for (const user of expiredSubs) {
                 if (user.email) {
                     await resend.emails.send({
-                        from: 'Beautify Channel <noreply@beautifychannel.com>',
+                        from: process.env.RESEND_FROM_EMAIL || 'Beautify Channel <info@beautify-channel.com>',
                         to: user.email,
                         subject: 'Il tuo abbonamento è scaduto ⚠️ Riattiva Beautify Channel',
                         html: `
@@ -110,7 +110,7 @@ export async function GET(request: Request) {
             for (const user of warningUsers) {
                 if (user.email) {
                     await resend.emails.send({
-                        from: 'Beautify Channel <noreply@beautifychannel.com>',
+                        from: process.env.RESEND_FROM_EMAIL || 'Beautify Channel <info@beautify-channel.com>',
                         to: user.email,
                         subject: 'Manca 1 giorno alla scadenza della prova gratuita ⏰',
                         html: `
@@ -140,7 +140,7 @@ export async function GET(request: Request) {
             for (const user of twoDaysTrialUsers) {
                 if (user.email) {
                     await resend.emails.send({
-                        from: 'Beautify Channel <noreply@beautifychannel.com>',
+                        from: process.env.RESEND_FROM_EMAIL || 'Beautify Channel <info@beautify-channel.com>',
                         to: user.email,
                         subject: 'Mancano 2 giorni alla scadenza della prova gratuita ⏳',
                         html: `
@@ -170,7 +170,7 @@ export async function GET(request: Request) {
             for (const user of twoDaysSubUsers) {
                 if (user.email) {
                     await resend.emails.send({
-                        from: 'Beautify Channel <noreply@beautifychannel.com>',
+                        from: process.env.RESEND_FROM_EMAIL || 'Beautify Channel <info@beautify-channel.com>',
                         to: user.email,
                         subject: 'Il tuo abbonamento scade tra 2 giorni ⏳ Rinnovo richiesto',
                         html: `
