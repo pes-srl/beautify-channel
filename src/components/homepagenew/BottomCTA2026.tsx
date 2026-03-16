@@ -74,6 +74,17 @@ export function BottomCTA2026({ hasSession }: { hasSession?: boolean }) {
             console.error("REGISTRATION ERROR:", result.error);
             setError(result.error);
         } else {
+            // Trigger Welcome Email
+            try {
+                fetch("/api/send-welcome", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ email, full_name: fullName })
+                });
+            } catch (err) {
+                console.error("Failed to trigger welcome email:", err);
+            }
+
             if (result.hasSession) {
                 setMessage("Attivazione Prova Gratuita in corso...");
                 router.push("/area-riservata");
