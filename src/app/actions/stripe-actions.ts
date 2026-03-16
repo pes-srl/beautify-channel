@@ -68,7 +68,8 @@ export async function createCheckoutSession(formData: FormData) {
     }
 
     try {
-        const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
+        const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 
+                        (process.env.NEXT_PUBLIC_VERCEL_URL ? `https://${process.env.NEXT_PUBLIC_VERCEL_URL}` : 'http://localhost:3000');
 
         // Construct metadata from formData to store the request details if needed, 
         // or we can rely on catching the webhook to fulfill the upgrade
