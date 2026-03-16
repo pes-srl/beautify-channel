@@ -1,7 +1,7 @@
 import { ChannelGrid2 } from "@/components/draft2026/ChannelGrid2";
 import { BasicHeroChannel2 } from "@/components/draft2026/BasicHeroChannel2";
 import { createClient } from "@/utils/supabase/server";
-import { LogOut, Sparkles, AlertCircle, CheckCircle2, Lock, Radio, ArrowDown } from "lucide-react";
+import { LogOut, Sparkles, AlertCircle, CheckCircle2, Lock, Radio, ArrowDown, Play } from "lucide-react";
 import { redirect } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
@@ -183,7 +183,7 @@ export default async function AreaClientePage2(props: {
                                 <summary className="flex items-center justify-between cursor-pointer list-none bg-white/[0.02] hover:bg-white/[0.04] backdrop-blur-md border border-white/5 rounded-[2rem] p-4 pr-6 transition-all duration-300 w-full md:w-3/4 mx-auto select-none">
                                     <div className="flex items-center gap-3 md:gap-5">
                                         <div className="p-3 bg-white/5 rounded-full shrink-0">
-                                            <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 md:w-8 md:h-8 text-white fill-white" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                                            <Play className="w-6 h-6 md:w-8 md:h-8 text-white fill-transparent stroke-[1.5]" />
                                         </div>
                                         <span className="text-white font-black uppercase text-xl md:text-3xl tracking-widest">COME FUNZIONA</span>
                                     </div>
@@ -228,12 +228,12 @@ export default async function AreaClientePage2(props: {
                                         <p className="text-lg md:text-xl text-zinc-300 font-light mb-8">
                                             Qui sotto, hai a disposizione altri 6 canali settoriali, per cambiare il tuo mood musicale in istituto durante la giornata.
                                         </p>
-                                        <div className="bg-black/30 p-5 rounded-3xl border border-white/5 space-y-4">
-                                            <p className="text-zinc-300 text-base md:text-lg">
-                                                Anche questi canali contengono <span className="text-white italic">morbidi suggerimenti vocali</span> tranne <strong className="bg-white/10 text-white px-2 py-0.5 rounded-md align-middle mx-1 text-sm font-semibold">RELAX</strong> e <strong className="bg-white/10 text-white px-2 py-0.5 rounded-md align-middle mx-1 text-sm font-semibold">MASSAGE</strong>.
+                                        <div className="bg-white/[0.02] p-5 rounded-[1.5rem] border border-white/5 space-y-5 shadow-inner">
+                                            <p className="text-zinc-200 text-base md:text-lg font-light leading-relaxed">
+                                                Anche questi canali contengono <span className="text-white italic font-normal">morbidi suggerimenti vocali</span> tranne <strong className="bg-white/10 text-white px-3 py-1 rounded-full align-middle mx-1 text-xs md:text-sm font-bold tracking-wider uppercase border border-white/10">RELAX</strong> e <strong className="bg-white/10 text-white px-3 py-1 rounded-full align-middle mx-1 text-xs md:text-sm font-bold tracking-wider uppercase border border-white/10">MASSAGE</strong>.
                                             </p>
-                                            <p className="text-zinc-300 text-base md:text-lg">
-                                                Rilassati con <strong className="bg-zinc-800 text-white px-2 py-0.5 rounded-md align-middle mx-1 text-sm font-semibold">DEEP SOFT</strong> nel weekend o del <strong className="bg-zinc-800 text-white px-2 py-0.5 rounded-md align-middle mx-1 text-sm font-semibold">JAZZ</strong> a fine giornata.
+                                            <p className="text-zinc-200 text-base md:text-lg font-light leading-relaxed">
+                                                Rilassati con <strong className="bg-white/10 text-white px-3 py-1 rounded-full align-middle mx-1 text-xs md:text-sm font-bold tracking-wider uppercase border border-white/10">DEEP SOFT</strong> nel weekend o del <strong className="bg-white/10 text-white px-3 py-1 rounded-full align-middle mx-1 text-xs md:text-sm font-bold tracking-wider uppercase border border-white/10">JAZZ</strong> a fine giornata.
                                             </p>
                                         </div>
                                         <div className="pt-6 mt-6 border-t border-white/5">

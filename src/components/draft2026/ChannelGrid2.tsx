@@ -97,14 +97,13 @@ export function ChannelGrid2({ initialChannels, serverError, planType }: Channel
                             {/* Play Button Overlay */}
                             <div className="absolute inset-0 z-20 flex items-center justify-center pointer-events-none">
                                 <div className={`
-                                    w-16 h-16 rounded-full flex items-center justify-center backdrop-blur-md transition-all duration-300 shadow-lg bg-white
-                                    ${planType === 'free_trial' ? 'shadow-emerald-400/20' : 'shadow-[#AB7169]/20'}
+                                    w-14 h-14 md:w-16 md:h-16 rounded-full flex items-center justify-center backdrop-blur-sm transition-all duration-300 shadow-xl bg-white/20 border-2 border-white group-hover:bg-white/30
                                     ${isActive ? (planType === 'free_trial' ? 'outline-4 outline-emerald-400/30 border-2 border-emerald-400' : 'outline-4 outline-[#AB7169]/30 border-2 border-[#AB7169]') : 'group-hover:scale-110 border-none'}
                                 `}>
                                     {isCurrentlyPlaying ? (
-                                        <Pause className="w-8 h-8 fill-white stroke-black stroke-[2px]" />
+                                        <Pause className="w-6 h-6 md:w-8 md:h-8 fill-transparent stroke-white stroke-[2px]" />
                                     ) : (
-                                        <Play className="w-8 h-8 fill-white stroke-black stroke-[2px] ml-1" />
+                                        <Play className="w-6 h-6 md:w-8 md:h-8 fill-transparent stroke-white stroke-[2px] ml-1" />
                                     )}
                                 </div>
                             </div>
@@ -120,8 +119,8 @@ export function ChannelGrid2({ initialChannels, serverError, planType }: Channel
                         </div>
 
                         {/* Content info */}
-                        <div className="absolute bottom-0 left-0 right-0 p-3 md:p-5 bg-linear-to-t from-black via-black/80 to-transparent z-20 pt-12 flex flex-col items-center text-center">
-                            <h3 className="text-[16px] md:text-xl leading-tight font-semibold font-[family-name:var(--font-montserrat)] text-white md:truncate drop-shadow-md mt-[3px] line-clamp-2 md:line-clamp-none">{channel.name}</h3>
+                        <div className="absolute bottom-0 left-0 right-0 p-4 md:p-5 bg-gradient-to-t from-black via-black/80 to-transparent z-20 pt-16 flex flex-col items-center text-center translate-y-1">
+                            <h3 className="text-sm md:text-lg leading-tight font-black font-[family-name:var(--font-montserrat)] tracking-widest uppercase text-white drop-shadow-lg drop-shadow-black">{channel.name}</h3>
                             {isActive && (
                                 <div className="flex justify-center items-center gap-2 mt-2">
                                     <div className="flex gap-1 items-end h-3">
