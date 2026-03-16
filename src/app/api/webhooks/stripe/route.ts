@@ -271,13 +271,18 @@ export async function POST(req: Request) {
                             to: userEmail,
                             subject: `🎉 Pagamento Confermato! Benvenuto in ${planType.toUpperCase()} 🌟`,
                             html: `
-                            <h2>Pagamento Completato con Successo!</h2>
-                            <p>Ciao! Ti confermiamo di aver ricevuto il pagamento tramite carta per il tuo piano <strong>${planType.toUpperCase()}</strong>.</p>
-                            <p>Il tuo account è già stato aggiornato e puoi iniziare subito a utilizzare tutte le funzionalità e i canali musicali riservati alla tua sottoscrizione.</p>
-                            <p>In allegato trovi i file PDF del tuo <strong>Contratto di Abbonamento</strong> e del tuo <strong>Certificato/Licenza Ufficiale</strong> relativi a questo abbonamento.</p>
-                            <p>Grazie per aver scelto Beautify Channel!</p>
-                            <br/>
-                            <p>Il team di Beautify Channel</p>
+                            <div style="font-family: Arial, sans-serif; max-w: 600px; margin: 0 auto; color: #333; background-color: #FAFAFA; padding: 0; border-radius: 12px; border: 1px solid #EAEAEA; overflow: hidden;">
+                                <div style="background-color: #09090b; padding: 30px 20px; text-align: center;">
+                                    <img src="https://eufahlzjxbimyiwivoiq.supabase.co/storage/v1/object/public/bucket-assets/Logo-BeautiFyChannel.svg" alt="Beautify Channel" style="max-height: 40px; width: auto;" />
+                                </div>
+                                <div style="background-color: #FFFFFF; padding: 30px; border-radius: 0 0 12px 12px;">
+                                    <h2 style="font-size: 20px; color: #c026d3; margin-top: 0;">Pagamento Completato con Successo!</h2>
+                                    <p style="font-size: 16px; line-height: 1.6; color: #444;">Ciao! Ti confermiamo di aver ricevuto il pagamento per il tuo piano <strong>${planType.toUpperCase()}</strong>.</p>
+                                    <p style="font-size: 16px; line-height: 1.6; color: #444;">Il tuo account è già stato aggiornato e puoi iniziare subito a utilizzare tutte le funzionalità e i canali musicali riservati alla tua sottoscrizione.</p>
+                                    <p style="font-size: 16px; line-height: 1.6; color: #444;">In allegato trovi i file PDF del tuo <strong>Contratto di Abbonamento</strong> e del tuo <strong>Certificato/Licenza Ufficiale</strong> relativi a questo abbonamento.</p>
+                                    <p style="font-size: 16px; line-height: 1.6; color: #444; margin-top: 20px;">Grazie per aver scelto Beautify Channel!<br><b>Il team di Beautify Channel</b></p>
+                                </div>
+                            </div>
                             `,
                             attachments: attachments
                         });

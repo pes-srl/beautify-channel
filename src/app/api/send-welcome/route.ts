@@ -19,13 +19,13 @@ export async function POST(request: Request) {
             to: email,
             subject: 'Benvenuto su Beautify Channel! 🎵 La tua prova gratuita è attiva',
             html: `
-                <div style="font-family: Arial, sans-serif; max-w: 600px; margin: 0 auto; color: #333; background-color: #FAFAFA; padding: 20px; border-radius: 12px; border: 1px solid #EAEAEA;">
-                    <div style="text-align: center; margin-bottom: 30px;">
-                        <h1 style="color: #c026d3; margin: 0; font-size: 28px; font-weight: 800;">Beautify Channel</h1>
-                        <p style="color: #666; font-size: 14px; margin-top: 5px;">L'Atmosfera Perfetta per il tuo Salone</p>
+                <div style="font-family: Arial, sans-serif; max-w: 600px; margin: 0 auto; color: #333; background-color: #FAFAFA; padding: 0; border-radius: 12px; border: 1px solid #EAEAEA; overflow: hidden;">
+                    <!-- Header Scuro con Logo -->
+                    <div style="background-color: #09090b; padding: 30px 20px; text-align: center;">
+                        <img src="https://eufahlzjxbimyiwivoiq.supabase.co/storage/v1/object/public/bucket-assets/Logo-BeautiFyChannel.svg" alt="Beautify Channel" style="max-height: 40px; width: auto;" />
                     </div>
 
-                    <div style="background-color: #FFFFFF; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border: 1px solid #EAEAEA;">
+                    <div style="background-color: #FFFFFF; padding: 30px; border-radius: 0 0 12px 12px;">
                         <h2 style="font-size: 20px; color: #111; margin-top: 0;">Ciao ${full_name || ''}, Benvenuto a bordo! 🎉</h2>
                         
                         <p style="font-size: 16px; line-height: 1.6; color: #444;">
@@ -33,7 +33,7 @@ export async function POST(request: Request) {
                         </p>
                         
                         <p style="font-size: 16px; line-height: 1.6; color: #444;">
-                            Queste sono le credenziali per la tua area riservata. La prova gratuita dura 7 giorni, successivamente se lo vorrai, potrai scegliere il nostro piano BASIC ma intanto...
+                            La prova gratuita dura 7 giorni, successivamente se lo vorrai, potrai scegliere il nostro piano BASIC ma intanto...
                         </p>
                         
                         <h3 style="font-size: 18px; color: #c026d3; margin-top: 20px;">BUONA ESPERIENZA CON BeautiFy Channel.</h3>
