@@ -137,10 +137,85 @@ export default async function AreaClientePage2(props: {
                     </div>
                 )}
 
-                {/* 1. DYNAMIC WELCOME BANNER (THE "GRAZIE" HERO) */}
-                {!isAdmin && profile?.plan_type && !isExpired && (
+                {/* 1. DYNAMIC WELCOME BANNER */}
+                {!isAdmin && profile?.plan_type === 'free_trial' && !isExpired && (
+                    <div className="w-full max-w-4xl mx-auto mt-24 mb-16 flex flex-col gap-6 items-center px-4">
+                        {/* TOP CARD */}
+                        <div className="w-full bg-gradient-to-br from-[#3b1c6b] via-[#2a1154] to-[#1a0b33] border border-white/5 rounded-3xl p-8 md:p-12 text-center shadow-2xl flex flex-col items-center">
+                            <h2 className="text-xl md:text-3xl font-semibold text-white mb-8 max-w-2xl mx-auto leading-relaxed">
+                                Benvenuta, grazie di aver scelto di provare BeautiFy Channel! Buona esperienza!
+                            </h2>
+                            <div className="bg-black/20 border border-white/5 rounded-2xl p-6 md:p-8 flex flex-col items-center shadow-inner mb-8 w-full max-w-sm">
+                                <span className="text-zinc-400 text-xs md:text-sm uppercase tracking-[0.2em] font-medium mb-3">
+                                    IL TUO PIANO ATTUALE
+                                </span>
+                                <h3 className="text-4xl md:text-5xl font-black text-[#ff5a7e] uppercase tracking-wider mb-2">
+                                    FREE TRIAL
+                                </h3>
+                                <span className="text-zinc-400 text-sm md:text-base italic">
+                                    {daysLeft} {daysLeft === 1 ? 'giorno' : 'giorni'} alla fine della prova gratuita
+                                </span>
+                            </div>
+                            
+                            <button
+                                onClick={() => {
+                                    const element = document.getElementById('scegli-piano-section');
+                                    element?.scrollIntoView({ behavior: 'smooth' });
+                                }}
+                                className="bg-white text-black font-bold uppercase tracking-widest text-sm md:text-base px-8 py-3.5 rounded-full hover:scale-105 transition-transform"
+                            >
+                                SCEGLI UN PIANO
+                            </button>
+                        </div>
+
+                        {/* GLOWING BAR */}
+                        <div className="w-full bg-gradient-to-r from-[#9b3bff] to-[#ff5a7e] rounded-2xl p-4 md:p-6 flex flex-col md:flex-row items-center gap-4 justify-between shadow-[0_0_40px_rgba(255,90,126,0.3)]">
+                            <div className="flex items-center gap-4">
+                                <Sparkles className="w-6 h-6 md:w-8 md:h-8 text-white shrink-0" />
+                                <span className="font-bold text-white text-lg md:text-xl">
+                                    La tua prova gratuita è attiva
+                                </span>
+                            </div>
+                            <div className="flex items-center gap-3">
+                                <span className="text-white/90 text-sm md:text-base">Scade tra</span>
+                                <span className="bg-black/30 backdrop-blur-md px-4 py-1.5 rounded-xl text-white text-sm md:text-base font-bold">
+                                    {daysLeft} {daysLeft === 1 ? 'giorno' : 'giorni'}
+                                </span>
+                            </div>
+                        </div>
+
+                        {/* AREA RISERVATA BLOCK */}
+                        <div className="w-full mt-8 md:mt-12 bg-[#0f0518]/50 border border-[#ff5a7e]/20 rounded-[2.5rem] p-8 md:p-12 flex flex-col items-center justify-center relative shadow-[0_0_50px_rgba(255,90,126,0.05)]">
+                            <div className="absolute inset-0 bg-gradient-to-br from-[#ff5a7e]/5 to-transparent rounded-[2.5rem] pointer-events-none" />
+                            <h1 className="text-5xl md:text-7xl font-sans font-bold text-[#ff5a7e] mb-6 drop-shadow-md tracking-tight">
+                                Area Riservata
+                            </h1>
+                            <div className="flex flex-col md:flex-row items-center gap-4 relative z-10">
+                                <span className="text-white font-bold text-xl md:text-2xl">
+                                    {profile?.salon_name || user.email}
+                                </span>
+                                <span className="text-xs md:text-sm font-bold text-emerald-400 border border-emerald-400/30 bg-emerald-400/10 px-3 py-1.5 rounded-full uppercase tracking-widest">
+                                    PIANO: FREE TRIAL
+                                </span>
+                            </div>
+                        </div>
+
+                        {/* QUESTO E IL TUO CANALE AUDIO PRINCIPALE */}
+                        <div className="mt-12 mb-0 flex flex-col items-center">
+                            <h3 className="text-white/90 font-medium tracking-[0.2em] uppercase text-center text-sm md:text-base mb-6">
+                                Questo e' il tuo canale audio principale
+                            </h3>
+                            <div className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center bg-white/5 backdrop-blur-sm">
+                                <ArrowDown className="w-5 h-5 text-white/70" />
+                            </div>
+                        </div>
+                    </div>
+                )}
+
+                {/* GRAZIE BANNER FOR NON-TRIAL USERS (PREMIUM/BASIC) */}
+                {!isAdmin && profile?.plan_type !== 'free_trial' && profile?.plan_type && !isExpired && (
                     <div className="w-full mt-32 md:mt-40 mb-20 flex flex-col items-center justify-center text-center">
-                        <h1 className={`text-5xl md:text-7xl font-black uppercase tracking-tight text-transparent bg-clip-text bg-gradient-to-br ${profile.plan_type === 'free_trial' ? 'from-emerald-400 to-teal-300' : 'from-amber-400 to-amber-200'} mb-4 drop-shadow-lg`}>
+                        <h1 className={`text-5xl md:text-7xl font-black uppercase tracking-tight text-transparent bg-clip-text bg-gradient-to-br from-amber-400 to-amber-200 mb-4 drop-shadow-lg`}>
                             GRAZIE
                         </h1>
                         <h2 className="text-xl md:text-2xl font-light tracking-[0.2em] font-[family-name:var(--font-montserrat)] text-white mb-6 uppercase">
@@ -152,9 +227,9 @@ export default async function AreaClientePage2(props: {
                                 {profile?.salon_name || user.email}
                             </span>
                             <div className="flex bg-white/5 border border-white/10 rounded-full px-4 py-1.5 items-center gap-2 backdrop-blur-sm">
-                                <span className={`w-2 h-2 rounded-full animate-pulse ${profile.plan_type === 'free_trial' ? 'bg-emerald-400' : 'bg-amber-400'}`} />
+                                <span className={`w-2 h-2 rounded-full animate-pulse bg-amber-400`} />
                                 <span className="text-sm font-semibold uppercase tracking-wider text-zinc-300">
-                                    {profile.plan_type === 'free_trial' ? `Trial: ${daysLeft} ${daysLeft === 1 ? 'giorno' : 'giorni'} rimanenti` : `Piano: Premium`}
+                                    {`Piano: ${profile.plan_type === 'basic' ? 'Basic' : 'Premium'}`}
                                 </span>
                             </div>
                         </div>
@@ -254,7 +329,7 @@ export default async function AreaClientePage2(props: {
 
                         {/* Upgrade Form for Free Trial and Basic Users */}
                         {(profile?.plan_type === 'free_trial' || profile?.plan_type === 'basic') && !isAdmin && (
-                            <div className="w-full max-w-4xl mx-auto mt-0 md:mt-16 border-t border-white/10 pt-4 md:pt-16">
+                            <div id="scegli-piano-section" className="w-full max-w-4xl mx-auto mt-0 md:mt-16 border-t border-white/10 pt-4 md:pt-16">
                                 {(profile?.plan_type === 'basic' || profile?.plan_type === 'free_trial') && (
                                     <div className="text-center mb-16 px-4">
                                         {/* Elegant Divider */}
