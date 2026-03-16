@@ -190,17 +190,17 @@ export default async function AreaClientePage2(props: {
                         </div>
 
                         {/* AREA RISERVATA BLOCK */}
-                        <div className="w-full mt-8 md:mt-12 bg-[#0f0518]/50 border border-[#ff5a7e]/20 rounded-[2.5rem] p-8 md:p-12 flex flex-col items-center justify-center relative shadow-[0_0_50px_rgba(255,90,126,0.05)]">
+                        <div className="w-full mt-8 md:mt-12 bg-[#0f0518]/50 border border-[#ff5a7e]/20 rounded-[2.5rem] p-8 md:p-12 flex flex-col items-center justify-center relative shadow-[0_0_50px_rgba(255,90,126,0.05)] text-center">
                             <div className="absolute inset-0 bg-gradient-to-br from-[#ff5a7e]/5 to-transparent rounded-[2.5rem] pointer-events-none" />
-                            <h1 className="text-5xl md:text-7xl font-sans font-bold text-[#ff5a7e] mb-6 drop-shadow-md tracking-tight">
+                            <h1 className="text-5xl md:text-7xl font-sans font-bold text-[#ff5a7e] mb-6 drop-shadow-md tracking-tight w-full justify-center text-center">
                                 Area Riservata
                             </h1>
                             <div className="flex flex-col md:flex-row items-center gap-4 relative z-10">
-                                <span className="text-white font-bold text-xl md:text-2xl">
+                                <span className="text-white font-bold text-xl md:text-2xl text-center">
                                     {profile?.salon_name || user.email}
                                 </span>
-                                <span className="text-xs md:text-sm font-bold text-emerald-400 border border-emerald-400/30 bg-emerald-400/10 px-3 py-1.5 rounded-full uppercase tracking-widest">
-                                    PIANO: FREE TRIAL
+                                <span className="text-xs md:text-sm font-bold text-emerald-400 border border-emerald-400/30 bg-emerald-400/10 px-3 py-1.5 rounded-full uppercase tracking-widest text-center">
+                                    PIANO: {profile?.plan_type === 'premium' ? 'PREMIUM' : profile?.plan_type === 'basic' ? 'BASIC' : 'FREE TRIAL'}
                                 </span>
                             </div>
                         </div>
@@ -319,7 +319,7 @@ export default async function AreaClientePage2(props: {
                             </details>
 
                             {/* ALTRI CANALI ACCORDION (CONTAINS THE GRID) */}
-                            <details className="group marker:content-['']" open>
+                            <details className="group marker:content-['']">
                                 <summary className="flex items-center justify-between cursor-pointer list-none bg-white/[0.02] hover:bg-white/[0.04] backdrop-blur-md border border-white/5 rounded-[2rem] p-4 pr-6 transition-all duration-300 w-full md:w-3/4 mx-auto select-none">
                                     <div className="flex items-center gap-3 md:gap-5">
                                         <div className="p-3 bg-white/5 rounded-full shrink-0">
