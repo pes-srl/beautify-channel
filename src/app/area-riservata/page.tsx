@@ -157,15 +157,12 @@ export default async function AreaClientePage2(props: {
                                 </span>
                             </div>
                             
-                            <button
-                                onClick={() => {
-                                    const element = document.getElementById('scegli-piano-section');
-                                    element?.scrollIntoView({ behavior: 'smooth' });
-                                }}
-                                className="bg-white text-black font-bold uppercase tracking-widest text-sm md:text-base px-8 py-3.5 rounded-full hover:scale-105 transition-transform"
+                            <a
+                                href="#scegli-piano-section"
+                                className="inline-block bg-white text-black font-bold uppercase tracking-widest text-sm md:text-base px-8 py-3.5 rounded-full hover:scale-105 transition-transform"
                             >
                                 SCEGLI UN PIANO
-                            </button>
+                            </a>
                         </div>
 
                         {/* GLOWING BAR */}
