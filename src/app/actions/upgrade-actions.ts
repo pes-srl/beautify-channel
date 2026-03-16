@@ -1,6 +1,7 @@
 'use server'
 
 import { createClient } from '@/utils/supabase/server'
+import { generatePdfCertificate } from '@/utils/generatePdfCertificate'
 import { revalidatePath } from 'next/cache'
 import { logActivity } from '@/app/actions/activity-actions'
 
@@ -30,6 +31,7 @@ export async function submitUpgradeRequest(formData: FormData) {
     const responsabileIstituto = formData.get('responsabileIstituto') as string
     const emailContatto = formData.get('emailContatto') as string
     const telefono = formData.get('telefono') as string
+    const codiceSdi = formData.get('codiceSdi') as string || ''
 
     // Simple validation
     if (!requested_plan || !ragioneSociale || !partitaIva || !indirizzoIstituto || !nomeIstituto || !metriQuadri || !responsabileIstituto || !emailContatto || !telefono) {
@@ -45,7 +47,8 @@ export async function submitUpgradeRequest(formData: FormData) {
         durata_abbonamento: durataAbbonamento,
         responsabile_istituto: responsabileIstituto,
         email_contatto: emailContatto,
-        telefono: telefono
+        telefono: telefono,
+        codice_sdi: codiceSdi
     }
 
     // Insert the upgrade request
@@ -68,62 +71,27 @@ export async function submitUpgradeRequest(formData: FormData) {
     // Log the event for the dashboard Recent Activity
     await logActivity(user.id, 'upgrade_request', { plan: requested_plan });
 
-    // Send Emails via Resend
-    try {
-        const resendApiKey = process.env.RESEND_API_KEY;
-        if (resendApiKey) {
-            // Import dynamically to avoid top-level issues if resend is not installed or used elsewhere
-            const { Resend } = await import('resend');
-            const resend = new Resend(resendApiKey);
+    // --- LE EMAIL E LA GENERAZIONE DEL PDF SONO STATI SPOSTATI NEL WEBHOOK DI STRIPE ---
+    // (src/app/api/webhooks/stripe/route.ts)
+    // Non generiamo più PDF né inviamo email prima che il cliente abbia effettivamente pagato.
 
-            // 1. Email to Admin
-            await resend.emails.send({
-                from: 'Beautify Channel <onboarding@resend.dev>', // Update this to your verified domain later: e.g. 'hola@beautifychannel.com'
-                to: 'mirkocata@gmail.com', // Your admin email
-                subject: `🔔 NUOVA RICHIESTA DI UPGRADE - ${user.email}`,
-                html: `
-          <h2>Nuova Richiesta di Upgrade</h2>
-          <p>L'utente <strong>${user.email}</strong> ha richiesto di passare al piano <strong>${requested_plan.toUpperCase()}</strong>.</p>
-          <h3>Dati del Modulo:</h3>
-          <ul>
-            <li><strong>Ragione Sociale:</strong> ${ragioneSociale}</li>
-            <li><strong>Partita IVA:</strong> ${partitaIva}</li>
-            <li><strong>Indirizzo istituto:</strong> ${indirizzoIstituto}</li>
-            <li><strong>Nome istituto:</strong> ${nomeIstituto}</li>
-            <li><strong>Metri quadri istituto:</strong> ${metriQuadri}</li>
-            <li><strong>Durata abbonamento richiesta:</strong> ${durataAbbonamento}</li>
-            <li><strong>Responsabile istituto:</strong> ${responsabileIstituto}</li>
-            <li><strong>Email di contatto:</strong> ${emailContatto}</li>
-            <li><strong>Telefono:</strong> ${telefono}</li>
-          </ul>
-          <p>Per favore, contatta il cliente per gestire il pagamento e poi attiva il suo piano dal pannello di amministrazione.</p>
-        `
-            });
+    // Update the user's profile with the submitted information and the license URL
+    // This part is commented out as the original instruction's snippet was for a different context
+    // and the current \`submitUpgradeRequest\` does not update the user's profile directly
+    // with these specific fields (full_name, salon_name, etc.) but rather inserts an upgrade request.
+    // If a profile update is desired here, the schema and fields would need to be confirmed.
 
-            // 2. Email to User (Confirmation)
-            if (user.email) {
-                await resend.emails.send({
-                    from: 'Beautify Channel <onboarding@resend.dev>', // Update this to your verified domain later
-                    to: user.email,
-                    subject: `Abbiamo ricevuto la tua richiesta per passare a ${requested_plan.toUpperCase()} 🌟`,
-                    html: `
-            <h2>Ciao!</h2>
-            <p>Abbiamo ricevuto correttamente i tuoi dati per effettuare l'upgrade al piano <strong>${requested_plan.toUpperCase()}</strong>.</p>
-            <p>Il nostro team sta esaminando la tua richiesta e ti contatterà al più presto con le istruzioni di pagamento e i dettagli per procedere.</p>
-            <p>Non preoccuparti, il tuo canale di prova continua a funzionare nel frattempo!</p>
-            <br/>
-            <p>Il team di Beautify Channel</p>
-            `
-                });
-            }
-            // We don't return an error to the user if the email fails, since the DB insert succeeded.
-        } else {
-            console.warn("RESEND_API_KEY no está configurada. Los correos no se enviaron.");
-        }
-    } catch (emailError) {
-        console.error('Error sending upgrade emails:', emailError)
-        // We don't return an error to the user if the email fails, since the DB insert succeeded.
-    }
+    // Example of how you might update the profile if a 'store_license_url' column existed:
+    // if (finalLicenseUrl) {
+    //     const { error: profileUpdateError } = await supabase
+    //         .from('profiles')
+    //         .update({ store_license_url: finalLicenseUrl })
+    //         .eq('id', user.id);
+    //     if (profileUpdateError) {
+    //         console.error('Error updating user profile with license URL:', profileUpdateError);
+    //     }
+    // }
+
 
     revalidatePath('/area-riservata')
     return { success: true, message: 'La tua richiesta è stata inviata con successo! Ti contatteremo presto con i dettagli per il pagamento.' }

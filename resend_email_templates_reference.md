@@ -1,95 +1,100 @@
-# Riferimento Modelli Email (Resend) e Flusso di Upgrade
+# Riferimento Modelli Email e Flusso Transazionale (Beautify Channel)
 
-Questo documento funge da riferimento centrale per tutte le email operative (transazionali) che verranno inviate tramite Resend, nonché per la strategia raccomandata per gestire i cambi di piano in modo manuale.
-
----
-
-## 📧 1. Registrazione Utente (Welcome Email)
-**Quando viene inviata:** Quando un utente si registra per la prima volta sulla piattaforma.
-**Oggetto:** Benvenuto su Beautify Channel! 🎉
-**Contenuto suggerito:**
-- **Saluto:** Ciao [Nome],
-- **Messaggio:** Grazie per esserti unito a Beautify Channel! Siamo entusiasti di averti qui.
-- **Call to Action (CTA):** Pulsante per "Vai alla mia Dashboard" o "Completa il mio Profilo".
-- **Piè di pagina:** Supporto tecnico e contatti.
-
-## 📧 2. Recupero Password
-**Quando viene inviata:** Quando l'utente clicca su "Ho dimenticato la password".
-**Oggetto:** Recupero della tua password - Beautify Channel
-**Contenuto suggerito:**
-- **Messaggio:** Abbiamo ricevuto una richiesta per reimpostare la password del tuo account.
-- **CTA:** Pulsante sicuro "Reimposta Password" (Magic link temporaneo).
-- **Avviso:** "Se non hai richiesto tu questa email, puoi ignorarla in modo sicuro."
-
-## 📧 3. Inizio Prova Gratuita (Free Trial)
-**Quando viene inviata:** Quando l'utente attiva la creazione del suo canale di prova (Free).
-**Oggetto:** La tua prova gratuita su Beautify Channel è iniziata 🚀
-**Contenuto suggerito:**
-- **Messaggio:** Il tuo canale di prova è ora attivo e pronto per trasmettere! Hai accesso temporaneo alle nostre funzioni di base.
-- **Dettagli:** Promemoria della durata della prova (es. 7 o 14 giorni).
-- **CTA:** "Vai al mio Canale ora".
+Questo documento traccia rigorosamente **tutte le email transazionali attualmente inviate in produzione** (sia tramite l'API di Resend, sia tramite Supabase Auth). Include la descrizione di quando partono, i loro oggetti, e una sezione finale con **proposte di miglioramento**.
 
 ---
 
-## 📧 4. Richiesta di Cambio Piano (Upgrade Request)
-Dato che attualmente il processo di pagamento è manuale (senza Stripe diretto), l'utente compilerà un modulo con i propri dati di fatturazione. Questo genera **due** email automatiche.
+## 🟢 1. Registrazione e Onboarding
 
-### A. Per l'Utente (Conferma di Ricezione)
-**Quando viene inviata:** Immediatamente dopo aver inviato il modulo di richiesta di Upgrade.
-**Oggetto:** Abbiamo ricevuto la tua richiesta per passare a [Nome del Piano] 🌟
-**Contenuto suggerito:**
-- **Messaggio:** Ciao [Nome], abbiamo ricevuto correttamente i tuoi dati per effettuare l'upgrade a **[Piano Premium / Basic]**.
-- **Prossimi passi:** "Il nostro team sta esaminando i tuoi dati e ti contatterà al più presto con le istruzioni di pagamento e i dettagli per procedere. Non preoccuparti, il tuo canale attuale continuerà a funzionare nel frattempo!"
+### 1.1 Welcome Email & Inizio Prova Gratuita
+* **File sorgente:** `src/app/api/send-welcome/route.ts`
+* **Trigger:** Subito dopo che l'utente si è registrato con successo e ha completato i suoi dati.
+* **Mittente:** `Beautify Channel <noreply@beautifychannel.com>`
+* **Oggetto:** `Benvenuto su Beautify Channel! 🎵 La tua prova gratuita è attiva`
+* **Contenuto Riepilogativo:** 
+  - Saluto personalizzato (`Ciao [Nome]`).
+  - Conferma dell'avvio dei 7 giorni di prova gratuita.
+  - Spiegazione dei primi passi (Accedere all'area riservata, scegliere il canale, ecc.).
+  - Pulsante CTA per entrare subito nell'Area Riservata.
 
-### B. Per il Team / Amministratore (Avviso Interno)
-**Quando viene inviata:** Contemporaneamente alla precedente.
-**Oggetto:** 🔔 NUOVA RICHIESTA DI UPGRADE - [Nome dell'Utente]
-**Contenuto suggerito:**
-- **Messaggio:** L'utente [Nome dell'Utente] ([Email]) ha richiesto un passaggio al piano [Nome del Piano].
-- **Dati di Fatturazione:** [Mostrare P.IVA/CF, Ragione Sociale, Indirizzo, ecc., raccolti nel form].
-- **Azione richiesta:** Contattare il cliente per inviargli il metodo di pagamento e poi attivare il suo piano dal Pannello Admin.
+## 🔴 2. Cron Jobs (Controllo Scadenze Abbonamenti e Prove)
+*I cron jobs girano automaticamente ogni giorno per verificare la data di `trial_ends_at` e `subscription_expiration` sulle tabelle Supabase.*
+* **File sorgente:** `src/app/api/cron/check-trials/route.ts`
+* **Mittente:** `Beautify Channel <noreply@beautifychannel.com>`
 
-## 📧 5. Conferma di Pagamento e Attivazione (Manuale)
-**Quando viene inviata:** Una volta che l'amministratore convalida che il pagamento manuale (bonifico, link di pagamento esterno, ecc.) è stato ricevuto e gli abilita il livello Premium nella dashboard.
-**Oggetto:** Il tuo piano [Nome del Piano] è ora attivo! 💎
-**Contenuto suggerito:**
-- **Messaggio:** Congratulazioni! Abbiamo confermato il tuo pagamento. Il tuo account è stato aggiornato con successo al livello **[Piano Premium / Basic]**.
-- **Vantaggi:** Piccolo promemoria di ciò che ora può fare (es. Canale unico personalizzato, senza interruzioni, ecc.).
-- **CTA:** "Accedi al mio nuovo Canale Premium".
+### 2.1 Avviso: 2 Giorni alla fine della Prova Gratuita
+* **Trigger:** Tracciato a 2 giorni esatti (48-72 ore) dalla fine del campo `trial_ends_at` (piano `free_trial`).
+* **Oggetto:** `Mancano 2 giorni alla scadenza della prova gratuita ⏳`
+* **Contenuto Riepilogativo:** Avviso ("Il tempo stringe!"). Comunica che in 48 ore scadrà l'accesso e invita l'utente ai piani a pagamento per non interrompere la musica nel salone.
+
+### 2.2 Avviso: 1 Giorno alla fine della Prova Gratuita
+* **Trigger:** Tracciato a 1 giorno esatto (24 ore) dalla fine del campo `trial_ends_at` (piano `free_trial`).
+* **Oggetto:** `Manca 1 giorno alla scadenza della prova gratuita ⏰`
+* **Contenuto Riepilogativo:** Avviso urgenza ("Ultimo giorno di musica!"). Suggerisce di passare a Premium per non far spegnere la musica nel salone. CTA verso il listino prezzi.
+
+### 2.2 Scadenza Prova Gratuita (Downgrade a Free)
+* **Trigger:** Quando la data in `trial_ends_at` è uguale o inferiore alla data odierna per un piano `free_trial`.
+* **Oggetto:** `La tua prova è scaduta ⚠️ Riattiva Beautify Channel`
+* **Contenuto Riepilogativo:** "La musica si è fermata!". Notifica che l'account è sospeso/limitato al piano Free e si invita urgentemente al rinnovo.
+
+### 2.4 Avviso: 2 Giorni alla scadenza Abbonamento Pay
+* **Trigger:** Tracciato a 2 giorni esatti (48-72 ore) prima del `subscription_expiration` (piani `basic` o `premium`).
+* **Oggetto:** `Il tuo abbonamento scade tra 2 giorni ⏳ Rinnovo richiesto`
+* **Contenuto Riepilogativo:** "Rinnovo in arrivo!". Invita a rinnovare in anticipo per mantenere l'esclusività dei canali e non interrompere il servizio ai clienti del centro.
+
+### 2.5 Scadenza Abbonamento Pay (Downgrade a Free)
+* **Trigger:** Quando la data `subscription_expiration` è superata e l'utente ha piano `basic` o `premium`.
+* **Oggetto:** `Il tuo abbonamento è scaduto ⚠️ Riattiva Beautify Channel`
+* **Contenuto Riepilogativo:** "Abbonamento Terminato!". Comunica che l'accesso ai canali è sospeso. Rinnova subito per non restare nel silenzio.
+
+## 💰 3. Webhook Stripe (Pagamenti Avvenuti)
+* **File sorgente:** `src/app/api/webhooks/stripe/route.ts`
+
+### 3.1 Avviso Interno Admin
+* **Trigger:** All'evento Stripe `checkout.session.completed`.
+* **Mittente:** `Beautify Channel Pagamenti <onboarding@resend.dev>`
+* **Destinatario:** `mirkocata@gmail.com`
+* **Oggetto:** `🟢 PAGAMENTO RICEVUTO - Nuovo [PIANO] da [Email Cliente]`
+* **Contenuto Riepilogativo:** Dettagli del cliente (ID sessione, P.IVA, SDI, Indirizzo, Durata). Avvisa l'amministratore che non c'è azione tecnica da intraprendere perché il canale si è sbloccato automaticamente.
+
+### 3.2 Conferma per l'Utente (e Invio Documenti)
+* **Trigger:** All'evento Stripe `checkout.session.completed` (subito dopo l'attivazione in Supabase del Profilo e PDF).
+* **Mittente:** `Beautify Channel <onboarding@resend.dev>`
+* **Oggetto:** `🎉 Pagamento Confermato! Benvenuto in [PIANO] 🌟`
+* **Contenuto Riepilogativo:** 
+  - Ringraziamenti e conferma di avvenuto upgrade automatico.
+  - **Allegati (2 file PDF vitali):** Il "Contratto di Abbonamento" generato contestualmente, e la "Licenza Ufficiale" (Certificato Epidemic Sound). Entrambi conterranno le date di attivazione e scadenza corrette e non conterranno la firma obbligatoria.
+
+## 🔐 4. Auth & Sicurezza
+*Queste email sono attualmente gestite dalle impostazioni interne di Supabase, non dal codice sorgente esplicito con Resend, ma fanno parte del flusso.*
+
+### 4.1 Recupero Password
+* **Trigger:** L'utente preme "Ho dimenticato la password" e conferma la UI.
+* **Oggetto:** *Gestito nel pannello Email Templates di Supabase* 
+* **Funzionamento:** Recapita un Magic Link o Token a tempo di scadenza che riporta l'utente a `/area-riservata/profilo` per forzare il cambio password.
 
 ---
 
-# 🛠️ Piano Strategico Raccomandato (Flusso Manuale)
+# 🚀 Proposte di Miglioramento (Roadmap Email)
 
-Per gestire questo processo in modo efficiente e professionale senza avere Stripe implementato direttamente nel codice per ora, ti raccomando il seguente flusso:
+Attualmente il flusso base è ben coperto. Tuttavia, per dare all'app una "veste" ancora più Premium ed Enterprise, ecco cosa ti suggerisco di implementare nel breve/medio termine:
 
-### 1. Interfaccia Utente (Il Modulo di Upgrade)
-Crea una pagina o un modulo modale (es. `/area-riservata/upgrade`) a cui l'utente può accedere quando è `FREE_TRIAL`.
-- **Cosa chiedere:** Tipo di piano desiderato (Premium, Basic), Dati Persona Fisica o Azienda (Ragione Sociale, P.IVA/CF, Indirizzo Fiscale), e un campo opzionale per "Commenti o richieste speciali per il canale".
-- **UX:** Fai in modo che sia molto chiaro che *non gli verrà addebitato nulla in quel momento*, ma che si tratta di una **richiesta formale**.
+### 1. Dominio di Produzione per il Webhook
+**Problema:** Nel Webhook di Stripe in `route.ts`, per le email di conferma pagamento stiamo ancora usando `<onboarding@resend.dev>` come mittente.
+**Soluzione:** Nelle impostazioni del tuo account Resend, verifica il nuovo dominio a pagamento (quando lanci) e sostituisci il mittente con `pagamenti@beautifychannel.com` o `supporto@beautifychannel.com`.
 
-### 2. Database (Supabase)
-Crea una tabella chiamata `upgrade_requests`:
-- `id`, `user_id`, `requested_plan` (enum: basic, premium), `billing_details` (jsonb), `status` (pending, contacted, approved, rejected), `created_at`.
+### 2. Aggiungere le React Email (Styling Avanzato)
+**Problema:** Attualmente le email HTML in `send-welcome` e nei Cron Jobs sono grosse stringhe di testo iniettato nel codice JS, difficili da manutenere o abbellire visivamente senza rompere la formattazione.
+**Soluzione:** Integrare la libreria **[React-Email](https://react.email/)** insieme a Resend. Questo ti permette di codificare le email come normali componenti `.tsx` compatibili col brand (con Tailwind incluso), vederne le anteprime live in sviluppo e mantenere il codice molto più pulito.
 
-### 3. Il Trigger (Server Action)
-Quando l'utente invia il modulo:
-1. Viene salvato il record nella tabella `upgrade_requests` con stato `pending`.
-2. Vengono attivate le due email di Resend (Sezione 4A per tranquillizzare il cliente, 4B per avvisare te). *Opzionale: Se hai n8n configurato (come abbiamo visto per i lead), puoi inviare anche un WhatsApp al team admin.*
+### 3. Recupero Carrelli Abbandonati (Stripe/N8N)
+**Problema:** Un utente compila il modulo "Dati Fatturazione", va su Stripe ma poi chiude la tendina senza pagare. Al momento la richiesta rimane "pending" ma lui non viene ricontattato in automatico.
+**Soluzione:** Aggiungere un Cron Job che rileva le `upgrade_requests` in stato "pending" da più di 24 ore. Tramite Resend, fargli arrivare un'email del tipo *"Hai dimenticato qualcosa? Completa ora il tuo upgrade e ottieni i canali musicali premium!"*. 
 
-### 4. La Gestione nell'Area Admin (Il tuo Lavoro)
-Nel tuo `/admin`, aggiungi una scheda **"Richieste di Upgrade"**.
-- Vedrai le richieste in sospeso.
-- Contatterai il cliente manualmente (via email o inviandogli un link di pagamento Stripe pre-generato da te esternamente, o i dati per il bonifico bancario).
-- Puoi cambiare lo stato in `contacted`.
+### 4. Fatturazione Automatica PDF
+**Problema:** Noi generiamo e gli inviamo via email solo "Documenti Legali" (il Contratto di Servizio e il Certificato Exemption SIAE). Manca l'invio della vera e propria Fattura Commerciale che magari generi su un software terzo (es. Aruba, FattureInCloud).
+**Soluzione:** Si può connettere il webhook di Stripe direttamente a Zapier/Make per generare anche la fattura SDI ufficiale italiana o sfruttare Stripe Invoicing se la p.iva è abilitata.
 
-### 5. L'Attivazione Finale (Passaggio a Premium)
-Una volta che il cliente ti conferma il pagamento e vedi i soldi:
-1. Entri nell'admin, cambi il ruolo/piano dell'utente in `PREMIUM`.
-2. Crei o gli assegni il suo canale finale.
-3. Questo attiva (o si preme un pulsante per attivare) l'email della Sezione 5 (Attivazione).
-
-**Perché questo piano è buono?**
-- **Controllo Totale:** Essendo manuale all'inizio, eviti problemi di fatturazione automatica errata se il prodotto è ancora in fase di iterazione.
-- **Relazione con il cliente:** Hai l'opportunità di offrirgli un trattamento VIP: "Ciao, ho visto che vuoi passare a Premium, ecco come fare... che musica vorresti per il tuo canale?".
-- **Transizione facile:** Quando in futuro vorrai automatizzare davvero con Stripe, avrai già pronta l'UI del modulo, ti basterà cambiare il pulsante "Richiedi" con un checkout di Stripe.
+### 5. Email Personalizzata al Scattare del Mese Finale dell'Abbonamento
+**Problema Il rinnovo annuale/semestrale potrebbe cogliere un business model di sorpresa.
+**Soluzione:** Aggiungere al file Cron uno step `30 days warning`. Ad un mese prima della scadenza di un piano a 6-12 mesi, inviargli l'Avviso Bonario invitandolo a non aspettare l'ultimo giorno per rinnovare (magari offrendogli la possibilità di fare l'addebito automatico sul rinnovo se implementerete gli Stripe Subscriptions reali invece di sessioni di checkout "One Off").

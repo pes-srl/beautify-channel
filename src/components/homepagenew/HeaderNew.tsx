@@ -21,7 +21,7 @@ export function HeaderNew({
     initialProfile = null
 }: {
     initialUser?: SupabaseUser | null;
-    initialProfile?: { role: string | null; plan_type: string | null; salon_name: string | null; trial_ends_at?: string | null } | null;
+    initialProfile?: { role: string | null; plan_type: string | null; salon_name: string | null; trial_ends_at?: string | null; store_license_url?: string | null; store_contract_url?: string | null } | null;
 } = {}) {
     const pathname = usePathname();
 
@@ -30,7 +30,7 @@ export function HeaderNew({
 
     // Seed state with SSR props if available, otherwise fetch
     const [user, setUser] = useState<SupabaseUser | null>(initialUser);
-    const [profile, setProfile] = useState<{ role: string | null; plan_type: string | null; salon_name: string | null; trial_ends_at?: string | null } | null>(initialProfile);
+    const [profile, setProfile] = useState<{ role: string | null; plan_type: string | null; salon_name: string | null; trial_ends_at?: string | null; store_license_url?: string | null; store_contract_url?: string | null } | null>(initialProfile);
 
     // If we already have a user from SSR, we are not loading.
     const [isLoading, setIsLoading] = useState(!initialUser);
@@ -90,7 +90,7 @@ export function HeaderNew({
 
                 const { data: profileData, error: profileError } = await supabase
                     .from('profiles')
-                    .select('role, plan_type, salon_name, trial_ends_at')
+                    .select('role, plan_type, salon_name, trial_ends_at, store_license_url, store_contract_url')
                     .eq('id', authUser.id)
                     .single();
 
@@ -98,10 +98,13 @@ export function HeaderNew({
                     let pType = profileData.plan_type;
                     if (pType === 'free_trial' && profileData.trial_ends_at) {
                         const trialEndDate = new Date(profileData.trial_ends_at);
-                        const daysLeft = Math.ceil((trialEndDate.getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24));
-                        if (daysLeft <= 0) pType = 'free';
+                        const now = new Date();
+                        const diffTime = trialEndDate.getTime() - now.getTime();
+                        const daysLeft = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+                        if (daysLeft < 0) pType = 'free';
                     }
-                    setProfile({ role: profileData.role, plan_type: pType, salon_name: profileData.salon_name, trial_ends_at: profileData.trial_ends_at });
+                    setProfile({ role: profileData.role, plan_type: pType, salon_name: profileData.salon_name, trial_ends_at: profileData.trial_ends_at, store_license_url: profileData.store_license_url,
+                        store_contract_url: profileData.store_contract_url });
                 }
             } catch (err) {
                 console.error("Error in HeaderNew fetchUser:", err);
@@ -120,17 +123,20 @@ export function HeaderNew({
                 if (currentUser) {
                     const { data: profileData } = await supabase
                         .from('profiles')
-                        .select('role, plan_type, salon_name, trial_ends_at')
+                        .select('role, plan_type, salon_name, trial_ends_at, store_license_url, store_contract_url')
                         .eq('id', currentUser.id)
                         .single();
                     if (profileData) {
                         let pType = profileData.plan_type;
                         if (pType === 'free_trial' && profileData.trial_ends_at) {
                             const trialEndDate = new Date(profileData.trial_ends_at);
-                            const daysLeft = Math.ceil((trialEndDate.getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24));
-                            if (daysLeft <= 0) pType = 'free';
+                            const now = new Date();
+                            const diffTime = trialEndDate.getTime() - now.getTime();
+                            const daysLeft = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+                            if (daysLeft < 0) pType = 'free';
                         }
-                        setProfile({ role: profileData.role, plan_type: pType, salon_name: profileData.salon_name, trial_ends_at: profileData.trial_ends_at });
+                        setProfile({ role: profileData.role, plan_type: pType, salon_name: profileData.salon_name, trial_ends_at: profileData.trial_ends_at, store_license_url: profileData.store_license_url,
+                        store_contract_url: profileData.store_contract_url });
                     }
                 } else {
                     setProfile(null);
@@ -143,6 +149,51 @@ export function HeaderNew({
             subscription.unsubscribe();
         };
     }, [supabase, initialUser]);
+
+    // Polling mechanism if returning from Stripe (upgrade=success) and still seeing free_trial
+    useEffect(() => {
+        if (typeof window === 'undefined') return;
+        const searchParams = new URLSearchParams(window.location.search);
+        const upgradeParam = searchParams.get('upgrade');
+        
+        if (upgradeParam !== 'success' || !user || !profile) return;
+        
+        // Only poll if it still looks like a trial/free plan but user just paid
+        if (profile.plan_type !== 'free_trial' && profile.plan_type !== 'free') return;
+
+        let pollingCount = 0;
+        const maxPolls = 8; // Poll for about 12 seconds total
+        
+        const pollTimer = setInterval(async () => {
+            pollingCount++;
+            try {
+                const { data: profileData } = await supabase
+                    .from('profiles')
+                    .select('role, plan_type, salon_name, trial_ends_at, store_license_url, store_contract_url')
+                    .eq('id', user.id)
+                    .single();
+                    
+                if (profileData && profileData.plan_type !== 'free_trial' && profileData.plan_type !== 'free') {
+                    // Plan has finally updated securely!
+                    setProfile({ 
+                        role: profileData.role, 
+                        plan_type: profileData.plan_type, 
+                        salon_name: profileData.salon_name, 
+                        trial_ends_at: profileData.trial_ends_at, 
+                        store_license_url: profileData.store_license_url,
+                        store_contract_url: profileData.store_contract_url 
+                    });
+                    clearInterval(pollTimer);
+                } else if (pollingCount >= maxPolls) {
+                    clearInterval(pollTimer);
+                }
+            } catch (err) {
+                console.error("Polling error:", err);
+            }
+        }, 1500);
+
+        return () => clearInterval(pollTimer);
+    }, [user, profile?.plan_type, supabase]);
 
     const handleSignOut = () => {
         const form = document.createElement('form');
@@ -284,11 +335,25 @@ export function HeaderNew({
                                     </Link>
                                 </DropdownMenuItem>
                                 <DropdownMenuItem asChild className="cursor-pointer focus:bg-white/10 rounded-lg px-3 py-2.5 mt-1">
-                                    <Link href="/area-riservata/le-mie-richieste" className="flex items-center gap-3 w-full">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-zinc-400"><path d="M12 2v20" /><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" /></svg>
-                                        <span className="text-zinc-200">Le mie Richieste</span>
+                                    <Link href="/area-riservata/profilo" className="flex items-center gap-3 w-full">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-zinc-400"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                                        <span className="text-zinc-200">Il Mio Profilo</span>
                                     </Link>
                                 </DropdownMenuItem>
+                                <DropdownMenuItem asChild className="cursor-pointer focus:bg-white/10 rounded-lg px-3 py-2.5 mt-1">
+                                    <Link href="/area-riservata/ordini" className="flex items-center gap-3 w-full">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-zinc-400"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+                                        <span className="text-zinc-200">I Miei Ordini</span>
+                                    </Link>
+                                </DropdownMenuItem>
+                                {(profile?.store_license_url || profile?.store_contract_url) && (
+                                    <DropdownMenuItem asChild className="cursor-pointer focus:bg-white/10 rounded-lg px-3 py-2.5 mt-1">
+                                        <Link href="/area-riservata/documenti" className="flex items-center gap-3 w-full">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-zinc-400"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>
+                                            <span className="text-zinc-200">Documenti e Licenza</span>
+                                        </Link>
+                                    </DropdownMenuItem>
+                                )}
                                 {profile?.role === 'Admin' && (
                                     <>
                                         <DropdownMenuSeparator className="bg-white/5 my-2" />
@@ -335,13 +400,15 @@ export function HeaderNew({
 
                 {/* Mobile Menu Toggle & Direct Access */}
                 <div className="md:hidden flex items-center gap-3">
-                    <Link
-                        href={user ? "/area-riservata" : "/login"}
-                        className="text-zinc-300 hover:text-white p-1"
-                        aria-label="Accesso rapido"
-                    >
-                        <User size={22} className={user && profile?.plan_type === 'premium' ? "text-amber-500" : ""} />
-                    </Link>
+                    {!user && (
+                        <Link
+                            href="/login"
+                            className="text-zinc-300 hover:text-white p-1"
+                            aria-label="Accesso rapido"
+                        >
+                            <User size={22} />
+                        </Link>
+                    )}
                     <button
                         className="text-zinc-300 hover:text-white"
                         onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -367,10 +434,16 @@ export function HeaderNew({
                     <div className="flex flex-col gap-3 mt-4">
                         {!isLoading && user ? (
                             <>
-                                <Link href="/admin" onClick={() => setIsMobileMenuOpen(false)}>
+                                <Link href="/area-riservata" onClick={() => setIsMobileMenuOpen(false)}>
                                     <Button variant="outline" className="w-full border-white/20 text-white bg-transparent flex items-center justify-center gap-2 rounded-[35px]">
                                         <User size={18} />
-                                        Area Personale
+                                        Area Riservata
+                                    </Button>
+                                </Link>
+                                <Link href="/area-riservata/profilo" onClick={() => setIsMobileMenuOpen(false)}>
+                                    <Button variant="outline" className="w-full border-white/20 text-white bg-transparent flex items-center justify-center gap-2 rounded-[35px]">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                                        Il Mio Profilo
                                     </Button>
                                 </Link>
                                 <Button onClick={() => { handleSignOut(); setIsMobileMenuOpen(false); }} className="w-full bg-white/10 hover:bg-white/20 text-white border-0 flex items-center justify-center gap-2 cursor-pointer transition-colors rounded-[35px]">

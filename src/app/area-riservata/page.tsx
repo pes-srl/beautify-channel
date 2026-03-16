@@ -1,27 +1,49 @@
-import { ChannelGrid } from "@/components/player/ChannelGrid";
-import { BasicHeroChannel } from "@/components/player/BasicHeroChannel";
+import { ChannelGrid2 } from "@/components/draft2026/ChannelGrid2";
+import { BasicHeroChannel2 } from "@/components/draft2026/BasicHeroChannel2";
 import { createClient } from "@/utils/supabase/server";
-import { LogOut, Sparkles, AlertCircle, CheckCircle2, Lock, Radio, ArrowDown, ChevronDown, PlayCircle } from "lucide-react";
+import { LogOut, Sparkles, AlertCircle, CheckCircle2, Lock, Radio, ArrowDown } from "lucide-react";
 import { redirect } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Paywall } from "./Paywall";
-import { UpgradeFormTrial } from "@/components/UpgradeFormTrial";
-import { UpgradeFormBasic } from "@/components/UpgradeFormBasic";
+import { UpgradeCheckoutForm } from "@/components/draft2026/UpgradeCheckoutForm";
+import { AudioPlayer } from "@/components/player/AudioPlayer";
+import { PollActivation } from "@/components/draft2026/PollActivation";
 
 export const dynamic = "force-dynamic";
 
-export default async function AreaClientePage() {
+export default async function AreaClientePage2(props: {
+    searchParams?: Promise<{ upgrade?: string }>;
+}) {
+    const searchParams = await props.searchParams;
+    const upgradeStatus = searchParams?.upgrade;
+
     const supabase = await createClient();
     const { data: { user } } = await supabase.auth.getUser();
 
     if (!user) redirect("/login");
 
-    const { data: profile } = await supabase
+    const { data: dbProfile } = await supabase
         .from("profiles")
         .select("salon_name, role, plan_type, trial_ends_at")
         .eq("id", user.id)
         .single();
+
+    let profile = dbProfile ? { ...dbProfile, partita_iva: user?.user_metadata?.partita_iva || null } : {
+        salon_name: user?.user_metadata?.salon_name || null,
+        role: 'User',
+        plan_type: user?.user_metadata?.plan_type || 'free',
+        trial_ends_at: user?.user_metadata?.trial_ends_at || null,
+        partita_iva: user?.user_metadata?.partita_iva || null,
+    };
+
+    // Robustness Check: If replication lag causes plan_type to be 'free' but they just signed up as 'free_trial'
+    if (profile.plan_type === 'free' && user?.user_metadata?.plan_type === 'free_trial') {
+        profile.plan_type = 'free_trial';
+        profile.trial_ends_at = profile.trial_ends_at || user.user_metadata.trial_ends_at;
+        profile.salon_name = profile.salon_name || user.user_metadata.salon_name;
+    }
 
     // Calculate Trial State
     const isAdmin = profile?.role === 'Admin';
@@ -31,14 +53,22 @@ export default async function AreaClientePage() {
     if (profile?.plan_type === 'free_trial') {
         if (profile?.trial_ends_at) {
             const trialEndDate = new Date(profile.trial_ends_at);
-            daysLeft = Math.ceil((trialEndDate.getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24));
-            if (daysLeft <= 0) {
+            const now = new Date();
+            const diffTime = trialEndDate.getTime() - now.getTime();
+            daysLeft = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+            // Allow 1 day grace period for timezone issues and immediate signup edge case
+            if (daysLeft < 0) {
                 isExpired = true;
                 profile.plan_type = 'free';
+                daysLeft = 0;
+            } else if (daysLeft === 0 && diffTime > -86400000) {
+                // still active, just < 24h left
+                daysLeft = 1;
             }
         } else {
-            // Fallback for old accounts without date: assume active but give 0 days visual
-            daysLeft = 0;
+            // Fallback for new accounts where triggers might be delayed: give 7 days visual
+            daysLeft = 7;
         }
     }
 
@@ -73,210 +103,188 @@ export default async function AreaClientePage() {
     }
 
     return (
-        <div className="pt-12 pb-32">
+        <div className="pt-[7rem] pb-32 min-h-screen relative w-full selection:bg-[#D8B2A3]/30">
+            {/* Dynamic Background identico alla Home Page */}
+            <div className="fixed inset-0 z-0 flex justify-center bg-zinc-950 pointer-events-none">
+                <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] bg-[#AB7169]/10 blur-[120px] rounded-full mix-blend-screen" />
+                <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[60%] bg-[#5D6676]/10 blur-[120px] rounded-full mix-blend-screen" />
+            </div>
 
-            {/* DYNAMIC WELCOME BANNER BASED ON PLAN */}
-            {!isAdmin && profile?.plan_type && profile?.plan_type !== 'basic' && !isExpired && (
-                <div className={`mb-6 p-4 rounded-xl border backdrop-blur-md flex items-center justify-center text-center shadow-lg relative overflow-hidden ${profile.plan_type === 'free_trial'
-                    ? 'border-purple-500/30 bg-gradient-to-r from-fuchsia-900/20 to-purple-900/80 shadow-purple-900/20'
-                    : profile.plan_type === 'basic'
-                        ? 'border-[#dfa3fb]/30 bg-gradient-to-r from-[#fba5cc] to-[#dfa3fb] shadow-[#dfa3fb]/20'
-                        : 'border-white/5 bg-zinc-900/50 shadow-md'
-                    }`}>
-                    {profile.plan_type === 'basic' && (
-                        <div className="absolute inset-0 bg-gradient-to-b from-black/40 to-black/10 pointer-events-none z-0" />
-                    )}
-                    <div className="w-full relative z-10">
-                        {profile.plan_type === 'free_trial' ? (
-                            <div className="flex flex-col items-center justify-center py-1">
-                                <h2 className="text-2xl md:text-4xl md:leading-relaxed text-white/80 font-[family-name:var(--font-montserrat)] font-light text-center px-4 max-w-4xl">
-                                    Benvenuta, grazie di aver scelto di provare <br />
-                                    <span className="font-medium text-white/90">BeautiFy Channel!</span> Buona esperienza!
-                                </h2>
-                                <div className="w-24 h-[1px] bg-gradient-to-r from-transparent via-white/50 to-transparent my-4" />
-                                <div className="flex flex-col items-center justify-center text-center max-w-3xl mx-auto">
+            {/* Wrapper z-10 per far fluttuare il contenuto SOPRA il background */}
+            <div className="relative z-10 text-white w-full">
 
-                                    <div className="relative inline-flex flex-col items-center justify-center p-6 md:p-8 rounded-3xl border border-emerald-500/20 bg-emerald-950/20 shadow-[0_0_40px_rgba(16,185,129,0.15)] overflow-hidden w-full max-w-lg mb-6">
-                                        <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/5 to-transparent pointer-events-none" />
-                                        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 bg-emerald-500/10 blur-[50px] rounded-full pointer-events-none" />
-
-                                        <span className="relative z-10 text-sm md:text-base text-white font-medium tracking-widest uppercase mb-1">
-                                            Il tuo piano attuale
-                                        </span>
-                                        <span className="relative z-10 font-black text-[#FF4D79] text-4xl md:text-5xl tracking-[0.1em] py-2 drop-shadow-sm font-[family-name:var(--font-montserrat)]">
-                                            FREE TRIAL
-                                        </span>
-                                        <span className="relative z-10 text-white italic font-light text-base md:text-lg mt-1">
-                                            {daysLeft} {daysLeft === 1 ? 'giorno' : 'giorni'} alla fine della prova gratuita
-                                        </span>
-                                    </div>
-                                    <Link href="#upgrade-section" className="relative z-10 bg-white text-zinc-900 px-8 py-4 rounded-xl font-bold font-[family-name:var(--font-montserrat)] text-base md:text-lg tracking-widest hover:bg-zinc-100 transition-transform duration-300 hover:scale-105 shadow-xl text-center">
-                                        SCEGLI UN PIANO
-                                    </Link>
-                                </div>
-                            </div>
-                        ) : profile.plan_type === 'basic' ? (
-                            <div className="flex flex-col items-center justify-center space-y-4 py-8 px-4">
-                                <h2 className="text-2xl md:text-4xl text-white/90 font-[family-name:var(--font-montserrat)] font-light leading-relaxed text-center flex flex-col md:flex-row items-center gap-3">
-                                    <span>Benvenuta nella tua Area Riservata, il tuo piano è <strong className="font-black text-[#5B21B6] uppercase drop-shadow-sm">BASIC</strong></span>
-                                    <img
-                                        src="https://eufahlzjxbimyiwivoiq.supabase.co/storage/v1/object/public/bucket-assets/Logo-BeautiFyChannel.svg"
-                                        alt="BeautiFy Channel Logo"
-                                        className="h-6 md:h-8 lg:h-10 w-auto mt-2 md:mt-0 brightness-0 invert opacity-80"
-                                    />
-                                </h2>
-                            </div>
-                        ) : (
-                            <div className="flex flex-col items-center justify-center space-y-4 py-4">
-                                <h2 className="text-2xl md:text-4xl uppercase tracking-[0.15em] text-zinc-100 font-[family-name:var(--font-montserrat)] font-light flex flex-col md:flex-row items-center gap-2 md:gap-3 text-center md:text-left">
-                                    <span>BENVENUTA NEL TUO ACCOUNT</span>
-                                    <img
-                                        src="https://eufahlzjxbimyiwivoiq.supabase.co/storage/v1/object/public/bucket-assets/Logo-BeautiFyChannel.svg"
-                                        alt="BeautiFy Channel Logo"
-                                        className="h-8 md:h-10 lg:h-12 w-auto mt-2 md:mt-0"
-                                    />
-                                </h2>
-                                <div className="w-24 h-[1px] bg-gradient-to-r from-transparent via-white/50 to-transparent" />
-                                <p className="text-zinc-300 font-medium text-lg tracking-wide leading-relaxed">
-                                    Hai attivo il piano <span className="font-black text-transparent bg-clip-text bg-gradient-to-r from-amber-300 to-orange-400 uppercase text-2xl px-1 tracking-wider">PREMIUM</span>. COMPLIMENTI! Hai a disposizione il <strong className="text-amber-400 font-black">TOP</strong> delle potenzialità di BeautiFy
-                                </p>
-                            </div>
-                        )}
-                    </div>
-                </div>
-            )}
-
-            {/* TRIAL OVERVIEW BANNER */}
-            {/* TRIAL OVERVIEW AND PROMO BANNER */}
-            {profile?.plan_type === 'free_trial' && daysLeft > 0 && !isAdmin && (
-                <div className="bg-white/5 backdrop-blur-xl rounded-3xl mb-12 border border-white/10 shadow-2xl shadow-purple-900/40 overflow-hidden max-w-5xl mx-auto w-full group/trial">
-                    {/* Status Header */}
-                    <div className="bg-gradient-to-r from-[#8624FF] to-[#FF4D79] text-white px-6 md:px-10 py-5 flex flex-col md:flex-row justify-between items-center shadow-lg gap-4 relative">
-                        <div className="absolute top-0 right-0 w-64 h-64 bg-white/20 blur-[50px] rounded-full mix-blend-screen -translate-y-1/2 translate-x-1/3 pointer-events-none" />
-                        <div className="flex items-center gap-4 relative z-10 w-full md:w-auto">
-                            <div className="p-2.5 bg-white/20 rounded-full backdrop-blur-md shrink-0 shadow-inner">
-                                <Sparkles className="w-5 h-5 md:w-6 md:h-6 text-white" />
-                            </div>
-                            <div className="flex-1 text-left">
-                                <h3 className="font-extrabold text-lg md:text-xl font-[family-name:var(--font-montserrat)] leading-tight mb-0.5 tracking-wide">La tua prova gratuita è attiva</h3>
-                                <p className="text-white/90 text-sm md:text-base font-medium">Scade tra <strong className="text-emerald-400 bg-black/30 px-2 py-0.5 rounded-md mx-1 text-base md:text-lg font-black shadow-inner">{daysLeft} {daysLeft === 1 ? 'giorno' : 'giorni'}</strong>.</p>
+                {/* STRIPE RETURN BANNER */}
+                {upgradeStatus === 'success' && (
+                    <>
+                        <div className="mb-8 bg-emerald-500/10 border border-emerald-500/30 p-4 md:p-6 rounded-2xl flex flex-col md:flex-row items-center gap-4 max-w-4xl mx-auto shadow-lg shadow-emerald-900/20">
+                            <CheckCircle2 className="w-10 h-10 text-emerald-400 shrink-0 animate-pulse" />
+                            <div>
+                                <h3 className="text-xl md:text-2xl font-bold text-white mb-1">Pagamento Completato con Successo!</h3>
+                                <p className="text-emerald-200/80 font-medium">Il tuo abbonamento è in fase di attivazione. I tuoi canali si sbloccheranno automaticamente a breve. L'elaborazione del pagamento richede qualche istante, non chiudere la pagina.</p>
                             </div>
                         </div>
+                        <PollActivation />
+                    </>
+                )}
+
+                {upgradeStatus === 'cancel' && (
+                    <div className="mb-8 bg-red-500/10 border border-red-500/30 p-4 md:p-6 rounded-2xl flex flex-col md:flex-row items-center gap-4 max-w-4xl mx-auto shadow-lg shadow-red-900/20">
+                        <AlertCircle className="w-10 h-10 text-red-400 shrink-0" />
+                        <div>
+                            <h3 className="text-xl md:text-2xl font-bold text-white mb-1">Pagamento Annullato</h3>
+                            <p className="text-red-200/80 font-medium">Il processo di pagamento è stato interrotto. Nessun addebito è stato effettuato. Puoi riprovare quando desideri selezionando nuovamente il piano qui sotto.</p>
+                        </div>
                     </div>
+                )}
 
+                {/* DYNAMIC WELCOME BANNER BASED ON PLAN */}
+                {!isAdmin && profile?.plan_type && !isExpired && (
+                    <div className="mb-6 p-4 rounded-xl border border-white/5 bg-zinc-900/50 flex items-center justify-center text-center shadow-md">
+                        <div className="w-full">
+                            {(profile.plan_type === 'free_trial' || profile.plan_type === 'basic') ? (
+                                <div className="flex flex-col items-center justify-center space-y-4 py-4">
+                                    <h2 className="text-2xl md:text-4xl uppercase tracking-[0.15em] text-zinc-100 font-[family-name:var(--font-montserrat)] font-light flex flex-col md:flex-row items-center gap-2 md:gap-3 text-center md:text-left">
+                                        <span>BENVENUTA NEL TUO ACCOUNT</span>
+                                        <div className="relative h-8 md:h-10 lg:h-12 w-32 md:w-40 mt-2 md:mt-0">
+                                            <Image
+                                                src="https://eufahlzjxbimyiwivoiq.supabase.co/storage/v1/object/public/bucket-assets/Logo-BeautiFyChannel.svg"
+                                                alt="BeautiFy Channel Logo"
+                                                fill
+                                                className="object-contain"
+                                            />
+                                        </div>
+                                    </h2>
+                                    <div className="w-24 h-[1px] bg-gradient-to-r from-transparent via-white/50 to-transparent" />
+                                    <p className="text-zinc-300 font-medium text-xl tracking-wide leading-relaxed">
+                                        <strong className="text-[#D8B2A3] font-black">GRAZIE PER LA FIDUCIA</strong> in BeautiFy Channel <strong className="text-[#D8B2A3] font-black">ORA</strong>, hai a disposizione il <strong className="text-[#D8B2A3] font-black">NUOVO</strong> e unico<br className="md:hidden" /> strumento di <strong className="text-[#D8B2A3] font-black">MARKETING SENSORIALE</strong> dedicato al settore, con le sue potenzialità.
+                                    </p>
+                                </div>
+                            ) : (
+                                <div className="flex flex-col items-center justify-center space-y-4 py-4">
+                                    <h2 className="text-2xl md:text-4xl uppercase tracking-[0.15em] text-zinc-100 font-[family-name:var(--font-montserrat)] font-light flex flex-col md:flex-row items-center gap-2 md:gap-3 text-center md:text-left">
+                                        <span>BENVENUTA NEL TUO ACCOUNT</span>
+                                        <div className="relative h-8 md:h-10 lg:h-12 w-32 md:w-40 mt-2 md:mt-0">
+                                            <Image
+                                                src="https://eufahlzjxbimyiwivoiq.supabase.co/storage/v1/object/public/bucket-assets/Logo-BeautiFyChannel.svg"
+                                                alt="BeautiFy Channel Logo"
+                                                fill
+                                                className="object-contain"
+                                            />
+                                        </div>
+                                    </h2>
+                                    <div className="w-24 h-[1px] bg-gradient-to-r from-transparent via-white/50 to-transparent" />
+                                    <p className="text-zinc-300 font-medium text-lg tracking-wide leading-relaxed">
+                                        Hai attivo il piano <span className="font-black text-transparent bg-clip-text bg-gradient-to-r from-[#D8B2A3] to-[#D8B2A3] uppercase text-2xl px-1 tracking-wider">PREMIUM</span>. COMPLIMENTI! Hai a disposizione il <strong className="text-[#D8B2A3] font-black">TOP</strong> delle potenzialità di BeautiFy
+                                    </p>
+                                </div>
+                            )}
+                        </div>
+                    </div>
+                )}
 
-                </div>
-            )}
+                {/* TRIAL OVERVIEW BANNER */}
+                {profile?.plan_type === 'free_trial' && daysLeft > 0 && !isAdmin && (
+                    <div className="bg-gradient-to-r from-[#AB7169] to-[#5D6676] text-white px-6 py-5 rounded-xl mb-8 flex flex-col md:flex-row justify-between items-center shadow-lg shadow-[#AB7169]/20 gap-4 border border-[#AB7169]/30 relative overflow-hidden max-w-3xl mx-auto w-full">
+                        <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 blur-[30px] rounded-full mix-blend-screen -translate-y-1/2 translate-x-1/3 pointer-events-none" />
+                        <div className="flex items-center gap-4 relative z-10 w-full md:w-auto">
+                            <div className="p-2 bg-white/20 rounded-full backdrop-blur-md shrink-0">
+                                <Sparkles className="w-5 h-5" />
+                            </div>
+                            <div className="flex-1">
+                                <h3 className="font-bold text-base md:text-lg leading-tight mb-1">La tua prova gratuita è attiva</h3>
+                                <p className="text-[#fefefe] text-xs">Scade tra <strong className="text-[#D8B2A3] bg-black/20 px-1.5 py-0.5 rounded-sm mx-1">{daysLeft} giorni</strong>.</p>
+                            </div>
+                        </div>
+                        <Link href="#upgrade-section" className="relative z-10 shrink-0 w-full md:w-auto bg-white text-zinc-950 px-5 py-2.5 rounded-lg font-bold text-sm tracking-wide hover:bg-zinc-100 transition-colors shadow-md text-center mt-3 md:mt-0">
+                            SCEGLI UN PIANO
+                        </Link>
+                    </div>
+                )}
 
-            <div className="mt-32 md:mt-40 flex flex-col items-center justify-center gap-6 mb-12 border-b border-white/10 pb-8">
-                <div className="flex flex-col items-center justify-center w-full text-center">
-                    <div className="relative inline-flex flex-col items-center justify-center p-6 md:p-10 rounded-[2.5rem] border border-[#FF4D79]/20 bg-[#FF4D79]/[0.03] shadow-[0_0_40px_rgba(255,77,121,0.1)] overflow-hidden w-full max-w-3xl">
-                        <div className="absolute inset-0 bg-gradient-to-br from-[#FF4D79]/5 to-transparent pointer-events-none" />
-                        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 bg-[#FF4D79]/10 blur-[60px] rounded-full pointer-events-none" />
-
-                        <h1 className={`font-bold font-[family-name:var(--font-montserrat)] text-[#FF4D79] mb-3 md:mb-5 tracking-tight flex flex-col items-center justify-center gap-1 md:gap-2 w-full relative z-10 ${profile?.plan_type === 'basic' ? 'text-4xl md:text-5xl lg:text-6xl' : 'text-5xl md:text-7xl'}`}>
-                            {profile?.plan_type === 'basic' ? (
-                                <>
-                                    <span>Area Riservata</span>
-                                    <span>Piano Basic</span>
-                                </>
-                            ) : 'Area Riservata'}
+                <div className="flex flex-col items-center justify-center gap-6 mb-12 border-b border-white/10 pb-8 mt-4">
+                    <div className="flex flex-col items-center w-full text-center">
+                        <h1 className="text-4xl md:text-5xl font-semibold font-[family-name:var(--font-montserrat)] text-white mb-3 tracking-tight flex items-center justify-center gap-3 w-full">
+                            Area Riservata
                         </h1>
-                        <div className="flex flex-wrap items-center justify-center gap-3 mt-2 mb-2 relative z-10">
+                        <div className="flex flex-wrap items-center justify-center gap-3 mt-4 mb-2">
                             <span className="text-lg font-medium text-white">
                                 {profile?.salon_name || user.email}
                             </span>
-                            <span className={`px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest border border-white/10 ${profile?.plan_type === 'premium' ? 'bg-amber-500/10 text-amber-500' :
-                                profile?.plan_type === 'free_trial' ? 'bg-emerald-500/10 text-emerald-400' :
-                                    profile?.plan_type === 'basic' ? 'bg-indigo-500/10 text-indigo-400' :
-                                        profile?.plan_type === 'free' ? 'bg-red-500/10 text-red-500 border border-red-500/30' :
-                                            'bg-zinc-800 text-zinc-400'
+                            <span className={`px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest border border-white/10 ${profile?.plan_type === 'premium' ? 'bg-[#D8B2A3]/10 text-[#D8B2A3]' :
+                                profile?.plan_type === 'free_trial' ? 'bg-[#D8B2A3]/10 text-[#D8B2A3]' :
+                                    profile?.plan_type === 'basic' ? 'bg-[#5D6676]/10 text-[#5D6676]' :
+                                        'bg-zinc-800 text-zinc-400'
                                 }`}>
                                 Piano: {profile?.plan_type?.replace('_', ' ') || 'Free'}
                             </span>
                             {isAdmin && (
-                                <span className="px-3 py-1 rounded-full bg-red-500/20 text-red-400 text-xs font-bold uppercase tracking-widest border border-red-500/30">
+                                <span className="px-3 py-1 rounded-full bg-[#AB7169]/20 text-[#AB7169] text-xs font-bold uppercase tracking-widest border border-[#AB7169]/30">
                                     Admin Privileges
                                 </span>
                             )}
                         </div>
                         {!isExpired || isAdmin ? null : (
-                            <p className="text-fuchsia-400 text-lg mt-4 font-medium relative z-10">L'accesso ai canali è bloccato.</p>
+                            <p className="text-[#AB7169] text-lg mt-2 font-medium">L'accesso ai canali è bloccato.</p>
                         )}
                     </div>
                 </div>
-            </div>
 
-            {/* MAIN CONTENT OR PAYWALL */}
-            {(!isExpired || isAdmin) ? (
-                <>
-                    {/* Basic/Premium Channel Hero */}
-                    {(profile?.plan_type === 'free_trial' || profile?.plan_type === 'basic' || profile?.plan_type === 'premium') && (
-                        <div className="mb-8">
-                            <div className="text-center mb-8 flex flex-col items-center justify-center">
-                                <h3 className={`text-xl md:text-2xl font-black font-[family-name:var(--font-montserrat)] uppercase mb-4 tracking-[0.15em] md:tracking-[0.2em] ${profile?.plan_type === 'premium' ? 'text-transparent bg-clip-text bg-gradient-to-r from-[#D8B2A3] to-[#C69C85] drop-shadow-[0_0_10px_rgba(198,156,133,0.5)]' :
-                                    profile?.plan_type === 'basic' ? 'text-white drop-shadow-sm' :
-                                        'text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-200 drop-shadow-[0_0_10px_rgba(255,255,255,0.5)]'
-                                    }`}>
-                                    QUESTO E' IL TUO CANALE AUDIO PRINCIPALE
-                                </h3>
-                                <div className={`p-3 rounded-full border animate-bounce ${profile?.plan_type === 'premium' ? 'bg-[#C69C85]/20 border-[#C69C85]/30 shadow-[0_0_15px_rgba(198,156,133,0.3)]' :
-                                    profile?.plan_type === 'basic' ? 'bg-white/10 border-white/30 shadow-[0_0_15px_rgba(255,255,255,0.3)]' :
-                                        'bg-white/10 border-white/30 shadow-[0_0_15px_rgba(255,255,255,0.3)]'
-                                    }`}>
-                                    <ArrowDown className={`w-6 h-6 md:w-8 md:h-8 ${profile?.plan_type === 'premium' ? 'text-[#C69C85]' :
-                                        profile?.plan_type === 'basic' ? 'text-white' :
-                                            'text-white'
-                                        }`} />
+                {/* MAIN CONTENT OR PAYWALL */}
+                {(!isExpired || isAdmin) ? (
+                    <>
+                        {/* Basic/Premium Channel Hero */}
+                        {(profile?.plan_type === 'free_trial' || profile?.plan_type === 'basic' || profile?.plan_type === 'premium') && (
+                            <div className="mb-8">
+                                <div className="text-center mb-8 flex flex-col items-center justify-center">
+                                    <h3 className={`text-xl md:text-2xl font-black text-transparent bg-clip-text uppercase mb-4 tracking-[0.15em] md:tracking-[0.2em] ${profile?.plan_type === 'premium' ? 'bg-gradient-to-r from-[#D8B2A3] to-[#D8B2A3] drop-shadow-[0_0_10px_rgba(251,191,36,0.5)]' :
+                                        profile?.plan_type === 'basic' ? 'bg-gradient-to-r from-[#D8B2A3] to-[#5D6676] drop-shadow-[0_0_10px_rgba(56,189,248,0.5)]' :
+                                            'bg-gradient-to-r from-[#D8B2A3] to-[#AB7169] drop-shadow-[0_0_10px_rgba(52,211,153,0.5)]'
+                                        }`}>
+                                        QUESTO E' IL TUO CANALE AUDIO PRINCIPALE
+                                    </h3>
+                                    <div className={`p-3 rounded-full border animate-bounce ${profile?.plan_type === 'premium' ? 'bg-[#D8B2A3]/20 border-[#D8B2A3]/30 shadow-[0_0_15px_rgba(251,191,36,0.3)]' :
+                                        profile?.plan_type === 'basic' ? 'bg-[#D8B2A3]/20 border-[#D8B2A3]/30 shadow-[0_0_15px_rgba(56,189,248,0.3)]' :
+                                            'bg-[#D8B2A3]/20 border-[#D8B2A3]/30 shadow-[0_0_15px_rgba(52,211,153,0.3)]'
+                                        }`}>
+                                        <ArrowDown className={`w-6 h-6 md:w-8 md:h-8 ${profile?.plan_type === 'premium' ? 'text-[#D8B2A3]' :
+                                            profile?.plan_type === 'basic' ? 'text-[#D8B2A3]' :
+                                                'text-[#D8B2A3]'
+                                            }`} />
+                                    </div>
                                 </div>
-                            </div>
-                            <BasicHeroChannel
-                                planType={profile?.plan_type}
-                                channel={channels?.find((c: any) =>
-                                    profile?.plan_type === 'premium'
-                                        ? (c.name.toLowerCase().includes('premium') || c.name.toLowerCase() === 'beautify channel premium')
-                                        : (c.name.toLowerCase().includes('basic') || c.name.toLowerCase() === 'beautify channel basic')
-                                ) || null}
-                            />
-                            {/* INFO BLOCK INNOVATIVO */}
-                            <div id="welcome-pricing-banner" className="w-full mt-12 mb-4 relative z-30">
-                                {/* Sfondo decorativo */}
-                                <div className={`absolute inset-0 bg-linear-to-b ${profile?.plan_type === 'free_trial' ? 'from-emerald-900/10 via-teal-900/5' : 'from-fuchsia-900/10 via-indigo-900/5'} to-transparent rounded-[3rem] -z-10 blur-xl pointer-events-none`} />
+                                <BasicHeroChannel2
+                                    planType={profile?.plan_type}
+                                    channel={channels?.find((c: any) =>
+                                        profile?.plan_type === 'premium'
+                                            ? (c.name.toLowerCase().includes('premium') || c.name.toLowerCase() === 'beautify channel premium')
+                                            : (c.name.toLowerCase().includes('basic') || c.name.toLowerCase() === 'beautify channel basic')
+                                    ) || null}
+                                />
+                                {/* INFO BLOCK INNOVATIVO */}
+                                <div id="welcome-pricing-banner" className="w-full max-w-6xl mx-auto mt-10 mb-12 relative">
+                                    {/* Sfondo decorativo */}
+                                    <div className={`absolute inset-0 bg-linear-to-b ${profile?.plan_type === 'free_trial' ? 'from-[#D8B2A3]/10 via-[#AB7169]/5' : 'from-[#AB7169]/10 via-[#5D6676]/5'} to-transparent rounded-[3rem] -z-10 blur-xl pointer-events-none`} />
 
-                                <details className="group w-full max-w-7xl mx-auto relative z-20 mb-4 md:mb-8">
-                                    <summary className="cursor-pointer list-none flex justify-center items-center w-full outline-none select-none mb-4 text-center relative z-20">
-                                        <div className={`flex items-center justify-between w-full max-w-[360px] md:max-w-[640px] px-6 md:px-10 py-4 rounded-[2rem] border border-white/5 backdrop-blur-md shadow-xl transition-all duration-300 hover:border-white/10 relative overflow-hidden group/btn ${profile?.plan_type === 'free_trial' ? 'bg-gradient-to-br from-[#FAFAFA]/20 via-purple-300/10 to-[#DDA0DD]/5' : profile?.plan_type === 'basic' ? 'bg-gradient-to-r from-white/10 to-transparent border-white/10' : 'bg-white/[0.02] hover:bg-white/[0.05]'}`}>
-                                            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full group-hover/btn:translate-x-full transition-transform duration-1000"></div>
-                                            <div className="flex items-center gap-3 md:gap-4 flex-1 text-left">
-                                                <PlayCircle className={`w-8 h-8 md:w-10 md:h-10 shrink-0 ${profile?.plan_type === 'free_trial' ? 'text-purple-300' : profile?.plan_type === 'basic' ? 'text-[#dfa3fb]' : 'text-white'}`} />
-                                                <span className={`text-lg md:text-xl lg:text-2xl font-bold font-[family-name:var(--font-montserrat)] tracking-widest md:tracking-[0.15em] uppercase drop-shadow-sm whitespace-nowrap pt-1 ${profile?.plan_type === 'free_trial' ? 'text-white' : profile?.plan_type === 'basic' ? 'text-white' : 'text-[#C69C85]'}`}>
-                                                    COME FUNZIONA
-                                                </span>
-                                            </div>
-                                            <div className={`p-1.5 md:p-2 rounded-full border transition-transform duration-300 group-open:rotate-180 flex-shrink-0 ${profile?.plan_type === 'free_trial' ? 'bg-purple-500/10 border-purple-500/20 text-purple-300' : profile?.plan_type === 'basic' ? 'bg-white/5 border-white/10 text-[#dfa3fb]' : 'bg-white/10 border-white/20 text-white'}`}>
-                                                <ChevronDown className="w-5 h-5 md:w-6 md:h-6" />
-                                            </div>
-                                        </div>
-                                    </summary>
-
-                                    {/* Content Wrapper */}
-                                    <div className={`border border-white/5 rounded-[35px] shadow-2xl p-6 md:p-10 relative overflow-hidden backdrop-blur-xl ${profile?.plan_type === 'free_trial' ? 'bg-gradient-to-br from-[#FAFAFA]/20 via-purple-300/10 to-[#DDA0DD]/5' : profile?.plan_type === 'basic' ? 'bg-[#312344]' : 'bg-[#2b2730]'} animate-in fade-in slide-in-from-top-4 duration-500`}>
+                                    <div className={`border border-white/5 rounded-[35px] shadow-2xl p-6 md:p-10 relative overflow-hidden backdrop-blur-xl ${profile?.plan_type === 'free_trial' ? 'bg-gradient-to-br from-[#AB7169]/10 to-[#2e1d1b]' : 'bg-[#2b2730]'}`}>
                                         {/* Overlay di luce */}
-                                        <div className={`absolute top-0 right-0 w-[500px] h-[500px] rounded-full blur-[80px] -translate-y-1/2 translate-x-1/2 pointer-events-none ${profile?.plan_type === 'free_trial' ? 'bg-[#FAFAFA]/10' : profile?.plan_type === 'basic' ? 'bg-fuchsia-600/10' : 'bg-[#D8B2A3]/10'}`} />
-                                        <div className={`absolute bottom-0 left-0 w-[400px] h-[400px] rounded-full blur-[80px] translate-y-1/3 -translate-x-1/3 pointer-events-none ${profile?.plan_type === 'free_trial' ? 'bg-purple-400/10' : profile?.plan_type === 'basic' ? 'bg-indigo-600/10' : 'bg-[#5D6676]/10'}`} />
+                                        <div className={`absolute top-0 right-0 w-[500px] h-[500px] rounded-full blur-[80px] -translate-y-1/2 translate-x-1/2 pointer-events-none ${profile?.plan_type === 'free_trial' ? 'bg-[#D8B2A3]/10' : 'bg-[#AB7169]/10'}`} />
+                                        <div className={`absolute bottom-0 left-0 w-[400px] h-[400px] rounded-full blur-[80px] translate-y-1/3 -translate-x-1/3 pointer-events-none ${profile?.plan_type === 'free_trial' ? 'bg-[#AB7169]/10' : 'bg-[#5D6676]/10'}`} />
 
-                                        <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                                        <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
 
-                                            <div className="lg:col-span-5 space-y-6">
+                                            <div className="lg:col-span-5 space-y-5">
+                                                <h2 className={`text-sm md:text-base font-black font-[family-name:var(--font-montserrat)] tracking-[0.3em] uppercase mb-2 ${profile?.plan_type === 'free_trial' ? 'text-[#D8B2A3]' : 'text-[#D8B2A3]'}`}>
+                                                    Come Funziona
+                                                </h2>
                                                 <p className="text-xl md:text-2xl text-zinc-200 font-light leading-relaxed">
-                                                    Nulla di più semplice!<br /><span className="text-white font-medium">Collega il tuo pc / smartphone / tablet</span> all'impianto audio del tuo istituto o a delle <span className="text-white font-medium">casse Bluetooth</span>.<br /><br /><span className="text-white font-medium">Premi play sul canale principale</span> qui sopra, imposta il giusto volume in salone e <span className="text-white font-medium">dimenticatene</span>, il resto lo fa <span className="text-white font-medium">BeautiFy</span>.
+                                                    Nulla di più semplice! Collega il tuo pc / smartphone / tablet all'impianto audio del tuo istituto. Premi play sul canale principale qui sopra, imposta il giusto volume in salone e <strong className="font-semibold text-white">dimenticatene</strong>, il resto lo fa BeautiFy.
                                                 </p>
-                                                <div className={`pl-6 border-l-2 py-1 space-y-4 ${profile?.plan_type === 'free_trial' ? 'border-purple-500/30' : profile?.plan_type === 'basic' ? 'border-[#00E5FF]/30' : 'border-[#C69C85]/30'}`}>
+                                                <div className={`pl-6 border-l-2 py-1 space-y-4 ${profile?.plan_type === 'free_trial' ? 'border-[#AB7169]/30' : 'border-[#5D6676]/30'}`}>
                                                     <p className="text-lg md:text-xl text-zinc-200 leading-relaxed font-light">
-                                                        I nostri canali audio propongono una <span className="text-white font-medium">raffinata selezione</span> <span className={`font-medium ${profile?.plan_type === 'free_trial' ? 'text-purple-200' : profile?.plan_type === 'basic' ? 'text-[#00E5FF]/80' : 'text-[#D8B2A3]'}`}>di diversi generi musicali</span>, intervallata da <span className={`font-medium ${profile?.plan_type === 'free_trial' ? 'text-purple-200' : profile?.plan_type === 'basic' ? 'text-[#00E5FF]/80' : 'text-[#D8B2A3]'}`}>eleganti, delicati e generici</span> <span className={`font-medium ${profile?.plan_type === 'free_trial' ? 'text-purple-300' : profile?.plan_type === 'basic' ? 'text-[#00E5FF]' : 'text-[#C69C85]'}`}>suggerimenti vocali</span>.
+                                                        I nostri canali audio propongono una <strong className={`font-semibold ${profile?.plan_type === 'free_trial' ? 'text-[#D8B2A3]' : 'text-[#D8B2A3]'}`}>raffinata selezione di diversi generi musicali</strong>, intervallata da <strong className={`font-semibold ${profile?.plan_type === 'free_trial' ? 'text-[#D8B2A3]' : 'text-[#D8B2A3]'}`}>eleganti, delicati e generici</strong> <span className={`font-bold ${profile?.plan_type === 'free_trial' ? 'text-[#D8B2A3]' : 'text-[#D8B2A3]'}`}>suggerimenti vocali</span>.
                                                     </p>
-                                                    <p className={`text-lg tracking-wide mt-2 font-light ${profile?.plan_type === 'free_trial' ? 'text-purple-300/90' : profile?.plan_type === 'basic' ? 'text-[#00E5FF]/90' : 'text-[#D8B2A3]/90'}`}>
-                                                        Studiati per <span className="text-white font-medium">stimolare la curiosità</span> delle tue clienti e l'<span className="text-white font-medium">acquisto dei tuoi servizi</span>.
+                                                    <p className={`text-lg font-medium tracking-wide mt-2 ${profile?.plan_type === 'free_trial' ? 'text-[#D8B2A3]/90' : 'text-[#D8B2A3]/90'}`}>
+                                                        Studiati per <strong className="text-white font-bold">stimolare la curiosità</strong> delle tue clienti e l'<strong className="text-white font-bold">acquisto dei tuoi servizi</strong>.
                                                     </p>
                                                 </div>
                                             </div>
@@ -287,15 +295,15 @@ export default async function AreaClientePage() {
                                             </div>
 
                                             {/* Colonna Destra: Altri Canali */}
-                                            <div className="lg:col-span-5 space-y-6 bg-white/[0.02] p-8 md:p-10 rounded-[2.5rem] border border-white/5 relative group hover:bg-white/[0.04] transition-all duration-500 hover:border-[#5D6676]/20 shadow-xl">
+                                            <div className="lg:col-span-5 space-y-5 bg-white/[0.02] p-6 md:p-8 rounded-[2rem] border border-white/5 relative group hover:bg-white/[0.04] transition-all duration-500 hover:border-[#5D6676]/20 shadow-xl">
                                                 <div className="absolute -top-4 -right-4 bg-gradient-to-br from-[#5D6676] to-[#5D6676] text-white w-14 h-14 flex items-center justify-center rounded-2xl shadow-xl shadow-[#5D6676]/30 rotate-12 group-hover:rotate-6 transition-transform">
                                                     <span className="font-black text-2xl font-[family-name:var(--font-montserrat)]">+6</span>
                                                 </div>
-                                                <h3 className="text-2xl md:text-4xl font-semibold font-[family-name:var(--font-montserrat)] text-white flex items-center gap-3 drop-shadow-sm leading-tight mb-2">
+                                                <h3 className="text-2xl md:text-4xl font-semibold font-[family-name:var(--font-montserrat)] text-white flex items-center gap-3 drop-shadow-md leading-tight mb-2">
                                                     Cambia il tuo Mood
                                                 </h3>
                                                 <p className="text-lg md:text-xl text-zinc-300 leading-relaxed font-light">
-                                                    Qui sotto, hai a disposizione altri <strong className="text-[#8b8599] font-semibold">6 canali settoriali</strong>, per cambiare il tuo mood musicale in istituto durante la giornata.
+                                                    Qui sotto, hai a disposizione altri <strong className="text-[#5D6676] font-semibold">6 canali settoriali</strong>, per cambiare il tuo mood musicale in istituto durante la giornata.
                                                 </p>
 
                                                 <div className="bg-zinc-950/40 p-5 rounded-3xl border border-white/5 space-y-4">
@@ -317,7 +325,7 @@ export default async function AreaClientePage() {
                                                     </div>
                                                 </div>
                                                 <div className="pt-4 mt-2 border-t border-white/5">
-                                                    <p className={`font-bold font-[family-name:var(--font-montserrat)] tracking-wider uppercase text-lg flex items-center gap-2 ${profile?.plan_type === 'free_trial' ? 'text-purple-300' : profile?.plan_type === 'basic' ? 'text-[#00E5FF]' : 'text-[#C69C85]'}`}>
+                                                    <p className={`font-bold font-[family-name:var(--font-montserrat)] tracking-wider uppercase text-lg flex items-center gap-2 ${profile?.plan_type === 'free_trial' ? 'text-[#D8B2A3]' : 'text-[#D8B2A3]'}`}>
                                                         <Radio className="w-5 h-5" /> Buon ascolto
                                                     </p>
                                                 </div>
@@ -325,96 +333,101 @@ export default async function AreaClientePage() {
 
                                         </div>
                                     </div>
-                                </details>
-                            </div>
-
-                        </div>
-                    )}
-
-                    <details className="group w-full max-w-7xl mx-auto mb-4 md:mb-8 relative z-10">
-                        <summary className="cursor-pointer list-none flex justify-center items-center w-full outline-none select-none mb-4 text-center relative z-20">
-                            <div className={`flex items-center justify-between w-full max-w-[360px] md:max-w-[640px] px-6 md:px-10 py-4 rounded-[2rem] border border-white/5 backdrop-blur-md shadow-xl transition-all duration-300 hover:border-white/10 relative overflow-hidden group/btn ${profile?.plan_type === 'free_trial' ? 'bg-gradient-to-br from-[#FAFAFA]/20 via-purple-300/10 to-[#DDA0DD]/5' : profile?.plan_type === 'basic' ? 'bg-gradient-to-r from-white/10 to-transparent border-white/10' : 'bg-white/[0.02] hover:bg-white/[0.05]'}`}>
-                                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full group-hover/btn:translate-x-full transition-transform duration-1000"></div>
-                                <div className="flex items-center gap-3 md:gap-4 flex-1 text-left">
-                                    <Radio className={`w-8 h-8 md:w-10 md:h-10 shrink-0 ${profile?.plan_type === 'free_trial' ? 'text-purple-300' : profile?.plan_type === 'basic' ? 'text-[#dfa3fb]' : 'text-white'}`} />
-                                    <span className={`text-lg md:text-xl lg:text-2xl font-bold font-[family-name:var(--font-montserrat)] tracking-widest md:tracking-[0.15em] uppercase drop-shadow-sm whitespace-nowrap pt-1 ${profile?.plan_type === 'free_trial' ? 'text-white' : profile?.plan_type === 'basic' ? 'text-white' : 'text-[#C69C85]'}`}>
-                                        ALTRI CANALI
-                                    </span>
                                 </div>
-                                <div className={`p-1.5 md:p-2 rounded-full border transition-transform duration-300 group-open:rotate-180 flex-shrink-0 ${profile?.plan_type === 'free_trial' ? 'bg-purple-500/10 border-purple-500/20 text-purple-300' : profile?.plan_type === 'basic' ? 'bg-white/5 border-white/10 text-[#dfa3fb]' : 'bg-white/10 border-white/20 text-white'}`}>
-                                    <ChevronDown className="w-5 h-5 md:w-6 md:h-6" />
-                                </div>
+
+                                <h3 className="text-2xl md:text-3xl font-semibold font-[family-name:var(--font-montserrat)] text-white mb-8 mt-12 md:mt-24 lg:mt-32 flex flex-col md:flex-row items-center justify-center gap-3 uppercase tracking-wider text-center">
+                                    <Radio className="w-6 h-6 text-zinc-400" />
+                                    ALTRI CANALI DISPONIBILI
+                                </h3>
                             </div>
-                        </summary>
+                        )}
 
-                        <div className="animate-in fade-in slide-in-from-top-8 duration-500 pt-4">
-                            <ChannelGrid initialChannels={channels || []} serverError={channelsError?.message} planType={profile?.plan_type} />
+                        <div className="relative w-full py-20 -mx-4 px-4 sm:mx-0 sm:px-0 mt-8 mb-12" style={{ width: 'calc(100% + 2rem)' }}>
+                            {/* Sfondo sfumato bianco dall'alto più visibile e diffuso */}
+                            <div className="absolute inset-0 bg-gradient-to-b from-white/10 via-white/5 to-transparent pointer-events-none -z-10 rounded-[3rem]" />
+                            {/* Bagliore alto */}
+                            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[90%] max-w-5xl h-72 bg-white/5 blur-[100px] pointer-events-none -z-10" />
+                            {/* Bagliore basso per diffonderlo in fondo */}
+                            <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[70%] max-w-4xl h-72 bg-white/5 blur-[120px] pointer-events-none -z-10" />
+
+                            <ChannelGrid2 initialChannels={channels || []} serverError={channelsError?.message} planType={profile?.plan_type} />
                         </div>
-                    </details>
 
-                    {profile?.plan_type === 'free_trial' && (
-                        <div className="w-full max-w-7xl mx-auto mt-12 mb-8 flex justify-center relative z-10">
-                            <div className="relative w-full max-w-4xl p-2 md:p-3 rounded-[2.5rem] bg-gradient-to-br from-purple-500/20 via-fuchsia-500/10 to-pink-500/20 shadow-2xl shadow-purple-900/40 backdrop-blur-xl overflow-hidden group">
-                                <div className="absolute inset-0 bg-black/20 mix-blend-overlay" />
-                                <div className="absolute inset-0 border border-white/10 rounded-[2.5rem]" />
-                                <div className="absolute inset-0 bg-gradient-to-tr from-purple-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-                                <img 
-                                    src="/free-trial-banner.png" 
-                                    alt="Promozione Free Trial" 
-                                    className="relative z-10 w-full h-auto object-cover rounded-[2rem] shadow-[0_0_30px_rgba(0,0,0,0.5)] transform transition-transform duration-700 group-hover:scale-[1.02]"
-                                />
-                            </div>
-                        </div>
-                    )}
+                        {/* Upgrade Form for Free Trial and Basic Users */}
+                        {(profile?.plan_type === 'free_trial' || profile?.plan_type === 'basic') && !isAdmin && (
+                            <div className="w-full max-w-4xl mx-auto mt-0 md:mt-16 border-t border-white/10 pt-4 md:pt-16">
+                                {(profile?.plan_type === 'basic' || profile?.plan_type === 'free_trial') && (
+                                    <div className="text-center mb-16 px-4">
+                                        {/* Elegant Divider */}
+                                        <div className="flex items-center justify-center w-full mb-16 relative">
+                                            {/* Core line */}
+                                            <div className="w-11/12 max-w-4xl h-[3px] rounded-full z-10 bg-gradient-to-r from-transparent via-white/60 to-transparent" />
+                                            {/* Glow effect */}
+                                            <div className="absolute w-11/12 max-w-4xl h-[12px] blur-[8px] rounded-full bg-gradient-to-r from-transparent via-white/30 to-transparent" />
+                                        </div>
 
-                    {profile?.plan_type === 'basic' && (
-                        <div className="w-full max-w-7xl mx-auto mt-12 mb-8 flex justify-center relative z-10">
-                            <div className="relative w-full max-w-4xl p-2 md:p-3 rounded-[2.5rem] bg-gradient-to-br from-purple-500/20 via-fuchsia-500/10 to-pink-500/20 shadow-2xl shadow-purple-900/40 backdrop-blur-xl overflow-hidden group">
-                                <div className="absolute inset-0 bg-black/20 mix-blend-overlay" />
-                                <div className="absolute inset-0 border border-white/10 rounded-[2.5rem]" />
-                                <div className="absolute inset-0 bg-gradient-to-tr from-purple-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-                                <img 
-                                    src="/basic-plan-banner.png" 
-                                    alt="Promozione Basic" 
-                                    className="relative z-10 w-full h-auto object-cover rounded-[2rem] shadow-[0_0_30px_rgba(0,0,0,0.5)] transform transition-transform duration-700 group-hover:scale-[1.02]"
-                                />
-                            </div>
-                        </div>
-                    )}
+                                        <h2 className="text-xl md:text-3xl font-black uppercase text-white tracking-widest leading-tight mb-6 w-full max-w-5xl mx-auto">
+                                            IL MESE PROSSIMO HAI PIANIFICATO UNA PROMOZIONE SU UN TUO SERVIZIO PER LE TUE CLIENTI?
+                                        </h2>
+                                        <p className="text-zinc-200 text-xl w-full max-w-4xl mx-auto leading-relaxed mb-12 font-medium">
+                                            Facendo upgrade al <strong className="text-amber-400 font-black uppercase tracking-wider">Piano Premium</strong> puoi chiederci di realizzare delle <span className="text-white font-bold underline decoration-amber-400/50 underline-offset-4">promo audio personalizzate</span> con le tue promozioni.
+                                        </p>
 
-                    {/* Upgrade Form for Free Trial and Basic Users */}
-                    {(profile?.plan_type === 'free_trial' || profile?.plan_type === 'basic') && !isAdmin && (
-                        <details className="group w-full max-w-7xl mx-auto mb-16 relative z-10" id="upgrade-section">
-                            <summary className="cursor-pointer list-none flex justify-center items-center w-full outline-none select-none mb-4 text-center relative z-20">
-                                <div className={`flex items-center justify-between w-full max-w-[360px] md:max-w-[640px] px-6 md:px-10 py-4 rounded-[2rem] border border-white/5 backdrop-blur-md shadow-xl transition-all duration-300 hover:border-white/10 relative overflow-hidden group/btn ${profile?.plan_type === 'free_trial' ? 'bg-gradient-to-br from-[#FAFAFA]/20 via-purple-300/10 to-[#DDA0DD]/5' : profile?.plan_type === 'basic' ? 'bg-gradient-to-r from-white/10 to-transparent border-white/10' : 'bg-white/[0.02] hover:bg-white/[0.05]'}`}>
-                                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full group-hover/btn:translate-x-full transition-transform duration-1000"></div>
-                                    <div className="flex items-center gap-3 md:gap-4 flex-1 text-left">
-                                        <Sparkles className={`w-8 h-8 md:w-10 md:h-10 shrink-0 ${profile?.plan_type === 'free_trial' ? 'text-purple-300' : profile?.plan_type === 'basic' ? 'text-[#dfa3fb]' : 'text-sky-400'}`} />
-                                        <span className="text-lg md:text-xl lg:text-2xl font-bold text-white font-[family-name:var(--font-montserrat)] tracking-widest md:tracking-[0.15em] uppercase drop-shadow-sm whitespace-nowrap pt-1">
-                                            MIGLIORA L'ESPERIENZA
-                                        </span>
+                                        {/* Premium Plan Layout */}
+                                        <div className="text-center flex flex-col items-center justify-center w-full max-w-5xl mx-auto">
+                                            <div className="relative mb-8 flex flex-col items-center justify-center px-4 shrink-0">
+                                                <h3 className="font-[family-name:var(--font-montserrat)] text-center w-full max-w-4xl mx-auto">
+                                                    <span className="block text-xs md:text-sm text-zinc-400 uppercase tracking-[0.3em] mb-4">
+                                                        Con il <strong className="text-amber-400 font-black">Piano Premium</strong>
+                                                    </span>
+                                                    <span className="block text-xl md:text-2xl xl:text-3xl text-white font-semibold leading-tight tracking-tight opacity-90 mb-1">
+                                                        puoi aggiungere ai canali audio
+                                                    </span>
+                                                    <span className="block text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-amber-400 to-amber-500 font-bold text-3xl md:text-4xl xl:text-5xl py-2 drop-shadow-sm">
+                                                        eleganti suggerimenti vocali
+                                                    </span>
+                                                    <span className="block text-base md:text-lg text-zinc-300 mt-4 font-light italic">
+                                                        con le <strong className="text-amber-400 font-semibold not-italic">tue promozioni</strong> e i tuoi <strong className="text-amber-400 font-semibold not-italic">servizi personalizzati</strong>.
+                                                    </span>
+                                                </h3>
+                                            </div>
+                                            <div className="relative rounded-3xl overflow-hidden shadow-2xl shadow-[#D8B2A3]/20 w-full mt-auto aspect-[4/3] lg:aspect-video mb-16 h-64 md:h-80 lg:h-96">
+                                                <Image
+                                                    src="https://eufahlzjxbimyiwivoiq.supabase.co/storage/v1/object/public/bucket-assets/1772934286210-zjhcxj.png"
+                                                    alt="Servizi Personalizzati Premium"
+                                                    fill
+                                                    sizes="(max-width: 1024px) 100vw, 80vw"
+                                                    className="object-cover scale-[1.15]"
+                                                />
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div className={`p-1.5 md:p-2 rounded-full border transition-transform duration-300 group-open:rotate-180 flex-shrink-0 ${profile?.plan_type === 'free_trial' ? 'bg-purple-500/10 border-purple-500/20 text-purple-300' : profile?.plan_type === 'basic' ? 'bg-white/5 border-white/10 text-[#dfa3fb]' : 'bg-sky-500/10 border-sky-500/20 text-sky-400'}`}>
-                                        <ChevronDown className="w-5 h-5 md:w-6 md:h-6" />
-                                    </div>
-                                </div>
-                            </summary>
+                                )}
 
-                            <div className="animate-in fade-in slide-in-from-top-8 duration-500 pt-4 w-full max-w-4xl mx-auto">
-                                {profile?.plan_type === 'basic' ? (
-                                    <UpgradeFormBasic userEmail={user.email} />
+                                {profile?.plan_type === 'free_trial' ? (
+                                    <UpgradeCheckoutForm userEmail={user.email} userVat={profile?.partita_iva} userSalonName={profile?.salon_name as string} planType={profile?.plan_type} />
                                 ) : (
-                                    <UpgradeFormTrial userEmail={user.email} />
+                                    <div className="flex justify-center mt-[-1rem] mb-4">
+                                        <a
+                                            href="https://wa.link/5apci9"
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="inline-flex items-center justify-center bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold text-lg md:text-xl rounded-[35px] px-10 py-5 shadow-[0_0_20px_rgba(37,211,102,0.4)] transition-all hover:scale-105 gap-3"
+                                        >
+                                            Contattaci per UPGRADE A PREMIUM
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                                        </a>
+                                    </div>
                                 )}
                             </div>
-                        </details>
-                    )}
+                        )}
 
-                </>
-            ) : (
-                <Paywall salonName={profile?.salon_name || user.email || 'Utente'} userEmail={user.email} />
-            )
-            }
-        </div >
+                        <AudioPlayer />
+                    </>
+                ) : (
+                    <Paywall salonName={profile?.salon_name || user.email || 'Utente'} userEmail={user.email} />
+                )}
+            </div>
+        </div>
     );
 }

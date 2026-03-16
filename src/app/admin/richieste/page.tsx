@@ -3,6 +3,7 @@ import { HandCoins } from "lucide-react";
 import { format } from "date-fns";
 import { it } from "date-fns/locale";
 import { StatusUpdater } from "@/components/admin/StatusUpdater";
+import { AdminLicenseLink } from "@/components/admin/AdminLicenseLink";
 
 export const dynamic = "force-dynamic";
 
@@ -106,12 +107,34 @@ export default async function AdminRichiestePage() {
                                         <p className="text-xs font-bold uppercase text-zinc-500 mb-1">Telefono</p>
                                         <p className="text-zinc-200 font-medium">{req.billing_details?.telefono || '-'}</p>
                                     </div>
+                                    {req.billing_details?.stripe_session_id && (
+                                        <div className="col-span-1 md:col-span-2 pt-2 mt-2 border-t border-white/5">
+                                            <p className="text-xs font-bold uppercase text-emerald-500/80 mb-2">Dettagli Pagamento (Stripe)</p>
+                                            <div className="flex flex-col md:flex-row gap-4">
+                                                <div className="bg-black/20 px-3 py-2 rounded-lg border border-white/5 flex items-center">
+                                                    <span className="text-zinc-500 text-xs uppercase font-bold mr-3 tracking-wider">Sessione:</span>
+                                                    <span className="text-zinc-300 font-mono text-xs truncate max-w-[200px]" title={req.billing_details.stripe_session_id}>{req.billing_details.stripe_session_id}</span>
+                                                </div>
+                                                <div className="bg-black/20 px-3 py-2 rounded-lg border border-white/5 flex items-center">
+                                                    <span className="text-zinc-500 text-xs uppercase font-bold mr-3 tracking-wider">Importo:</span>
+                                                    <span className="text-emerald-400 font-bold text-sm">€ {req.billing_details.importo_pagato_eur?.toFixed(2) || '0.00'}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    )}
                                 </div>
 
-                                <div className="mt-4 pt-4 border-t border-white/5 flex gap-3 relative z-10 items-center justify-between">
+                                <div className="mt-4 pt-4 border-t border-white/5 flex flex-col md:flex-row gap-4 relative z-10 items-start md:items-center justify-between bg-black/20 -mx-6 -mb-6 p-6">
                                     <div className="flex items-center gap-2">
-                                        <span className="text-sm text-zinc-400 font-medium">Aggiorna Stato:</span>
+                                        <span className="text-sm text-zinc-400 font-medium whitespace-nowrap">Aggiorna Stato:</span>
                                         <StatusUpdater requestId={req.id} currentStatus={req.status} />
+                                    </div>
+                                    <div className="flex items-center gap-2 w-full md:w-auto mt-2 md:mt-0 pt-2 border-t border-white/5 md:border-none md:pt-0">
+                                         <span className="text-sm text-zinc-400 font-medium md:hidden">Licenza:</span>
+                                         <AdminLicenseLink 
+                                            userId={req.user_id} 
+                                            salonName={req.billing_details?.nome_istituto || "default"} 
+                                         />
                                     </div>
                                 </div>
                             </div>

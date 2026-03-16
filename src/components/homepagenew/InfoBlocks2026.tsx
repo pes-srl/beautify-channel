@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { useState, useRef, useEffect } from "react";
 import { Play, Pause, ArrowRight } from "lucide-react";
 import { Montserrat, Inter } from "next/font/google";
+import Image from "next/image";
 
 const montserrat = Montserrat({ subsets: ["latin"], weight: ["600"] });
 const inter = Inter({ subsets: ["latin"], weight: ["300", "400", "600"] });
@@ -120,12 +121,14 @@ export function InfoBlocks2026() {
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true, margin: "-100px" }}
                         transition={{ duration: 0.8 }}
-                        className="flex-1 w-full flex justify-center"
+                        className="flex-1 w-full flex justify-center relative h-[300px] md:h-[500px] lg:h-[550px]"
                     >
-                        <img
+                        <Image
                             src="https://eufahlzjxbimyiwivoiq.supabase.co/storage/v1/object/public/bucket-assets/1772733090547-nfq28.png"
                             alt="BeautiFy Channel Beauty Room"
-                            className="w-full h-auto md:h-[500px] lg:h-[550px] aspect-[16/10] md:aspect-auto object-cover rounded-[33px] shadow-2xl lg:scale-105"
+                            fill
+                            sizes="(max-width: 768px) 100vw, 50vw"
+                            className="object-cover rounded-[33px] shadow-2xl lg:scale-105"
                         />
                     </motion.div>
                 </div>
@@ -172,11 +175,13 @@ export function InfoBlocks2026() {
                         transition={{ duration: 0.8 }}
                         className="flex-1 w-full flex justify-center md:justify-start"
                     >
-                        <div className="relative w-full">
-                            <img
+                        <div className="relative w-full h-[300px] md:h-[500px] lg:h-[550px]">
+                            <Image
                                 src="https://eufahlzjxbimyiwivoiq.supabase.co/storage/v1/object/public/bucket-assets/1772727853683-sr1147.png"
                                 alt="Assistente Tati"
-                                className="w-full h-auto md:h-[500px] lg:h-[550px] aspect-[16/10] md:aspect-auto object-cover rounded-[33px] shadow-2xl lg:scale-105"
+                                fill
+                                sizes="(max-width: 768px) 100vw, 50vw"
+                                className="object-cover rounded-[33px] shadow-2xl lg:scale-105"
                             />
                         </div>
                     </motion.div>

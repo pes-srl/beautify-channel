@@ -20,6 +20,8 @@ export async function GET(request: Request) {
     try {
         const now = new Date();
         const tomorrow = new Date(now.getTime() + 24 * 60 * 60 * 1000);
+        const inTwoDays = new Date(now.getTime() + 48 * 60 * 60 * 1000);
+        const inThreeDays = new Date(now.getTime() + 72 * 60 * 60 * 1000);
 
         // 1. DOWGRADE EXPIRED USERS (trial_ends_at < NOW() AND plan_type = 'free_trial')
         const { data: expiredUsers, error: expireError } = await supabase
@@ -124,11 +126,73 @@ export async function GET(request: Request) {
             }
         }
 
+        // 3. SEND WARNINGS: 2 DAYS LEFT ON FREE TRIAL
+        const { data: twoDaysTrialUsers, error: twoDaysTrialError } = await supabase
+            .from('profiles')
+            .select('*')
+            .eq('plan_type', 'free_trial')
+            .gt('trial_ends_at', inTwoDays.toISOString())
+            .lte('trial_ends_at', inThreeDays.toISOString());
+
+        if (twoDaysTrialError) throw twoDaysTrialError;
+
+        if (twoDaysTrialUsers && twoDaysTrialUsers.length > 0) {
+            for (const user of twoDaysTrialUsers) {
+                if (user.email) {
+                    await resend.emails.send({
+                        from: 'Beautify Channel <noreply@beautifychannel.com>',
+                        to: user.email,
+                        subject: 'Mancano 2 giorni alla scadenza della prova gratuita ⏳',
+                        html: `
+                            <div style="font-family: Arial, sans-serif; max-w: 600px; margin: 0 auto; color: #333; padding: 20px;">
+                                <h1 style="color: #f59e0b;">Il tempo stringe!</h1>
+                                <p>Ciao ${user.salon_name || 'Amico'}, ti ricordiamo che la tua prova di 7 giorni per Beautify Channel scadrà tra sole 48 ore.</p>
+                                <p>Speriamo che la nostra selezione musicale ti stia piacendo. Per non interrompere l'atmosfera nel tuo salone e mantenere l'accesso illimitato, ti invitiamo a passare a un piano a pagamento.</p>
+                                <a href="https://beautifychannel.com/area-riservata#pricing" style="background-color: #f59e0b; color: #FFFFFF; text-decoration: none; padding: 12px 24px; border-radius: 8px; font-weight: bold; display: inline-block; margin-top: 20px;">Scopri i Piani</a>
+                            </div>
+                        `
+                    });
+                }
+            }
+        }
+        
+        // 4. SEND WARNINGS: 2 DAYS LEFT SULL'ABBONAMENTO (BASIC/PREMIUM)
+        const { data: twoDaysSubUsers, error: twoDaysSubError } = await supabase
+            .from('profiles')
+            .select('*')
+            .in('plan_type', ['basic', 'premium'])
+            .gt('subscription_expiration', inTwoDays.toISOString())
+            .lte('subscription_expiration', inThreeDays.toISOString());
+
+        if (twoDaysSubError) throw twoDaysSubError;
+
+        if (twoDaysSubUsers && twoDaysSubUsers.length > 0) {
+            for (const user of twoDaysSubUsers) {
+                if (user.email) {
+                    await resend.emails.send({
+                        from: 'Beautify Channel <noreply@beautifychannel.com>',
+                        to: user.email,
+                        subject: 'Il tuo abbonamento scade tra 2 giorni ⏳ Rinnovo richiesto',
+                        html: `
+                            <div style="font-family: Arial, sans-serif; max-w: 600px; margin: 0 auto; color: #333; padding: 20px;">
+                                <h1 style="color: #f59e0b;">Rinnovo in arrivo!</h1>
+                                <p>Ciao ${user.salon_name || 'Amico'}, l'abbonamento a Beautify Channel del tuo istituto terminerà tra 2 giorni.</p>
+                                <p>Per evitare l'interruzione del servizio e mantenere l'accesso esclusivo ai canali musicali premium che i tuoi clienti amano, per favore rinnova la sottoscrizione.</p>
+                                <a href="https://beautifychannel.com/area-riservata#pricing" style="background-color: #f59e0b; color: #FFFFFF; text-decoration: none; padding: 12px 24px; border-radius: 8px; font-weight: bold; display: inline-block; margin-top: 20px;">Rinnova Ora</a>
+                            </div>
+                        `
+                    });
+                }
+            }
+        }
+
         return NextResponse.json({
             success: true,
             expiredProcessed: expiredUsers?.length || 0,
             expiredSubsProcessed: expiredSubs?.length || 0,
-            warnedProcessed: warningUsers?.length || 0
+            warned1DayProcessed: warningUsers?.length || 0,
+            warned2DaysTrialProcessed: twoDaysTrialUsers?.length || 0,
+            warned2DaysSubProcessed: twoDaysSubUsers?.length || 0
         });
 
     } catch (error: any) {

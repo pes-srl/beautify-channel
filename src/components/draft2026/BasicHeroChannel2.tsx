@@ -43,7 +43,7 @@ export function BasicHeroChannel2({ channel, planType }: BasicHeroChannel2Props)
     };
 
     return (
-        <div className={`relative w-full rounded-3xl overflow-hidden shadow-2xl mb-12 group transition-all duration-700 ${isPremium ? 'shadow-black border border-white/5 bg-black' : planType === 'free_trial' ? 'shadow-[#D8B2A3]/20' : 'shadow-[#D8B2A3]/20'}`}>
+        <div className={`relative w-full md:w-3/4 mx-auto rounded-3xl overflow-hidden shadow-2xl mb-12 group transition-all duration-700 ${isPremium ? 'shadow-black border border-white/5 bg-black' : planType === 'free_trial' ? 'shadow-[#D8B2A3]/20' : 'shadow-[#D8B2A3]/20'}`}>
             {/* Animated Gradient Background */}
             <div className={`absolute inset-0 z-0 bg-gradient-to-r ${isPremium ? 'from-[#4F3627] via-[#0D0907] to-black' : planType === 'free_trial' ? 'from-[#D8B2A3] via-[#AB7169] to-black' : 'from-[#D8B2A3] via-[#5D6676] to-black'}`} />
 

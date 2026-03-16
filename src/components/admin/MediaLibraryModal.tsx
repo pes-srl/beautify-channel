@@ -58,7 +58,7 @@ export function MediaLibraryModal({ onSelectImage, triggerButton }: MediaLibrary
             toast.error("Errore nel caricamento delle immagini", { description: error.message });
         } else {
             // Filter out empty folder placeholders if any
-            setFiles(data?.filter(file => file.name !== ".emptyFolderPlaceholder") || []);
+            setFiles((data?.filter(file => file.name !== ".emptyFolderPlaceholder").map(file => ({ ...file, id: file.id || crypto.randomUUID() })) as MediaFile[]) || []);
         }
         setIsLoading(false);
     }, [supabase]);
