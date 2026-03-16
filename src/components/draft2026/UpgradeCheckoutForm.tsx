@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { submitUpgradeRequest } from "@/app/actions/upgrade-actions";
+import { createCheckoutSession } from "@/app/actions/stripe-actions";
 import { Button } from "@/components/ui/button";
 import { AlertCircle, CheckCircle2, Heart, Sparkles } from "lucide-react";
 
@@ -74,7 +75,6 @@ export function UpgradeCheckoutForm({ userEmail, userVat, userSalonName, planTyp
         // ========================================================
         
         // 2. Genera sessione Stripe Checkout
-        const { createCheckoutSession } = await import('@/app/actions/stripe-actions');
         const checkoutResult = await createCheckoutSession(formData);
         
         if (checkoutResult.error) {
