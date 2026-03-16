@@ -179,46 +179,46 @@ export function UpgradeCheckoutForm({ userEmail, userVat, userSalonName, planTyp
 
                 {/* Plan Selector */}
                 <div className="flex flex-col md:flex-row gap-4 mb-10 bg-black/20 p-2 md:p-3 rounded-2xl border border-white/5">
-                    <button
-                        type="button"
-                        disabled={planType === 'basic'}
-                        onClick={() => { setSelectedPlan("basic"); setCurrentStep(1); }}
-                        className={`flex-1 relative overflow-hidden p-6 rounded-xl border text-left transition-all duration-500 flex flex-col items-start ${planType === 'basic' ? "opacity-50 cursor-not-allowed bg-white/5 border-transparent grayscale" : selectedPlan === "basic" ? "bg-white/10 border-[pink-300]/50 shadow-[0_0_20px_rgba(216,178,163,0.15)] cursor-pointer" : "bg-transparent border-transparent hover:bg-white/5 cursor-pointer"}`}
-                    >
-                        {planType === 'basic' && (
-                            <div className="absolute top-0 right-0 bg-white/10 backdrop-blur-sm text-xs font-bold text-zinc-300 px-3 py-1 rounded-bl-lg uppercase border-l border-b border-white/5">
-                                Piano Attuale
+                    {planType !== 'basic' && (
+                        <button
+                            type="button"
+                            onClick={() => { setSelectedPlan("basic"); setCurrentStep(1); }}
+                            className={`w-full relative overflow-hidden p-6 rounded-xl border text-left transition-all duration-500 flex flex-col items-start bg-white/10 border-[pink-300]/50 shadow-[0_0_20px_rgba(216,178,163,0.15)] cursor-pointer`}
+                        >
+                            <div className="flex justify-between items-center w-full mb-2 mt-1">
+                                <h3 className="text-xl font-bold text-white tracking-widest uppercase">Basic</h3>
+                                <CheckCircle2 className="w-6 h-6 text-[pink-300]" />
                             </div>
-                        )}
-                        <div className="flex justify-between items-center w-full mb-2 mt-1">
-                            <h3 className="text-xl font-bold text-white tracking-widest uppercase">Basic</h3>
-                            {selectedPlan === "basic" && <CheckCircle2 className="w-6 h-6 text-[pink-300]" />}
-                        </div>
-                        <p className="text-sm text-zinc-400 font-light mb-4">La soluzione ideale per la giusta atmosfera nel tuo salone.</p>
-                        <div className="mt-auto">
-                            <span className="text-2xl font-black text-white">€ 20,90</span><span className="text-zinc-500 text-sm"> / mese</span>
-                        </div>
-                    </button>
+                            <p className="text-sm text-zinc-400 font-light mb-4 text-center md:text-left">La soluzione ideale per la giusta atmosfera nel tuo salone.</p>
+                            <div className="mt-auto flex w-full justify-between items-end">
+                                <div>
+                                    <span className="text-2xl md:text-3xl font-black text-white">€ 20,90</span><span className="text-zinc-500 text-sm md:text-base"> / mese</span>
+                                </div>
+                            </div>
+                        </button>
+                    )}
 
-                    <button
-                        type="button"
-                        onClick={() => { setSelectedPlan("premium"); setCurrentStep(1); }}
-                        className={`flex-1 relative overflow-hidden p-6 rounded-xl border text-left transition-all duration-500 flex flex-col items-start ${selectedPlan === "premium" ? "bg-white/10 border-purple-500/50 shadow-[0_0_20px_rgba(192,38,211,0.15)] cursor-pointer" : "bg-transparent border-transparent hover:bg-white/5 cursor-pointer"}`}
-                    >
-                        {true && (
+                    {planType === 'basic' && (
+                        <button
+                            type="button"
+                            onClick={() => { setSelectedPlan("premium"); setCurrentStep(1); }}
+                            className={`w-full relative overflow-hidden p-6 rounded-xl border text-left transition-all duration-500 flex flex-col items-start bg-white/10 border-purple-500/50 shadow-[0_0_20px_rgba(192,38,211,0.15)] cursor-pointer`}
+                        >
                             <div className="absolute top-0 right-0 bg-purple-500 text-xs font-bold text-white px-3 py-1 rounded-bl-lg uppercase">
                                 + Promo Sonore
                             </div>
-                        )}
-                        <div className="flex justify-between items-center w-full mb-2">
-                            <h3 className="text-xl font-bold text-white tracking-widest uppercase flex items-center gap-2">Premium <Sparkles className="w-5 h-5 text-purple-400" /></h3>
-                            {selectedPlan === "premium" && <CheckCircle2 className="w-6 h-6 text-purple-400" />}
-                        </div>
-                        <p className="text-sm text-zinc-400 font-light mb-4">Tutta la libreria musicale, più spot sonori personalizzati e creati su misura per te.</p>
-                        <div className="mt-auto">
-                            <span className="text-2xl font-black text-white">€ 38,90</span><span className="text-zinc-500 text-sm"> / mese</span>
-                        </div>
-                    </button>
+                            <div className="flex justify-between items-center w-full mb-2">
+                                <h3 className="text-xl font-bold text-white tracking-widest uppercase flex items-center gap-2">Premium <Sparkles className="w-5 h-5 text-purple-400" /></h3>
+                                <CheckCircle2 className="w-6 h-6 text-purple-400" />
+                            </div>
+                            <p className="text-sm text-zinc-400 font-light mb-4 text-center md:text-left">Tutta la libreria musicale, più spot sonori personalizzati e creati su misura per te.</p>
+                            <div className="mt-auto flex w-full justify-between items-end">
+                                <div>
+                                    <span className="text-2xl md:text-3xl font-black text-white">€ 38,90</span><span className="text-zinc-500 text-sm md:text-base"> / mese</span>
+                                </div>
+                            </div>
+                        </button>
+                    )}
                 </div>
 
                 <form onSubmit={(e) => { e.preventDefault(); handleSubmit(new FormData(e.currentTarget)); }} className="space-y-6 bg-black/30 p-6 md:p-8 rounded-2xl border border-white/5 relative overflow-hidden shadow-inner" noValidate>

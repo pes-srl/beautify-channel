@@ -309,25 +309,41 @@ export default async function AreaClientePage2(props: {
                                     </div>
                                 </div>
                             </details>
-                        </div>
-                        {/* END ACCORDIONS */}
-                        
 
-                        <div className="relative w-full py-20 -mx-4 px-4 sm:mx-0 sm:px-0 mt-8 mb-12" style={{ width: 'calc(100% + 2rem)' }}>
-                            {/* Sfondo sfumato bianco dall'alto più visibile e diffuso */}
-                            <div className="absolute inset-0 bg-gradient-to-b from-white/10 via-white/5 to-transparent pointer-events-none -z-10 rounded-[3rem]" />
-                            {/* Bagliore alto */}
-                            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[90%] max-w-5xl h-72 bg-white/5 blur-[100px] pointer-events-none -z-10" />
-                            {/* Bagliore basso per diffonderlo in fondo */}
-                            <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[70%] max-w-4xl h-72 bg-white/5 blur-[120px] pointer-events-none -z-10" />
+                            {/* ALTRI CANALI ACCORDION (CONTAINS THE GRID) */}
+                            <details className="group marker:content-['']" open>
+                                <summary className="flex items-center justify-between cursor-pointer list-none bg-white/[0.02] hover:bg-white/[0.04] backdrop-blur-md border border-white/5 rounded-[2rem] p-4 pr-6 transition-all duration-300 w-full md:w-3/4 mx-auto select-none">
+                                    <div className="flex items-center gap-3 md:gap-5">
+                                        <div className="p-3 bg-white/5 rounded-full shrink-0">
+                                            <Radio className="w-6 h-6 md:w-8 md:h-8 text-white" />
+                                        </div>
+                                        <span className="text-white font-black uppercase text-xl md:text-3xl tracking-widest">ALTRI CANALI</span>
+                                    </div>
+                                    <div className={`p-2 rounded-full border ${profile?.plan_type === 'premium' ? 'border-amber-500/20 bg-amber-500/10' : profile?.plan_type === 'free_trial' ? 'border-fuchsia-500/20 bg-fuchsia-500/10' : 'border-indigo-500/20 bg-indigo-500/10'}`}>
+                                        <ArrowDown className={`w-5 h-5 transition-transform duration-300 group-open:rotate-180 ${profile?.plan_type === 'premium' ? 'text-amber-400' : profile?.plan_type === 'free_trial' ? 'text-fuchsia-400' : 'text-indigo-400'}`} />
+                                    </div>
+                                </summary>
+                                <div className="overflow-hidden mt-4 animate-in fade-in slide-in-from-top-4 duration-500 w-full xl:w-[90%] mx-auto">
+                                    <div className="relative w-full py-12 md:py-20 -mx-4 px-4 sm:mx-0 sm:px-0 mt-2 mb-6" style={{ width: 'calc(100% + 2rem)' }}>
+                                        {/* Sfondo sfumato bianco dall'alto più visibile e diffuso */}
+                                        <div className="absolute inset-0 bg-gradient-to-b from-white/10 via-white/5 to-transparent pointer-events-none -z-10 rounded-[3rem]" />
+                                        {/* Bagliore alto */}
+                                        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[90%] max-w-5xl h-72 bg-white/5 blur-[100px] pointer-events-none -z-10" />
+                                        {/* Bagliore basso per diffonderlo in fondo */}
+                                        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[70%] max-w-4xl h-72 bg-white/5 blur-[120px] pointer-events-none -z-10" />
 
-                            <ChannelGrid2 initialChannels={channels || []} serverError={channelsError?.message} planType={profile?.plan_type} />
+                                        <ChannelGrid2 initialChannels={channels || []} serverError={channelsError?.message} planType={profile?.plan_type} />
+                                    </div>
+                                </div>
+                            </details>
+
                         </div>
+                        {/* END ACCORDIONS E GRIGLIA */}
 
                         {/* Upgrade Form for Free Trial and Basic Users */}
                         {(profile?.plan_type === 'free_trial' || profile?.plan_type === 'basic') && !isAdmin && (
                             <div id="scegli-piano-section" className="w-full max-w-4xl mx-auto mt-0 md:mt-16 border-t border-white/10 pt-4 md:pt-16">
-                                {(profile?.plan_type === 'basic' || profile?.plan_type === 'free_trial') && (
+                                {profile?.plan_type === 'basic' && (
                                     <div className="text-center mb-16 px-4">
                                         {/* Elegant Divider */}
                                         <div className="flex items-center justify-center w-full mb-16 relative">
