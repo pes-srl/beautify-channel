@@ -278,7 +278,6 @@ export async function POST(req: Request) {
                                 <div style="background-color: #FFFFFF; padding: 30px; border-radius: 0 0 12px 12px;">
                                     <p style="font-size: 16px; line-height: 1.6; color: #444;">Sei dei nostri, significa che hai capito le potenzialità del servizio!<br>Grazie!</p>
                                     <p style="font-size: 16px; line-height: 1.6; color: #444;">Il tuo abbonamento attuale è il <strong>${planType.toUpperCase()}</strong> e scadrà il <strong>${expirationDate.toLocaleDateString('it-IT')}</strong>.</p>
-                                    <p style="font-size: 16px; line-height: 1.6; color: #444;">Queste sono le credenziali per la tua area riservata.</p>
                                     <p style="font-size: 16px; line-height: 1.6; color: #444;">Nell'area riservata troverai anche una sezione documenti contenente: Pagamento - Contratto - Licenza di diffusione musicale (da tenere sempre in reception in caso di controlli della SIAE)</p>
                                     <p style="font-size: 16px; line-height: 1.6; color: #444;">Esatto, utilizzando il nostro servizio puoi fare disdetta alla SIAE non pagandola più perchè con noi i diritti musicali sono già compresi!</p>
                                     <p style="font-size: 16px; line-height: 1.6; color: #444; margin-top: 20px;">Per qualsiasi info puoi scriverci su whatsapp o mandarci una email a info@beautify-channel.com<br><b>Grazie per aver scelto BeautiFy!</b></p>
