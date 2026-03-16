@@ -233,7 +233,7 @@ export async function POST(req: Request) {
                     // A. Email to Admin
                     await resend.emails.send({
                         from: process.env.RESEND_FROM_EMAIL || 'Beautify Channel <info@beautify-channel.com>',
-                        to: 'mirkocata@gmail.com', // Admin email
+                        to: process.env.RESEND_FROM_EMAIL || 'info@beautify-channel.com', // Admin email
                         subject: `🟢 PAGAMENTO RICEVUTO - Nuovo ${planType.toUpperCase()} da ${metadata.email_richiedente || 'Cliente'}`,
                         html: `
                           <h2>Nuovo Pagamento Completato tramite Stripe</h2>
