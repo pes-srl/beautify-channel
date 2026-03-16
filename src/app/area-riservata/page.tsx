@@ -345,11 +345,122 @@ export default async function AreaClientePage2(props: {
                                 </div>
                             </details>
 
+                            {/* NEW POTENZIA IL SERVIZIO ACCORDION E SCEGLI IL PIANO (ONLY FREE TRIAL) */}
+                            {profile?.plan_type === 'free_trial' && (
+                                <>
+                                    <details className="group mt-4 mb-4 marker:content-['']">
+                                        <summary className="flex items-center justify-between cursor-pointer list-none bg-[#ff5a7e]/10 hover:bg-[#ff5a7e]/20 backdrop-blur-md border border-[#ff5a7e]/30 rounded-[2rem] p-4 pr-6 transition-all duration-300 w-full md:w-3/4 mx-auto select-none shadow-[0_0_20px_rgba(255,90,126,0.15)]">
+                                            <div className="flex items-center gap-3 md:gap-5">
+                                                <div className="p-3 bg-[#ff5a7e]/20 rounded-full shrink-0">
+                                                    <Sparkles className="w-6 h-6 md:w-8 md:h-8 text-[#ff5a7e]" />
+                                                </div>
+                                                <span className="text-white font-black uppercase text-lg md:text-3xl tracking-widest">POTENZIA IL SERVIZIO</span>
+                                            </div>
+                                            <div className="p-2 rounded-full border border-[#ff5a7e]/40 bg-[#ff5a7e]/20">
+                                                <ArrowDown className="w-5 h-5 transition-transform duration-300 group-open:rotate-180 text-[#ff5a7e]" />
+                                            </div>
+                                        </summary>
+                                        <div className="overflow-hidden mt-4 animate-in fade-in slide-in-from-top-4 duration-500 w-full xl:w-5/6 mx-auto">
+                                            <div className="bg-white/[0.02] backdrop-blur-xl border border-white/10 rounded-[2rem] p-6 md:p-10">
+                                                <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16">
+                                                    {/* LEFT COLUMN: Benefici Piano Basic */}
+                                                    <div className="text-lg md:text-xl font-light leading-relaxed text-zinc-300 flex flex-col justify-center">
+                                                        <h3 className="text-2xl md:text-3xl font-bold text-white mb-6">Il segreto di un'atmosfera perfetta</h3>
+                                                        <p className="mb-6">
+                                                            Con il <strong className="text-white">Piano Basic</strong> di BeautiFy Channel, trasformi l'attesa e i trattamenti in una vera e propria esperienza sensoriale. Non dovrai più preoccuparti di scegliere la musica giusta: i nostri palinsesti sono <strong className="text-white">curati da esperti del settore</strong> per accompagnare ogni momento della giornata nel tuo salone.
+                                                        </p>
+                                                        
+                                                        <ul className="mb-8 space-y-4">
+                                                            <li className="flex items-start gap-3">
+                                                                <Radio className="w-6 h-6 text-[#ff5a7e] shrink-0 mt-1" />
+                                                                <span><strong className="text-white">Musica Ininterrotta e Senza Annunci:</strong> Niente stacchi di radio locali o pubblicità esterne che spezzano la magia.</span>
+                                                            </li>
+                                                            <li className="flex items-start gap-3">
+                                                                <Radio className="w-6 h-6 text-[#ff5a7e] shrink-0 mt-1" />
+                                                                <span><strong className="text-white">7 Canali Tematici:</strong> L'atmosfera perfetta per ogni momento e trattamento, che potrai cambiare con un click.</span>
+                                                            </li>
+                                                            <li className="flex items-start gap-3">
+                                                                <Radio className="w-6 h-6 text-[#ff5a7e] shrink-0 mt-1" />
+                                                                <span><strong className="text-white">Suggerimenti Vocali Generici:</strong> Delicate e professionali voci fuoricampo che valorizzano i benefici dei trattamenti estetici per ispirare le clienti.</span>
+                                                            </li>
+                                                        </ul>
+                                                        
+                                                        <div className={`pl-5 md:pl-6 border-l-2 border-[#ff5a7e]/40 py-1`}>
+                                                            <p className="italic text-zinc-400">Eleva la percezione del tuo istituto fin dal primo ascolto, rendendo ogni permanenza memorabile e rilassante.</p>
+                                                        </div>
+                                                    </div>
+
+                                                    {/* RIGHT COLUMN: Upsell Premium */}
+                                                    <div className="bg-white/[0.02] border border-white/10 rounded-[2rem] p-6 md:p-8 relative shadow-[0_0_30px_rgba(251,191,36,0.05)] overflow-hidden">
+                                                        <div className="absolute top-0 right-0 w-64 h-64 bg-amber-500/10 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/2" />
+                                                        
+                                                        <div className="flex items-center gap-3 mb-6 relative z-10">
+                                                            <Sparkles className="w-8 h-8 text-amber-400" />
+                                                            <h3 className="text-2xl md:text-3xl font-bold text-white uppercase tracking-wider">Premium</h3>
+                                                        </div>
+                                                        
+                                                        <h4 className="text-xl text-amber-300 font-semibold mb-4 relative z-10">
+                                                            Il Tuo Suono, Le Tue Promozioni
+                                                        </h4>
+                                                        
+                                                        <p className="text-base md:text-lg text-zinc-300 font-light mb-6 leading-relaxed relative z-10">
+                                                            Pianifichi offerte mensili, pacchetti esclusivi o nuovi trattamenti? Fai in modo che tutte le tue clienti <strong className="text-white">lo scoprano nel modo più elegante possibile</strong>, mentre sono comodamente sedute nel tuo istituto.
+                                                        </p>
+                                                        
+                                                        <div className="bg-black/40 p-5 rounded-[1.25rem] border border-amber-500/20 mb-6 relative z-10">
+                                                            <ul className="space-y-4">
+                                                                <li className="flex items-start gap-3">
+                                                                    <div className="w-1.5 h-1.5 rounded-full bg-amber-400 mt-2 shrink-0" />
+                                                                    <span className="text-zinc-200">
+                                                                        <strong className="text-white">Messaggi Promozionali Personalizzati:</strong> Inviaci i testi delle tue promo, i nostri speaker professionisti li registreranno per te!
+                                                                    </span>
+                                                                </li>
+                                                                <li className="flex items-start gap-3">
+                                                                    <div className="w-1.5 h-1.5 rounded-full bg-amber-400 mt-2 shrink-0" />
+                                                                    <span className="text-zinc-200">
+                                                                        <strong className="text-white">Trasmissione Automatica:</strong> Le tue promozioni verranno inserite in rotazione direttamente nel canale musicale principale.
+                                                                    </span>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                        
+                                                        <div className="pt-2 relative z-10">
+                                                            <p className="text-sm font-medium text-amber-500 uppercase tracking-widest">
+                                                                LA RADIO UFFICIALE DEL TUO SALONE
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </details>
+
+                                    <details className="group mb-4 marker:content-['']" id="scegli-piano-section">
+                                        <summary className="flex items-center justify-between cursor-pointer list-none bg-emerald-500/10 hover:bg-emerald-500/20 backdrop-blur-md border border-emerald-500/30 rounded-[2rem] p-4 pr-6 transition-all duration-300 w-full md:w-3/4 mx-auto select-none shadow-[0_0_20px_rgba(16,185,129,0.15)]">
+                                            <div className="flex items-center gap-3 md:gap-5">
+                                                <div className="p-3 bg-emerald-500/20 rounded-full shrink-0">
+                                                    <Lock className="w-6 h-6 md:w-8 md:h-8 text-emerald-400" />
+                                                </div>
+                                                <span className="text-white font-black uppercase text-lg md:text-3xl tracking-widest">AGGIORNA L'ESPERIENZA</span>
+                                            </div>
+                                            <div className="p-2 rounded-full border border-emerald-500/40 bg-emerald-500/20">
+                                                <ArrowDown className="w-5 h-5 transition-transform duration-300 group-open:rotate-180 text-emerald-400" />
+                                            </div>
+                                        </summary>
+                                        <div className="overflow-hidden mt-4 animate-in fade-in slide-in-from-top-4 duration-500 w-full md:w-3/4 mx-auto">
+                                            <div className="bg-white/[0.02] backdrop-blur-xl border border-white/10 rounded-[2rem] p-6 md:p-10">
+                                                <UpgradeCheckoutForm userEmail={user.email} userVat={profile?.partita_iva} userSalonName={profile?.salon_name as string} planType={profile?.plan_type} />
+                                            </div>
+                                        </div>
+                                    </details>
+                                </>
+                            )}
+
                         </div>
                         {/* END ACCORDIONS E GRIGLIA */}
 
-                        {/* Upgrade Form for Free Trial and Basic Users */}
-                        {(profile?.plan_type === 'free_trial' || profile?.plan_type === 'basic') && !isAdmin && (
+                        {/* Upgrade Form for Basic Users */}
+                        {profile?.plan_type === 'basic' && !isAdmin && (
                             <div id="scegli-piano-section" className="w-full max-w-4xl mx-auto mt-0 md:mt-16 border-t border-white/10 pt-4 md:pt-16">
                                 {profile?.plan_type === 'basic' && (
                                     <div className="text-center mb-16 px-4">
@@ -399,9 +510,7 @@ export default async function AreaClientePage2(props: {
                                     </div>
                                 )}
 
-                                {profile?.plan_type === 'free_trial' ? (
-                                    <UpgradeCheckoutForm userEmail={user.email} userVat={profile?.partita_iva} userSalonName={profile?.salon_name as string} planType={profile?.plan_type} />
-                                ) : (
+                                {profile?.plan_type !== 'free_trial' && (
                                     <div className="flex justify-center mt-[-1rem] mb-4">
                                         <a
                                             href="https://wa.link/5apci9"

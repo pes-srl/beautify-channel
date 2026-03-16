@@ -170,7 +170,7 @@ export function UpgradeCheckoutForm({ userEmail, userVat, userSalonName, planTyp
             <div className="relative z-10 max-w-4xl mx-auto">
                 <div className="text-center mb-10">
                     <h2 className="text-3xl font-semibold text-white mb-3 uppercase tracking-wide">
-                        SCEGLI IL TUO PIANO E MIGLIORA IL SERVIZIO
+                        AGGIORNA L'ESPERIENZA CON IL PIANO BASIC
                     </h2>
                     <p className="text-zinc-300 font-light mt-2 leading-relaxed max-w-2xl mx-auto">
                         Personalizza la tua esperienza musicale scegliendo l'abbonamento che si adatta alle tue esigenze.
