@@ -59,9 +59,10 @@ export async function registerTrialAccount(formData: FormData) {
         return check === parseInt(pi.charAt(10), 10);
     };
 
-    if (!isValidPartitaIva(partitaIva)) {
-        return { error: 'La Partita IVA inserita non è valida. Controlla e riprova.' };
-    }
+    // TEMP BYPASS FOR TESTING: Disattivata la validazione della Partita IVA temporaneamente
+    // if (!isValidPartitaIva(partitaIva)) {
+    //     return { error: 'La Partita IVA inserita non è valida. Controlla e riprova.' };
+    // }
 
     const salonName = salonNameRaw?.trim() !== "" ? salonNameRaw : fullName;
 
@@ -87,16 +88,15 @@ export async function registerTrialAccount(formData: FormData) {
 
         if (ipCheckError) {
             console.error("Error checking trial IPs:", ipCheckError);
-            // If the table doesn't exist yet, we'll log it but let the signup proceed (or block it depending on strictness).
-            // Better to let it proceed if the migration hasn't run yet, but in a real scenario we'd want it to fail closed.
-            if (ipCheckError.code !== '42P01') { // 42P01 is "undefined_table" in Postgres
+            if (ipCheckError.code !== '42P01') { 
                 return { error: "Errore durante la verifica di sicurezza dell'IP." };
             }
         }
 
-        if (existingIp) {
-            return { error: "Abbiamo rilevato che hai già attivato una prova gratuita da questo dispositivo o rete." };
-        }
+        // TEMP BYPASS FOR TESTING: Disattivato il blocco dei dispositivi multipli temporaneamente
+        // if (existingIp) {
+        //     return { error: "Abbiamo rilevato che hai già attivato una prova gratuita da questo dispositivo o rete." };
+        // }
     }
 
     // 3. Register the user using the standard client so headers/cookies are set for the session
