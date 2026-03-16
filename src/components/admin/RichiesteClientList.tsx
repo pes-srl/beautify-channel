@@ -16,7 +16,7 @@ export function RichiesteClientList({ initialRichieste }: { initialRichieste: an
 
     return (
         <div className="space-y-6">
-            <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between bg-[#17092b] border border-white/10 p-4 rounded-xl">
+            <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-start bg-[#17092b] border border-white/10 p-4 rounded-xl">
                 <span className="text-sm font-medium text-zinc-300">Filtra per stato:</span>
                 <div className="flex flex-wrap gap-2">
                     <button
