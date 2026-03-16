@@ -141,15 +141,15 @@ export default async function AreaClientePage2(props: {
                 {!isAdmin && profile?.plan_type === 'free_trial' && !isExpired && (
                     <div className="w-full max-w-4xl mx-auto mt-24 mb-16 flex flex-col gap-6 items-center px-4">
                         {/* TOP CARD */}
-                        <div className="w-full bg-gradient-to-br from-[#3b1c6b] via-[#2a1154] to-[#1a0b33] border border-white/5 rounded-3xl p-8 md:p-12 text-center shadow-2xl flex flex-col items-center">
-                            <h2 className="text-xl md:text-3xl font-semibold text-white mb-8 max-w-2xl mx-auto leading-relaxed">
+                        <div className="w-full max-w-2xl bg-gradient-to-br from-[#3b1c6b] via-[#2a1154] to-[#1a0b33] border border-white/5 rounded-2xl p-6 md:p-8 text-center shadow-2xl flex flex-col items-center">
+                            <h2 className="text-lg md:text-xl font-semibold text-white mb-6 max-w-2xl mx-auto leading-relaxed">
                                 Benvenuta, grazie di aver scelto di provare BeautiFy Channel! Buona esperienza!
                             </h2>
-                            <div className="bg-black/20 border border-white/5 rounded-2xl p-6 md:p-8 flex flex-col items-center shadow-inner mb-8 w-full max-w-sm">
-                                <span className="text-zinc-400 text-xs md:text-sm uppercase tracking-[0.2em] font-medium mb-3">
+                            <div className="bg-black/20 border border-white/5 rounded-xl p-4 md:p-6 flex flex-col items-center shadow-inner mb-6 w-full max-w-sm">
+                                <span className="text-zinc-400 text-xs md:text-sm uppercase tracking-[0.2em] font-medium mb-2">
                                     IL TUO PIANO ATTUALE
                                 </span>
-                                <h3 className="text-4xl md:text-5xl font-black text-[#ff5a7e] uppercase tracking-wider mb-2">
+                                <h3 className="text-3xl md:text-4xl font-black text-[#ff5a7e] uppercase tracking-wider mb-2">
                                     FREE TRIAL
                                 </h3>
                                 <span className="text-zinc-400 text-sm md:text-base italic">
@@ -159,14 +159,14 @@ export default async function AreaClientePage2(props: {
                             
                             <a
                                 href="#scegli-piano-section"
-                                className="inline-block bg-white text-black font-bold uppercase tracking-widest text-sm md:text-base px-8 py-3.5 rounded-full hover:scale-105 transition-transform"
+                                className="inline-block bg-white text-black font-bold uppercase tracking-widest text-sm md:text-base px-6 py-3 rounded-full hover:scale-105 transition-transform"
                             >
                                 SCEGLI UN PIANO
                             </a>
                         </div>
 
                         {/* GLOWING BAR */}
-                        <div className="w-full bg-gradient-to-r from-[#9b3bff] to-[#ff5a7e] rounded-2xl p-4 md:p-6 flex flex-col md:flex-row items-center gap-4 justify-between shadow-[0_0_40px_rgba(255,90,126,0.3)]">
+                        <div className="w-full max-w-2xl mx-auto bg-gradient-to-r from-[#9b3bff] to-[#ff5a7e] rounded-2xl p-4 md:p-6 flex flex-col md:flex-row items-center gap-4 justify-between shadow-[0_0_40px_rgba(255,90,126,0.3)]">
                             <div className="flex items-center gap-4">
                                 <Sparkles className="w-6 h-6 md:w-8 md:h-8 text-white shrink-0" />
                                 <span className="font-bold text-white text-lg md:text-xl">
@@ -179,6 +179,14 @@ export default async function AreaClientePage2(props: {
                                     {daysLeft} {daysLeft === 1 ? 'giorno' : 'giorni'}
                                 </span>
                             </div>
+                        </div>
+
+                        {/* Elegant Divider */}
+                        <div className="flex items-center justify-center w-full mt-8 md:mt-12 relative">
+                            {/* Core line */}
+                            <div className="w-[90%] max-w-3xl h-[2px] rounded-full z-10 bg-gradient-to-r from-transparent via-[#ff5a7e]/40 to-transparent" />
+                            {/* Glow effect */}
+                            <div className="absolute w-[90%] max-w-3xl h-[8px] blur-[6px] rounded-full bg-gradient-to-r from-transparent via-[#ff5a7e]/20 to-transparent" />
                         </div>
 
                         {/* AREA RISERVATA BLOCK */}
@@ -198,12 +206,12 @@ export default async function AreaClientePage2(props: {
                         </div>
 
                         {/* QUESTO E IL TUO CANALE AUDIO PRINCIPALE */}
-                        <div className="mt-12 mb-0 flex flex-col items-center">
-                            <h3 className="text-white/90 font-medium tracking-[0.2em] uppercase text-center text-sm md:text-base mb-6">
+                        <div className="mt-16 mb-0 flex flex-col items-center">
+                            <h3 className="text-white font-black tracking-widest uppercase text-center text-xl md:text-4xl mb-8 drop-shadow-[0_0_20px_rgba(255,255,255,0.5)]">
                                 Questo e' il tuo canale audio principale
                             </h3>
-                            <div className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center bg-white/5 backdrop-blur-sm">
-                                <ArrowDown className="w-5 h-5 text-white/70" />
+                            <div className="w-16 h-16 rounded-full border-2 border-white/50 flex items-center justify-center bg-white/20 backdrop-blur-md shadow-[0_0_40px_rgba(255,255,255,0.3)] animate-bounce">
+                                <ArrowDown className="w-8 h-8 text-white" />
                             </div>
                         </div>
                     </div>
