@@ -247,8 +247,8 @@ export function UpgradeCheckoutForm({ userEmail, userVat, userSalonName, planTyp
                                 {currentStep === 3 && "Firma Contratto"}
                             </h3>
                             <p className="text-sm text-zinc-400 mt-1">
-                                {currentStep === 1 && "Passo 1 di " + (selectedPlan === "premium" ? "3" : "2")}
-                                {currentStep === 2 && "Passo 2 di " + (selectedPlan === "premium" ? "3" : "2")}
+                                {currentStep === 1 && "Passo 1 di 3"}
+                                {currentStep === 2 && "Passo 2 di 3"}
                                 {currentStep === 3 && "Passo 3 di 3"}
                             </p>
                         </div>
