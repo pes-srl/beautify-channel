@@ -146,8 +146,10 @@ export async function GET(request: Request) {
                         html: `
                             <div style="font-family: Arial, sans-serif; max-w: 600px; margin: 0 auto; color: #333; padding: 20px;">
                                 <h1 style="color: #f59e0b;">Il tempo stringe!</h1>
-                                <p>Ciao ${user.salon_name || 'Amico'}, ti ricordiamo che la tua prova di 7 giorni per Beautify Channel scadrà tra sole 48 ore.</p>
-                                <p>Speriamo che la nostra selezione musicale ti stia piacendo. Per non interrompere l'atmosfera nel tuo salone e mantenere l'accesso illimitato, ti invitiamo a passare a un piano a pagamento.</p>
+                                <p style="font-size: 16px; line-height: 1.6; color: #444;">Ciao, ti sta piacendo l'esperienza BeautiFy Channel?<br>Come ti stai trovando?</p>
+                                <p style="font-size: 16px; line-height: 1.6; color: #444;">Ti ricordiamo che tra 2 giorni scadrà la prova gratuita.<br>Dopo la scadenza potrai scegliere il nostro piano BASIC ma intanto...</p>
+                                <h3 style="font-size: 18px; color: #f59e0b; margin-top: 20px;">Continua a goderti BeautiFy Channel!</h3>
+                                <p style="font-size: 16px; line-height: 1.6; color: #444; font-weight: bold;">Il Team BeautiFy</p>
                                 <a href="https://beautifychannel.com/area-riservata#pricing" style="background-color: #f59e0b; color: #FFFFFF; text-decoration: none; padding: 12px 24px; border-radius: 8px; font-weight: bold; display: inline-block; margin-top: 20px;">Scopri i Piani</a>
                             </div>
                         `
