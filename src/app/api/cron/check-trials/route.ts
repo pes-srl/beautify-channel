@@ -50,9 +50,10 @@ export async function GET(request: Request) {
                         html: `
                             <div style="font-family: Arial, sans-serif; max-w: 600px; margin: 0 auto; color: #333; padding: 20px;">
                                 <h1 style="color: #ef4444;">La musica si è fermata!</h1>
-                                <p>Ciao ${user.salon_name || 'Amico'}, ti informiamo che i tuoi 7 giorni di prova gratuita sono terminati.</p>
-                                <p>L'accesso ai canali premium è stato sospeso. Per continuare ad offrire ai tuoi clienti la migliore atmosfera musicale, scegli uno dei nostri piani.</p>
-                                <a href="https://beautifychannel.com/area-riservata#pricing" style="background-color: #ef4444; color: #FFFFFF; text-decoration: none; padding: 12px 24px; border-radius: 8px; font-weight: bold; display: inline-block; margin-top: 20px;">Riattiva ora</a>
+                                <p style="font-size: 16px; line-height: 1.6; color: #444;">Ciao, la tua prova gratuita BeautiFy Channel è scaduta!</p>
+                                <p style="font-size: 16px; line-height: 1.6; color: #444;">Ci piacerebbe rimanessi con noi, qui sotto puoi abbonarti al nostro piano BASIC!<br>In caso contrario, ci piacerebbe sapere cosa non ti ha convinto, feedback sempre super benvenuti.</p>
+                                <p style="font-size: 16px; line-height: 1.6; color: #444; margin-top: 20px;">Grazie, speriamo di leggerti presto.<br><b>Il Team BeautiFy</b></p>
+                                <a href="https://beautifychannel.com/area-riservata#pricing" style="background-color: #ef4444; color: #FFFFFF; text-decoration: none; padding: 12px 24px; border-radius: 8px; font-weight: bold; display: inline-block; margin-top: 20px;">Abbonati al piano BASIC</a>
                             </div>
                         `
                     });
