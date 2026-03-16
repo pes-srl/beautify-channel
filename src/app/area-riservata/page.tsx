@@ -178,7 +178,7 @@ export default async function AreaClientePage2(props: {
 
                         {/* ACCORDIONS */}
                         <div className="w-full max-w-6xl mx-auto mt-6 mb-24 px-4">
-                            {/* COME FUNZIONA ACCORDION */}
+                            {/* COME FUNZIONA ACCORDION (UNIFIED LAYOUT) */}
                             <details className="group mb-4 marker:content-['']">
                                 <summary className="flex items-center justify-between cursor-pointer list-none bg-white/[0.02] hover:bg-white/[0.04] backdrop-blur-md border border-white/5 rounded-[2rem] p-4 pr-6 transition-all duration-300 w-full md:w-3/4 mx-auto select-none">
                                     <div className="flex items-center gap-3 md:gap-5">
@@ -191,56 +191,49 @@ export default async function AreaClientePage2(props: {
                                         <ArrowDown className={`w-5 h-5 transition-transform duration-300 group-open:rotate-180 ${profile?.plan_type === 'premium' ? 'text-amber-400' : 'text-emerald-400'}`} />
                                     </div>
                                 </summary>
-                                <div className="overflow-hidden mt-4 animate-in fade-in slide-in-from-top-4 duration-500 w-full md:w-3/4 mx-auto">
-                                    <div className="bg-white/[0.02] backdrop-blur-xl border border-white/10 rounded-[2rem] p-6 md:p-10 text-lg md:text-xl font-light leading-relaxed text-zinc-300">
-                                        <p className="mb-6">Nulla di più semplice!<br /><br />
-                                        Collega il tuo pc / smartphone / tablet all'<strong className="text-white">impianto audio</strong> del tuo istituto o a delle <strong className="text-white">casse Bluetooth</strong>.</p>
+                                <div className="overflow-hidden mt-4 animate-in fade-in slide-in-from-top-4 duration-500 w-full xl:w-5/6 mx-auto">
+                                    <div className="bg-white/[0.02] backdrop-blur-xl border border-white/10 rounded-[2rem] p-6 md:p-10">
                                         
-                                        <p className="mb-6">Premi play sul canale principale qui sopra, imposta il giusto volume in salone e <strong className="text-white">dimenticatene</strong>, il resto lo fa <strong className="text-white">BeautiFy</strong>.</p>
-                                        
-                                        <div className={`pl-6 border-l-2 ${profile?.plan_type === 'premium' ? 'border-amber-500/30' : 'border-emerald-500/30'}`}>
-                                            <p>I nostri canali audio propongono una <strong className="text-white">raffinata selezione di diversi generi musicali</strong>, intervallata da <strong className="text-white">eleganti, delicati e generici suggerimenti vocali</strong>.</p>
-                                            <p className="mt-4">Studiati per <strong className="text-white">stimolare la curiosità</strong> delle tue clienti e l'<strong className="text-white">acquisto dei tuoi servizi</strong>.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </details>
+                                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16">
+                                            {/* LEFT COLUMN: Istruzioni */}
+                                            <div className="text-lg md:text-xl font-light leading-relaxed text-zinc-300 flex flex-col justify-center">
+                                                <p className="mb-6">Nulla di più semplice!<br />
+                                                Collega il tuo pc / smartphone / tablet all'<strong className="text-white">impianto audio</strong> del tuo istituto o a delle <strong className="text-white">casse Bluetooth</strong>.</p>
+                                                
+                                                <p className="mb-8">Premi play sul canale principale qui sopra, imposta il giusto volume in salone e <strong className="text-white">dimenticatene</strong>, il resto lo fa <strong className="text-white">BeautiFy</strong>.</p>
+                                                
+                                                <div className={`pl-5 md:pl-6 border-l-2 ${profile?.plan_type === 'premium' ? 'border-amber-500/30' : 'border-purple-500/40'} py-1`}>
+                                                    <p>I nostri canali audio propongono una <strong className="text-white">raffinata selezione di diversi generi musicali</strong>, intervallata da <strong className="text-white">eleganti, delicati e generici suggerimenti vocali</strong>.</p>
+                                                    <p className="mt-4">Studiati per <strong className="text-white">stimolare la curiosità</strong> delle tue clienti e l'<strong className="text-white">acquisto dei tuoi servizi</strong>.</p>
+                                                </div>
+                                            </div>
 
-                            {/* ALTRI CANALI ACCORDION */}
-                            <details className="group marker:content-['']">
-                                <summary className="flex items-center justify-between cursor-pointer list-none bg-white/[0.02] hover:bg-white/[0.04] backdrop-blur-md border border-white/5 rounded-[2rem] p-4 pr-6 transition-all duration-300 w-full md:w-3/4 mx-auto select-none">
-                                    <div className="flex items-center gap-3 md:gap-5">
-                                        <div className="p-3 bg-white/5 rounded-full shrink-0">
-                                            <Radio className="w-6 h-6 md:w-8 md:h-8 text-white" />
+                                            {/* RIGHT COLUMN: Cambia il tuo Mood (The +6 Card) */}
+                                            <div className="bg-white/[0.02] border border-white/10 rounded-[2rem] p-6 md:p-8 relative shadow-lg">
+                                                <div className={`absolute -top-4 -right-4 text-white w-12 h-12 flex items-center justify-center rounded-2xl shadow-xl rotate-6 transition-transform hover:rotate-12 ${profile?.plan_type === 'premium' ? 'bg-amber-600 shadow-amber-900/50' : 'bg-slate-600/80 shadow-slate-900/50 border border-white/10'}`}>
+                                                    <span className="font-black text-xl">+6</span>
+                                                </div>
+                                                <h3 className="text-2xl md:text-3xl font-bold text-white mb-3">Cambia il tuo Mood</h3>
+                                                <p className="text-base md:text-lg text-zinc-400 font-light mb-6">
+                                                    Qui sotto, hai a disposizione altri 6 canali settoriali, per cambiare il tuo mood musicale in istituto durante la giornata.
+                                                </p>
+                                                <div className="bg-black/20 p-4 md:p-5 rounded-[1.25rem] border border-white/5 space-y-4 shadow-inner mb-6">
+                                                    <p className="text-zinc-200 text-sm md:text-base font-light leading-relaxed">
+                                                        Anche questi canali contengono <span className="text-white italic font-normal">morbidi suggerimenti vocali</span> tranne <strong className="bg-white/5 text-white px-2.5 py-1 rounded-md align-middle mx-1 text-xs font-bold tracking-wider uppercase border border-white/10">RELAX</strong> e <strong className="bg-white/5 text-white px-2.5 py-1 rounded-md align-middle mx-1 text-xs font-bold tracking-wider uppercase border border-white/10">MASSAGE</strong>.
+                                                    </p>
+                                                    <p className="text-zinc-200 text-sm md:text-base font-light leading-relaxed">
+                                                        Rilassati con <strong className="bg-white/5 text-white px-2.5 py-1 rounded-md align-middle mx-1 text-xs font-bold tracking-wider uppercase border border-white/10">DEEP SOFT</strong> nel weekend o del <strong className="bg-white/5 text-white px-2.5 py-1 rounded-md align-middle mx-1 text-xs font-bold tracking-wider uppercase border border-white/10">JAZZ</strong> a fine giornata.
+                                                    </p>
+                                                </div>
+                                                <div className="pt-2 flex items-center gap-2">
+                                                    <Radio className={`w-5 h-5 ${profile?.plan_type === 'premium' ? 'text-amber-400' : 'text-emerald-400'}`} />
+                                                    <p className={`font-bold tracking-widest uppercase text-sm md:text-base ${profile?.plan_type === 'premium' ? 'text-amber-400' : 'text-emerald-400'}`}>
+                                                        BUON ASCOLTO
+                                                    </p>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <span className="text-white font-black uppercase text-xl md:text-3xl tracking-widest">ALTRI CANALI</span>
-                                    </div>
-                                    <div className={`p-2 rounded-full border ${profile?.plan_type === 'premium' ? 'border-amber-500/20 bg-amber-500/10' : 'border-emerald-500/20 bg-emerald-500/10'}`}>
-                                        <ArrowDown className={`w-5 h-5 transition-transform duration-300 group-open:rotate-180 ${profile?.plan_type === 'premium' ? 'text-amber-400' : 'text-emerald-400'}`} />
-                                    </div>
-                                </summary>
-                                <div className="overflow-hidden mt-4 animate-in fade-in slide-in-from-top-4 duration-500 w-full md:w-3/4 mx-auto">
-                                    <div className="bg-white/[0.02] backdrop-blur-xl border border-white/10 rounded-[2rem] p-6 md:p-10 relative">
-                                        <div className={`absolute -top-4 -right-4 text-white w-14 h-14 flex items-center justify-center rounded-2xl shadow-xl rotate-12 transition-transform ${profile?.plan_type === 'premium' ? 'bg-amber-600 shadow-amber-900/50' : 'bg-emerald-600 shadow-emerald-900/50'}`}>
-                                            <span className="font-black text-2xl">+6</span>
-                                        </div>
-                                        <h3 className="text-2xl md:text-3xl font-semibold text-white mb-4">Cambia il tuo Mood</h3>
-                                        <p className="text-lg md:text-xl text-zinc-300 font-light mb-8">
-                                            Qui sotto, hai a disposizione altri 6 canali settoriali, per cambiare il tuo mood musicale in istituto durante la giornata.
-                                        </p>
-                                        <div className="bg-white/[0.02] p-5 rounded-[1.5rem] border border-white/5 space-y-5 shadow-inner">
-                                            <p className="text-zinc-200 text-base md:text-lg font-light leading-relaxed">
-                                                Anche questi canali contengono <span className="text-white italic font-normal">morbidi suggerimenti vocali</span> tranne <strong className="bg-white/10 text-white px-3 py-1 rounded-full align-middle mx-1 text-xs md:text-sm font-bold tracking-wider uppercase border border-white/10">RELAX</strong> e <strong className="bg-white/10 text-white px-3 py-1 rounded-full align-middle mx-1 text-xs md:text-sm font-bold tracking-wider uppercase border border-white/10">MASSAGE</strong>.
-                                            </p>
-                                            <p className="text-zinc-200 text-base md:text-lg font-light leading-relaxed">
-                                                Rilassati con <strong className="bg-white/10 text-white px-3 py-1 rounded-full align-middle mx-1 text-xs md:text-sm font-bold tracking-wider uppercase border border-white/10">DEEP SOFT</strong> nel weekend o del <strong className="bg-white/10 text-white px-3 py-1 rounded-full align-middle mx-1 text-xs md:text-sm font-bold tracking-wider uppercase border border-white/10">JAZZ</strong> a fine giornata.
-                                            </p>
-                                        </div>
-                                        <div className="pt-6 mt-6 border-t border-white/5">
-                                            <p className={`font-bold tracking-wider uppercase text-lg flex items-center gap-2 ${profile?.plan_type === 'premium' ? 'text-amber-400' : 'text-emerald-400'}`}>
-                                                <Radio className="w-5 h-5" /> Buon ascolto
-                                            </p>
-                                        </div>
+
                                     </div>
                                 </div>
                             </details>
