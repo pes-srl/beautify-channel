@@ -103,9 +103,9 @@ export default async function AreaClientePage2(props: {
     }
 
     return (
-        <div className="pt-[7rem] pb-32 min-h-screen relative w-full selection:bg-[#D8B2A3]/30">
+        <div className="pt-[7rem] pb-32 min-h-screen relative w-full bg-[#0f0518] selection:bg-[#D8B2A3]/30">
             {/* Dynamic Background identico alla Home Page */}
-            <div className="fixed inset-0 z-0 flex justify-center bg-zinc-950 pointer-events-none">
+            <div className="fixed inset-0 z-0 flex justify-center bg-[#0f0518] pointer-events-none">
                 <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] bg-[#AB7169]/10 blur-[120px] rounded-full mix-blend-screen" />
                 <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[60%] bg-[#5D6676]/10 blur-[120px] rounded-full mix-blend-screen" />
             </div>
@@ -137,210 +137,116 @@ export default async function AreaClientePage2(props: {
                     </div>
                 )}
 
-                {/* DYNAMIC WELCOME BANNER BASED ON PLAN */}
+                {/* 1. DYNAMIC WELCOME BANNER (THE "GRAZIE" HERO) */}
                 {!isAdmin && profile?.plan_type && !isExpired && (
-                    <div className="mb-6 p-4 rounded-xl border border-white/5 bg-zinc-900/50 flex items-center justify-center text-center shadow-md">
-                        <div className="w-full">
-                            {(profile.plan_type === 'free_trial' || profile.plan_type === 'basic') ? (
-                                <div className="flex flex-col items-center justify-center space-y-4 py-4">
-                                    <h2 className="text-2xl md:text-4xl uppercase tracking-[0.15em] text-zinc-100 font-[family-name:var(--font-montserrat)] font-light flex flex-col md:flex-row items-center gap-2 md:gap-3 text-center md:text-left">
-                                        <span>BENVENUTA NEL TUO ACCOUNT</span>
-                                        <div className="relative h-8 md:h-10 lg:h-12 w-32 md:w-40 mt-2 md:mt-0">
-                                            <Image
-                                                src="https://eufahlzjxbimyiwivoiq.supabase.co/storage/v1/object/public/bucket-assets/Logo-BeautiFyChannel.svg"
-                                                alt="BeautiFy Channel Logo"
-                                                fill
-                                                className="object-contain"
-                                            />
-                                        </div>
-                                    </h2>
-                                    <div className="w-24 h-[1px] bg-gradient-to-r from-transparent via-white/50 to-transparent" />
-                                    <p className="text-zinc-300 font-medium text-xl tracking-wide leading-relaxed">
-                                        <strong className="text-[#D8B2A3] font-black">GRAZIE PER LA FIDUCIA</strong> in BeautiFy Channel <strong className="text-[#D8B2A3] font-black">ORA</strong>, hai a disposizione il <strong className="text-[#D8B2A3] font-black">NUOVO</strong> e unico<br className="md:hidden" /> strumento di <strong className="text-[#D8B2A3] font-black">MARKETING SENSORIALE</strong> dedicato al settore, con le sue potenzialità.
-                                    </p>
-                                </div>
-                            ) : (
-                                <div className="flex flex-col items-center justify-center space-y-4 py-4">
-                                    <h2 className="text-2xl md:text-4xl uppercase tracking-[0.15em] text-zinc-100 font-[family-name:var(--font-montserrat)] font-light flex flex-col md:flex-row items-center gap-2 md:gap-3 text-center md:text-left">
-                                        <span>BENVENUTA NEL TUO ACCOUNT</span>
-                                        <div className="relative h-8 md:h-10 lg:h-12 w-32 md:w-40 mt-2 md:mt-0">
-                                            <Image
-                                                src="https://eufahlzjxbimyiwivoiq.supabase.co/storage/v1/object/public/bucket-assets/Logo-BeautiFyChannel.svg"
-                                                alt="BeautiFy Channel Logo"
-                                                fill
-                                                className="object-contain"
-                                            />
-                                        </div>
-                                    </h2>
-                                    <div className="w-24 h-[1px] bg-gradient-to-r from-transparent via-white/50 to-transparent" />
-                                    <p className="text-zinc-300 font-medium text-lg tracking-wide leading-relaxed">
-                                        Hai attivo il piano <span className="font-black text-transparent bg-clip-text bg-gradient-to-r from-[#D8B2A3] to-[#D8B2A3] uppercase text-2xl px-1 tracking-wider">PREMIUM</span>. COMPLIMENTI! Hai a disposizione il <strong className="text-[#D8B2A3] font-black">TOP</strong> delle potenzialità di BeautiFy
-                                    </p>
-                                </div>
-                            )}
-                        </div>
-                    </div>
-                )}
-
-                {/* TRIAL OVERVIEW BANNER */}
-                {profile?.plan_type === 'free_trial' && daysLeft > 0 && !isAdmin && (
-                    <div className="bg-gradient-to-r from-[#AB7169] to-[#5D6676] text-white px-6 py-5 rounded-xl mb-8 flex flex-col md:flex-row justify-between items-center shadow-lg shadow-[#AB7169]/20 gap-4 border border-[#AB7169]/30 relative overflow-hidden max-w-3xl mx-auto w-full">
-                        <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 blur-[30px] rounded-full mix-blend-screen -translate-y-1/2 translate-x-1/3 pointer-events-none" />
-                        <div className="flex items-center gap-4 relative z-10 w-full md:w-auto">
-                            <div className="p-2 bg-white/20 rounded-full backdrop-blur-md shrink-0">
-                                <Sparkles className="w-5 h-5" />
-                            </div>
-                            <div className="flex-1">
-                                <h3 className="font-bold text-base md:text-lg leading-tight mb-1">La tua prova gratuita è attiva</h3>
-                                <p className="text-[#fefefe] text-xs">Scade tra <strong className="text-[#D8B2A3] bg-black/20 px-1.5 py-0.5 rounded-sm mx-1">{daysLeft} giorni</strong>.</p>
-                            </div>
-                        </div>
-                        <Link href="#upgrade-section" className="relative z-10 shrink-0 w-full md:w-auto bg-white text-zinc-950 px-5 py-2.5 rounded-lg font-bold text-sm tracking-wide hover:bg-zinc-100 transition-colors shadow-md text-center mt-3 md:mt-0">
-                            SCEGLI UN PIANO
-                        </Link>
-                    </div>
-                )}
-
-                <div className="flex flex-col items-center justify-center gap-6 mb-12 border-b border-white/10 pb-8 mt-4">
-                    <div className="flex flex-col items-center w-full text-center">
-                        <h1 className="text-4xl md:text-5xl font-semibold font-[family-name:var(--font-montserrat)] text-white mb-3 tracking-tight flex items-center justify-center gap-3 w-full">
-                            Area Riservata
+                    <div className="w-full mt-32 md:mt-40 mb-20 flex flex-col items-center justify-center text-center">
+                        <h1 className={`text-5xl md:text-7xl font-black uppercase tracking-tight text-transparent bg-clip-text bg-gradient-to-br ${profile.plan_type === 'free_trial' ? 'from-emerald-400 to-teal-300' : 'from-amber-400 to-amber-200'} mb-4 drop-shadow-lg`}>
+                            GRAZIE
                         </h1>
-                        <div className="flex flex-wrap items-center justify-center gap-3 mt-4 mb-2">
-                            <span className="text-lg font-medium text-white">
+                        <h2 className="text-xl md:text-2xl font-light tracking-[0.2em] font-[family-name:var(--font-montserrat)] text-white mb-6 uppercase">
+                            Benvenuta nel tuo account
+                        </h2>
+                        
+                        <div className="flex flex-col items-center gap-3">
+                            <span className="text-xl md:text-2xl font-bold text-white">
                                 {profile?.salon_name || user.email}
                             </span>
-                            <span className={`px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest border border-white/10 ${profile?.plan_type === 'premium' ? 'bg-[#D8B2A3]/10 text-[#D8B2A3]' :
-                                profile?.plan_type === 'free_trial' ? 'bg-[#D8B2A3]/10 text-[#D8B2A3]' :
-                                    profile?.plan_type === 'basic' ? 'bg-[#5D6676]/10 text-[#5D6676]' :
-                                        'bg-zinc-800 text-zinc-400'
-                                }`}>
-                                Piano: {profile?.plan_type?.replace('_', ' ') || 'Free'}
-                            </span>
-                            {isAdmin && (
-                                <span className="px-3 py-1 rounded-full bg-[#AB7169]/20 text-[#AB7169] text-xs font-bold uppercase tracking-widest border border-[#AB7169]/30">
-                                    Admin Privileges
+                            <div className="flex bg-white/5 border border-white/10 rounded-full px-4 py-1.5 items-center gap-2 backdrop-blur-sm">
+                                <span className={`w-2 h-2 rounded-full animate-pulse ${profile.plan_type === 'free_trial' ? 'bg-emerald-400' : 'bg-amber-400'}`} />
+                                <span className="text-sm font-semibold uppercase tracking-wider text-zinc-300">
+                                    {profile.plan_type === 'free_trial' ? `Trial: ${daysLeft} ${daysLeft === 1 ? 'giorno' : 'giorni'} rimanenti` : `Piano: Premium`}
                                 </span>
-                            )}
+                            </div>
                         </div>
-                        {!isExpired || isAdmin ? null : (
-                            <p className="text-[#AB7169] text-lg mt-2 font-medium">L'accesso ai canali è bloccato.</p>
-                        )}
                     </div>
-                </div>
+                )}
 
-                {/* MAIN CONTENT OR PAYWALL */}
+                {/* MAIN CONTENT V2 */}
                 {(!isExpired || isAdmin) ? (
                     <>
-                        {/* Basic/Premium Channel Hero */}
-                        {(profile?.plan_type === 'free_trial' || profile?.plan_type === 'basic' || profile?.plan_type === 'premium') && (
-                            <div className="mb-8">
-                                <div className="text-center mb-8 flex flex-col items-center justify-center">
-                                    <h3 className={`text-xl md:text-2xl font-black text-transparent bg-clip-text uppercase mb-4 tracking-[0.15em] md:tracking-[0.2em] ${profile?.plan_type === 'premium' ? 'bg-gradient-to-r from-[#D8B2A3] to-[#D8B2A3] drop-shadow-[0_0_10px_rgba(251,191,36,0.5)]' :
-                                        profile?.plan_type === 'basic' ? 'bg-gradient-to-r from-[#D8B2A3] to-[#5D6676] drop-shadow-[0_0_10px_rgba(56,189,248,0.5)]' :
-                                            'bg-gradient-to-r from-[#D8B2A3] to-[#AB7169] drop-shadow-[0_0_10px_rgba(52,211,153,0.5)]'
-                                        }`}>
-                                        QUESTO E' IL TUO CANALE AUDIO PRINCIPALE
-                                    </h3>
-                                    <div className={`p-3 rounded-full border animate-bounce ${profile?.plan_type === 'premium' ? 'bg-[#D8B2A3]/20 border-[#D8B2A3]/30 shadow-[0_0_15px_rgba(251,191,36,0.3)]' :
-                                        profile?.plan_type === 'basic' ? 'bg-[#D8B2A3]/20 border-[#D8B2A3]/30 shadow-[0_0_15px_rgba(56,189,248,0.3)]' :
-                                            'bg-[#D8B2A3]/20 border-[#D8B2A3]/30 shadow-[0_0_15px_rgba(52,211,153,0.3)]'
-                                        }`}>
-                                        <ArrowDown className={`w-6 h-6 md:w-8 md:h-8 ${profile?.plan_type === 'premium' ? 'text-[#D8B2A3]' :
-                                            profile?.plan_type === 'basic' ? 'text-[#D8B2A3]' :
-                                                'text-[#D8B2A3]'
-                                            }`} />
+                        {/* THE HERO PLAYER */}
+                        <div className="mb-0 flex flex-col items-center">
+                             <BasicHeroChannel2
+                                planType={profile?.plan_type}
+                                channel={channels?.find((c: any) =>
+                                    profile?.plan_type === 'premium'
+                                        ? (c.name.toLowerCase().includes('premium') || c.name.toLowerCase() === 'beautify channel premium')
+                                        : (c.name.toLowerCase().includes('basic') || c.name.toLowerCase() === 'beautify channel basic')
+                                ) || null}
+                            />
+                        </div>
+
+                        {/* ACCORDIONS */}
+                        <div className="w-full max-w-6xl mx-auto mt-6 mb-24 px-4">
+                            {/* COME FUNZIONA ACCORDION */}
+                            <details className="group mb-4 marker:content-['']">
+                                <summary className="flex items-center justify-between cursor-pointer list-none bg-white/[0.02] hover:bg-white/[0.04] backdrop-blur-md border border-white/5 rounded-[2rem] p-4 pr-6 transition-all duration-300 w-full md:w-3/4 mx-auto select-none">
+                                    <div className="flex items-center gap-3 md:gap-5">
+                                        <div className="p-3 bg-white/5 rounded-full shrink-0">
+                                            <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 md:w-8 md:h-8 text-white fill-white" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                                        </div>
+                                        <span className="text-white font-black uppercase text-xl md:text-3xl tracking-widest">COME FUNZIONA</span>
                                     </div>
-                                </div>
-                                <BasicHeroChannel2
-                                    planType={profile?.plan_type}
-                                    channel={channels?.find((c: any) =>
-                                        profile?.plan_type === 'premium'
-                                            ? (c.name.toLowerCase().includes('premium') || c.name.toLowerCase() === 'beautify channel premium')
-                                            : (c.name.toLowerCase().includes('basic') || c.name.toLowerCase() === 'beautify channel basic')
-                                    ) || null}
-                                />
-                                {/* INFO BLOCK INNOVATIVO */}
-                                <div id="welcome-pricing-banner" className="w-full max-w-6xl mx-auto mt-10 mb-12 relative">
-                                    {/* Sfondo decorativo */}
-                                    <div className={`absolute inset-0 bg-linear-to-b ${profile?.plan_type === 'free_trial' ? 'from-[#D8B2A3]/10 via-[#AB7169]/5' : 'from-[#AB7169]/10 via-[#5D6676]/5'} to-transparent rounded-[3rem] -z-10 blur-xl pointer-events-none`} />
-
-                                    <div className={`border border-white/5 rounded-[35px] shadow-2xl p-6 md:p-10 relative overflow-hidden backdrop-blur-xl ${profile?.plan_type === 'free_trial' ? 'bg-gradient-to-br from-[#AB7169]/10 to-[#2e1d1b]' : 'bg-[#2b2730]'}`}>
-                                        {/* Overlay di luce */}
-                                        <div className={`absolute top-0 right-0 w-[500px] h-[500px] rounded-full blur-[80px] -translate-y-1/2 translate-x-1/2 pointer-events-none ${profile?.plan_type === 'free_trial' ? 'bg-[#D8B2A3]/10' : 'bg-[#AB7169]/10'}`} />
-                                        <div className={`absolute bottom-0 left-0 w-[400px] h-[400px] rounded-full blur-[80px] translate-y-1/3 -translate-x-1/3 pointer-events-none ${profile?.plan_type === 'free_trial' ? 'bg-[#AB7169]/10' : 'bg-[#5D6676]/10'}`} />
-
-                                        <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-
-                                            <div className="lg:col-span-5 space-y-5">
-                                                <h2 className={`text-sm md:text-base font-black font-[family-name:var(--font-montserrat)] tracking-[0.3em] uppercase mb-2 ${profile?.plan_type === 'free_trial' ? 'text-[#D8B2A3]' : 'text-[#D8B2A3]'}`}>
-                                                    Come Funziona
-                                                </h2>
-                                                <p className="text-xl md:text-2xl text-zinc-200 font-light leading-relaxed">
-                                                    Nulla di più semplice! Collega il tuo pc / smartphone / tablet all'impianto audio del tuo istituto. Premi play sul canale principale qui sopra, imposta il giusto volume in salone e <strong className="font-semibold text-white">dimenticatene</strong>, il resto lo fa BeautiFy.
-                                                </p>
-                                                <div className={`pl-6 border-l-2 py-1 space-y-4 ${profile?.plan_type === 'free_trial' ? 'border-[#AB7169]/30' : 'border-[#5D6676]/30'}`}>
-                                                    <p className="text-lg md:text-xl text-zinc-200 leading-relaxed font-light">
-                                                        I nostri canali audio propongono una <strong className={`font-semibold ${profile?.plan_type === 'free_trial' ? 'text-[#D8B2A3]' : 'text-[#D8B2A3]'}`}>raffinata selezione di diversi generi musicali</strong>, intervallata da <strong className={`font-semibold ${profile?.plan_type === 'free_trial' ? 'text-[#D8B2A3]' : 'text-[#D8B2A3]'}`}>eleganti, delicati e generici</strong> <span className={`font-bold ${profile?.plan_type === 'free_trial' ? 'text-[#D8B2A3]' : 'text-[#D8B2A3]'}`}>suggerimenti vocali</span>.
-                                                    </p>
-                                                    <p className={`text-lg font-medium tracking-wide mt-2 ${profile?.plan_type === 'free_trial' ? 'text-[#D8B2A3]/90' : 'text-[#D8B2A3]/90'}`}>
-                                                        Studiati per <strong className="text-white font-bold">stimolare la curiosità</strong> delle tue clienti e l'<strong className="text-white font-bold">acquisto dei tuoi servizi</strong>.
-                                                    </p>
-                                                </div>
-                                            </div>
-
-                                            {/* Divisore centrale su Desktop */}
-                                            <div className="hidden lg:flex lg:col-span-2 justify-center items-center">
-                                                <div className="w-[1px] h-32 bg-linear-to-b from-transparent via-white/20 to-transparent" />
-                                            </div>
-
-                                            {/* Colonna Destra: Altri Canali */}
-                                            <div className="lg:col-span-5 space-y-5 bg-white/[0.02] p-6 md:p-8 rounded-[2rem] border border-white/5 relative group hover:bg-white/[0.04] transition-all duration-500 hover:border-[#5D6676]/20 shadow-xl">
-                                                <div className="absolute -top-4 -right-4 bg-gradient-to-br from-[#5D6676] to-[#5D6676] text-white w-14 h-14 flex items-center justify-center rounded-2xl shadow-xl shadow-[#5D6676]/30 rotate-12 group-hover:rotate-6 transition-transform">
-                                                    <span className="font-black text-2xl font-[family-name:var(--font-montserrat)]">+6</span>
-                                                </div>
-                                                <h3 className="text-2xl md:text-4xl font-semibold font-[family-name:var(--font-montserrat)] text-white flex items-center gap-3 drop-shadow-md leading-tight mb-2">
-                                                    Cambia il tuo Mood
-                                                </h3>
-                                                <p className="text-lg md:text-xl text-zinc-300 leading-relaxed font-light">
-                                                    Qui sotto, hai a disposizione altri <strong className="text-[#5D6676] font-semibold">6 canali settoriali</strong>, per cambiare il tuo mood musicale in istituto durante la giornata.
-                                                </p>
-
-                                                <div className="bg-zinc-950/40 p-5 rounded-3xl border border-white/5 space-y-4">
-                                                    <div className="flex items-start gap-4">
-                                                        <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#AB7169]/20 to-[#5D6676]/20 flex items-center justify-center shrink-0 mt-1 shadow-inner border border-[#AB7169]/20">
-                                                            <div className="w-2.5 h-2.5 rounded-full bg-[#AB7169] shadow-[0_0_10px_rgba(232,121,249,0.8)]" />
-                                                        </div>
-                                                        <p className="text-zinc-300 text-[15px] leading-relaxed">
-                                                            Anche questi canali contengono <span className="text-[#D8B2A3] italic font-light">morbidi suggerimenti vocali</span> tranne <strong className="text-white font-semibold font-[family-name:var(--font-montserrat)] tracking-wide bg-white/10 px-2 py-0.5 rounded-md align-middle mx-1 text-xs">RELAX</strong> e <strong className="text-white font-semibold font-[family-name:var(--font-montserrat)] tracking-wide bg-white/10 px-2 py-0.5 rounded-md align-middle mx-1 text-xs">MASSAGE</strong>.
-                                                        </p>
-                                                    </div>
-                                                    <div className="flex items-start gap-4">
-                                                        <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#5D6676]/20 to-[#D8B2A3]/20 flex items-center justify-center shrink-0 mt-1 shadow-inner border border-[#5D6676]/20">
-                                                            <div className="w-2.5 h-2.5 rounded-full bg-[#5D6676] shadow-[0_0_10px_rgba(129,140,248,0.8)]" />
-                                                        </div>
-                                                        <p className="text-zinc-300 text-[15px] leading-relaxed">
-                                                            Rilassati con <strong className="text-white font-semibold font-[family-name:var(--font-montserrat)] tracking-wide bg-[#5D6676]/20 border border-[#5D6676]/30 text-[#5D6676] px-2 py-0.5 rounded-md align-middle mx-1 text-xs">DEEP SOFT</strong> nel weekend o del <strong className="text-white font-semibold font-[family-name:var(--font-montserrat)] tracking-wide bg-[#D8B2A3]/20 border border-[#D8B2A3]/30 text-[#D8B2A3] px-2 py-0.5 rounded-md align-middle mx-1 text-xs">JAZZ</strong> a fine giornata.
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                                <div className="pt-4 mt-2 border-t border-white/5">
-                                                    <p className={`font-bold font-[family-name:var(--font-montserrat)] tracking-wider uppercase text-lg flex items-center gap-2 ${profile?.plan_type === 'free_trial' ? 'text-[#D8B2A3]' : 'text-[#D8B2A3]'}`}>
-                                                        <Radio className="w-5 h-5" /> Buon ascolto
-                                                    </p>
-                                                </div>
-                                            </div>
-
+                                    <div className={`p-2 rounded-full border ${profile?.plan_type === 'premium' ? 'border-amber-500/20 bg-amber-500/10' : 'border-emerald-500/20 bg-emerald-500/10'}`}>
+                                        <ArrowDown className={`w-5 h-5 transition-transform duration-300 group-open:rotate-180 ${profile?.plan_type === 'premium' ? 'text-amber-400' : 'text-emerald-400'}`} />
+                                    </div>
+                                </summary>
+                                <div className="overflow-hidden mt-4 animate-in fade-in slide-in-from-top-4 duration-500 w-full md:w-3/4 mx-auto">
+                                    <div className="bg-white/[0.02] backdrop-blur-xl border border-white/10 rounded-[2rem] p-6 md:p-10 text-lg md:text-xl font-light leading-relaxed text-zinc-300">
+                                        <p className="mb-6">Nulla di più semplice!<br /><br />
+                                        Collega il tuo pc / smartphone / tablet all'<strong className="text-white">impianto audio</strong> del tuo istituto o a delle <strong className="text-white">casse Bluetooth</strong>.</p>
+                                        
+                                        <p className="mb-6">Premi play sul canale principale qui sopra, imposta il giusto volume in salone e <strong className="text-white">dimenticatene</strong>, il resto lo fa <strong className="text-white">BeautiFy</strong>.</p>
+                                        
+                                        <div className={`pl-6 border-l-2 ${profile?.plan_type === 'premium' ? 'border-amber-500/30' : 'border-emerald-500/30'}`}>
+                                            <p>I nostri canali audio propongono una <strong className="text-white">raffinata selezione di diversi generi musicali</strong>, intervallata da <strong className="text-white">eleganti, delicati e generici suggerimenti vocali</strong>.</p>
+                                            <p className="mt-4">Studiati per <strong className="text-white">stimolare la curiosità</strong> delle tue clienti e l'<strong className="text-white">acquisto dei tuoi servizi</strong>.</p>
                                         </div>
                                     </div>
                                 </div>
+                            </details>
 
-                                <h3 className="text-2xl md:text-3xl font-semibold font-[family-name:var(--font-montserrat)] text-white mb-8 mt-12 md:mt-24 lg:mt-32 flex flex-col md:flex-row items-center justify-center gap-3 uppercase tracking-wider text-center">
-                                    <Radio className="w-6 h-6 text-zinc-400" />
-                                    ALTRI CANALI DISPONIBILI
-                                </h3>
-                            </div>
-                        )}
+                            {/* ALTRI CANALI ACCORDION */}
+                            <details className="group marker:content-['']">
+                                <summary className="flex items-center justify-between cursor-pointer list-none bg-white/[0.02] hover:bg-white/[0.04] backdrop-blur-md border border-white/5 rounded-[2rem] p-4 pr-6 transition-all duration-300 w-full md:w-3/4 mx-auto select-none">
+                                    <div className="flex items-center gap-3 md:gap-5">
+                                        <div className="p-3 bg-white/5 rounded-full shrink-0">
+                                            <Radio className="w-6 h-6 md:w-8 md:h-8 text-white" />
+                                        </div>
+                                        <span className="text-white font-black uppercase text-xl md:text-3xl tracking-widest">ALTRI CANALI</span>
+                                    </div>
+                                    <div className={`p-2 rounded-full border ${profile?.plan_type === 'premium' ? 'border-amber-500/20 bg-amber-500/10' : 'border-emerald-500/20 bg-emerald-500/10'}`}>
+                                        <ArrowDown className={`w-5 h-5 transition-transform duration-300 group-open:rotate-180 ${profile?.plan_type === 'premium' ? 'text-amber-400' : 'text-emerald-400'}`} />
+                                    </div>
+                                </summary>
+                                <div className="overflow-hidden mt-4 animate-in fade-in slide-in-from-top-4 duration-500 w-full md:w-3/4 mx-auto">
+                                    <div className="bg-white/[0.02] backdrop-blur-xl border border-white/10 rounded-[2rem] p-6 md:p-10 relative">
+                                        <div className={`absolute -top-4 -right-4 text-white w-14 h-14 flex items-center justify-center rounded-2xl shadow-xl rotate-12 transition-transform ${profile?.plan_type === 'premium' ? 'bg-amber-600 shadow-amber-900/50' : 'bg-emerald-600 shadow-emerald-900/50'}`}>
+                                            <span className="font-black text-2xl">+6</span>
+                                        </div>
+                                        <h3 className="text-2xl md:text-3xl font-semibold text-white mb-4">Cambia il tuo Mood</h3>
+                                        <p className="text-lg md:text-xl text-zinc-300 font-light mb-8">
+                                            Qui sotto, hai a disposizione altri 6 canali settoriali, per cambiare il tuo mood musicale in istituto durante la giornata.
+                                        </p>
+                                        <div className="bg-black/30 p-5 rounded-3xl border border-white/5 space-y-4">
+                                            <p className="text-zinc-300 text-base md:text-lg">
+                                                Anche questi canali contengono <span className="text-white italic">morbidi suggerimenti vocali</span> tranne <strong className="bg-white/10 text-white px-2 py-0.5 rounded-md align-middle mx-1 text-sm font-semibold">RELAX</strong> e <strong className="bg-white/10 text-white px-2 py-0.5 rounded-md align-middle mx-1 text-sm font-semibold">MASSAGE</strong>.
+                                            </p>
+                                            <p className="text-zinc-300 text-base md:text-lg">
+                                                Rilassati con <strong className="bg-zinc-800 text-white px-2 py-0.5 rounded-md align-middle mx-1 text-sm font-semibold">DEEP SOFT</strong> nel weekend o del <strong className="bg-zinc-800 text-white px-2 py-0.5 rounded-md align-middle mx-1 text-sm font-semibold">JAZZ</strong> a fine giornata.
+                                            </p>
+                                        </div>
+                                        <div className="pt-6 mt-6 border-t border-white/5">
+                                            <p className={`font-bold tracking-wider uppercase text-lg flex items-center gap-2 ${profile?.plan_type === 'premium' ? 'text-amber-400' : 'text-emerald-400'}`}>
+                                                <Radio className="w-5 h-5" /> Buon ascolto
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </details>
+                        </div>
+                        {/* END ACCORDIONS */}
+                        
 
                         <div className="relative w-full py-20 -mx-4 px-4 sm:mx-0 sm:px-0 mt-8 mb-12" style={{ width: 'calc(100% + 2rem)' }}>
                             {/* Sfondo sfumato bianco dall'alto più visibile e diffuso */}

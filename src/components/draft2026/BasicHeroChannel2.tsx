@@ -43,13 +43,13 @@ export function BasicHeroChannel2({ channel, planType }: BasicHeroChannel2Props)
     };
 
     return (
-        <div className={`relative w-full md:w-3/4 mx-auto rounded-3xl overflow-hidden shadow-2xl mb-12 group transition-all duration-700 ${isPremium ? 'shadow-black border border-white/5 bg-black' : planType === 'free_trial' ? 'shadow-[#D8B2A3]/20' : 'shadow-[#D8B2A3]/20'}`}>
+        <div className={`relative w-full md:w-3/4 mx-auto rounded-3xl overflow-hidden shadow-2xl mb-12 group transition-all duration-700 ${isPremium ? 'shadow-amber-500/20 border border-amber-500/10' : planType === 'free_trial' ? 'shadow-emerald-500/20 border border-emerald-500/10' : 'shadow-indigo-500/20 border border-indigo-500/10'}`}>
             {/* Animated Gradient Background */}
-            <div className={`absolute inset-0 z-0 bg-gradient-to-r ${isPremium ? 'from-[#4F3627] via-[#0D0907] to-black' : planType === 'free_trial' ? 'from-[#D8B2A3] via-[#AB7169] to-black' : 'from-[#D8B2A3] via-[#5D6676] to-black'}`} />
+            <div className={`absolute inset-0 z-0 bg-gradient-to-r ${isPremium ? 'from-amber-900 via-zinc-950 to-black' : planType === 'free_trial' ? 'from-emerald-900 via-teal-950 to-black' : 'from-indigo-900 via-zinc-950 to-black'}`} />
 
             {/* Glowing Orbs */}
-            <div className={`absolute top-0 right-0 w-[500px] h-[500px] blur-[100px] rounded-full mix-blend-screen -translate-y-1/2 translate-x-1/3 pointer-events-none ${isPremium ? 'bg-[#C69C85]/0' : planType === 'free_trial' ? 'bg-[#D8B2A3]/20' : 'bg-[#D8B2A3]/20'}`} />
-            <div className={`absolute bottom-0 left-0 w-[300px] h-[300px] blur-[80px] rounded-full mix-blend-screen translate-y-1/2 -translate-x-1/3 pointer-events-none ${isPremium ? 'bg-[#C69C85]/0' : planType === 'free_trial' ? 'bg-[#AB7169]/20' : 'bg-[#5D6676]/20'}`} />
+            <div className={`absolute top-0 right-0 w-[500px] h-[500px] blur-[100px] rounded-full mix-blend-screen -translate-y-1/2 translate-x-1/3 pointer-events-none ${isPremium ? 'bg-amber-500/10' : planType === 'free_trial' ? 'bg-emerald-400/10' : 'bg-indigo-400/10'}`} />
+            <div className={`absolute bottom-0 left-0 w-[300px] h-[300px] blur-[80px] rounded-full mix-blend-screen translate-y-1/2 -translate-x-1/3 pointer-events-none ${isPremium ? 'bg-amber-700/10' : planType === 'free_trial' ? 'bg-teal-500/10' : 'bg-indigo-600/10'}`} />
 
             {/* Content Container */}
         <div className="relative z-10 flex flex-col md:flex-row items-center border border-white/5 rounded-3xl bg-transparent">
@@ -58,16 +58,16 @@ export function BasicHeroChannel2({ channel, planType }: BasicHeroChannel2Props)
                 <div className="flex-1 p-8 md:p-12 flex flex-col justify-center">
                     <div className="flex flex-wrap items-center gap-2 mb-4">
                         <div className="flex items-center gap-1.5 bg-transparent text-white px-3 py-1.5 rounded-full text-[10px] md:text-xs font-bold uppercase tracking-widest border border-white/10 backdrop-blur-md">
-                            <Sparkles className={`w-3.5 h-3.5 ${isPremium ? 'text-[#C69C85]' : planType === 'free_trial' ? 'text-[#D8B2A3]' : 'text-[#D8B2A3]'}`} />
+                            <Sparkles className={`w-3.5 h-3.5 ${isPremium ? 'text-amber-400' : planType === 'free_trial' ? 'text-emerald-400' : 'text-indigo-400'}`} />
                             <span>CANALE AUDIO PRINCIPALE</span>
                         </div>
                         {isActive && (
-                            <div className={`flex items-center gap-2 border px-3 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest ${isPremium ? 'bg-[#C69C85]/10 text-[#C69C85] border-[#C69C85]/20' : planType === 'free_trial' ? 'bg-[#D8B2A3]/20 text-[#D8B2A3] border-[#D8B2A3]/30' : 'bg-[#D8B2A3]/20 text-[#D8B2A3] border-[#D8B2A3]/30'}`}>
+                            <div className={`flex items-center gap-2 border px-3 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest ${isPremium ? 'bg-amber-500/10 text-amber-400 border-amber-500/20' : planType === 'free_trial' ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20' : 'bg-indigo-500/10 text-indigo-400 border-indigo-500/20'}`}>
                                 <div className="flex gap-0.5 items-end h-3">
                                     {[1, 2, 3].map((i) => (
                                         <motion.div
                                             key={`wave-${i}`}
-                                            className={`w-0.5 rounded-full ${isPremium ? 'bg-[#C69C85]' : planType === 'free_trial' ? 'bg-[#D8B2A3]' : 'bg-[#D8B2A3]'}`}
+                                            className={`w-0.5 rounded-full ${isPremium ? 'bg-amber-400' : planType === 'free_trial' ? 'bg-emerald-400' : 'bg-indigo-400'}`}
                                             animate={isCurrentlyPlaying ? { height: ["4px", "10px", "4px"] } : { height: "4px" }}
                                             transition={{ repeat: Infinity, duration: 1.2, delay: i * 0.2 }}
                                         />
@@ -80,7 +80,7 @@ export function BasicHeroChannel2({ channel, planType }: BasicHeroChannel2Props)
 
                     <h2 className="text-4xl md:text-5xl lg:text-6xl font-semibold font-[family-name:var(--font-montserrat)] text-white tracking-tight mb-4">
                         Beautify Channel
-                        <span className={`block mt-1 ${isPremium ? 'text-[#C69C85] font-bold' : planType === 'free_trial' ? 'text-[#D8B2A3]' : 'text-[#D8B2A3]'}`}>
+                        <span className={`block mt-1 ${isPremium ? 'text-amber-400 font-bold' : planType === 'free_trial' ? 'text-emerald-400 font-bold' : 'text-indigo-400 font-bold'}`}>
                             {isPremium ? 'Premium' : planType === 'free_trial' ? 'Prova Gratuita' : 'Basic'}
                         </span>
                     </h2>
@@ -88,7 +88,7 @@ export function BasicHeroChannel2({ channel, planType }: BasicHeroChannel2Props)
                     <div className="max-w-xl leading-relaxed mb-8 text-zinc-300">
                         {isPremium ? (
                             <p className="text-lg md:text-lg">
-                                Questo è il <span className="text-xl md:text-xl"><strong className="text-white font-black">CANALE AUDIO PRINCIPALE</strong> che contiene tutte le <strong className="text-[#C69C85] font-black">TUE PROMO PERSONALIZZATE</strong></span> dei prossimi mesi e che trasforma radicalmente l'atmosfera del tuo istituto.<br />Sotto altri canali settoriali!
+                                Questo è il <span className="text-xl md:text-xl"><strong className="text-white font-black">CANALE AUDIO PRINCIPALE</strong> che contiene tutte le <strong className="text-amber-400 font-black">TUE PROMO PERSONALIZZATE</strong></span> dei prossimi mesi e che trasforma radicalmente l'atmosfera del tuo istituto.<br />Sotto altri canali settoriali!
                             </p>
                         ) : (
                             <p className="text-lg md:text-lg">
@@ -107,12 +107,12 @@ export function BasicHeroChannel2({ channel, planType }: BasicHeroChannel2Props)
                     {isCurrentlyPlaying && (
                         <>
                             <motion.div
-                                className={`absolute w-[80%] h-[80%] rounded-full border ${isPremium ? 'border-[#C69C85]/20' : 'border-[#AB7169]/20'}`}
+                                className={`absolute w-[80%] h-[80%] rounded-full border ${isPremium ? 'border-amber-400/20' : 'border-emerald-400/20'}`}
                                 animate={{ scale: [1, 1.2, 1], opacity: [0.5, 0, 0.5] }}
                                 transition={{ repeat: Infinity, duration: 3, ease: "linear" }}
                             />
                             <motion.div
-                                className={`absolute w-[60%] h-[60%] rounded-full border ${isPremium ? 'border-[#C69C85]/20' : 'border-[#5D6676]/20'}`}
+                                className={`absolute w-[60%] h-[60%] rounded-full border ${isPremium ? 'border-amber-400/20' : 'border-indigo-400/20'}`}
                                 animate={{ scale: [1, 1.3, 1], opacity: [0.5, 0, 0.5] }}
                                 transition={{ repeat: Infinity, duration: 2.5, ease: "linear", delay: 0.5 }}
                             />
