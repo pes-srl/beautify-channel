@@ -238,7 +238,7 @@ export function InfoBlocks2026() {
                     </div>
 
                     {/* Refined Integrated Info Blocks */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-6xl py-16 mx-auto relative z-10">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-6xl pt-32 md:pt-48 pb-0 mx-auto relative z-10">
 
                         {/* Block 1 */}
                         <motion.div
