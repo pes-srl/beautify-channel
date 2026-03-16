@@ -232,7 +232,7 @@ export async function POST(req: Request) {
 
                     // A. Email to Admin
                     await resend.emails.send({
-                        from: 'Beautify Channel Pagamenti <onboarding@resend.dev>', // Update domain
+                        from: process.env.RESEND_FROM_EMAIL || 'Beautify Channel <info@beautify-channel.com>',
                         to: 'mirkocata@gmail.com', // Admin email
                         subject: `🟢 PAGAMENTO RICEVUTO - Nuovo ${planType.toUpperCase()} da ${metadata.email_richiedente || 'Cliente'}`,
                         html: `
@@ -267,7 +267,7 @@ export async function POST(req: Request) {
                         }
 
                         await resend.emails.send({
-                            from: 'Beautify Channel <onboarding@resend.dev>', 
+                            from: process.env.RESEND_FROM_EMAIL || 'Beautify Channel <info@beautify-channel.com>', 
                             to: userEmail,
                             subject: `🎉 Pagamento Confermato! Benvenuto in ${planType.toUpperCase()} 🌟`,
                             html: `
