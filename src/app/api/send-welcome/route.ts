@@ -15,7 +15,7 @@ export async function POST(request: Request) {
 
         // Send the Welcome Email
         const data = await resend.emails.send({
-            from: 'Beautify Channel <noreply@beautifychannel.com>', // We use the noreply address requested by the user
+            from: process.env.RESEND_FROM_EMAIL || 'Beautify Channel <info@beautify-channel.com>', // We use the verified domain
             to: email,
             subject: 'Benvenuto su Beautify Channel! 🎵 La tua prova gratuita è attiva',
             html: `
