@@ -29,7 +29,7 @@ export function AdminSidebarNav() {
             icon: ImageIcon
         },
         {
-            name: "Richieste Upgrade",
+            name: "Richieste",
             href: "/admin/richieste",
             icon: HandCoins
         },
