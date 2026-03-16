@@ -46,7 +46,8 @@ export async function getStripeCustomerPortalUrl() {
             return { error: 'Nessun account di fatturazione trovato. Non hai ancora effettuato ordini.' };
         }
 
-        const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
+        const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 
+                        (process.env.NEXT_PUBLIC_VERCEL_URL ? `https://${process.env.NEXT_PUBLIC_VERCEL_URL}` : 'http://localhost:3000');
         const portalSession = await stripe.billingPortal.sessions.create({
             customer: customerId,
             return_url: `${siteUrl}/area-riservata/ordini`,
