@@ -140,29 +140,44 @@ export default async function AreaClientePage2(props: {
                 {/* 1. DYNAMIC WELCOME BANNER */}
                 {!isAdmin && profile?.plan_type === 'free_trial' && !isExpired && (
                     <div className="w-full max-w-4xl mx-auto mt-24 mb-16 flex flex-col gap-6 items-center px-4">
-                        {/* TOP CARD */}
-                        <div className="w-full max-w-2xl bg-gradient-to-br from-[#3b1c6b] via-[#2a1154] to-[#1a0b33] border border-white/5 rounded-2xl p-6 md:p-8 text-center shadow-2xl flex flex-col items-center">
-                            <h2 className="text-lg md:text-xl font-semibold text-white mb-6 max-w-2xl mx-auto leading-relaxed">
-                                Benvenuta, grazie di aver scelto di provare BeautiFy Channel! Buona esperienza!
-                            </h2>
-                            <div className="bg-black/20 border border-white/5 rounded-xl p-4 md:p-6 flex flex-col items-center shadow-inner mb-6 w-full max-w-sm">
-                                <span className="text-zinc-400 text-xs md:text-sm uppercase tracking-[0.2em] font-medium mb-2">
-                                    IL TUO PIANO ATTUALE
-                                </span>
-                                <h3 className="text-3xl md:text-4xl font-black text-[#ff5a7e] uppercase tracking-wider mb-2">
-                                    FREE TRIAL
-                                </h3>
-                                <span className="text-zinc-400 text-sm md:text-base italic">
-                                    {daysLeft} {daysLeft === 1 ? 'giorno' : 'giorni'} alla fine della prova gratuita
-                                </span>
+                        {/* SLEEK HORIZONTAL WELCOME BANNER */}
+                        <div className="w-full max-w-6xl mx-auto bg-gradient-to-r from-[#0f0518]/80 via-[#2a1154]/60 to-[#ff5a7e]/10 border border-white/5 rounded-[2rem] p-6 text-left shadow-2xl flex flex-col lg:flex-row items-center justify-between gap-6 backdrop-blur-xl relative overflow-hidden">
+                            {/* Decorative background glow */}
+                            <div className="absolute top-0 right-1/4 w-64 h-64 bg-[#ff5a7e]/10 blur-[80px] rounded-full pointer-events-none" />
+                            
+                            <div className="flex-1 relative z-10 flex flex-col md:flex-row items-center lg:items-center gap-4 text-center lg:text-left">
+                                <div className="p-4 bg-white/5 border border-white/10 rounded-2xl shrink-0 shadow-inner">
+                                    <Sparkles className="w-8 h-8 md:w-10 md:h-10 text-[#ff5a7e]" />
+                                </div>
+                                <div>
+                                    <h2 className="text-xl md:text-2xl lg:text-3xl font-bold text-white mb-1 lg:mb-2 tracking-wide font-[family-name:var(--font-montserrat)]">
+                                        Benvenuta in BeautiFy Channel
+                                    </h2>
+                                    <p className="text-zinc-300 text-sm md:text-base font-light">
+                                        Grazie per aver scelto di provare la nostra esperienza musicale. Buon ascolto!
+                                    </p>
+                                </div>
                             </div>
                             
-                            <a
-                                href="#scegli-piano-section"
-                                className="inline-block bg-white text-black font-bold uppercase tracking-widest text-sm md:text-base px-6 py-3 rounded-full hover:scale-105 transition-transform"
-                            >
-                                SCEGLI UN PIANO
-                            </a>
+                            <div className="flex flex-col sm:flex-row items-center gap-4 relative z-10 w-full lg:w-auto mt-4 lg:mt-0 pt-6 lg:pt-0 border-t lg:border-t-0 border-white/10 lg:pl-8 lg:border-l">
+                                <div className="text-center lg:text-right flex-1 sm:flex-none">
+                                    <span className="text-zinc-400 text-xs md:text-sm uppercase tracking-[0.2em] font-medium block mb-1">
+                                        Il Tuo Piano
+                                    </span>
+                                    <h3 className="text-2xl md:text-3xl font-black text-[#ff5a7e] uppercase tracking-wider leading-none mb-1">
+                                        FREE TRIAL
+                                    </h3>
+                                    <span className="text-zinc-400 text-xs md:text-sm italic block">
+                                        {daysLeft} {daysLeft === 1 ? 'giorno' : 'giorni'} alla scadenza
+                                    </span>
+                                </div>
+                                <a
+                                    href="#scegli-piano-section"
+                                    className="bg-white text-black font-bold uppercase tracking-widest text-xs md:text-sm px-6 py-3 md:px-8 md:py-4 rounded-full hover:scale-105 transition-transform flex items-center justify-center shrink-0 w-full sm:w-auto mt-2 sm:mt-0 shadow-xl shadow-white/10"
+                                >
+                                    SCEGLI UN PIANO
+                                </a>
+                            </div>
                         </div>
 
                         {/* GLOWING BAR */}
@@ -190,16 +205,16 @@ export default async function AreaClientePage2(props: {
                         </div>
 
                         {/* AREA RISERVATA BLOCK */}
-                        <div className="w-full mt-8 md:mt-12 bg-[#0f0518]/50 border border-[#ff5a7e]/20 rounded-[2.5rem] p-8 md:p-12 flex flex-col items-center justify-center relative shadow-[0_0_50px_rgba(255,90,126,0.05)] text-center">
-                            <div className="absolute inset-0 bg-gradient-to-br from-[#ff5a7e]/5 to-transparent rounded-[2.5rem] pointer-events-none" />
-                            <h1 className="text-5xl md:text-7xl font-sans font-bold text-[#ff5a7e] mb-6 drop-shadow-md tracking-tight w-full justify-center text-center">
+                        <div className="w-full max-w-4xl mx-auto mt-6 md:mt-8 bg-[#0f0518]/50 border border-[#ff5a7e]/20 rounded-3xl p-6 md:p-8 flex flex-col items-center justify-center relative shadow-[0_0_30px_rgba(255,90,126,0.05)] text-center">
+                            <div className="absolute inset-0 bg-gradient-to-br from-[#ff5a7e]/5 to-transparent rounded-3xl pointer-events-none" />
+                            <h1 className="text-3xl md:text-5xl font-sans font-bold text-[#ff5a7e] mb-4 drop-shadow-sm tracking-tight w-full justify-center text-center">
                                 Area Riservata
                             </h1>
-                            <div className="flex flex-col md:flex-row items-center gap-4 relative z-10">
-                                <span className="text-white font-bold text-xl md:text-2xl text-center">
+                            <div className="flex flex-col md:flex-row items-center gap-3 relative z-10">
+                                <span className="text-white font-bold text-lg md:text-xl text-center">
                                     {profile?.salon_name || user.email}
                                 </span>
-                                <span className="text-xs md:text-sm font-bold text-emerald-400 border border-emerald-400/30 bg-emerald-400/10 px-3 py-1.5 rounded-full uppercase tracking-widest text-center">
+                                <span className="text-[10px] md:text-xs font-bold text-emerald-400 border border-emerald-400/30 bg-emerald-400/10 px-3 py-1 rounded-full uppercase tracking-widest text-center">
                                     PIANO: {profile?.plan_type === 'premium' ? 'PREMIUM' : profile?.plan_type === 'basic' ? 'BASIC' : 'FREE TRIAL'}
                                 </span>
                             </div>
