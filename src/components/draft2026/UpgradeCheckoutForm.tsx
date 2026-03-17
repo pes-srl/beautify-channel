@@ -73,10 +73,10 @@ export function UpgradeCheckoutForm({ userEmail, userVat, userSalonName, planTyp
         // ========================================================
         // STRIPE INTEGRATION:
         // ========================================================
-        
+
         // 2. Genera sessione Stripe Checkout
         const checkoutResult = await createCheckoutSession(formData);
-        
+
         if (checkoutResult.error) {
             setStatus({ type: "error", message: checkoutResult.error });
             setIsSubmitting(false);
@@ -226,7 +226,7 @@ export function UpgradeCheckoutForm({ userEmail, userVat, userSalonName, planTyp
                     <div className="flex flex-col items-center justify-center mb-10 w-full relative">
                         {/* Progress Bar Background */}
                         <div className="absolute top-1/2 left-1/4 right-1/4 h-1 bg-white/10 -z-10 rounded-full" />
-                        
+
                         <div className="flex justify-between w-1/2 relative z-10 px-8">
                             <div className={`w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm transition-all duration-500 shadow-md ${currentStep >= 1 ? `${themeColors.bgAccent} text-white shadow-[#D8B2A3]/30` : "bg-white/10 text-zinc-500"}`}>
                                 1
@@ -400,7 +400,7 @@ export function UpgradeCheckoutForm({ userEmail, userVat, userSalonName, planTyp
                                         <Button type="button" onClick={handlePrevStep} className="bg-transparent hover:bg-white/5 text-white font-semibold py-6 px-10 rounded-xl transition-all border border-white/10">
                                             &larr; Indietro
                                         </Button>
-                                        
+
                                         <Button type="button" onClick={handleNextStep2} className={`bg-gradient-to-r ${themeColors.btnGradientFrom} ${themeColors.btnGradientTo} text-white font-bold py-6 px-10 rounded-xl transition-all border-none flex-1 md:flex-none text-lg`}>
                                             Vai allo Step 3 (Firma) &rarr;
                                         </Button>
@@ -421,7 +421,7 @@ export function UpgradeCheckoutForm({ userEmail, userVat, userSalonName, planTyp
                                     {/* Scrollable Contract Box */}
                                     <div className="bg-black/60 border border-white/10 rounded-xl p-4 h-48 overflow-y-auto text-left text-sm text-zinc-300 custom-scrollbar shadow-inner">
                                         <h4 className="font-bold text-white mb-3 text-base">CONTRATTO DI ABBONAMENTO BeautiFy Channel</h4>
-                                        
+
                                         <p className="font-bold text-white mt-4 mb-1">1. OGGETTO DEL SERVIZIO</p>
                                         <p className="mb-2">PES fornisce al Cliente il servizio BeautiFy Channel, piattaforma di streaming audio professionale accessibile tramite il sito beautify-channel.com. Il servizio consente la diffusione sonora di palinsesti musicali e comunicazioni audio progettate per istituti di bellezza. Il servizio è destinato esclusivamente alla diffusione sonora all'interno dell'istituto indicato nel form precedente.</p>
 
@@ -445,7 +445,7 @@ export function UpgradeCheckoutForm({ userEmail, userVat, userSalonName, planTyp
 
                                         <p className="font-bold text-white mt-4 mb-1">8. LEGGE APPLICABILE</p>
                                         <p className="mb-2">Il presente contratto è regolato dalla legge italiana. Per qualsiasi controversia relativa al presente contratto è competente in via esclusiva il Foro di Milano.</p>
-                                        
+
                                         <p className="font-bold text-white mt-4 mb-1">9. GENERAZIONE AUTOMATICA</p>
                                         <p className="mb-2 pb-4">Il presente documento è integrato nel sistema BeautiFy Channel. Proseguendo l'acquisto, confermi di aver letto, compreso e accettato integralmente le suddette clausole che compariranno nel PDF definitivo.</p>
                                     </div>
@@ -454,9 +454,9 @@ export function UpgradeCheckoutForm({ userEmail, userVat, userSalonName, planTyp
                                     <div className="flex flex-col gap-4 mt-2">
                                         <label className="flex items-start gap-3 cursor-pointer p-3 rounded-lg bg-black/40 border border-white/10 hover:border-white/20 hover:bg-white/5 transition-all">
                                             <div className="relative flex items-center pt-1">
-                                                <input 
-                                                    type="checkbox" 
-                                                    checked={acceptedTerms} 
+                                                <input
+                                                    type="checkbox"
+                                                    checked={acceptedTerms}
                                                     onChange={(e) => setAcceptedTerms(e.target.checked)}
                                                     className={`w-5 h-5 focus:${themeColors.ring} bg-white/10 border-white/20 rounded cursor-pointer`}
                                                     required
@@ -469,9 +469,9 @@ export function UpgradeCheckoutForm({ userEmail, userVat, userSalonName, planTyp
 
                                         <label className="flex items-start gap-3 cursor-pointer p-3 rounded-lg bg-black/40 border border-white/10 hover:border-white/20 hover:bg-white/5 transition-all">
                                             <div className="relative flex items-center pt-1">
-                                                <input 
-                                                    type="checkbox" 
-                                                    checked={acceptedPrivacy} 
+                                                <input
+                                                    type="checkbox"
+                                                    checked={acceptedPrivacy}
                                                     onChange={(e) => setAcceptedPrivacy(e.target.checked)}
                                                     className={`w-5 h-5 focus:${themeColors.ring} bg-white/10 border-white/20 rounded cursor-pointer`}
                                                     required

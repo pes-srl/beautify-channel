@@ -252,7 +252,7 @@ export function HeaderNew({
                 planBadge = <Badge className={`bg-indigo-600 hover:bg-indigo-700 text-white ${baseClass}`}>Basic</Badge>;
                 break;
             case 'free_trial':
-                planBadge = <Badge className={`bg-emerald-500 hover:bg-emerald-600 text-black ${baseClass}`}>Trial</Badge>;
+                planBadge = <Badge className={`bg-purple-400 hover:bg-purple-500 text-black ${baseClass}`}>Trial</Badge>;
                 break;
             case 'free':
             default:
@@ -316,7 +316,7 @@ export function HeaderNew({
                         <DropdownMenu>
                             <DropdownMenuTrigger asChild>
                                 <Button variant="ghost" className="relative h-10 w-10 p-0 rounded-full border border-white/10 bg-black/50 hover:bg-white/10 flex items-center justify-center transition-colors outline-none focus-visible:ring-2 focus-visible:ring-fuchsia-500">
-                                    <div className={`w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm uppercase shadow-inner ${profile?.plan_type === 'premium' ? 'bg-amber-500 text-zinc-950' : profile?.plan_type === 'basic' ? 'bg-sky-500 text-zinc-950' : profile?.plan_type === 'free_trial' ? 'bg-emerald-500 text-zinc-950' : profile?.plan_type === 'free' ? 'bg-red-500 text-white' : 'bg-zinc-800 text-zinc-300'}`}>
+                                    <div className={`w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm uppercase shadow-inner ${profile?.plan_type === 'premium' ? 'bg-amber-500 text-zinc-950' : profile?.plan_type === 'basic' ? 'bg-sky-500 text-zinc-950' : profile?.plan_type === 'free_trial' ? 'bg-purple-400 text-zinc-950' : profile?.plan_type === 'free' ? 'bg-red-500 text-white' : 'bg-zinc-800 text-zinc-300'}`}>
                                         {initials}
                                     </div>
                                 </Button>

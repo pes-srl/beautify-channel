@@ -148,7 +148,7 @@ export default async function AreaClientePage2(props: {
 
                             <div className="flex-1 relative z-10 flex flex-col md:flex-row items-center lg:items-center gap-4 text-center lg:text-left">
                                 <div className="p-4 bg-white/5 border border-white/10 rounded-2xl shrink-0 shadow-inner">
-                                    <Sparkles className="w-8 h-8 md:w-10 md:h-10 text-emerald-400" />
+                                    <Sparkles className="w-8 h-8 md:w-10 md:h-10 text-purple-400" />
                                 </div>
                                 <div>
                                     <h2 className="text-xl md:text-2xl lg:text-3xl font-medium text-white/90 mb-1 lg:mb-2 tracking-wide font-[family-name:var(--font-montserrat)]">
@@ -166,14 +166,14 @@ export default async function AreaClientePage2(props: {
                                     <span className="text-zinc-400 text-xs md:text-sm uppercase tracking-[0.2em] font-medium block mb-1">
                                         Il Tuo Piano
                                     </span>
-                                    <h3 className="text-2xl md:text-3xl font-black text-emerald-400 uppercase tracking-wider leading-none mb-1">
+                                    <h3 className="text-2xl md:text-3xl font-black text-purple-400 uppercase tracking-wider leading-none mb-1">
                                         FREE TRIAL
                                     </h3>
-                                    <span className="text-emerald-400/80 text-xs md:text-sm font-bold block mb-1">
+                                    <span className="text-purple-400/80 text-xs md:text-sm font-bold block mb-1">
                                         E' STATO ATTIVATO
                                     </span>
                                     <span className="text-zinc-400 text-xs md:text-sm italic block mt-1 leading-tight">
-                                        <span className="text-emerald-400 font-bold text-sm md:text-base">{daysLeft}</span> {daysLeft === 1 ? 'giorno' : 'giorni'} alla scadenza<br />della tua prova gratuita
+                                        <span className="text-purple-400 font-bold text-sm md:text-base">{daysLeft}</span> {daysLeft === 1 ? 'giorno' : 'giorni'} alla scadenza<br />della tua prova gratuita
                                     </span>
                                 </div>
                                 <a
@@ -205,7 +205,7 @@ export default async function AreaClientePage2(props: {
                                 <span className="text-zinc-400 font-semibold text-lg md:text-xl text-center">
                                     {profile?.salon_name || user.email}
                                 </span>
-                                <span className="text-[10px] md:text-xs font-semibold text-emerald-400 border border-emerald-400/30 bg-emerald-400/10 px-3 py-1 rounded-full uppercase tracking-widest text-center">
+                                <span className="text-[10px] md:text-xs font-semibold text-purple-400 border border-purple-400/30 bg-purple-400/10 px-3 py-1 rounded-full uppercase tracking-widest text-center">
                                     PIANO: {profile?.plan_type === 'premium' ? 'PREMIUM' : profile?.plan_type === 'basic' ? 'BASIC' : 'FREE TRIAL'}
                                 </span>
                             </div>

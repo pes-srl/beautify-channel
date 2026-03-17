@@ -20,6 +20,10 @@ export function AreaRiservataTabs({ profile, channels, channelsError, user, isAd
         setOpenSection(openSection === section ? null : section);
     };
 
+    const activeColor = profile?.plan_type === 'free_trial' ? 'text-purple-400' : 'text-white';
+    const activeFillColor = profile?.plan_type === 'free_trial' ? 'text-purple-400 fill-purple-400' : 'text-white fill-white';
+    const hoverColor = profile?.plan_type === 'free_trial' ? 'group-hover:text-purple-400' : 'group-hover:text-white';
+
     return (
         <div className="w-full max-w-4xl mx-auto mt-6 mb-24 px-4">
             <div className="flex flex-col border-t border-white/10">
@@ -31,12 +35,12 @@ export function AreaRiservataTabs({ profile, channels, channelsError, user, isAd
                         className="w-full py-6 flex items-center justify-between text-left group transition-colors hover:bg-white/[0.02]"
                     >
                         <div className="flex items-center gap-4">
-                            <Play className={`w-5 h-5 ${openSection === 'funziona' ? 'text-white fill-white' : 'text-zinc-400 group-hover:text-white'}`} />
-                            <span className={`text-lg md:text-xl font-medium tracking-wide transition-colors ${openSection === 'funziona' ? 'text-white' : 'text-zinc-400 group-hover:text-white'}`}>
+                            <Play className={`w-5 h-5 ${openSection === 'funziona' ? activeFillColor : `text-zinc-400 ${hoverColor}`}`} />
+                            <span className={`text-lg md:text-xl font-medium tracking-wide transition-colors ${openSection === 'funziona' ? activeColor : `text-zinc-400 ${hoverColor}`}`}>
                                 Come Funziona
                             </span>
                         </div>
-                        <ChevronDown className={`w-5 h-5 text-zinc-500 transition-transform duration-300 ${openSection === 'funziona' ? 'rotate-180 text-white' : ''}`} />
+                        <ChevronDown className={`w-5 h-5 text-zinc-500 transition-transform duration-300 ${openSection === 'funziona' ? `rotate-180 ${activeColor}` : ''}`} />
                     </button>
                     
                     <div className={`overflow-hidden transition-all duration-500 ease-in-out ${openSection === 'funziona' ? 'max-h-[2000px] opacity-100 pb-8' : 'max-h-0 opacity-0'}`}>
@@ -85,12 +89,12 @@ export function AreaRiservataTabs({ profile, channels, channelsError, user, isAd
                         className="w-full py-6 flex items-center justify-between text-left group transition-colors hover:bg-white/[0.02]"
                     >
                         <div className="flex items-center gap-4">
-                            <Radio className={`w-5 h-5 ${openSection === 'canali' ? 'text-white' : 'text-zinc-400 group-hover:text-white'}`} />
-                            <span className={`text-lg md:text-xl font-medium tracking-wide transition-colors ${openSection === 'canali' ? 'text-white' : 'text-zinc-400 group-hover:text-white'}`}>
+                            <Radio className={`w-5 h-5 ${openSection === 'canali' ? activeColor : `text-zinc-400 ${hoverColor}`}`} />
+                            <span className={`text-lg md:text-xl font-medium tracking-wide transition-colors ${openSection === 'canali' ? activeColor : `text-zinc-400 ${hoverColor}`}`}>
                                 Altri Canali
                             </span>
                         </div>
-                        <ChevronDown className={`w-5 h-5 text-zinc-500 transition-transform duration-300 ${openSection === 'canali' ? 'rotate-180 text-white' : ''}`} />
+                        <ChevronDown className={`w-5 h-5 text-zinc-500 transition-transform duration-300 ${openSection === 'canali' ? `rotate-180 ${activeColor}` : ''}`} />
                     </button>
                     
                     <div className={`overflow-hidden transition-all duration-500 ease-in-out ${openSection === 'canali' ? 'max-h-[2000px] opacity-100 pb-8' : 'max-h-0 opacity-0'}`}>
@@ -110,12 +114,12 @@ export function AreaRiservataTabs({ profile, channels, channelsError, user, isAd
                             className="w-full py-6 flex items-center justify-between text-left group transition-colors hover:bg-white/[0.02]"
                         >
                             <div className="flex items-center gap-4">
-                                <Sparkles className={`w-5 h-5 ${openSection === 'potenzia' ? 'text-[#ff5a7e]' : 'text-zinc-400 group-hover:text-[#ff5a7e]'}`} />
-                                <span className={`text-lg md:text-xl font-medium tracking-wide transition-colors ${openSection === 'potenzia' ? 'text-[#ff5a7e]' : 'text-zinc-400 group-hover:text-[#ff5a7e]'}`}>
+                                <Sparkles className={`w-5 h-5 ${openSection === 'potenzia' ? 'text-purple-400' : 'text-zinc-400 group-hover:text-purple-400'}`} />
+                                <span className={`text-lg md:text-xl font-medium tracking-wide transition-colors ${openSection === 'potenzia' ? 'text-purple-400' : 'text-zinc-400 group-hover:text-purple-400'}`}>
                                     Potenzia il Servizio
                                 </span>
                             </div>
-                            <ChevronDown className={`w-5 h-5 text-zinc-500 transition-transform duration-300 ${openSection === 'potenzia' ? 'rotate-180 text-[#ff5a7e]' : ''}`} />
+                            <ChevronDown className={`w-5 h-5 text-zinc-500 transition-transform duration-300 ${openSection === 'potenzia' ? 'rotate-180 text-purple-400' : ''}`} />
                         </button>
                         
                         <div className={`overflow-hidden transition-all duration-500 ease-in-out ${openSection === 'potenzia' ? 'max-h-[2000px] opacity-100 pb-8' : 'max-h-0 opacity-0'}`}>
@@ -130,15 +134,15 @@ export function AreaRiservataTabs({ profile, channels, channelsError, user, isAd
                                         
                                         <ul className="mb-8 space-y-4 text-sm md:text-base">
                                             <li className="flex items-start gap-3">
-                                                <div className="w-1.5 h-1.5 rounded-full bg-[#ff5a7e] mt-2 shrink-0" />
+                                                <div className="w-1.5 h-1.5 rounded-full bg-purple-400 mt-2 shrink-0" />
                                                 <span><strong className="text-white">Ininterrotta e Senza Annunci:</strong> Niente stacchi di radio locali o pubblicità.</span>
                                             </li>
                                             <li className="flex items-start gap-3">
-                                                <div className="w-1.5 h-1.5 rounded-full bg-[#ff5a7e] mt-2 shrink-0" />
+                                                <div className="w-1.5 h-1.5 rounded-full bg-purple-400 mt-2 shrink-0" />
                                                 <span><strong className="text-white">7 Canali Tematici:</strong> L'atmosfera perfetta per ogni momento.</span>
                                             </li>
                                             <li className="flex items-start gap-3">
-                                                <div className="w-1.5 h-1.5 rounded-full bg-[#ff5a7e] mt-2 shrink-0" />
+                                                <div className="w-1.5 h-1.5 rounded-full bg-purple-400 mt-2 shrink-0" />
                                                 <span><strong className="text-white">Suggerimenti Vocali Generici:</strong> Delicate voci fuoricampo che ispirano le clienti.</span>
                                             </li>
                                         </ul>
@@ -189,12 +193,12 @@ export function AreaRiservataTabs({ profile, channels, channelsError, user, isAd
                             className="w-full py-6 flex items-center justify-between text-left group transition-colors hover:bg-white/[0.02]"
                         >
                             <div className="flex items-center gap-4">
-                                <Lock className={`w-5 h-5 ${openSection === 'aggiorna' ? 'text-emerald-400' : 'text-zinc-400 group-hover:text-emerald-400'}`} />
-                                <span className={`text-lg md:text-xl font-medium tracking-wide transition-colors ${openSection === 'aggiorna' ? 'text-emerald-400' : 'text-zinc-400 group-hover:text-emerald-400'}`}>
+                                <Lock className={`w-5 h-5 ${openSection === 'aggiorna' ? 'text-purple-400' : 'text-zinc-400 group-hover:text-purple-400'}`} />
+                                <span className={`text-lg md:text-xl font-medium tracking-wide transition-colors ${openSection === 'aggiorna' ? 'text-purple-400' : 'text-zinc-400 group-hover:text-purple-400'}`}>
                                     Aggiorna L'Esperienza
                                 </span>
                             </div>
-                            <ChevronDown className={`w-5 h-5 text-zinc-500 transition-transform duration-300 ${openSection === 'aggiorna' ? 'rotate-180 text-emerald-400' : ''}`} />
+                            <ChevronDown className={`w-5 h-5 text-zinc-500 transition-transform duration-300 ${openSection === 'aggiorna' ? 'rotate-180 text-purple-400' : ''}`} />
                         </button>
                         
                         <div id="scegli-piano-section" className={`overflow-hidden transition-all duration-500 ease-in-out ${openSection === 'aggiorna' ? 'max-h-[3000px] opacity-100 pb-8' : 'max-h-0 opacity-0'}`}>

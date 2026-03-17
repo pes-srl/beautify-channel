@@ -170,7 +170,7 @@ export function UsersTableClient({ initialProfiles }: { initialProfiles: any[] }
                                         <Badge variant="outline" className={`
                                             bg-transparent uppercase text-[10px] font-bold tracking-wider
                                             ${computedPlanType === 'premium' ? 'bg-amber-500/10 text-amber-500 border-amber-500/50' :
-                                                computedPlanType === 'free_trial' ? 'text-emerald-400 border-emerald-400/50' :
+                                                computedPlanType === 'free_trial' ? 'text-purple-400 border-purple-400/50' :
                                                     computedPlanType === 'basic' ? 'text-indigo-400 border-indigo-400/50' :
                                                         'text-red-500 border-red-500/50'}
                                         `}>

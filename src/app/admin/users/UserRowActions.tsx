@@ -116,7 +116,7 @@ export function UserRowActions({ user }: UserRowActionsProps) {
                     <DropdownMenuSubContent className="bg-zinc-950 border-white/10">
                         <DropdownMenuRadioGroup value={user.plan_type || 'free'}>
                             <DropdownMenuRadioItem value="free" onSelect={(e) => { e.preventDefault(); handleUpdate('plan_type', 'free'); }} className="text-red-500 focus:bg-white/10 cursor-pointer font-medium">Free</DropdownMenuRadioItem>
-                            <DropdownMenuRadioItem value="free_trial" onSelect={(e) => { e.preventDefault(); handleUpdate('plan_type', 'free_trial'); }} className="text-emerald-400 focus:bg-white/10 cursor-pointer font-medium">Free Trial</DropdownMenuRadioItem>
+                            <DropdownMenuRadioItem value="free_trial" onSelect={(e) => { e.preventDefault(); handleUpdate('plan_type', 'free_trial'); }} className="text-purple-400 focus:bg-white/10 cursor-pointer font-medium">Free Trial</DropdownMenuRadioItem>
                             <DropdownMenuRadioItem value="basic" onSelect={(e) => { e.preventDefault(); handleUpdate('plan_type', 'basic'); }} className="text-indigo-400 focus:bg-white/10 cursor-pointer font-medium">Basic</DropdownMenuRadioItem>
                             <DropdownMenuRadioItem value="premium" onSelect={(e) => { e.preventDefault(); handleUpdate('plan_type', 'premium'); }} className="text-amber-500 focus:bg-white/10 cursor-pointer font-medium">Premium</DropdownMenuRadioItem>
                         </DropdownMenuRadioGroup>
