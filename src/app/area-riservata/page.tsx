@@ -208,14 +208,14 @@ export default async function AreaClientePage2(props: {
                         {/* AREA RISERVATA BLOCK */}
                         <div className="w-full max-w-5xl mx-auto mt-6 md:mt-8 bg-[#0f0518]/50 border border-[#ff5a7e]/20 rounded-[2rem] p-8 md:p-10 flex flex-col items-center justify-center relative shadow-[0_0_40px_rgba(255,90,126,0.05)] text-center">
                             <div className="absolute inset-0 bg-gradient-to-br from-[#ff5a7e]/5 to-transparent rounded-[2rem] pointer-events-none" />
-                            <h1 className="text-4xl md:text-6xl font-sans font-bold text-white mb-5 drop-shadow-md tracking-tight w-full justify-center text-center">
+                            <h1 className="text-4xl md:text-6xl font-sans font-medium text-white mb-5 drop-shadow-md tracking-tight w-full justify-center text-center">
                                 Area Riservata
                             </h1>
                             <div className="flex flex-col md:flex-row items-center gap-4 relative z-10">
-                                <span className="text-white font-bold text-xl md:text-2xl text-center">
+                                <span className="text-white font-medium text-xl md:text-2xl text-center">
                                     {profile?.salon_name || user.email}
                                 </span>
-                                <span className="text-xs md:text-sm font-bold text-emerald-400 border border-emerald-400/30 bg-emerald-400/10 px-4 py-1.5 rounded-full uppercase tracking-widest text-center">
+                                <span className="text-xs md:text-sm font-medium text-emerald-400 border border-emerald-400/30 bg-emerald-400/10 px-4 py-1.5 rounded-full uppercase tracking-widest text-center">
                                     PIANO: {profile?.plan_type === 'premium' ? 'PREMIUM' : profile?.plan_type === 'basic' ? 'BASIC' : 'FREE TRIAL'}
                                 </span>
                             </div>
@@ -223,7 +223,7 @@ export default async function AreaClientePage2(props: {
 
                         {/* QUESTO E IL TUO CANALE AUDIO PRINCIPALE */}
                         <div className="mt-16 mb-0 flex flex-col items-center">
-                            <h3 className="text-white font-black tracking-widest uppercase text-center text-xl md:text-4xl mb-8 drop-shadow-[0_0_20px_rgba(255,255,255,0.5)]">
+                            <h3 className="text-white font-medium tracking-widest uppercase text-center text-xl md:text-3xl mb-8 drop-shadow-[0_0_20px_rgba(255,255,255,0.5)]">
                                 Questo e' il tuo canale audio principale
                             </h3>
                             <div className="w-16 h-16 rounded-full border-2 border-white/50 flex items-center justify-center bg-white/20 backdrop-blur-md shadow-[0_0_40px_rgba(255,255,255,0.3)] animate-bounce">
