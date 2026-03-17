@@ -223,7 +223,7 @@ export default async function AreaClientePage2(props: {
 
                         {/* QUESTO E IL TUO CANALE AUDIO PRINCIPALE */}
                         <div className="mt-16 mb-0 flex flex-col items-center">
-                            <h3 className="text-zinc-400 font-semibold tracking-widest uppercase text-center text-xl md:text-3xl mb-8 drop-shadow-[0_0_20px_rgba(255,255,255,0.5)]">
+                            <h3 className="text-zinc-400 font-semibold tracking-widest uppercase text-center text-2xl md:text-4xl mb-8 drop-shadow-[0_0_20px_rgba(255,255,255,0.5)]">
                                 Questo e' il tuo canale audio principale
                             </h3>
                             <div className="w-16 h-16 rounded-full border-2 border-zinc-400/50 flex items-center justify-center bg-zinc-400/10 backdrop-blur-md shadow-[0_0_40px_rgba(255,255,255,0.1)] animate-bounce">
