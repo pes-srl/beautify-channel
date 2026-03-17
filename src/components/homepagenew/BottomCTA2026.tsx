@@ -4,12 +4,13 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { registerTrialAccount } from "@/app/actions/trial-actions";
 import { Button } from "@/components/ui/button";
-import { Montserrat } from "next/font/google";
+import { Montserrat, Inter } from "next/font/google";
 
-const montserrat = Montserrat({ subsets: ["latin"], weight: ["600"] });
+const montserrat = Montserrat({ subsets: ["latin"], weight: ["600", "800"] });
+const inter = Inter({ subsets: ["latin"], weight: ["400", "500", "600"] });
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Sparkles, Eye, EyeOff } from "lucide-react";
+import { Sparkles, Eye, EyeOff, Mail } from "lucide-react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 
@@ -242,7 +243,7 @@ export function BottomCTA2026({ hasSession }: { hasSession?: boolean }) {
                                                 className="mt-1 h-5 w-5 rounded border-white/20 bg-black/40 text-[#AB7169] focus:ring-[#AB7169] focus:ring-offset-zinc-950 shrink-0"
                                             />
                                             <Label htmlFor="terms" className="text-sm text-[#ECE0D4] font-normal leading-relaxed cursor-pointer select-none">
-                                                Accetto i <Link href="/termini" className="text-[#D8B2A3] hover:text-[#FAFAF8] underline font-medium">Termini e Condizioni</Link> e la <Link href="/privacy" className="text-[#D8B2A3] hover:text-[#FAFAF8] underline font-medium">Privacy Policy</Link> di Beautify Channel.
+                                                Accetto i <Link href="/termini" className="text-[#D8B2A3] hover:text-[#FAFAF8] underline font-medium">Termini e Condizioni</Link> e la <Link href="/privacy" className="text-[#D8B2A3] hover:text-[#FAFAF8] underline font-medium">Privacy Policy</Link> di BeautiFy Channel.
                                             </Label>
                                         </div>
 
@@ -278,15 +279,43 @@ export function BottomCTA2026({ hasSession }: { hasSession?: boolean }) {
                     <h2 className={`text-2xl md:text-4xl lg:text-5xl font-semibold text-white tracking-wide ${montserrat.className}`}>
                         HAI BISOGNO DI ALTRE INFO?
                     </h2>
-                    <a
-                        href="https://wa.link/5apci9"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center justify-center bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold text-lg md:text-xl rounded-[35px] px-10 py-4 shadow-[0_0_20px_rgba(37,211,102,0.4)] transition-all hover:scale-105 gap-3"
-                    >
-                        Scrivici su WhatsApp
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
-                    </a>
+                    <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 w-full items-center justify-center">
+                        <a
+                            href="https://wa.link/5apci9"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center justify-center bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold text-lg md:text-xl rounded-[35px] px-8 py-4 md:px-10 shadow-[0_0_20px_rgba(37,211,102,0.4)] transition-all hover:scale-105 gap-3 shrink-0"
+                        >
+                            Scrivici su WhatsApp
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                        </a>
+                        <a
+                            href="mailto:info@beautify-channel.com"
+                            className="inline-flex items-center justify-center bg-white/10 hover:bg-white/20 border-2 border-[#D8B2A3]/50 hover:border-[#D8B2A3] text-white font-bold text-lg md:text-xl rounded-[35px] px-8 py-4 md:px-10 backdrop-blur-md shadow-[0_0_20px_rgba(216,178,163,0.15)] transition-all hover:scale-105 gap-3 shrink-0"
+                        >
+                            Contattaci
+                            <Mail size={24} className="text-fuchsia-400 shadow-sm drop-shadow-sm" />
+                        </a>
+                    </div>
+                </motion.div>
+
+                {/* Stay Tuned Section */}
+                <motion.div
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true, margin: "-100px" }}
+                    transition={{ duration: 0.8, delay: 0.2 }}
+                    className="pt-16 pb-12 flex flex-col items-center justify-center text-center space-y-6 md:space-y-8"
+                >
+                    <h3 className={`text-fuchsia-400 font-extrabold uppercase tracking-[0.2em] text-3xl md:text-4xl lg:text-6xl mb-4 ${montserrat.className}`}>
+                        STAY TUNED!
+                    </h3>
+                    <p className="text-zinc-200 text-2xl md:text-3xl lg:text-4xl font-semibold max-w-4xl leading-tight">
+                        I servizi e le opportunità BeautiFy sono in continuo ampliamento.
+                    </p>
+                    <p className={`text-[#D8B2A3] text-xl md:text-2xl lg:text-3xl italic mt-2 font-medium drop-shadow-sm max-w-3xl ${inter.className}`}>
+                        Prossimamente in arrivo <span className="text-fuchsia-400 font-bold block sm:inline">Laser Channel e</span> <br className="hidden sm:block" /> <span className="text-fuchsia-400 font-bold block sm:inline">Cosmetic Channel</span>.
+                    </p>
                 </motion.div>
             </div>
         </section>
