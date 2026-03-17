@@ -38,9 +38,9 @@ export async function POST(req: Request) {
             const planType = metadata.requested_plan.toLowerCase();
             const duration = metadata.durata === '12 mesi' ? 12 : 6;
             
-            // Calculate expiration date
-            const expirationDate = new Date();
-            expirationDate.setMonth(expirationDate.getMonth() + duration);
+            // Calculate expiration date (Always December 31st of the current year)
+            const startDate = new Date();
+            const expirationDate = new Date(startDate.getFullYear(), 11, 31, 23, 59, 59); // Month is 11 for December (0-indexed)
 
             // Access Supabase securely with Server Role Key
             try {
@@ -128,6 +128,7 @@ export async function POST(req: Request) {
                         metadata.indirizzo || '-', // address
                         metadata.responsabile || '-', // fullName
                         metadata.partita_iva || '-', // vat
+                        startDate.toLocaleDateString('it-IT'), // startDate
                         expirationDate.toLocaleDateString('it-IT') // expirationDate
                     );
 
@@ -231,9 +232,12 @@ export async function POST(req: Request) {
                     const resend = new Resend(resendApiKey);
 
                     // A. Email to Admin
+                    const secondAdminEmail = process.env.ADMIN_EMAIL || 'pessrl@gmail.com';
+                    const adminEmails = process.env.RESEND_FROM_EMAIL ? [process.env.RESEND_FROM_EMAIL, secondAdminEmail] : ['info@beautify-channel.com', secondAdminEmail];
+                    
                     await resend.emails.send({
                         from: process.env.RESEND_FROM_EMAIL || 'Beautify Channel <info@beautify-channel.com>',
-                        to: process.env.RESEND_FROM_EMAIL || 'info@beautify-channel.com', // Admin email
+                        to: adminEmails, // Both admin and personal Gmail
                         subject: `🟢 PAGAMENTO RICEVUTO - Nuovo ${planType.toUpperCase()} da ${metadata.email_richiedente || 'Cliente'}`,
                         html: `
                           <h2>Nuovo Pagamento Completato tramite Stripe</h2>

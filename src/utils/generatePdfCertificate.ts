@@ -16,30 +16,35 @@ export async function generatePdfCertificate(
     address: string,
     managedBy: string,
     vat: string,
+    startDate: string,
     expirationDate: string
 ): Promise<Buffer> {
-    
+
     const pdfDoc = await PDFDocument.create();
     const page = pdfDoc.addPage([595.28, 841.89]);
     const { width, height } = page.getSize();
-    
+
+    // Forced Expiration Logic: Always end of the same year as startDate
+    const startYear = startDate.split('/')[2] || new Date().getFullYear().toString();
+    const computedExpirationDate = `31/12/${startYear}`;
+
     const fontRegular = await pdfDoc.embedFont(StandardFonts.Helvetica);
     const fontBold = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
-    
+
     const black = rgb(0, 0, 0);
     const darkGray = rgb(0.2, 0.2, 0.2);
-    
+
     // ------------------------------------------------------------------------
     // 1. HEADER (Logo + Title)
     // ------------------------------------------------------------------------
-    
+
     try {
         // Read from the public folder (works in Next.js Server Actions if path is resolved correctly)
         const logoPath = path.join(process.cwd(), 'public', 'ES-Logo-Header.webp');
         const logoBytes = fs.readFileSync(logoPath);
         const logoImage = await pdfDoc.embedPng(logoBytes);
         const logoDims = logoImage.scale(0.09);
-        
+
         page.drawImage(logoImage, {
             x: 50,
             y: height - 40 - logoDims.height,
@@ -55,20 +60,20 @@ export async function generatePdfCertificate(
     const titleFontSize = 10;
     const titleWidth = fontBold.widthOfTextAtSize(titleText, titleFontSize);
     page.drawText(titleText, {
-        x: width - 50 - titleWidth,
+        x: width - 70 - titleWidth,
         y: height - 90,
         size: titleFontSize,
         font: fontBold,
         color: black,
     });
-    
+
     // ------------------------------------------------------------------------
     // 2. USER DETAILS RECTANGLE
     // ------------------------------------------------------------------------
-    
-    const boxY = height - 120;
-    const boxHeight = 80;
-    
+
+    const boxY = height - 105; // Ajustamos esto de 120 a 105 para subir toda la caja
+    const boxHeight = 54; // Altura de la caja (ajustar esto para padding inferior)
+
     page.drawRectangle({
         x: 50,
         y: boxY - boxHeight,
@@ -79,11 +84,11 @@ export async function generatePdfCertificate(
     });
 
     const labelX = 55;
-    const valueX = 200;
-    const lineSpacing = 16;
-    const startTextY = boxY - 20;
+    const valueX = 160;   // Moved values closer to labels
+    const lineSpacing = 13; // Interlineado entre el texto
+    const startTextY = boxY - 11; // Y inicial del texto (ajustar para padding superior)
     const labelFontSize = 10;
-    const valueFontSize = 11;
+    const valueFontSize = 10;
 
     // Use placeholder text if data is missing
     const safeStoreName = storeName || "_______________________";
@@ -106,9 +111,9 @@ export async function generatePdfCertificate(
     // ------------------------------------------------------------------------
     // 3. LEGAL TEXT (English)
     // ------------------------------------------------------------------------
-    
+
     const paragraphFontSize = 10;
-    const pLineHeight = 13;
+    const pLineHeight = 12;
     const textMaxWidth = width - 100;
     let currentY = boxY - boxHeight - 20;
 
@@ -175,16 +180,19 @@ You have acquired a license to use Epidemic Sound music for in-store/background 
     currentY = drawParagraph(page, textEnglish, fontRegular, paragraphFontSize, 50, currentY, textMaxWidth, pLineHeight, true);
 
     currentY -= 10;
-    
+
     // Validity Period
-    page.drawText(`Validity period: until ${expirationDate}`, { x: 50, y: currentY, size: paragraphFontSize, font: fontRegular, color: black });
+    page.drawText(`Validity period: from ${startDate} to ${computedExpirationDate}`, { x: 50, y: currentY, size: paragraphFontSize, font: fontRegular, color: black });
 
     // ------------------------------------------------------------------------
     // 4. DIVIDER AND ITALIAN TEXT
     // ------------------------------------------------------------------------
-    
+
     currentY -= 30;
-    page.drawText(`*******`, { x: 50, y: currentY, size: paragraphFontSize, font: fontRegular, color: black });
+    const dividerText = `*******`;
+    const dividerWidth = fontRegular.widthOfTextAtSize(dividerText, paragraphFontSize);
+    const dividerX = (width - dividerWidth) / 2;
+    page.drawText(dividerText, { x: dividerX, y: currentY, size: paragraphFontSize, font: fontRegular, color: black });
     currentY -= 20;
 
     const textItalian = `Epidemic Sound AB, Västgötagatan 2, 118 27 Stoccolma Svezia ("Epidemic Sound") è l'unico titolare di tutti i diritti sulla musica di Epidemic Sound fornita all'interno del Servizio, quali i cosiddetti "diritti connessi" sulla registrazione e i diritti d’autore sulla composizione musicale che è incorporata nella registrazione. Pertanto, Epidemic Sound è l'unico proprietario di tutti i diritti d’autore e diritti connessi a carattere economico su ciascun brano musicale del suo catalogo e tutti i titolari dei diritti hanno ricevuto un pagamento diretto da Epidemic Sound per ogni opera musicale.
@@ -196,16 +204,14 @@ Il presente certificato attesa l’acquisizione di una licenza per utilizzare la
     currentY = drawParagraph(page, textItalian, fontRegular, paragraphFontSize, 50, currentY, textMaxWidth, pLineHeight, true);
 
     currentY -= 10;
-    page.drawText(`Periodo di validità: fino al ${expirationDate}`, { x: 50, y: currentY, size: paragraphFontSize, font: fontRegular, color: black });
+    page.drawText(`Periodo di validità: dal ${startDate} al ${computedExpirationDate}`, { x: 50, y: currentY, size: paragraphFontSize, font: fontRegular, color: black });
 
-    currentY -= 30;
-    const today = new Date();
-    const formattedDate = today.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
-    page.drawText(`Stockholm ${formattedDate}`, { x: 50, y: currentY, size: paragraphFontSize, font: fontRegular, color: black });
+    currentY -= 25;
+    page.drawText(`Stockholm 25 November 2021`, { x: 50, y: currentY, size: paragraphFontSize, font: fontRegular, color: black });
 
     // ------------------------------------------------------------------------
     // 5. SIGNATURE FOOTER
-    currentY -= 50;
+    currentY -= 25;
     const signatureY = currentY; // Store base Y for both signatures
 
     // --- LEFT: Epidemic Sound Signature ---
@@ -214,10 +220,10 @@ Il presente certificato attesa l’acquisizione di una licenza per utilizzare la
         const signatureBytes = fs.readFileSync(signaturePath);
         const signatureImage = await pdfDoc.embedPng(signatureBytes);
         const signatureDims = signatureImage.scale(0.25);
-        
+
         page.drawImage(signatureImage, {
-            x: 50,
-            y: signatureY - signatureDims.height + 10,
+            x: 60,
+            y: signatureY - signatureDims.height + 15,
             width: signatureDims.width,
             height: signatureDims.height,
         });
@@ -225,10 +231,10 @@ Il presente certificato attesa l’acquisizione di una licenza per utilizzare la
     } catch (e: any) {
         console.error("Could not load signature Image:", e.message);
     }
-    
-    page.drawText(`Elisabet Ström`, { x: 50, y: currentY - 5, size: 10, font: fontRegular, color: black });
-    page.drawText(`Legal Counsel`, { x: 50, y: currentY - 17, size: 10, font: fontRegular, color: black });
-    page.drawText(`Epidemic Sound`, { x: 50, y: currentY - 29, size: 10, font: fontRegular, color: black });
+
+    page.drawText(`Elisabet Ström`, { x: 50, y: currentY + 5, size: 10, font: fontRegular, color: black });
+    page.drawText(`Legal Counsel`, { x: 50, y: currentY - 7, size: 10, font: fontRegular, color: black });
+    page.drawText(`Epidemic Sound`, { x: 50, y: currentY - 19, size: 10, font: fontRegular, color: black });
 
     const pdfBytes = await pdfDoc.save();
     return Buffer.from(pdfBytes);
