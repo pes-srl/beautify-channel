@@ -6,7 +6,7 @@ import { Mail, Phone, Instagram, Facebook } from "lucide-react";
 
 export function FooterNew() {
     const pathname = usePathname();
-    const isDashboard = pathname?.startsWith("/admin") || pathname?.startsWith("/area-riservata");
+    const isDashboard = pathname?.startsWith("/admin");
 
     if (isDashboard) return null;
 
