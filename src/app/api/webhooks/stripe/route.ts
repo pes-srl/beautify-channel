@@ -38,9 +38,13 @@ export async function POST(req: Request) {
             const planType = metadata.requested_plan.toLowerCase();
             const duration = metadata.durata === '12 mesi' ? 12 : 6;
             
-            // Calculate expiration date (Always December 31st of the current year)
+            // 1. License Expiration: Always December 31st of the current year
             const startDate = new Date();
-            const expirationDate = new Date(startDate.getFullYear(), 11, 31, 23, 59, 59); // Month is 11 for December (0-indexed)
+            const licenseExpirationDate = new Date(startDate.getFullYear(), 11, 31, 23, 59, 59); // Month is 11 for December (0-indexed)
+
+            // 2. Plan Expiration: Calculated based on the purchased duration
+            const planExpirationDate = new Date(startDate);
+            planExpirationDate.setMonth(planExpirationDate.getMonth() + duration);
 
             // Access Supabase securely with Server Role Key
             try {
@@ -54,14 +58,14 @@ export async function POST(req: Request) {
                     { auth: { autoRefreshToken: false, persistSession: false } }
                 );
 
-                console.log(`Aggiornando il piano dell'utente ${metadata.user_id} a ${planType} fino al ${expirationDate.toISOString()}`);
+                console.log(`Aggiornando il piano dell'utente ${metadata.user_id} a ${planType} fino al ${planExpirationDate.toISOString()}`);
 
                 // Update Profile
                 const { error: profileError } = await supabaseAdmin
                     .from('profiles')
                     .update({
                         plan_type: planType,
-                        subscription_expiration: expirationDate.toISOString(),
+                        subscription_expiration: planExpirationDate.toISOString(),
                     })
                     .eq('id', metadata.user_id);
 
@@ -129,7 +133,7 @@ export async function POST(req: Request) {
                         metadata.responsabile || '-', // fullName
                         metadata.partita_iva || '-', // vat
                         startDate.toLocaleDateString('it-IT'), // startDate
-                        expirationDate.toLocaleDateString('it-IT') // expirationDate
+                        licenseExpirationDate.toLocaleDateString('it-IT') // expirationDate
                     );
 
                     const sanitizedName = (metadata.nome_istituto || 'istituto').replace(/[^a-z0-9]/gi, '_').toLowerCase();
@@ -188,7 +192,7 @@ export async function POST(req: Request) {
                             planType.toUpperCase(),
                             metadata.durata || '-',
                             new Date().toLocaleDateString('it-IT'),
-                            expirationDate.toLocaleDateString('it-IT')
+                            planExpirationDate.toLocaleDateString('it-IT')
                         );
 
                         const sanitizedName = (metadata.nome_istituto || 'istituto').replace(/[^a-z0-9]/gi, '_').toLowerCase();
@@ -281,7 +285,7 @@ export async function POST(req: Request) {
                                 </div>
                                 <div style="background-color: #FFFFFF; padding: 30px; border-radius: 0 0 12px 12px;">
                                     <p style="font-size: 16px; line-height: 1.6; color: #444;">Sei dei nostri, significa che hai capito le potenzialità del servizio!<br>Grazie!</p>
-                                    <p style="font-size: 16px; line-height: 1.6; color: #444;">Il tuo abbonamento attuale è il <strong>${planType.toUpperCase()}</strong> e scadrà il <strong>${expirationDate.toLocaleDateString('it-IT')}</strong>.</p>
+                                    <p style="font-size: 16px; line-height: 1.6; color: #444;">Il tuo abbonamento attuale è il <strong>${planType.toUpperCase()}</strong> e scadrà il <strong>${planExpirationDate.toLocaleDateString('it-IT')}</strong>.</p>
                                     <p style="font-size: 16px; line-height: 1.6; color: #444;">Nell'area riservata troverai anche una sezione documenti contenente: Pagamento - Contratto - Licenza di diffusione musicale (da tenere sempre in reception in caso di controlli della SIAE)</p>
                                     <p style="font-size: 16px; line-height: 1.6; color: #444;">Esatto, utilizzando il nostro servizio puoi fare disdetta alla SIAE non pagandola più perchè con noi i diritti musicali sono già compresi!</p>
                                     <p style="font-size: 16px; line-height: 1.6; color: #444; margin-top: 20px;">Per qualsiasi info puoi scriverci su whatsapp o mandarci una email a info@beautify-channel.com<br><b>Grazie per aver scelto BeautiFy!</b></p>
