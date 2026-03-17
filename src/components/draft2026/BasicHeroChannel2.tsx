@@ -43,26 +43,26 @@ export function BasicHeroChannel2({ channel, planType }: BasicHeroChannel2Props)
     };
 
     return (
-        <div className={`relative w-full md:w-3/4 mx-auto rounded-3xl overflow-hidden shadow-2xl mb-12 group transition-all duration-700 ${isPremium ? 'shadow-amber-500/20 border border-amber-500/10' : planType === 'free_trial' ? 'shadow-fuchsia-500/20 border border-fuchsia-500/10' : 'shadow-indigo-500/20 border border-indigo-500/10'}`}>
+        <div className={`relative w-full md:w-2/3 lg:w-3/5 mx-auto rounded-3xl overflow-hidden shadow-2xl mb-12 group transition-all duration-700 ${isPremium ? 'shadow-amber-500/20 border border-amber-500/10' : planType === 'free_trial' ? 'shadow-fuchsia-500/20 border border-fuchsia-500/10' : 'shadow-indigo-500/20 border border-indigo-500/10'}`}>
             {/* Animated Gradient Background */}
             <div className={`absolute inset-0 z-0 bg-gradient-to-r ${isPremium ? 'from-amber-900 via-zinc-950 to-black' : planType === 'free_trial' ? 'from-fuchsia-900 via-purple-950 to-black' : 'from-indigo-900 via-zinc-950 to-black'}`} />
 
             {/* Glowing Orbs */}
-            <div className={`absolute top-0 right-0 w-[500px] h-[500px] blur-[100px] rounded-full mix-blend-screen -translate-y-1/2 translate-x-1/3 pointer-events-none ${isPremium ? 'bg-amber-500/10' : planType === 'free_trial' ? 'bg-fuchsia-400/10' : 'bg-indigo-400/10'}`} />
-            <div className={`absolute bottom-0 left-0 w-[300px] h-[300px] blur-[80px] rounded-full mix-blend-screen translate-y-1/2 -translate-x-1/3 pointer-events-none ${isPremium ? 'bg-amber-700/10' : planType === 'free_trial' ? 'bg-purple-500/10' : 'bg-indigo-600/10'}`} />
+            <div className={`absolute top-0 right-0 w-[400px] h-[400px] blur-[100px] rounded-full mix-blend-screen -translate-y-1/2 translate-x-1/3 pointer-events-none ${isPremium ? 'bg-amber-500/10' : planType === 'free_trial' ? 'bg-fuchsia-400/10' : 'bg-indigo-400/10'}`} />
+            <div className={`absolute bottom-0 left-0 w-[200px] h-[200px] blur-[80px] rounded-full mix-blend-screen translate-y-1/2 -translate-x-1/3 pointer-events-none ${isPremium ? 'bg-amber-700/10' : planType === 'free_trial' ? 'bg-purple-500/10' : 'bg-indigo-600/10'}`} />
 
             {/* Content Container */}
         <div className="relative z-10 flex flex-col md:flex-row items-center border border-white/5 rounded-3xl bg-transparent">
 
                 {/* Left side: Premium Badge & Info */}
-                <div className="flex-1 p-8 md:p-12 flex flex-col justify-center">
+                <div className="flex-1 p-6 md:p-8 flex flex-col justify-center">
                     <div className="flex flex-wrap items-center gap-2 mb-4">
-                        <div className="flex items-center gap-1.5 bg-transparent text-white px-3 py-1.5 rounded-full text-[10px] md:text-xs font-bold uppercase tracking-widest border border-white/10 backdrop-blur-md">
+                        <div className="flex items-center gap-1.5 bg-transparent text-white px-3 py-1.5 rounded-full text-[10px] uppercase font-bold tracking-widest border border-white/10 backdrop-blur-md">
                             <Sparkles className={`w-3.5 h-3.5 ${isPremium ? 'text-amber-400' : planType === 'free_trial' ? 'text-fuchsia-400' : 'text-indigo-400'}`} />
                             <span>CANALE AUDIO PRINCIPALE</span>
                         </div>
                         {isActive && (
-                            <div className={`flex items-center gap-2 border px-3 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest ${isPremium ? 'bg-amber-500/10 text-amber-400 border-amber-500/20' : planType === 'free_trial' ? 'bg-fuchsia-500/10 text-fuchsia-400 border-fuchsia-500/20' : 'bg-indigo-500/10 text-indigo-400 border-indigo-500/20'}`}>
+                            <div className={`flex items-center gap-2 border px-3 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-widest ${isPremium ? 'bg-amber-500/10 text-amber-400 border-amber-500/20' : planType === 'free_trial' ? 'bg-fuchsia-500/10 text-fuchsia-400 border-fuchsia-500/20' : 'bg-indigo-500/10 text-indigo-400 border-indigo-500/20'}`}>
                                 <div className="flex gap-0.5 items-end h-3">
                                     {[1, 2, 3].map((i) => (
                                         <motion.div
@@ -78,20 +78,20 @@ export function BasicHeroChannel2({ channel, planType }: BasicHeroChannel2Props)
                         )}
                     </div>
 
-                    <h2 className="text-4xl md:text-5xl lg:text-6xl font-semibold font-[family-name:var(--font-montserrat)] text-zinc-300 tracking-tight mb-4">
+                    <h2 className="text-3xl md:text-4xl lg:text-5xl font-semibold font-[family-name:var(--font-montserrat)] text-zinc-300 tracking-tight mb-4">
                         Beautify Channel
                         <span className={`block mt-1 ${isPremium ? 'text-amber-400 font-bold' : planType === 'free_trial' ? 'text-fuchsia-400 font-bold' : 'text-indigo-400 font-bold'}`}>
                             {isPremium ? 'Premium' : planType === 'free_trial' ? 'Prova Gratuita' : 'Basic'}
                         </span>
                     </h2>
 
-                    <div className="max-w-xl leading-relaxed mb-8 text-zinc-300">
+                    <div className="max-w-lg leading-relaxed mb-4 text-zinc-300">
                         {isPremium ? (
-                            <p className="text-lg md:text-lg">
-                                Questo è il <span className="text-xl md:text-xl"><strong className="text-white font-black">CANALE AUDIO PRINCIPALE</strong> che contiene tutte le <strong className="text-amber-400 font-black">TUE PROMO PERSONALIZZATE</strong></span> dei prossimi mesi e che trasforma radicalmente l'atmosfera del tuo istituto.<br />Sotto altri canali settoriali!
+                            <p className="text-base md:text-lg">
+                                Questo è il <span><strong className="text-white font-black">CANALE AUDIO PRINCIPALE</strong> che contiene tutte le <strong className="text-amber-400 font-black">TUE PROMO PERSONALIZZATE</strong></span> dei prossimi mesi e che trasforma radicalmente l'atmosfera del tuo istituto.<br />Sotto altri canali settoriali!
                             </p>
                         ) : (
-                            <p className="text-lg md:text-lg">
+                            <p className="text-base md:text-lg">
                                 Questo è il <strong className="text-white font-black">CANALE AUDIO PRINCIPALE</strong> che trasforma radicalmente l'atmosfera del tuo istituto.<br />Sotto altri canali settoriali!
                             </p>
                         )}
@@ -100,7 +100,7 @@ export function BasicHeroChannel2({ channel, planType }: BasicHeroChannel2Props)
                 </div>
 
                 {/* Right side: Abstract Art / Vinyl Visualizer & Play Button */}
-                <div className="flex flex-col w-full md:w-1/3 relative items-center justify-center p-8 md:p-12 border-t md:border-t-0 md:border-l border-white/5 bg-transparent">
+                <div className="flex flex-col w-full md:w-[250px] lg:w-[300px] shrink-0 relative items-center justify-center p-6 md:p-8 border-t md:border-t-0 md:border-l border-white/5 bg-transparent">
                     <div className="absolute inset-0 bg-transparent pointer-events-none" />
 
                     {/* Pulsing rings if active */}
