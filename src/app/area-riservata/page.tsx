@@ -151,7 +151,7 @@ export default async function AreaClientePage2(props: {
                                     <Sparkles className="w-8 h-8 md:w-10 md:h-10 text-emerald-400" />
                                 </div>
                                 <div>
-                                    <h2 className="text-xl md:text-2xl lg:text-3xl font-medium text-zinc-300 mb-1 lg:mb-2 tracking-wide font-[family-name:var(--font-montserrat)]">
+                                    <h2 className="text-xl md:text-2xl lg:text-3xl font-medium text-zinc-400 mb-1 lg:mb-2 tracking-wide font-[family-name:var(--font-montserrat)]">
                                         Benvenuta in BeautiFy Channel
                                     </h2>
                                     <p className="text-zinc-300 text-sm md:text-base font-light">
@@ -168,7 +168,7 @@ export default async function AreaClientePage2(props: {
                                     <h3 className="text-2xl md:text-3xl font-black text-emerald-400 uppercase tracking-wider leading-none mb-1">
                                         FREE TRIAL
                                     </h3>
-                                    <span className="text-white text-xs md:text-sm italic block">
+                                    <span className="text-zinc-400 text-xs md:text-sm italic block">
                                         {daysLeft} {daysLeft === 1 ? 'giorno' : 'giorni'} alla scadenza
                                     </span>
                                 </div>
@@ -184,14 +184,14 @@ export default async function AreaClientePage2(props: {
                         {/* GLOWING BAR */}
                         <div className="w-full max-w-2xl mx-auto bg-gradient-to-r from-[#9b3bff] to-[#ff5a7e] rounded-2xl p-4 md:p-6 flex flex-col md:flex-row items-center gap-4 justify-between shadow-[0_0_40px_rgba(255,90,126,0.3)]">
                             <div className="flex items-center gap-4">
-                                <Sparkles className="w-6 h-6 md:w-8 md:h-8 text-white shrink-0" />
-                                <span className="font-bold text-white text-lg md:text-xl">
+                                <Sparkles className="w-6 h-6 md:w-8 md:h-8 text-zinc-400 shrink-0" />
+                                <span className="font-bold text-zinc-400 text-lg md:text-xl">
                                     La tua prova gratuita è attiva
                                 </span>
                             </div>
                             <div className="flex items-center gap-3">
-                                <span className="text-white/90 text-sm md:text-base">Scade tra</span>
-                                <span className="bg-black/30 backdrop-blur-md px-4 py-1.5 rounded-xl text-white text-sm md:text-base font-bold">
+                                <span className="text-zinc-400 text-sm md:text-base">Scade tra</span>
+                                <span className="bg-black/30 backdrop-blur-md px-4 py-1.5 rounded-xl text-zinc-400 text-sm md:text-base font-bold">
                                     {daysLeft} {daysLeft === 1 ? 'giorno' : 'giorni'}
                                 </span>
                             </div>
