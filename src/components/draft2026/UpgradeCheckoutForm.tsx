@@ -511,9 +511,9 @@ export function UpgradeCheckoutForm({ userEmail, userVat, userSalonName, planTyp
                         GRAZIE
                     </h3>
                     <p className="text-white text-sm md:text-base flex items-center justify-center gap-2 relative z-10 font-medium">
-                        <Heart className={`w-4 h-4 ${themeColors.accent} fill-current opacity-70`} />
+                        <Heart className={`w-4 h-4 text-red-500 fill-current opacity-70`} />
                         Il giusto mood fa la differenza in istituto
-                        <Heart className={`w-4 h-4 ${themeColors.accent} fill-current opacity-70`} />
+                        <Heart className={`w-4 h-4 text-red-500 fill-current opacity-70`} />
                     </p>
                 </div>
             </div>
