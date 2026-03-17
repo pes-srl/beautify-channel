@@ -78,7 +78,7 @@ export function BasicHeroChannel2({ channel, planType }: BasicHeroChannel2Props)
                         )}
                     </div>
 
-                    <h2 className="text-4xl md:text-5xl lg:text-6xl font-semibold font-[family-name:var(--font-montserrat)] text-white tracking-tight mb-4">
+                    <h2 className="text-4xl md:text-5xl lg:text-6xl font-semibold font-[family-name:var(--font-montserrat)] text-zinc-300 tracking-tight mb-4">
                         Beautify Channel
                         <span className={`block mt-1 ${isPremium ? 'text-amber-400 font-bold' : planType === 'free_trial' ? 'text-fuchsia-400 font-bold' : 'text-indigo-400 font-bold'}`}>
                             {isPremium ? 'Premium' : planType === 'free_trial' ? 'Prova Gratuita' : 'Basic'}
