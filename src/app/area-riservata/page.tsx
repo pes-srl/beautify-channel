@@ -151,7 +151,7 @@ export default async function AreaClientePage2(props: {
                                     <Sparkles className="w-8 h-8 md:w-10 md:h-10 text-emerald-400" />
                                 </div>
                                 <div>
-                                    <h2 className="text-xl md:text-2xl lg:text-3xl font-bold text-white mb-1 lg:mb-2 tracking-wide font-[family-name:var(--font-montserrat)]">
+                                    <h2 className="text-xl md:text-2xl lg:text-3xl font-medium text-zinc-300 mb-1 lg:mb-2 tracking-wide font-[family-name:var(--font-montserrat)]">
                                         Benvenuta in BeautiFy Channel
                                     </h2>
                                     <p className="text-zinc-300 text-sm md:text-base font-light">
