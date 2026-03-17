@@ -147,7 +147,7 @@ export default async function AreaClientePage2(props: {
                             
                             <div className="flex-1 relative z-10 flex flex-col md:flex-row items-center lg:items-center gap-4 text-center lg:text-left">
                                 <div className="p-4 bg-white/5 border border-white/10 rounded-2xl shrink-0 shadow-inner">
-                                    <Sparkles className="w-8 h-8 md:w-10 md:h-10 text-[#ff5a7e]" />
+                                    <Sparkles className="w-8 h-8 md:w-10 md:h-10 text-emerald-400" />
                                 </div>
                                 <div>
                                     <h2 className="text-xl md:text-2xl lg:text-3xl font-bold text-white mb-1 lg:mb-2 tracking-wide font-[family-name:var(--font-montserrat)]">
@@ -164,10 +164,10 @@ export default async function AreaClientePage2(props: {
                                     <span className="text-zinc-400 text-xs md:text-sm uppercase tracking-[0.2em] font-medium block mb-1">
                                         Il Tuo Piano
                                     </span>
-                                    <h3 className="text-2xl md:text-3xl font-black text-[#ff5a7e] uppercase tracking-wider leading-none mb-1">
+                                    <h3 className="text-2xl md:text-3xl font-black text-emerald-400 uppercase tracking-wider leading-none mb-1">
                                         FREE TRIAL
                                     </h3>
-                                    <span className="text-zinc-400 text-xs md:text-sm italic block">
+                                    <span className="text-white text-xs md:text-sm italic block">
                                         {daysLeft} {daysLeft === 1 ? 'giorno' : 'giorni'} alla scadenza
                                     </span>
                                 </div>
@@ -205,16 +205,16 @@ export default async function AreaClientePage2(props: {
                         </div>
 
                         {/* AREA RISERVATA BLOCK */}
-                        <div className="w-full max-w-4xl mx-auto mt-6 md:mt-8 bg-[#0f0518]/50 border border-[#ff5a7e]/20 rounded-3xl p-6 md:p-8 flex flex-col items-center justify-center relative shadow-[0_0_30px_rgba(255,90,126,0.05)] text-center">
-                            <div className="absolute inset-0 bg-gradient-to-br from-[#ff5a7e]/5 to-transparent rounded-3xl pointer-events-none" />
-                            <h1 className="text-3xl md:text-5xl font-sans font-bold text-[#ff5a7e] mb-4 drop-shadow-sm tracking-tight w-full justify-center text-center">
+                        <div className="w-full max-w-5xl mx-auto mt-6 md:mt-8 bg-[#0f0518]/50 border border-[#ff5a7e]/20 rounded-[2rem] p-8 md:p-10 flex flex-col items-center justify-center relative shadow-[0_0_40px_rgba(255,90,126,0.05)] text-center">
+                            <div className="absolute inset-0 bg-gradient-to-br from-[#ff5a7e]/5 to-transparent rounded-[2rem] pointer-events-none" />
+                            <h1 className="text-4xl md:text-6xl font-sans font-bold text-white mb-5 drop-shadow-md tracking-tight w-full justify-center text-center">
                                 Area Riservata
                             </h1>
-                            <div className="flex flex-col md:flex-row items-center gap-3 relative z-10">
-                                <span className="text-white font-bold text-lg md:text-xl text-center">
+                            <div className="flex flex-col md:flex-row items-center gap-4 relative z-10">
+                                <span className="text-white font-bold text-xl md:text-2xl text-center">
                                     {profile?.salon_name || user.email}
                                 </span>
-                                <span className="text-[10px] md:text-xs font-bold text-emerald-400 border border-emerald-400/30 bg-emerald-400/10 px-3 py-1 rounded-full uppercase tracking-widest text-center">
+                                <span className="text-xs md:text-sm font-bold text-emerald-400 border border-emerald-400/30 bg-emerald-400/10 px-4 py-1.5 rounded-full uppercase tracking-widest text-center">
                                     PIANO: {profile?.plan_type === 'premium' ? 'PREMIUM' : profile?.plan_type === 'basic' ? 'BASIC' : 'FREE TRIAL'}
                                 </span>
                             </div>
