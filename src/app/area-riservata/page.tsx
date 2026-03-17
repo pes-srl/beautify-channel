@@ -145,7 +145,7 @@ export default async function AreaClientePage2(props: {
                         <div className="w-full max-w-6xl mx-auto bg-gradient-to-r from-[#0f0518]/80 via-[#2a1154]/60 to-[#ff5a7e]/10 border border-white/5 rounded-[2rem] p-6 text-left shadow-2xl flex flex-col lg:flex-row items-center justify-between gap-6 backdrop-blur-xl relative overflow-hidden">
                             {/* Decorative background glow */}
                             <div className="absolute top-0 right-1/4 w-64 h-64 bg-[#ff5a7e]/10 blur-[80px] rounded-full pointer-events-none" />
-                            
+
                             <div className="flex-1 relative z-10 flex flex-col md:flex-row items-center lg:items-center gap-4 text-center lg:text-left">
                                 <div className="p-4 bg-white/5 border border-white/10 rounded-2xl shrink-0 shadow-inner">
                                     <Sparkles className="w-8 h-8 md:w-10 md:h-10 text-emerald-400" />
@@ -159,7 +159,7 @@ export default async function AreaClientePage2(props: {
                                     </p>
                                 </div>
                             </div>
-                            
+
                             <div className="flex flex-col sm:flex-row items-center gap-4 relative z-10 w-full lg:w-auto mt-4 lg:mt-0 pt-6 lg:pt-0 border-t lg:border-t-0 border-white/10 lg:pl-8 lg:border-l">
                                 <div className="text-center lg:text-right flex-1 sm:flex-none">
                                     <span className="text-zinc-400 text-xs md:text-sm uppercase tracking-[0.2em] font-medium block mb-1">
@@ -242,7 +242,7 @@ export default async function AreaClientePage2(props: {
                         <h2 className="text-xl md:text-2xl font-light tracking-[0.2em] font-[family-name:var(--font-montserrat)] text-white mb-6 uppercase">
                             Benvenuta nel tuo account
                         </h2>
-                        
+
                         <div className="flex flex-col items-center gap-3">
                             <span className="text-xl md:text-2xl font-bold text-white">
                                 {profile?.salon_name || user.email}
@@ -262,7 +262,7 @@ export default async function AreaClientePage2(props: {
                     <>
                         {/* THE HERO PLAYER */}
                         <div className="mb-0 flex flex-col items-center">
-                             <BasicHeroChannel2
+                            <BasicHeroChannel2
                                 planType={profile?.plan_type}
                                 channel={channels?.find((c: any) =>
                                     profile?.plan_type === 'premium'

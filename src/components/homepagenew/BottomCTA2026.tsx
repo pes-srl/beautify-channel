@@ -276,7 +276,7 @@ export function BottomCTA2026({ hasSession }: { hasSession?: boolean }) {
                     className="py-16 flex flex-col items-center justify-center text-center space-y-6 border-t border-white/10"
                 >
                     <h2 className={`text-2xl md:text-4xl lg:text-5xl font-semibold text-white tracking-wide ${montserrat.className}`}>
-                        CHIEDICI ALTRE INFO
+                        HAI BISOGNO DI ALTRE INFO?
                     </h2>
                     <a
                         href="https://wa.link/5apci9"

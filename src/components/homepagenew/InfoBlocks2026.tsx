@@ -97,10 +97,10 @@ export function InfoBlocks2026() {
 
                         <p className={`text-xl md:text-2xl leading-relaxed font-light text-zinc-700 ${inter.className}`}>
                             Finalmente anche in Italia un vero must have per gli istituti di bellezza: <br className="block md:hidden" />
-                            <span className="whitespace-nowrap inline-block mt-1 md:mt-0">il <strong className="text-[#AB7169] font-semibold">MARKETING SONORO</strong></span><br /><br />
-                            Estremamente innovativo, straordinariamente utile, elegantemente coinvolgente. BeautiFy Channel è la soluzione innovativa di marketing sonoro ideata per aumentare le
+                            <span className="whitespace-nowrap inline-block mt-1 md:mt-0">il <strong className="text-[#DDA0DD] font-semibold">MARKETING SONORO</strong></span><br /><br />
+                            Estremamente innovativo, straordinariamente utile, elegantemente coinvolgente. BeautiFy Channel è l’avanzata soluzione di marketing sonoro ideata per aumentare le
                             vendite, la professionalità e la customer experience nel settore del beauty, inducendo una
-                            piacevole sensazione di coinvolgimento
+                            piacevole sensazione di benessere
                         </p>
                         <div className="pt-4">
                             <a
@@ -143,10 +143,10 @@ export function InfoBlocks2026() {
                         className="flex-1 space-y-6"
                     >
                         <h2 className={`text-3xl md:text-5xl font-semibold text-[#5D6676] leading-[1.1] tracking-tight ${montserrat.className}`}>
-                            Un'eccellenza nell’intrattenimento in istituto
+                            Tutto in un canale unico!
                         </h2>
                         <p className={`text-zinc-700 text-xl md:text-2xl leading-relaxed font-light ${inter.className}`}>
-                            In grado di arricchire un raffinato sottofondo
+                            BeautiFy Channel è un’eccellenza nell’intrattenimento in istituto, in grado di arricchire un raffinato sottofondo
                             sonoro - scelto in perfetta coerenza con il settore - con efficaci input informativi e
                             promozionali.
                         </p>
@@ -200,8 +200,7 @@ export function InfoBlocks2026() {
                             COME?
                         </h2>
                         <p className={`text-xl md:text-2xl text-[#5D6676]/80 font-normal leading-relaxed max-w-3xl mx-auto ${inter.className}`}>
-                            Con un semplice clic accedendo in modo semplice e <br className="hidden md:block" />
-                            sicuro a BeautiFy Channel
+                            Con un semplice clic per accendere BeautiFy Channel!
                         </p>
                     </div>
 
@@ -213,15 +212,8 @@ export function InfoBlocks2026() {
                                     Ascolta una demo<br />del Mood BeautiFy
                                 </h3>
                                 <p className={`text-[#5D6676]/70 text-lg font-normal ${inter.className}`}>
-                                    La Tua Beauty Routine Sonora
+                                    Goditi l’atmosfera della Beauty Routine Sonora.
                                 </p>
-                                <div className="pt-2 flex justify-center">
-                                    <div className="inline-flex items-center gap-2 bg-[#DDA0DD] border border-[#DDA0DD]/20 px-4 py-1.5 rounded-full backdrop-blur-sm shadow-sm hover:bg-[#D48DD4] transition-all duration-300">
-                                        <div className="text-white font-bold tracking-widest uppercase text-xs md:text-sm">
-                                            CON UN SEMPLICE CLICK ;-)
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
 
                             <div className="relative group mt-6 md:mt-0">

@@ -27,7 +27,7 @@ const plans = [
         buttonText: "PROVA GRATUITA 7 GIORNI",
         buttonClasses: "hover:brightness-110 shadow-xl shadow-[#5D6676]/20",
         buttonStyle: { background: 'linear-gradient(90deg, #AB7169 0%, #D8B2A3 100%)' },
-        footerText: "Possibilità di abbonamento semestrale a 25,90 mese\nOfferta valida fino a 250mq\nPagamento unica soluzione",
+        footerText: "Possibilità di abbonamento semestrale a 25,90 al mese.\nOfferta valida fino a 250mq\nPagamento in un’unica soluzione",
         highlight: false,
     }
 ];
@@ -148,42 +148,7 @@ export function Pricing2026() {
                     ))}
                 </div>
 
-                {/* Laser & Cosmetic Channel Boxes */}
-                <motion.div
-                    initial={{ opacity: 0, x: 50 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
-                    className="mt-12 mb-4 w-full max-w-5xl mx-auto flex flex-col md:flex-row gap-4 px-2"
-                >
-                    {/* LASER CHANNEL */}
-                    <div className="flex-1 bg-gradient-to-b from-[#A66E64] to-[#8B5A52] rounded-[35px] p-8 flex flex-col justify-center items-center text-center shadow-xl relative overflow-hidden border border-white/10">
-                        <div className="absolute inset-0 flex items-center justify-center opacity-[0.1] pointer-events-none">
-                            <div className="w-64 h-64 border-[8px] border-white rotate-45 rounded-3xl"></div>
-                        </div>
-                        <h3 className={`text-2xl md:text-3xl font-semibold text-white tracking-wide mb-3 relative z-10 uppercase drop-shadow-sm ${montserrat.className}`}>
-                            LASER CHANNEL
-                        </h3>
-                        <p className={`text-white text-[15px] md:text-lg font-medium leading-snug relative z-10 transition-all drop-shadow-sm ${inter.className}`}>
-                            *Incluso nel piano <span className="text-white font-bold underline decoration-[#D8B2A3]">Premium</span>.<br />
-                            Puoi utilizzare il canale dedicato al laser quando vuoi promuovere servizi e pacchetti.
-                        </p>
-                    </div>
 
-                    {/* COSMETIC CHANNEL */}
-                    <div className="flex-1 bg-gradient-to-b from-[#5D6676] to-[#1E0C31] rounded-[35px] p-8 flex flex-col justify-center items-center text-center shadow-xl relative overflow-hidden border border-white/10">
-                        <div className="absolute inset-0 flex items-center justify-center opacity-[0.05] pointer-events-none">
-                            <div className="w-64 h-64 border-[8px] border-[#FAFAF8] rotate-45 rounded-3xl"></div>
-                        </div>
-                        <h3 className={`text-2xl md:text-3xl font-semibold text-white tracking-wide mb-3 drop-shadow-md relative z-10 uppercase ${montserrat.className}`}>
-                            COSMETIC CHANNEL
-                        </h3>
-                        <p className={`text-[#ECE0D4] text-[15px] md:text-lg font-medium leading-snug drop-shadow-sm relative z-10 transition-all ${inter.className}`}>
-                            **Incluso nel piano <span className="text-white font-bold">Premium</span>.<br />
-                            Puoi utilizzare il canale dedicato alla cosmetica, quando vuoi promuovere servizi di cosmetica.
-                        </p>
-                    </div>
-                </motion.div>
 
                 {/* 2. Three Steps Guide */}
                 <motion.div
