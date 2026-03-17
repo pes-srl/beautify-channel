@@ -168,8 +168,11 @@ export default async function AreaClientePage2(props: {
                                     <h3 className="text-2xl md:text-3xl font-black text-emerald-400 uppercase tracking-wider leading-none mb-1">
                                         FREE TRIAL
                                     </h3>
-                                    <span className="text-zinc-400 text-xs md:text-sm italic block">
-                                        {daysLeft} {daysLeft === 1 ? 'giorno' : 'giorni'} alla scadenza
+                                    <span className="text-emerald-400/80 text-xs md:text-sm font-bold block mb-1">
+                                        E' STATO ATTIVATO
+                                    </span>
+                                    <span className="text-zinc-400 text-xs md:text-sm italic block mt-1 leading-tight">
+                                        <span className="text-emerald-400 font-bold text-sm md:text-base">{daysLeft}</span> {daysLeft === 1 ? 'giorno' : 'giorni'} alla scadenza<br />della tua prova gratuita
                                     </span>
                                 </div>
                                 <a
@@ -181,21 +184,7 @@ export default async function AreaClientePage2(props: {
                             </div>
                         </div>
 
-                        {/* GLOWING BAR */}
-                        <div className="w-full max-w-2xl mx-auto bg-gradient-to-r from-[#9b3bff] to-[#ff5a7e] rounded-2xl p-4 md:p-6 flex flex-col md:flex-row items-center gap-4 justify-between shadow-[0_0_40px_rgba(255,90,126,0.3)]">
-                            <div className="flex items-center gap-4">
-                                <Sparkles className="w-6 h-6 md:w-8 md:h-8 text-white/90 shrink-0" />
-                                <span className="font-bold text-white/90 text-lg md:text-xl">
-                                    La tua prova gratuita è attiva
-                                </span>
-                            </div>
-                            <div className="flex items-center gap-3">
-                                <span className="text-white/80 text-sm md:text-base">Scade tra</span>
-                                <span className="bg-black/30 backdrop-blur-md px-4 py-1.5 rounded-xl text-white/90 text-sm md:text-base font-bold">
-                                    {daysLeft} {daysLeft === 1 ? 'giorno' : 'giorni'}
-                                </span>
-                            </div>
-                        </div>
+
 
                         {/* Elegant Divider */}
                         <div className="flex items-center justify-center w-full mt-8 md:mt-12 relative">
@@ -206,16 +195,16 @@ export default async function AreaClientePage2(props: {
                         </div>
 
                         {/* AREA RISERVATA BLOCK */}
-                        <div className="w-full max-w-5xl mx-auto mt-6 md:mt-8 bg-[#0f0518]/50 border border-[#ff5a7e]/20 rounded-[2rem] p-8 md:p-10 flex flex-col items-center justify-center relative shadow-[0_0_40px_rgba(255,90,126,0.05)] text-center">
-                            <div className="absolute inset-0 bg-gradient-to-br from-[#ff5a7e]/5 to-transparent rounded-[2rem] pointer-events-none" />
-                            <h1 className="text-4xl md:text-6xl font-sans font-semibold text-zinc-400 mb-5 drop-shadow-md tracking-tight w-full justify-center text-center">
+                        <div className="w-full max-w-xl mx-auto mt-6 md:mt-8 bg-[#0f0518]/50 border border-[#ff5a7e]/20 rounded-3xl p-5 md:p-6 flex flex-col items-center justify-center relative shadow-[0_0_40px_rgba(255,90,126,0.05)] text-center">
+                            <div className="absolute inset-0 bg-gradient-to-br from-[#ff5a7e]/5 to-transparent rounded-3xl pointer-events-none" />
+                            <h1 className="text-3xl md:text-4xl font-sans font-semibold text-zinc-400 mb-3 drop-shadow-md tracking-tight w-full justify-center text-center">
                                 Area Riservata
                             </h1>
-                            <div className="flex flex-col md:flex-row items-center gap-4 relative z-10">
-                                <span className="text-zinc-400 font-semibold text-xl md:text-2xl text-center">
+                            <div className="flex flex-col md:flex-row items-center gap-3 relative z-10">
+                                <span className="text-zinc-400 font-semibold text-lg md:text-xl text-center">
                                     {profile?.salon_name || user.email}
                                 </span>
-                                <span className="text-xs md:text-sm font-semibold text-emerald-400 border border-emerald-400/30 bg-emerald-400/10 px-4 py-1.5 rounded-full uppercase tracking-widest text-center">
+                                <span className="text-[10px] md:text-xs font-semibold text-emerald-400 border border-emerald-400/30 bg-emerald-400/10 px-3 py-1 rounded-full uppercase tracking-widest text-center">
                                     PIANO: {profile?.plan_type === 'premium' ? 'PREMIUM' : profile?.plan_type === 'basic' ? 'BASIC' : 'FREE TRIAL'}
                                 </span>
                             </div>
@@ -270,6 +259,13 @@ export default async function AreaClientePage2(props: {
                                         : (c.name.toLowerCase().includes('basic') || c.name.toLowerCase() === 'beautify channel basic')
                                 ) || null}
                             />
+                        </div>
+
+                        {/* DOWN ARROW */}
+                        <div className="mt-4 mb-20 flex justify-center">
+                            <div className="w-16 h-16 rounded-full border-2 border-zinc-500/30 flex items-center justify-center bg-zinc-500/10 backdrop-blur-md shadow-[0_0_30px_rgba(255,255,255,0.05)] animate-bounce cursor-default">
+                                <ArrowDown className="w-8 h-8 text-zinc-400" />
+                            </div>
                         </div>
 
                         {/* TABS CONTAINER */}
