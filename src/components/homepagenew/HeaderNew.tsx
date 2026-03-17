@@ -283,31 +283,32 @@ export function HeaderNew({
             className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b bg-zinc-950/80 backdrop-blur-lg shadow-lg ${isScrolled || pathname?.startsWith("/area-riservata") || pathname?.startsWith("/admin") ? "border-white/10" : "border-transparent"
                 }`}
         >
-            <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-                {/* Logo */}
-                <div className="flex items-center gap-2">
+            <div className="max-w-7xl mx-auto px-6 h-14 md:h-16 lg:h-20 flex items-center justify-between relative">
+                {/* Logo & Desktop Nav (Left Aligned) */}
+                <div className="flex items-center gap-10">
+                    {/* Logo */}
                     <Link href="/" className="flex items-center gap-2 group">
                         <img
                             src="https://eufahlzjxbimyiwivoiq.supabase.co/storage/v1/object/public/bucket-assets/Logo-BeautiFyChannel.svg"
                             alt="Beautify Channel Logo"
-                            className="h-[52px] w-auto md:h-[50px] group-hover:scale-105 transition-transform"
+                            className="h-8 md:h-10 xl:h-12 w-auto group-hover:scale-105 transition-transform"
                         />
                     </Link>
-                </div>
 
-                {/* Desktop Nav - Show on all pages */}
-                <nav className="hidden md:flex flex-1 items-center justify-center gap-8">
-                    {navLinks.map((link) => (
-                        <Link
-                            key={link.name}
-                            href={link.href}
-                            onClick={(e) => handleScrollTo(e, link.href)}
-                            className="text-sm font-medium text-zinc-300 hover:text-white transition-colors cursor-pointer"
-                        >
-                            {link.name}
-                        </Link>
-                    ))}
-                </nav>
+                    {/* Desktop Nav */}
+                    <nav className="hidden md:flex items-center gap-8">
+                        {navLinks.map((link) => (
+                            <Link
+                                key={link.name}
+                                href={link.href}
+                                onClick={(e) => handleScrollTo(e, link.href)}
+                                className="text-base font-medium text-zinc-300 hover:text-white transition-colors cursor-pointer"
+                            >
+                                {link.name}
+                            </Link>
+                        ))}
+                    </nav>
+                </div>
 
                 {/* Right Side Buttons & Avatar */}
                 <div className="flex items-center gap-4 ml-auto md:ml-0 flex-1 justify-end">
