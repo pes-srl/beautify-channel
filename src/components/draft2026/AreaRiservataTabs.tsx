@@ -27,10 +27,10 @@ export function AreaRiservataTabs({ profile, channels, channelsError, user, isAd
     return (
         <div className="w-full max-w-4xl mx-auto mt-6 mb-24 px-4">
             <div className="flex flex-col border-t border-white/10">
-                
+
                 {/* 1. COME FUNZIONA */}
                 <div className="border-b border-white/10">
-                    <button 
+                    <button
                         onClick={() => toggleSection('funziona')}
                         className="w-full py-6 flex items-center justify-between text-left group transition-colors hover:bg-white/[0.02]"
                     >
@@ -42,7 +42,7 @@ export function AreaRiservataTabs({ profile, channels, channelsError, user, isAd
                         </div>
                         <ChevronDown className={`w-5 h-5 text-zinc-500 transition-transform duration-300 ${openSection === 'funziona' ? `rotate-180 ${activeColor}` : ''}`} />
                     </button>
-                    
+
                     <div className={`overflow-hidden transition-all duration-500 ease-in-out ${openSection === 'funziona' ? 'max-h-[2000px] opacity-100 pb-8' : 'max-h-0 opacity-0'}`}>
                         <div className="px-4 py-4 md:px-12 md:py-8 bg-gradient-to-b from-white/[0.02] to-transparent rounded-2xl border border-white/5 relative">
                             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/2 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
@@ -50,10 +50,10 @@ export function AreaRiservataTabs({ profile, channels, channelsError, user, isAd
                                 {/* LEFT COLUMN */}
                                 <div className="text-base md:text-lg font-light leading-relaxed text-zinc-300 flex flex-col justify-center">
                                     <p className="mb-6">Nulla di più semplice!<br />
-                                    Collega il tuo dispositivo all'<strong className="text-white">impianto audio</strong> o a delle <strong className="text-white">casse Bluetooth</strong>.</p>
-                                    
+                                        Collega il tuo dispositivo all'<strong className="text-white">impianto audio</strong> o a delle <strong className="text-white">casse Bluetooth</strong>.</p>
+
                                     <p className="mb-8">Premi play sul canale principale qui sopra, imposta il giusto volume in salone e <strong className="text-white">dimenticatene</strong>, il resto lo fa <strong className="text-white">BeautiFy</strong>.</p>
-                                    
+
                                     <div className={`pl-4 border-l ${profile?.plan_type === 'premium' ? 'border-amber-500/30' : 'border-white/20'} py-1`}>
                                         <p>I nostri canali propongono una raffinata selezione musicale, intervallata da eleganti suggerimenti vocali.</p>
                                         <p className="mt-4">Studiati per stimolare la curiosità delle clienti e l'acquisto.</p>
@@ -84,7 +84,7 @@ export function AreaRiservataTabs({ profile, channels, channelsError, user, isAd
 
                 {/* 2. ALTRI CANALI */}
                 <div className="border-b border-white/10">
-                    <button 
+                    <button
                         onClick={() => toggleSection('canali')}
                         className="w-full py-6 flex items-center justify-between text-left group transition-colors hover:bg-white/[0.02]"
                     >
@@ -96,7 +96,7 @@ export function AreaRiservataTabs({ profile, channels, channelsError, user, isAd
                         </div>
                         <ChevronDown className={`w-5 h-5 text-zinc-500 transition-transform duration-300 ${openSection === 'canali' ? `rotate-180 ${activeColor}` : ''}`} />
                     </button>
-                    
+
                     <div className={`overflow-hidden transition-all duration-500 ease-in-out ${openSection === 'canali' ? 'max-h-[2000px] opacity-100 pb-8' : 'max-h-0 opacity-0'}`}>
                         <div className="pt-4 pb-8 relative w-full">
                             {/* Minimal subtile glow */}
@@ -106,10 +106,10 @@ export function AreaRiservataTabs({ profile, channels, channelsError, user, isAd
                     </div>
                 </div>
 
-                {/* 3. POTENZIA (ONLY FREE TRIAL) */}
-                {profile?.plan_type === 'free_trial' && (
+                {/* 3. POTENZIA (FREE TRIAL & BASIC) */}
+                {(profile?.plan_type === 'free_trial' || profile?.plan_type === 'basic') && (
                     <div className="border-b border-white/10">
-                        <button 
+                        <button
                             onClick={() => toggleSection('potenzia')}
                             className="w-full py-6 flex items-center justify-between text-left group transition-colors hover:bg-white/[0.02]"
                         >
@@ -121,7 +121,7 @@ export function AreaRiservataTabs({ profile, channels, channelsError, user, isAd
                             </div>
                             <ChevronDown className={`w-5 h-5 text-zinc-500 transition-transform duration-300 ${openSection === 'potenzia' ? 'rotate-180 text-purple-400' : ''}`} />
                         </button>
-                        
+
                         <div className={`overflow-hidden transition-all duration-500 ease-in-out ${openSection === 'potenzia' ? 'max-h-[2000px] opacity-100 pb-8' : 'max-h-0 opacity-0'}`}>
                             <div className="px-4 py-4 md:px-12 md:py-8 bg-gradient-to-b from-[#ff5a7e]/[0.02] to-transparent rounded-2xl border border-white/5 relative">
                                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16">
@@ -131,7 +131,7 @@ export function AreaRiservataTabs({ profile, channels, channelsError, user, isAd
                                         <p className="mb-6">
                                             Con il <strong className="text-white">Piano Basic</strong> di BeautiFy Channel, trasformi l'attesa e i trattamenti in una vera e propria esperienza sensoriale, curata da esperti del settore.
                                         </p>
-                                        
+
                                         <ul className="mb-8 space-y-4 text-sm md:text-base">
                                             <li className="flex items-start gap-3">
                                                 <div className="w-1.5 h-1.5 rounded-full bg-purple-400 mt-2 shrink-0" />
@@ -153,15 +153,15 @@ export function AreaRiservataTabs({ profile, channels, channelsError, user, isAd
                                         <div className="flex items-center gap-3 mb-4">
                                             <h3 className="text-xl md:text-2xl font-medium text-amber-400">Premium</h3>
                                         </div>
-                                        
+
                                         <h4 className="text-lg text-white font-medium mb-4">
                                             Il Tuo Suono, Le Tue Promozioni
                                         </h4>
-                                        
+
                                         <p className="text-sm md:text-base text-zinc-400 font-light mb-6">
                                             Fai scoprire alle tue clienti promozioni o pacchetti esclusivi nel modo più elegante possibile.
                                         </p>
-                                        
+
                                         <ul className="space-y-4 text-sm md:text-base text-zinc-300 font-light mb-6">
                                             <li className="flex items-start gap-3">
                                                 <div className="w-1.5 h-1.5 rounded-full bg-amber-400 mt-2 shrink-0" />
@@ -172,7 +172,7 @@ export function AreaRiservataTabs({ profile, channels, channelsError, user, isAd
                                                 <span><strong className="text-white font-medium">Automazione:</strong> Verranno inserite in rotazione direttamente nel canale principale.</span>
                                             </li>
                                         </ul>
-                                        
+
                                         <div className="pt-2">
                                             <p className="text-xs font-medium text-amber-500/50 uppercase tracking-widest">
                                                 LA RADIO UFFICIALE DEL TUO SALONE
@@ -185,10 +185,10 @@ export function AreaRiservataTabs({ profile, channels, channelsError, user, isAd
                     </div>
                 )}
 
-                {/* 4. AGGIORNA (ONLY FREE TRIAL) */}
-                {profile?.plan_type === 'free_trial' && (
+                {/* 4. AGGIORNA (FREE TRIAL & BASIC) */}
+                {(profile?.plan_type === 'free_trial' || profile?.plan_type === 'basic') && (
                     <div className="border-b border-white/10">
-                        <button 
+                        <button
                             onClick={() => toggleSection('aggiorna')}
                             className="w-full py-6 flex items-center justify-between text-left group transition-colors hover:bg-white/[0.02]"
                         >
@@ -200,7 +200,7 @@ export function AreaRiservataTabs({ profile, channels, channelsError, user, isAd
                             </div>
                             <ChevronDown className={`w-5 h-5 text-zinc-500 transition-transform duration-300 ${openSection === 'aggiorna' ? 'rotate-180 text-purple-400' : ''}`} />
                         </button>
-                        
+
                         <div id="scegli-piano-section" className={`overflow-hidden transition-all duration-500 ease-in-out ${openSection === 'aggiorna' ? 'max-h-[3000px] opacity-100 pb-8' : 'max-h-0 opacity-0'}`}>
                             <div className="px-0 py-4">
                                 <UpgradeCheckoutForm userEmail={user?.email} userVat={profile?.partita_iva} userSalonName={profile?.salon_name as string} planType={profile?.plan_type} />
