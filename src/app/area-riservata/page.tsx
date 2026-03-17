@@ -199,9 +199,9 @@ export default async function AreaClientePage2(props: {
                         {/* Elegant Divider */}
                         <div className="flex items-center justify-center w-full mt-8 md:mt-12 relative">
                             {/* Core line */}
-                            <div className="w-[90%] max-w-3xl h-[2px] rounded-full z-10 bg-gradient-to-r from-transparent via-[#ff5a7e]/40 to-transparent" />
+                            <div className="w-[95%] max-w-6xl h-[2px] rounded-full z-10 bg-gradient-to-r from-transparent via-white/40 to-transparent" />
                             {/* Glow effect */}
-                            <div className="absolute w-[90%] max-w-3xl h-[8px] blur-[6px] rounded-full bg-gradient-to-r from-transparent via-[#ff5a7e]/20 to-transparent" />
+                            <div className="absolute w-[95%] max-w-6xl h-[8px] blur-[6px] rounded-full bg-gradient-to-r from-transparent via-white/20 to-transparent" />
                         </div>
 
                         {/* AREA RISERVATA BLOCK */}
