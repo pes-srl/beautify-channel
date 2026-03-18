@@ -249,7 +249,7 @@ export function HeaderNew({
                 planBadge = <Badge className={`bg-amber-500 hover:bg-amber-600 text-zinc-950 ${baseClass}`}>Premium</Badge>;
                 break;
             case 'basic':
-                planBadge = <Badge className={`bg-indigo-600 hover:bg-indigo-700 text-white ${baseClass}`}>Basic</Badge>;
+                planBadge = <Badge className={`bg-[#ff7393] hover:brightness-110 text-white ${baseClass}`}>Basic</Badge>;
                 break;
             case 'free_trial':
                 planBadge = <Badge className={`bg-purple-400 hover:bg-purple-500 text-black ${baseClass}`}>Trial</Badge>;
@@ -316,9 +316,8 @@ export function HeaderNew({
                         <DropdownMenu>
                             <DropdownMenuTrigger asChild>
                                 <Button variant="ghost" className="relative h-10 w-10 p-0 rounded-full border border-white/10 bg-black/50 hover:bg-white/10 flex items-center justify-center transition-colors outline-none focus-visible:ring-2 focus-visible:ring-fuchsia-500">
-                                    <div className={`w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm uppercase shadow-inner ${profile?.plan_type === 'premium' ? 'bg-amber-500 text-zinc-950' : profile?.plan_type === 'basic' ? 'bg-sky-500 text-zinc-950' : profile?.plan_type === 'free_trial' ? 'bg-purple-400 text-zinc-950' : profile?.plan_type === 'free' ? 'bg-red-500 text-white' : 'bg-zinc-800 text-zinc-300'}`}>
-                                        {initials}
-                                    </div>
+                                    <div className={`w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm uppercase shadow-inner ${profile?.plan_type === 'premium' ? 'bg-amber-500 text-zinc-950' : profile?.plan_type === 'basic' ? 'bg-[#ff7393] text-zinc-950' : profile?.plan_type === 'free_trial' ? 'bg-purple-400 text-zinc-950' : profile?.plan_type === 'free' ? 'bg-red-500 text-white' : 'bg-zinc-800 text-zinc-300'}`}>
+                                        {initials}</div>
                                 </Button>
                             </DropdownMenuTrigger>
                             <DropdownMenuContent align="end" className="w-64 bg-zinc-950 border border-white/10 shadow-2xl rounded-xl p-2 mt-2">

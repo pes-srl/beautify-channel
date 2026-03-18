@@ -141,44 +141,29 @@ export default async function AreaClientePage2(props: {
                 {/* 1. DYNAMIC WELCOME BANNER */}
                 {!isAdmin && profile?.plan_type === 'free_trial' && !isExpired && (
                     <div className="w-full max-w-4xl mx-auto mt-24 mb-16 flex flex-col gap-6 items-center px-4">
-                        {/* SLEEK HORIZONTAL WELCOME BANNER */}
-                        <div className="w-full max-w-6xl mx-auto bg-gradient-to-r from-[#0f0518]/80 via-[#2a1154]/60 to-[#ff5a7e]/10 border border-white/5 rounded-[2rem] p-6 text-left shadow-2xl flex flex-col lg:flex-row items-center justify-between gap-6 backdrop-blur-xl relative overflow-hidden">
+                        {/* SLEEK HORIZONTAL WELCOME BANNER (NOW ONLY THE BADGE) */}
+                        <div className="w-fit mx-auto bg-gradient-to-r from-[#0f0518]/80 via-[#2a1154]/60 to-[#ff5a7e]/10 border border-white/5 rounded-[2rem] p-6 md:p-10 text-left shadow-2xl flex flex-col items-center justify-center gap-6 backdrop-blur-xl relative overflow-hidden mt-8 md:mt-12">
                             {/* Decorative background glow */}
-                            <div className="absolute top-0 right-1/4 w-64 h-64 bg-[#ff5a7e]/10 blur-[80px] rounded-full pointer-events-none" />
+                            <div className="absolute inset-0 bg-[#ff5a7e]/5 blur-[80px] rounded-full pointer-events-none" />
 
-                            <div className="flex-1 relative z-10 flex flex-col md:flex-row items-center lg:items-center gap-4 text-center lg:text-left">
-                                <div className="p-4 bg-white/5 border border-white/10 rounded-2xl shrink-0 shadow-inner">
-                                    <Sparkles className="w-8 h-8 md:w-10 md:h-10 text-purple-400" />
-                                </div>
-                                <div>
-                                    <h2 className="text-xl md:text-2xl lg:text-3xl font-medium text-white/90 mb-1 lg:mb-2 tracking-wide font-[family-name:var(--font-montserrat)]">
-                                        Benvenuta in BeautiFy Channel
-                                    </h2>
-                                    <p className="text-zinc-300 text-sm md:text-base font-light">
-                                        Grazie per aver scelto di provare l'esperienza BeautiFy Channel!<br />
-                                        Buon ascolto!
-                                    </p>
-                                </div>
-                            </div>
-
-                            <div className="flex flex-col sm:flex-row items-center gap-4 relative z-10 w-full lg:w-auto mt-4 lg:mt-0 pt-6 lg:pt-0 border-t lg:border-t-0 border-white/10 lg:pl-8 lg:border-l">
-                                <div className="text-center lg:text-right flex-1 sm:flex-none">
+                            <div className="flex flex-col sm:flex-row items-center gap-6 md:gap-10 relative z-10 w-full">
+                                <div className="text-center sm:text-left flex-1 sm:flex-none">
                                     <span className="text-zinc-400 text-xs md:text-sm uppercase tracking-[0.2em] font-medium block mb-1">
                                         Il Tuo Piano
                                     </span>
-                                    <h3 className="text-2xl md:text-3xl font-black text-purple-400 uppercase tracking-wider leading-none mb-1">
+                                    <h3 className="text-3xl md:text-5xl font-black text-purple-400 uppercase tracking-wider leading-none mb-2 drop-shadow-lg">
                                         FREE TRIAL
                                     </h3>
-                                    <span className="text-purple-400/80 text-xs md:text-sm font-bold block mb-1">
+                                    <span className="text-purple-400/80 text-sm md:text-base font-bold block mb-1">
                                         E' STATO ATTIVATO
                                     </span>
-                                    <span className="text-zinc-400 text-xs md:text-sm italic block mt-1 leading-tight">
-                                        <span className="text-purple-400 font-bold text-sm md:text-base">{daysLeft}</span> {daysLeft === 1 ? 'giorno' : 'giorni'} alla scadenza<br />della tua prova gratuita
+                                    <span className="text-zinc-400 text-sm md:text-base italic block mt-3 leading-tight">
+                                        <span className="text-purple-400 font-bold text-lg md:text-xl">{daysLeft}</span> {daysLeft === 1 ? 'giorno' : 'giorni'} alla scadenza<br className="hidden sm:block" /> della tua prova gratuita
                                     </span>
                                 </div>
                                 <a
                                     href="#scegli-piano-section"
-                                    className="bg-white text-black font-bold uppercase tracking-widest text-xs md:text-sm px-6 py-3 md:px-8 md:py-4 rounded-full hover:scale-105 transition-transform flex items-center justify-center shrink-0 w-full sm:w-auto mt-2 sm:mt-0 shadow-xl shadow-white/10"
+                                    className="bg-white text-black font-bold uppercase tracking-widest text-xs md:text-sm px-6 py-4 md:px-8 md:py-5 rounded-full hover:scale-105 transition-transform flex items-center justify-center shrink-0 w-full sm:w-auto mt-4 sm:mt-0 shadow-xl shadow-white/20 whitespace-nowrap"
                                 >
                                     SCEGLI UN PIANO
                                 </a>
@@ -195,21 +180,7 @@ export default async function AreaClientePage2(props: {
                             <div className="absolute w-[95%] max-w-6xl h-[8px] blur-[6px] rounded-full bg-gradient-to-r from-transparent via-white/20 to-transparent" />
                         </div>
 
-                        {/* AREA RISERVATA BLOCK */}
-                        <div className="w-full max-w-xl mx-auto mt-6 md:mt-8 bg-[#0f0518]/50 border border-[#ff5a7e]/20 rounded-3xl p-5 md:p-6 flex flex-col items-center justify-center relative shadow-[0_0_40px_rgba(255,90,126,0.05)] text-center">
-                            <div className="absolute inset-0 bg-gradient-to-br from-[#ff5a7e]/5 to-transparent rounded-3xl pointer-events-none" />
-                            <h1 className="text-3xl md:text-4xl font-sans font-semibold text-zinc-400 mb-3 drop-shadow-md tracking-tight w-full justify-center text-center">
-                                Area Riservata
-                            </h1>
-                            <div className="flex flex-col md:flex-row items-center gap-3 relative z-10">
-                                <span className="text-zinc-400 font-semibold text-lg md:text-xl text-center">
-                                    {profile?.salon_name || user.email}
-                                </span>
-                                <span className="text-[10px] md:text-xs font-semibold text-purple-400 border border-purple-400/30 bg-purple-400/10 px-3 py-1 rounded-full uppercase tracking-widest text-center">
-                                    PIANO: {profile?.plan_type === 'premium' ? 'PREMIUM' : profile?.plan_type === 'basic' ? 'BASIC' : 'FREE TRIAL'}
-                                </span>
-                            </div>
-                        </div>
+                        {/* THE AREA RISERVATA BLOCK WAS REMOVED AS REQUESTED */}
 
                         {/* QUESTO E IL TUO CANALE AUDIO PRINCIPALE */}
                         <div className="mt-16 mb-0 flex flex-col items-center">
@@ -226,21 +197,7 @@ export default async function AreaClientePage2(props: {
                 {/* HEADERS FOR BASIC USERS ONLY */}
                 {!isAdmin && profile?.plan_type === 'basic' && !isExpired && (
                     <div className="w-full max-w-4xl mx-auto mt-24 mb-16 flex flex-col gap-6 items-center px-4">
-                        {/* AREA RISERVATA BLOCK */}
-                        <div className="w-full max-w-xl mx-auto mt-6 md:mt-8 bg-[#0f0518]/50 border border-[#ff5a7e]/20 rounded-3xl p-5 md:p-6 flex flex-col items-center justify-center relative shadow-[0_0_40px_rgba(255,90,126,0.05)] text-center">
-                            <div className="absolute inset-0 bg-gradient-to-br from-[#ff5a7e]/5 to-transparent rounded-3xl pointer-events-none" />
-                            <h1 className="text-3xl md:text-4xl font-sans font-semibold text-zinc-400 mb-3 drop-shadow-md tracking-tight w-full justify-center text-center">
-                                Area Riservata
-                            </h1>
-                            <div className="flex flex-col md:flex-row items-center gap-3 relative z-10">
-                                <span className="text-zinc-400 font-semibold text-lg md:text-xl text-center">
-                                    {profile?.salon_name || user.email}
-                                </span>
-                                <span className="text-[10px] md:text-xs font-semibold text-zinc-900 border border-zinc-900/30 bg-zinc-100/50 px-3 py-1 rounded-full uppercase tracking-widest text-center">
-                                    PIANO: BASIC
-                                </span>
-                            </div>
-                        </div>
+                        {/* THE AREA RISERVATA BLOCK FOR BASIC WAS REMOVED AS REQUESTED */}
 
                         {/* QUESTO E IL TUO CANALE AUDIO PRINCIPALE */}
                         <div className="mt-16 mb-0 flex flex-col items-center">

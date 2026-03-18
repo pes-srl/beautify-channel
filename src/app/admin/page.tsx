@@ -23,7 +23,7 @@ export default async function AdminOverview() {
 
     const stats = [
         { label: "In Prova 7 Giorni", value: freeTrialCount?.toString() || "0", trend: "Piano Free Trial", icon: Users, color: "text-amber-400" },
-        { label: "Utenti Basic", value: basicCount?.toString() || "0", trend: "Piano Basic", icon: UserCheck, color: "text-indigo-400" },
+        { label: "Utenti Basic", value: basicCount?.toString() || "0", trend: "Piano Basic", icon: UserCheck, color: "text-[#ff7393]" },
         { label: "Utenti Premium", value: premiumCount?.toString() || "0", trend: "Piano Premium", icon: Crown, color: "text-fuchsia-400" },
         { label: "Prova Scaduta", value: freeCount?.toString() || "0", trend: "Piano Free (Inattivi)", icon: UserPlus, color: "text-red-400" },
     ];

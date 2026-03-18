@@ -156,8 +156,8 @@ export function InfoBlocks2026() {
                         className="flex-1 w-full flex justify-center relative h-[300px] md:h-[400px] lg:h-[450px]"
                     >
                         <Image
-                            src="https://eufahlzjxbimyiwivoiq.supabase.co/storage/v1/object/public/bucket-assets/1772733090547-nfq28.png"
-                            alt="BeautiFy Channel Beauty Room"
+                            src="/relax-sensoriale.png"
+                            alt="BeautiFy Channel Beauty Room Relax Sensoriale"
                             fill
                             sizes="(max-width: 768px) 100vw, 50vw"
                             className="object-cover rounded-[33px] shadow-2xl"
