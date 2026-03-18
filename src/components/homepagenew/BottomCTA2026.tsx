@@ -170,13 +170,14 @@ export function BottomCTA2026({ hasSession }: { hasSession?: boolean }) {
                                             </div>
 
                                             <div className="space-y-2">
-                                                <Label htmlFor="salonName" className="text-[#ECE0D4] font-medium ml-1">Nome Salone / Istituto <span className="text-zinc-500 font-normal">(Opzionale)</span></Label>
+                                                <Label htmlFor="salonName" className="text-[#ECE0D4] font-medium ml-1">Nome Istituto</Label>
                                                 <Input
                                                     id="salonName"
                                                     type="text"
                                                     placeholder="Es. Beauty Spa Milano"
                                                     value={salonName}
                                                     onChange={(e) => setSalonName(e.target.value)}
+                                                    required
                                                     className="h-14 bg-black/40 border-white/10 text-white placeholder:text-zinc-500 focus-visible:ring-[#AB7169]/50 rounded-[35px] text-[15px]"
                                                 />
                                             </div>

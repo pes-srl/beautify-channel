@@ -76,7 +76,7 @@ export function ProfileSettingsForm({ fullName, salonName, partitaIva, email }: 
 
                 <div className="space-y-2">
                     <label htmlFor="salonName" className="text-sm font-medium text-zinc-300">
-                        Nome Salone / Istituto
+                        Nome Istituto
                     </label>
                     <input
                         type="text"

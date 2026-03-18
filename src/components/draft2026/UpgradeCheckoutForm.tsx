@@ -170,7 +170,7 @@ export function UpgradeCheckoutForm({ userEmail, userVat, userSalonName, planTyp
             <div className="relative z-10 max-w-4xl mx-auto">
                 <div className="text-center mb-10">
                     <h2 className="text-3xl font-semibold text-white mb-3 uppercase tracking-wide">
-                        AGGIORNA L'ESPERIENZA CON IL PIANO BASIC
+                        AGGIORNA L'ESPERIENZA CON IL PIANO <span className="text-purple-400">BASIC</span>
                     </h2>
                     <p className="text-zinc-300 font-light mt-2 leading-relaxed max-w-2xl mx-auto">
                         Personalizza la tua esperienza musicale scegliendo l'abbonamento che si adatta alle tue esigenze.
@@ -289,7 +289,7 @@ export function UpgradeCheckoutForm({ userEmail, userVat, userSalonName, planTyp
 
                                 <div className="space-y-2 md:col-span-2">
                                     <label htmlFor="nomeIstituto" className="block text-sm font-semibold text-zinc-300">Nome istituto*</label>
-                                    <input id="nomeIstituto" name="nomeIstituto" type="text" required defaultValue={userSalonName || ""} className={`w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-zinc-600 focus:outline-none focus:ring-2 focus:${themeColors.ring} transition-all`} />
+                                    <input id="nomeIstituto" name="nomeIstituto" type="text" placeholder="Es. Beauty Spa Milano" required defaultValue={userSalonName || ""} className={`w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-zinc-600 focus:outline-none focus:ring-2 focus:${themeColors.ring} transition-all`} />
                                 </div>
 
                                 <div className="md:col-span-2 space-y-2">
@@ -334,7 +334,7 @@ export function UpgradeCheckoutForm({ userEmail, userVat, userSalonName, planTyp
 
                                 <div className="md:col-span-2 space-y-2">
                                     <label htmlFor="responsabileIstituto" className="block text-sm font-semibold text-zinc-300">Responsabile istituto*</label>
-                                    <input id="responsabileIstituto" name="responsabileIstituto" type="text" required className={`w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-zinc-600 focus:outline-none focus:ring-2 focus:${themeColors.ring}`} />
+                                    <input id="responsabileIstituto" name="responsabileIstituto" type="text" placeholder="Es. Mario Rossi" required className={`w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-zinc-600 focus:outline-none focus:ring-2 focus:${themeColors.ring}`} />
                                 </div>
 
                                 <div className="md:col-span-2 pt-6 flex flex-col gap-4">
@@ -357,16 +357,17 @@ export function UpgradeCheckoutForm({ userEmail, userVat, userSalonName, planTyp
                             {/* ========================================================== */}
                             <div id="step-2-container-unified" className="w-full shrink-0 grid grid-cols-1 md:grid-cols-2 gap-6 p-1">
                                 <div className="md:col-span-2 space-y-2">
-                                    <label htmlFor="ragioneSociale" className="block text-sm font-semibold text-zinc-300">Ragione Sociale*</label>
-                                    <input id="ragioneSociale" name="ragioneSociale" type="text" required className={`w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:ring-2 focus:${themeColors.ring}`} />
+                                    <label htmlFor="ragioneSociale" className="block text-sm font-semibold text-zinc-300">Ragione Sociale Completa*</label>
+                                    <input id="ragioneSociale" name="ragioneSociale" type="text" placeholder="Es. Beauty Sun s.r.l. Via Pisa, 24, 20093 Cologno Monzese Mi" required className={`w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-zinc-600 focus:outline-none focus:ring-2 focus:${themeColors.ring}`} />
+                                    <p className="text-xs text-zinc-500 italic mt-1">Inserisci l'intestazione esatta ed intera per la fatturazione e la licenza (incluso l'indirizzo legale).</p>
                                 </div>
                                 <div className="space-y-2">
                                     <label htmlFor="partitaIva" className="block text-sm font-semibold text-zinc-300">CF - Partita IVA*</label>
-                                    <input id="partitaIva" name="partitaIva" type="text" required defaultValue={userVat || ""} className={`w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:ring-2 focus:${themeColors.ring}`} />
+                                    <input id="partitaIva" name="partitaIva" type="text" placeholder="Es. 01234567890" required defaultValue={userVat || ""} className={`w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-zinc-600 focus:outline-none focus:ring-2 focus:${themeColors.ring}`} />
                                 </div>
                                 <div className="space-y-2">
                                     <label htmlFor="codiceSdi" className="block text-sm font-semibold text-zinc-300">Codice Destinatario/SDI</label>
-                                    <input id="codiceSdi" name="codiceSdi" type="text" className={`w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:ring-2 focus:${themeColors.ring}`} />
+                                    <input id="codiceSdi" name="codiceSdi" type="text" placeholder="Es. M5UXCR1" className={`w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-zinc-600 focus:outline-none focus:ring-2 focus:${themeColors.ring}`} />
                                 </div>
                                 <div className="space-y-2">
                                     <label htmlFor="emailContatto" className="block text-sm font-semibold text-zinc-300">La tua email*</label>
@@ -374,7 +375,7 @@ export function UpgradeCheckoutForm({ userEmail, userVat, userSalonName, planTyp
                                 </div>
                                 <div className="space-y-2">
                                     <label htmlFor="telefono" className="block text-sm font-semibold text-zinc-300">Il Tuo telefono*</label>
-                                    <input id="telefono" name="telefono" type="tel" required className={`w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:ring-2 focus:${themeColors.ring}`} />
+                                    <input id="telefono" name="telefono" type="tel" placeholder="Es. 333 1234567" required className={`w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-zinc-600 focus:outline-none focus:ring-2 focus:${themeColors.ring}`} />
                                 </div>
 
                                 <div className="md:col-span-2 mt-6 mb-2 flex justify-center">

@@ -151,13 +151,14 @@ export default function SignupPage() {
                                 </div>
 
                                 <div className="space-y-2">
-                                    <Label htmlFor="salonName" className="text-zinc-300 font-medium ml-1">Nome Salone / Istituto <span className="text-zinc-500 font-normal">(Opzionale)</span></Label>
+                                    <Label htmlFor="salonName" className="text-zinc-300 font-medium ml-1">Nome Istituto</Label>
                                     <Input
                                         id="salonName"
                                         type="text"
                                         placeholder="Es. Beauty Spa Milano"
                                         value={salonName}
                                         onChange={(e) => setSalonName(e.target.value)}
+                                        required
                                         className="h-14 bg-black/40 border-white/10 text-white placeholder:text-zinc-600 focus-visible:ring-fuchsia-500/50 rounded-2xl text-[15px]"
                                     />
                                 </div>
