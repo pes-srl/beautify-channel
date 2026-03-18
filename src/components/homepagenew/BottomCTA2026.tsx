@@ -299,23 +299,55 @@ export function BottomCTA2026({ hasSession }: { hasSession?: boolean }) {
                     </div>
                 </motion.div>
 
-                {/* Stay Tuned Section */}
+                {/* Delicate Fashion Stay Tuned Section */}
                 <motion.div
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: "-100px" }}
-                    transition={{ duration: 0.8, delay: 0.2 }}
-                    className="pt-16 pb-12 flex flex-col items-center justify-center text-center space-y-6 md:space-y-8"
+                    transition={{ duration: 1, delay: 0.1 }}
+                    className="pt-12 pb-10 w-full flex items-center justify-center relative px-4"
                 >
-                    <h3 className={`text-fuchsia-400 font-extrabold uppercase tracking-[0.2em] text-3xl md:text-4xl lg:text-6xl mb-4 ${montserrat.className}`}>
-                        STAY TUNED!
-                    </h3>
-                    <p className="text-zinc-200 text-2xl md:text-3xl lg:text-4xl font-semibold max-w-4xl leading-tight">
-                        I servizi e le opportunità BeautiFy sono in continuo ampliamento.
-                    </p>
-                    <p className={`text-[#D8B2A3] text-xl md:text-2xl lg:text-3xl italic mt-2 font-medium drop-shadow-sm max-w-3xl ${inter.className}`}>
-                        Prossimamente in arrivo <span className="text-fuchsia-400 font-bold block sm:inline">Laser Channel e</span> <br className="hidden sm:block" /> <span className="text-fuchsia-400 font-bold block sm:inline">Cosmetic Channel</span>.
-                    </p>
+                    <div className="relative w-full max-w-3xl rounded-3xl border border-white/10 bg-white/5 backdrop-blur-md shadow-lg">
+                        <div className="px-6 py-8 md:px-10 md:py-12 flex flex-col items-center justify-center text-center">
+                            
+                            <motion.h3 
+                                initial={{ opacity: 0 }}
+                                whileInView={{ opacity: 1 }}
+                                transition={{ duration: 0.8, delay: 0.2 }}
+                                className={`text-fuchsia-300 font-normal uppercase tracking-[0.4em] text-xl md:text-3xl lg:text-4xl mb-6 md:mb-8 ${montserrat.className}`}
+                            >
+                                Stay Tuned
+                            </motion.h3>
+
+                            <motion.p 
+                                initial={{ opacity: 0, y: 15 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.8, delay: 0.4 }}
+                                className={`text-white text-lg md:text-2xl lg:text-3xl font-light leading-relaxed max-w-2xl mb-6 md:mb-8 ${montserrat.className}`}
+                            >
+                                I servizi e le opportunità BeautiFy <br className="hidden md:block"/>
+                                <span className="italic text-zinc-400">sono in continuo ampliamento.</span>
+                            </motion.p>
+
+                            <motion.p 
+                                initial={{ opacity: 0, y: 15 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.8, delay: 0.6 }}
+                                className={`text-zinc-300 text-lg md:text-2xl lg:text-3xl font-light leading-relaxed ${inter.className}`}
+                            >
+                                Prossimamente in arrivo
+                                <span className="mt-4 flex flex-col sm:flex-row items-center justify-center gap-3 md:gap-4">
+                                    <span className="inline-flex items-center justify-center px-5 py-2 rounded-full border border-fuchsia-400/30 bg-fuchsia-500/20 text-fuchsia-50 font-normal text-xs md:text-sm tracking-wide shadow-inner">
+                                        Laser Channel
+                                    </span>
+                                    <span className="hidden sm:inline-block text-zinc-300 font-light italic text-sm md:text-base">e</span>
+                                    <span className="inline-flex items-center justify-center px-5 py-2 rounded-full border border-fuchsia-400/30 bg-fuchsia-500/20 text-fuchsia-50 font-normal text-xs md:text-sm tracking-wide shadow-inner">
+                                        Cosmetic Channel
+                                    </span>
+                                </span>
+                            </motion.p>
+                        </div>
+                    </div>
                 </motion.div>
             </div>
         </section>

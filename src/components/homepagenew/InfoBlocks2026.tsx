@@ -13,11 +13,16 @@ const inter = Inter({ subsets: ["latin"], weight: ["300", "400", "600"] });
 
 function AudioPlayerMinimal({ src }: { src: string }) {
     const [isPlaying, setIsPlaying] = useState(false);
+    const [duration, setDuration] = useState(0);
+    const [currentTime, setCurrentTime] = useState(0);
+    const [hasInteracted, setHasInteracted] = useState(false);
     const audioRef = useRef<HTMLAudioElement | null>(null);
 
     const togglePlay = () => {
         const audio = audioRef.current;
         if (!audio) return;
+
+        setHasInteracted(true);
 
         if (isPlaying) {
             audio.pause();
@@ -29,6 +34,26 @@ function AudioPlayerMinimal({ src }: { src: string }) {
         }
     };
 
+    const handleTimeUpdate = () => {
+        if (audioRef.current) {
+            setCurrentTime(audioRef.current.currentTime);
+        }
+    };
+
+    const handleLoadedMetadata = () => {
+        if (audioRef.current) {
+            setDuration(audioRef.current.duration);
+        }
+    };
+
+    const remainingTime = duration - currentTime;
+    const formatTime = (time: number) => {
+        if (!time || isNaN(time) || time < 0) return "0:00";
+        const minutes = Math.floor(time / 60);
+        const seconds = Math.floor(time % 60);
+        return `${minutes}:${seconds.toString().padStart(2, '0')}`;
+    };
+
     return (
         <div className="flex flex-col items-center justify-center">
             <audio
@@ -37,6 +62,8 @@ function AudioPlayerMinimal({ src }: { src: string }) {
                 onPlay={() => setIsPlaying(true)}
                 onPause={() => setIsPlaying(false)}
                 onEnded={() => setIsPlaying(false)}
+                onTimeUpdate={handleTimeUpdate}
+                onLoadedMetadata={handleLoadedMetadata}
             >
                 <source src={src} type="audio/mpeg" />
             </audio>
@@ -53,6 +80,11 @@ function AudioPlayerMinimal({ src }: { src: string }) {
                     )}
                 </button>
             </div>
+            {isPlaying && duration > 0 && (
+                <div className="mt-4 px-4 py-1.5 rounded-full bg-white/20 backdrop-blur-md border border-white/30 text-white font-medium text-sm md:text-base tabular-nums shadow-lg tracking-wider">
+                    -{formatTime(remainingTime)}
+                </div>
+            )}
         </div>
     );
 }
@@ -121,14 +153,14 @@ export function InfoBlocks2026() {
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true, margin: "-100px" }}
                         transition={{ duration: 0.8 }}
-                        className="flex-1 w-full flex justify-center relative h-[300px] md:h-[500px] lg:h-[550px]"
+                        className="flex-1 w-full flex justify-center relative h-[300px] md:h-[400px] lg:h-[450px]"
                     >
                         <Image
                             src="https://eufahlzjxbimyiwivoiq.supabase.co/storage/v1/object/public/bucket-assets/1772733090547-nfq28.png"
                             alt="BeautiFy Channel Beauty Room"
                             fill
                             sizes="(max-width: 768px) 100vw, 50vw"
-                            className="object-cover rounded-[33px] shadow-2xl lg:scale-105"
+                            className="object-cover rounded-[33px] shadow-2xl"
                         />
                     </motion.div>
                 </div>
@@ -175,13 +207,13 @@ export function InfoBlocks2026() {
                         transition={{ duration: 0.8 }}
                         className="flex-1 w-full flex justify-center md:justify-start"
                     >
-                        <div className="relative w-full h-[300px] md:h-[500px] lg:h-[550px]">
+                        <div className="relative w-full h-[300px] md:h-[400px] lg:h-[450px]">
                             <Image
                                 src="https://eufahlzjxbimyiwivoiq.supabase.co/storage/v1/object/public/bucket-assets/1772727853683-sr1147.png"
                                 alt="Assistente Tati"
                                 fill
                                 sizes="(max-width: 768px) 100vw, 50vw"
-                                className="object-cover rounded-[33px] shadow-2xl lg:scale-105"
+                                className="object-cover rounded-[33px] shadow-2xl"
                             />
                         </div>
                     </motion.div>
