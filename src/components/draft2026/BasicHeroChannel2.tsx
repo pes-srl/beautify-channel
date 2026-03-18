@@ -57,8 +57,8 @@ export function BasicHeroChannel2({ channel, planType }: BasicHeroChannel2Props)
                 {/* Left side: Premium Badge & Info */}
                 <div className="flex-1 p-6 md:p-8 flex flex-col justify-center">
                     <div className="flex flex-wrap items-center gap-2 mb-4">
-                        <div className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[10px] uppercase font-bold tracking-widest border backdrop-blur-md bg-transparent text-white border-white/10`}>
-                            <Sparkles className={`w-3.5 h-3.5 ${isPremium ? 'text-amber-400' : 'text-fuchsia-400'}`} />
+                        <div className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[10px] uppercase font-bold tracking-widest border backdrop-blur-md bg-transparent border-white/10 ${isPremium ? 'text-white' : planType === 'basic' ? 'text-[#ff7393]' : 'text-white'}`}>
+                            <Sparkles className={`w-3.5 h-3.5 ${isPremium ? 'text-amber-400' : planType === 'basic' ? 'text-[#ff7393]' : 'text-fuchsia-400'}`} />
                             <span>CANALE AUDIO PRINCIPALE</span>
                         </div>
                         {isActive && (
@@ -98,7 +98,7 @@ export function BasicHeroChannel2({ channel, planType }: BasicHeroChannel2Props)
                             </p>
                         ) : (
                             <p className="text-base md:text-lg">
-                                Questo è il <strong className="text-white font-black">CANALE AUDIO PRINCIPALE</strong> che trasforma radicalmente l'atmosfera del tuo istituto.<br />Sotto altri canali settoriali!
+                                Questo è il <strong className={`${planType === 'basic' ? 'text-[#ff7393]' : 'text-white'} font-black`}>CANALE AUDIO PRINCIPALE</strong> che trasforma radicalmente l'atmosfera del tuo istituto.<br />Sotto altri canali settoriali!
                             </p>
                         )}
                     </div>

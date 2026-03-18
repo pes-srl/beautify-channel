@@ -27,7 +27,7 @@ export default async function AreaClientePage2(props: {
 
     const { data: dbProfile } = await supabase
         .from("profiles")
-        .select("salon_name, role, plan_type, trial_ends_at")
+        .select("salon_name, role, plan_type, trial_ends_at, subscription_expiration")
         .eq("id", user.id)
         .single();
 
@@ -36,6 +36,7 @@ export default async function AreaClientePage2(props: {
         role: 'User',
         plan_type: user?.user_metadata?.plan_type || 'free',
         trial_ends_at: user?.user_metadata?.trial_ends_at || null,
+        subscription_expiration: user?.user_metadata?.subscription_expiration || null,
         partita_iva: user?.user_metadata?.partita_iva || null,
     };
 
@@ -71,6 +72,13 @@ export default async function AreaClientePage2(props: {
             // Fallback for new accounts where triggers might be delayed: give 7 days visual
             daysLeft = 7;
         }
+    }
+
+    let formattedBasicExpiration = null;
+    if (profile?.plan_type === 'basic' && profile?.subscription_expiration) {
+        const expDate = new Date(profile.subscription_expiration);
+        // Format as DD/MM/YYYY
+        formattedBasicExpiration = new Intl.DateTimeFormat('it-IT', { day: '2-digit', month: '2-digit', year: 'numeric' }).format(expDate);
     }
 
     // Server-side fetching of channels to prevent client-side lock contention
@@ -142,12 +150,12 @@ export default async function AreaClientePage2(props: {
                 {!isAdmin && profile?.plan_type === 'free_trial' && !isExpired && (
                     <div className="w-full max-w-4xl mx-auto mt-24 mb-16 flex flex-col gap-6 items-center px-4">
                         {/* SLEEK HORIZONTAL WELCOME BANNER (NOW ONLY THE BADGE) */}
-                        <div className="w-fit mx-auto bg-gradient-to-r from-[#0f0518]/80 via-[#2a1154]/60 to-[#ff5a7e]/10 border border-white/5 rounded-[2rem] p-6 md:p-10 text-left shadow-2xl flex flex-col items-center justify-center gap-6 backdrop-blur-xl relative overflow-hidden mt-8 md:mt-12">
+                        <div className="w-full sm:w-[550px] md:w-[650px] mx-auto bg-gradient-to-r from-[#0f0518]/80 via-[#2a1154]/60 to-[#ff5a7e]/10 border border-white/5 rounded-[2rem] p-6 md:p-10 text-left shadow-2xl flex flex-col items-center justify-center gap-6 backdrop-blur-xl relative overflow-hidden mt-8 md:mt-12">
                             {/* Decorative background glow */}
                             <div className="absolute inset-0 bg-[#ff5a7e]/5 blur-[80px] rounded-full pointer-events-none" />
 
                             <div className="flex flex-col sm:flex-row items-center gap-6 md:gap-10 relative z-10 w-full">
-                                <div className="text-center sm:text-left flex-1 sm:flex-none">
+                                <div className="text-center sm:text-left flex-1">
                                     <span className="text-zinc-400 text-xs md:text-sm uppercase tracking-[0.2em] font-medium block mb-1">
                                         Il Tuo Piano
                                     </span>
@@ -197,7 +205,49 @@ export default async function AreaClientePage2(props: {
                 {/* HEADERS FOR BASIC USERS ONLY */}
                 {!isAdmin && profile?.plan_type === 'basic' && !isExpired && (
                     <div className="w-full max-w-4xl mx-auto mt-24 mb-16 flex flex-col gap-6 items-center px-4">
-                        {/* THE AREA RISERVATA BLOCK FOR BASIC WAS REMOVED AS REQUESTED */}
+                        
+                        {/* SLEEK HORIZONTAL BANNER FOR BASIC */}
+                        <div className="w-full sm:w-[550px] md:w-[650px] mx-auto bg-gradient-to-r from-[#0f0518]/80 via-zinc-900/60 to-[#ff7393]/10 border border-white/5 rounded-[2rem] p-6 md:p-10 text-left shadow-2xl flex flex-col items-center justify-center gap-6 backdrop-blur-xl relative overflow-hidden mt-8 md:mt-12">
+                            {/* Decorative background glow */}
+                            <div className="absolute inset-0 bg-[#ff7393]/5 blur-[80px] rounded-full pointer-events-none" />
+
+                            <div className="flex flex-col sm:flex-row items-center gap-6 md:gap-10 relative z-10 w-full">
+                                <div className="text-center sm:text-left flex-1">
+                                    <span className="text-zinc-400 text-xs md:text-sm uppercase tracking-[0.2em] font-medium block mb-1">
+                                        Il Tuo Piano
+                                    </span>
+                                    <h3 className="text-3xl md:text-5xl font-black text-[#ff7393] uppercase tracking-wider leading-none mb-2 drop-shadow-lg">
+                                        BASIC
+                                    </h3>
+                                    <span className="text-[#ff7393]/80 text-sm md:text-base font-bold block mb-1">
+                                        E' ATTIVO
+                                    </span>
+                                    {formattedBasicExpiration ? (
+                                        <span className="text-zinc-400 text-sm md:text-base italic block mt-3 leading-tight">
+                                            Scade il <span className="text-[#ff7393] font-bold text-lg md:text-xl">{formattedBasicExpiration}</span>
+                                        </span>
+                                    ) : (
+                                        <span className="text-zinc-400 text-sm md:text-base italic block mt-3 leading-tight">
+                                            Abbonamento in corso
+                                        </span>
+                                    )}
+                                </div>
+                                <a
+                                    href="#scegli-piano-section"
+                                    className="bg-white text-black font-bold uppercase tracking-widest text-xs md:text-sm px-6 py-4 md:px-8 md:py-5 rounded-full hover:scale-105 transition-transform flex items-center justify-center shrink-0 w-full sm:w-auto mt-4 sm:mt-0 shadow-xl shadow-white/20 whitespace-nowrap"
+                                >
+                                    Fai Upgrade a PREMIUM
+                                </a>
+                            </div>
+                        </div>
+
+                        {/* Elegant Divider */}
+                        <div className="flex items-center justify-center w-full mt-8 md:mt-12 relative">
+                            {/* Core line */}
+                            <div className="w-[95%] max-w-6xl h-[2px] rounded-full z-10 bg-gradient-to-r from-transparent via-white/40 to-transparent" />
+                            {/* Glow effect */}
+                            <div className="absolute w-[95%] max-w-6xl h-[8px] blur-[6px] rounded-full bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+                        </div>
 
                         {/* QUESTO E IL TUO CANALE AUDIO PRINCIPALE */}
                         <div className="mt-16 mb-0 flex flex-col items-center">

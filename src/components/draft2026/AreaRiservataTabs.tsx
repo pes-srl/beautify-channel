@@ -56,7 +56,10 @@ export function AreaRiservataTabs({ profile, channels, channelsError, user, isAd
 
                                     <div className={`pl-4 border-l ${profile?.plan_type === 'premium' ? 'border-amber-500/30' : 'border-white/20'} py-1`}>
                                         <p>I nostri canali propongono una raffinata selezione musicale, intervallata da eleganti suggerimenti vocali.</p>
-                                        <p className="mt-4">Studiati per stimolare la curiosità delle clienti e l'acquisto.</p>
+                                        <p className="mt-4">
+                                            <span className="hidden md:inline">{profile?.plan_type === 'basic' ? 'Potenzia il servizio con le tue promo personalizzate' : 'Potenzia il Servizio'}</span>
+                                            Studiati per stimolare la curiosità delle clienti e l'acquisto.
+                                        </p>
                                     </div>
                                 </div>
 
