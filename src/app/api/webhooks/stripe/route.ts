@@ -130,7 +130,7 @@ export async function POST(req: Request) {
                     pdfBuffer = await generatePdfCertificate(
                         metadata.nome_istituto || 'Istituto Sconosciuto', // salonName
                         metadata.indirizzo || '-', // address
-                        metadata.responsabile || '-', // fullName
+                        metadata.ragione_sociale || metadata.responsabile || '-', // fullName
                         metadata.partita_iva || '-', // vat
                         startDate.toLocaleDateString('it-IT'), // startDate
                         licenseExpirationDate.toLocaleDateString('it-IT') // expirationDate
