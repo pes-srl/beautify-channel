@@ -170,11 +170,8 @@ export function UpgradeCheckoutForm({ userEmail, userVat, userSalonName, planTyp
             <div className="relative z-10 max-w-4xl mx-auto">
                 <div className="text-center mb-10">
                     <h2 className="text-3xl font-semibold text-white mb-3 uppercase tracking-wide">
-                        AGGIORNA L'ESPERIENZA CON IL PIANO <span className="text-purple-400">BASIC</span>
+                        AGGIORNA L'ESPERIENZA CON IL PIANO <span className="text-[#ff7393]">BASIC</span>
                     </h2>
-                    <p className="text-zinc-300 font-light mt-2 leading-relaxed max-w-2xl mx-auto">
-                        Personalizza la tua esperienza musicale scegliendo l'abbonamento che si adatta alle tue esigenze.
-                    </p>
                 </div>
 
                 {/* Plan Selector */}
@@ -186,14 +183,15 @@ export function UpgradeCheckoutForm({ userEmail, userVat, userSalonName, planTyp
                             className={`w-full relative overflow-hidden p-6 rounded-xl border text-left transition-all duration-500 flex flex-col items-start bg-white/10 border-[pink-300]/50 shadow-[0_0_20px_rgba(216,178,163,0.15)] cursor-pointer`}
                         >
                             <div className="flex justify-between items-center w-full mb-2 mt-1">
-                                <h3 className="text-xl font-bold text-white tracking-widest uppercase">Basic</h3>
+                                <h3 className="text-xl font-bold text-[#ff7393] tracking-widest uppercase">Basic</h3>
                                 <CheckCircle2 className="w-6 h-6 text-[pink-300]" />
                             </div>
                             <p className="text-sm text-zinc-400 font-light mb-4 text-center md:text-left">La soluzione ideale per la giusta atmosfera nel tuo salone.</p>
-                            <div className="mt-auto flex w-full justify-between items-end">
+                            <div className="mt-auto flex flex-col w-full items-start">
                                 <div>
                                     <span className="text-2xl md:text-3xl font-black text-white">€ 20,90</span><span className="text-zinc-500 text-sm md:text-base"> / mese</span>
                                 </div>
+                                <span className="text-xs text-zinc-500 mt-1">Pagamento in unica soluzione</span>
                             </div>
                         </button>
                     )}
@@ -212,10 +210,11 @@ export function UpgradeCheckoutForm({ userEmail, userVat, userSalonName, planTyp
                                 <CheckCircle2 className="w-6 h-6 text-purple-400" />
                             </div>
                             <p className="text-sm text-zinc-400 font-light mb-4 text-center md:text-left">Tutta la libreria musicale, più spot sonori personalizzati e creati su misura per te.</p>
-                            <div className="mt-auto flex w-full justify-between items-end">
+                            <div className="mt-auto flex flex-col w-full items-start">
                                 <div>
                                     <span className="text-2xl md:text-3xl font-black text-white">€ 38,90</span><span className="text-zinc-500 text-sm md:text-base"> / mese</span>
                                 </div>
+                                <span className="text-xs text-zinc-500 mt-1">Pagamento in unica soluzione</span>
                             </div>
                         </button>
                     )}
