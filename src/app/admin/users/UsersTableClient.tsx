@@ -45,6 +45,8 @@ export function UsersTableClient({ initialProfiles }: { initialProfiles: any[] }
                     <Input
                         name="admin-search-users"
                         autoComplete="off"
+                        data-lpignore="true"
+                        data-form-type="other"
                         placeholder="Cerca per istituto o email..."
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
