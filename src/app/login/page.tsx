@@ -94,7 +94,7 @@ export default async function LoginPage({
                 </form>
                 <p className="text-center text-sm text-zinc-400 mt-8">
                     Non hai ancora un account?{" "}
-                    <Link href="/register" className="text-fuchsia-400 hover:text-fuchsia-300 font-medium">
+                    <Link href="/#trial-form" className="text-fuchsia-400 hover:text-fuchsia-300 font-medium">
                         Registrati
                     </Link>
                 </p>

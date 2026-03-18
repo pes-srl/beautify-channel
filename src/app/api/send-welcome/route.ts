@@ -47,7 +47,7 @@ export async function POST(request: Request) {
                         </div>
 
                         <div style="text-align: center; margin: 35px 0;">
-                            <a href="https://beautifychannel.com/login" style="background-color: #c026d3; color: #FFFFFF; text-decoration: none; padding: 14px 28px; border-radius: 8px; font-weight: bold; font-size: 16px; display: inline-block; box-shadow: 0 4px 10px rgba(192, 38, 211, 0.3);">
+                            <a href="https://beautify-channel-iota.vercel.app/login" style="background-color: #c026d3; color: #FFFFFF; text-decoration: none; padding: 14px 28px; border-radius: 8px; font-weight: bold; font-size: 16px; display: inline-block; box-shadow: 0 4px 10px rgba(192, 38, 211, 0.3);">
                                 Accedi all'Area Riservata
                             </a>
                         </div>
