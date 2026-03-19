@@ -60,7 +60,7 @@ export function FooterNew() {
                             </li>
                             <li className="flex items-start gap-3 text-zinc-400 text-sm">
                                 <Mail size={18} className="text-fuchsia-400 shrink-0" />
-                                <a href="mailto:info@beautify-channel.it" className="hover:text-white transition-colors">info@beautify-channel.it</a>
+                                <a href="mailto:info@beautify-channel.com" className="hover:text-white transition-colors">info@beautify-channel.com</a>
                             </li>
                         </ul>
                     </div>

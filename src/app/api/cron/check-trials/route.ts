@@ -57,7 +57,7 @@ export async function GET(request: Request) {
                                     <p style="font-size: 16px; line-height: 1.6; color: #444;">Ciao, la tua prova gratuita BeautiFy Channel è scaduta!</p>
                                     <p style="font-size: 16px; line-height: 1.6; color: #444;">Ci piacerebbe rimanessi con noi, qui sotto puoi abbonarti al nostro piano BASIC!<br>In caso contrario, ci piacerebbe sapere cosa non ti ha convinto, feedback sempre super benvenuti.</p>
                                     <p style="font-size: 16px; line-height: 1.6; color: #444; margin-top: 20px;">Grazie, speriamo di leggerti presto.<br><b>Il Team BeautiFy</b></p>
-                                    <a href="https://beautifychannel.com/area-riservata#pricing" style="background-color: #ef4444; color: #FFFFFF; text-decoration: none; padding: 12px 24px; border-radius: 8px; font-weight: bold; display: inline-block; margin-top: 20px;">Abbonati al piano BASIC</a>
+                                    <a href="https://www.beautify-channel.com/area-riservata#pricing" style="background-color: #ef4444; color: #FFFFFF; text-decoration: none; padding: 12px 24px; border-radius: 8px; font-weight: bold; display: inline-block; margin-top: 20px;">Abbonati al piano BASIC</a>
                                 </div>
                             </div>
                         `
@@ -98,7 +98,7 @@ export async function GET(request: Request) {
                                     <h1 style="color: #ef4444; margin-top: 0;">Abbonamento Terminato!</h1>
                                     <p style="font-size: 16px; line-height: 1.6; color: #444;">Ciao ${user.salon_name || 'Amico'}, ti informiamo che il tuo abbonamento a Beautify Channel è terminato.</p>
                                     <p style="font-size: 16px; line-height: 1.6; color: #444;">L'accesso ai canali è stato sospeso e il tuo account è passato al piano Free. Rinnova subito per continuare ad offrire la migliore atmosfera al tuo istituto.</p>
-                                    <a href="https://beautifychannel.com/area-riservata#pricing" style="background-color: #ef4444; color: #FFFFFF; text-decoration: none; padding: 12px 24px; border-radius: 8px; font-weight: bold; display: inline-block; margin-top: 20px;">Rinnova ora</a>
+                                    <a href="https://www.beautify-channel.com/area-riservata#pricing" style="background-color: #ef4444; color: #FFFFFF; text-decoration: none; padding: 12px 24px; border-radius: 8px; font-weight: bold; display: inline-block; margin-top: 20px;">Rinnova ora</a>
                                 </div>
                             </div>
                         `
@@ -133,7 +133,7 @@ export async function GET(request: Request) {
                                     <h1 style="color: #f59e0b; margin-top: 0;">Ultimo giorno di musica!</h1>
                                     <p style="font-size: 16px; line-height: 1.6; color: #444;">Ciao ${user.salon_name || 'Amico'}, ti ricordiamo che la tua prova di 7 giorni per Beautify Channel scadrà a breve (domani).</p>
                                     <p style="font-size: 16px; line-height: 1.6; color: #444;">Non lasciare il tuo salone in silenzio. Passa a un piano Premium per non interrompere il servizio.</p>
-                                    <a href="https://beautifychannel.com/area-riservata#pricing" style="background-color: #f59e0b; color: #FFFFFF; text-decoration: none; padding: 12px 24px; border-radius: 8px; font-weight: bold; display: inline-block; margin-top: 20px;">Scopri i Piani</a>
+                                    <a href="https://www.beautify-channel.com/area-riservata#pricing" style="background-color: #f59e0b; color: #FFFFFF; text-decoration: none; padding: 12px 24px; border-radius: 8px; font-weight: bold; display: inline-block; margin-top: 20px;">Scopri i Piani</a>
                                 </div>
                             </div>
                         `
@@ -170,7 +170,7 @@ export async function GET(request: Request) {
                                     <p style="font-size: 16px; line-height: 1.6; color: #444;">Ti ricordiamo che tra 2 giorni scadrà la prova gratuita.<br>Dopo la scadenza potrai scegliere il nostro piano BASIC ma intanto...</p>
                                     <h3 style="font-size: 18px; color: #f59e0b; margin-top: 20px;">Continua a goderti BeautiFy Channel!</h3>
                                     <p style="font-size: 16px; line-height: 1.6; color: #444; font-weight: bold;">Il Team BeautiFy</p>
-                                    <a href="https://beautifychannel.com/area-riservata#pricing" style="background-color: #f59e0b; color: #FFFFFF; text-decoration: none; padding: 12px 24px; border-radius: 8px; font-weight: bold; display: inline-block; margin-top: 20px;">Scopri i Piani</a>
+                                    <a href="https://www.beautify-channel.com/area-riservata#pricing" style="background-color: #f59e0b; color: #FFFFFF; text-decoration: none; padding: 12px 24px; border-radius: 8px; font-weight: bold; display: inline-block; margin-top: 20px;">Scopri i Piani</a>
                                 </div>
                             </div>
                         `
@@ -205,7 +205,7 @@ export async function GET(request: Request) {
                                     <h1 style="color: #f59e0b; margin-top: 0;">Rinnovo in arrivo!</h1>
                                     <p style="font-size: 16px; line-height: 1.6; color: #444;">Ciao ${user.salon_name || 'Amico'}, l'abbonamento a Beautify Channel del tuo istituto terminerà tra 2 giorni.</p>
                                     <p style="font-size: 16px; line-height: 1.6; color: #444;">Per evitare l'interruzione del servizio e mantenere l'accesso esclusivo ai canali musicali premium che i tuoi clienti amano, per favore rinnova la sottoscrizione.</p>
-                                    <a href="https://beautifychannel.com/area-riservata#pricing" style="background-color: #f59e0b; color: #FFFFFF; text-decoration: none; padding: 12px 24px; border-radius: 8px; font-weight: bold; display: inline-block; margin-top: 20px;">Rinnova Ora</a>
+                                    <a href="https://www.beautify-channel.com/area-riservata#pricing" style="background-color: #f59e0b; color: #FFFFFF; text-decoration: none; padding: 12px 24px; border-radius: 8px; font-weight: bold; display: inline-block; margin-top: 20px;">Rinnova Ora</a>
                                 </div>
                             </div>
                         `

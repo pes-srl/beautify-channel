@@ -51,6 +51,24 @@ export default async function RootLayout({
 
   return (
     <html lang="it">
+      <head>
+        {/* Iubenda Cookie Policy Configuration */}
+        <script
+          type="text/javascript"
+          dangerouslySetInnerHTML={{
+            __html: `
+              var _iub = _iub || [];
+              _iub.csConfiguration = {"siteId":3794300,"cookiePolicyId":66648110,"storage":{"useSiteId":true}};
+              _iub.csLangConfiguration = {"it":{"cookiePolicyId":66648110}};
+            `
+          }}
+        />
+        <script type="text/javascript" src="https://cs.iubenda.com/autoblocking/3794300.js"></script>
+        <script type="text/javascript" src="//cdn.iubenda.com/cs/tcf/stub-v2.js"></script>
+        <script type="text/javascript" src="//cdn.iubenda.com/cs/tcf/safe-tcf-v2.js"></script>
+        <script type="text/javascript" src="//cdn.iubenda.com/cs/gpp/stub.js"></script>
+        <script type="text/javascript" src="//cdn.iubenda.com/cs/iubenda_cs.js" charSet="UTF-8" async></script>
+      </head>
       <body
         className={`${figtree.variable} ${montserrat.variable} font-sans antialiased bg-zinc-950 text-zinc-50 flex flex-col min-h-screen`}
       >
