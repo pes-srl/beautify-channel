@@ -75,8 +75,8 @@ export async function createCheckoutSession(formData: FormData) {
         // or we can rely on catching the webhook to fulfill the upgrade
 
         // We will create the Checkout Session here
+        // Ometto "payment_method_types" per abilitare i metodi automatici (Stripe leggerà la tua dashboard)
         const session = await stripe.checkout.sessions.create({
-            payment_method_types: ['card'],
             customer_email: emailContatto,
             line_items: [
                 {

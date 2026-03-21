@@ -286,7 +286,33 @@ export default async function AreaClientePage2(props: {
                 )}
 
                 {/* MAIN CONTENT V2 */}
-                {(!isExpired || isAdmin) ? (
+                {profile?.plan_type === 'pending_sepa' ? (
+                    <div className="w-full mt-24 mb-32 flex flex-col items-center justify-center text-center px-4 relative z-20">
+                        <div className="w-20 h-20 bg-amber-500/10 border border-amber-500/30 rounded-full flex items-center justify-center mb-6 shadow-xl shadow-amber-900/20">
+                            <svg className="w-10 h-10 text-amber-500 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        </div>
+                        <h1 className="text-3xl md:text-5xl font-black text-amber-500 uppercase tracking-tight mb-4 drop-shadow-lg">
+                            MANDATO SEPA RICEVUTO
+                        </h1>
+                        <p className="text-lg md:text-xl text-zinc-300 max-w-2xl leading-relaxed mb-8">
+                            Grazie per aver completato la tua richiesta di addebito. Essendo un bonifico bancario (SEPA), la rete interbancaria impiegherà dai <strong>2 ai 5 giorni lavorativi</strong> per confermare il primo trasferimento.
+                        </p>
+                        
+                        <div className="bg-white/5 border border-white/10 rounded-2xl p-6 md:p-8 text-left max-w-lg w-full backdrop-blur-sm shadow-2xl relative overflow-hidden">
+                            <div className="absolute top-0 right-0 w-32 h-32 bg-amber-500/10 blur-[50px] rounded-full pointer-events-none" />
+                            <h3 className="text-white font-bold text-xl mb-6 flex items-center gap-2">
+                                <Sparkles className="w-5 h-5 text-amber-500" />
+                                Cosa succede adesso?
+                            </h3>
+                            <ul className="text-zinc-400 space-y-4 text-sm md:text-base font-medium">
+                                <li className="flex gap-3"><span className="text-amber-500 shrink-0">1.</span> La tua banca sta verificando il mandato SEPA.</li>
+                                <li className="flex gap-3"><span className="text-amber-500 shrink-0">2.</span> I fondi verranno approvati e trasferiti a Beautify.</li>
+                                <li className="flex gap-3"><span className="text-amber-500 shrink-0">3.</span> Riceverai un'email con Licenza e Contratto in PDF.</li>
+                                <li className="flex gap-3"><span className="text-amber-500 shrink-0">4.</span> Il canale si sbloccherà automaticamente in questa pagina.</li>
+                            </ul>
+                        </div>
+                    </div>
+                ) : (!isExpired || isAdmin) ? (
                     <>
                         {/* THE HERO PLAYER */}
                         <div className="mb-0 flex flex-col items-center">

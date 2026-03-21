@@ -29,9 +29,56 @@ export async function POST(req: Request) {
         return new NextResponse(`Webhook Error: ${err.message}`, { status: 400 });
     }
 
-    // Handle the checkout.session.completed event
-    if (event.type === 'checkout.session.completed') {
+    // Gestisce pagamenti immediati (Carte, PayPal) O pagamenti asincroni che sono stati confermati (SEPA, Bonifici)
+    if (event.type === 'checkout.session.completed' || event.type === 'checkout.session.async_payment_succeeded') {
         const session = event.data.object as any;
+
+        // Sicurezza critica per Bonifici / SEPA: Se il checkout è completato ma i soldi non sono ancora arrivati (unpaid),
+        // informiamo l'utente e mettiamo l'account in stato "pending_sepa".
+        if (event.type === 'checkout.session.completed' && session.payment_status !== 'paid') {
+            const metadata = session.metadata;
+            if (metadata?.user_id) {
+                try {
+                    const supabaseAdmin = createClient(
+                        process.env.NEXT_PUBLIC_SUPABASE_URL!,
+                        process.env.SUPABASE_SERVICE_ROLE_KEY!,
+                        { auth: { autoRefreshToken: false, persistSession: false } }
+                    );
+                    
+                    // Mark as pending in DB
+                    await supabaseAdmin.from('profiles').update({ plan_type: 'pending_sepa' }).eq('id', metadata.user_id);
+                    
+                    // Send Email warning about 2-5 days delay
+                    const resendApiKey = process.env.RESEND_API_KEY;
+                    if (resendApiKey) {
+                        const resend = new Resend(resendApiKey);
+                        const userEmail = session.customer_details?.email || session.customer_email || metadata?.email_richiedente;
+                        if (userEmail) {
+                            await resend.emails.send({
+                                from: process.env.RESEND_FROM_EMAIL || 'Beautify Channel <info@beautify-channel.com>',
+                                to: userEmail,
+                                subject: '⏳ Il tuo mandato SEPA è in elaborazione',
+                                html: `
+                                    <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; color: #333; background-color: #FAFAFA; padding: 20px; border-radius: 12px; border: 1px solid #EAEAEA;">
+                                        <h2 style="color: #c026d3;">Mandato SEPA Ricevuto 🏦</h2>
+                                        <p>Ciao,</p>
+                                        <p>Abbiamo creato correttamente la tua richiesta di addebito SEPA per l'abbonamento a Beautify Channel.</p>
+                                        <p>Essendo un addebito bancario, la rete interbancaria impiegherà <strong>dai 2 ai 5 giorni lavorativi</strong> per confermare il primo trasferimento.</p>
+                                        <p>Non preoccuparti: <strong>il tuo account si sbloccherà automaticamente</strong> non appena i fondi saranno confermati, e a quel punto riceverai un'ulteriore email con la licenza definitiva e il contratto.</p>
+                                        <p><br>Grazie per la pazienza,<br><strong>Il Team BeautiFy</strong></p>
+                                    </div>
+                                `
+                            });
+                        }
+                    }
+                } catch (err) {
+                    console.error("Errore durante la gestione del pagamento pending SEPA:", err);
+                }
+            }
+            console.log("Addebito SEPA in sospeso gestito correttamente (DB e Email). Attesa 'async_payment_succeeded'.");
+            return new NextResponse('Pagamento in elaborazione, email inviata', { status: 200 });
+        }
+
         const metadata = session.metadata;
 
         if (metadata?.user_id && metadata?.requested_plan) {
