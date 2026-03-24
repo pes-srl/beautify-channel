@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect, useId } from "react";
 import { Play, Pause } from "lucide-react";
 import { Montserrat } from "next/font/google";
 import Image from "next/image";
@@ -16,6 +16,23 @@ function HeroAudioPlayer({ src }: { src: string }) {
     const [currentTime, setCurrentTime] = useState(0);
     const [hasInteracted, setHasInteracted] = useState(false);
     const audioRef = useRef<HTMLAudioElement | null>(null);
+    const playerId = useId();
+
+    useEffect(() => {
+        const handleGlobalPlay = (e: CustomEvent) => {
+            if (e.detail.id !== playerId) {
+                const audio = audioRef.current;
+                if (audio) {
+                    audio.pause();
+                    audio.currentTime = 0;
+                }
+                setIsPlaying(false);
+            }
+        };
+
+        window.addEventListener("globalAudioPlay", handleGlobalPlay as EventListener);
+        return () => window.removeEventListener("globalAudioPlay", handleGlobalPlay as EventListener);
+    }, [playerId]);
 
     const togglePlay = () => {
         const audio = audioRef.current;
@@ -26,6 +43,7 @@ function HeroAudioPlayer({ src }: { src: string }) {
         if (isPlaying) {
             audio.pause();
         } else {
+            window.dispatchEvent(new CustomEvent("globalAudioPlay", { detail: { id: playerId } }));
             audio.play().catch((e) => {
                 console.error("Playback failed", e);
                 setIsPlaying(false);
