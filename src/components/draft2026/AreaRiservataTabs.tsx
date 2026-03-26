@@ -52,14 +52,12 @@ export function AreaRiservataTabs({ profile, channels, channelsError, user, isAd
                                     <p className="mb-6">Nulla di più semplice!<br />
                                         Collega il tuo dispositivo all'<strong className="text-white">impianto audio</strong> o a delle <strong className="text-white">casse Bluetooth</strong>.</p>
 
-                                    <p className="mb-8">Premi play sul canale principale qui sopra, imposta il giusto volume in salone e <strong className="text-white">dimenticatene</strong>, il resto lo fa <strong className="text-white">BeautiFy</strong>.</p>
+                                    <p className="mb-8">Premi play sul canale primario qui sopra, imposta il giusto volume in salone e <strong className="text-white">dimenticatene</strong>, il resto lo fa <strong className="text-white">BeautiFy</strong>.</p>
 
                                     <div className={`pl-4 border-l ${profile?.plan_type === 'premium' ? 'border-amber-500/30' : 'border-white/20'} py-1`}>
-                                        <p>I nostri canali propongono una raffinata selezione musicale, intervallata da eleganti suggerimenti vocali.</p>
-                                        <p className="mt-4">
-                                            <span className="hidden md:inline">{profile?.plan_type === 'basic' ? 'Potenzia il servizio con le tue promo personalizzate' : 'Potenzia il Servizio'}</span>
-                                            Studiati per stimolare la curiosità delle clienti e l'acquisto.
-                                        </p>
+                                    <p className="mb-6">
+                                        I nostri canali propongono una raffinata selezione musicale, intervallata da eleganti suggerimenti vocali studiati per stimolare la curiosità delle clienti e l'acquisto.
+                                    </p>
                                     </div>
                                 </div>
 
@@ -67,11 +65,10 @@ export function AreaRiservataTabs({ profile, channels, channelsError, user, isAd
                                 <div className="bg-black/20 rounded-xl p-6 md:p-8 relative border border-white/5">
                                     <h3 className="text-xl md:text-2xl font-medium text-white mb-2">Cambia il tuo Mood</h3>
                                     <p className="text-sm md:text-base text-zinc-400 font-light mb-6">
-                                        Hai a disposizione altri 6 canali settoriali, per cambiare il mood musicale durante la giornata.
+                                        Hai a disposizione altri 6 canali monotematici, per cambiare il genere musicale durante la giornata.
                                     </p>
                                     <div className="space-y-4 mb-6 text-zinc-300 text-sm font-light">
-                                        <p>Contengono morbidi suggerimenti vocali tranne <strong>RELAX</strong> e <strong>MASSAGE</strong>.</p>
-                                        <p>Prova <strong>DEEP SOFT</strong> nel weekend o <strong>JAZZ</strong> a fine giornata.</p>
+                                        <p>Prova <strong>DEEP SOFT</strong> nel weekend o <strong>JAZZ</strong> nel tardo pomeriggio oppure i temi <strong>RELAX</strong> e <strong>MASSAGE</strong>.</p>
                                     </div>
                                     <div className="pt-2 flex items-center gap-2">
                                         <Radio className="w-4 h-4 text-white/50" />
@@ -142,7 +139,7 @@ export function AreaRiservataTabs({ profile, channels, channelsError, user, isAd
                                             </li>
                                             <li className="flex items-start gap-3">
                                                 <div className="w-1.5 h-1.5 rounded-full bg-purple-400 mt-2 shrink-0" />
-                                                <span><strong className="text-white">7 Canali Tematici:</strong> L'atmosfera perfetta per ogni momento.</span>
+                                                <span><strong className="text-white">6 Canali Tematici:</strong> L'atmosfera perfetta per ogni momento.</span>
                                             </li>
                                             <li className="flex items-start gap-3">
                                                 <div className="w-1.5 h-1.5 rounded-full bg-purple-400 mt-2 shrink-0" />
@@ -152,34 +149,29 @@ export function AreaRiservataTabs({ profile, channels, channelsError, user, isAd
                                     </div>
 
                                     {/* RIGHT COLUMN */}
-                                    <div className="bg-black/20 rounded-xl p-6 md:p-8 relative border border-white/5">
-                                        <div className="flex items-center gap-3 mb-4">
-                                            <h3 className="text-xl md:text-2xl font-medium text-amber-400">Premium</h3>
-                                        </div>
+                                    <div className="bg-gradient-to-br from-zinc-900/40 to-black/40 rounded-xl p-6 md:p-10 relative border border-white/5 flex flex-col items-center justify-center text-center overflow-hidden min-h-[300px]">
+                                        {/* Background Glow */}
+                                        <div className="absolute inset-0 bg-amber-500/5 blur-[60px] rounded-full pointer-events-none" />
+                                        
+                                        <div className="relative z-10">
+                                            <h3 className="text-3xl md:text-5xl font-black italic tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-amber-200 to-amber-500 mb-6 drop-shadow-2xl">
+                                                STAY TUNED!
+                                            </h3>
 
-                                        <h4 className="text-lg text-white font-medium mb-4">
-                                            Il Tuo Suono, Le Tue Promozioni
-                                        </h4>
-
-                                        <p className="text-sm md:text-base text-zinc-400 font-light mb-6">
-                                            Fai scoprire alle tue clienti promozioni o pacchetti esclusivi nel modo più elegante possibile.
-                                        </p>
-
-                                        <ul className="space-y-4 text-sm md:text-base text-zinc-300 font-light mb-6">
-                                            <li className="flex items-start gap-3">
-                                                <div className="w-1.5 h-1.5 rounded-full bg-amber-400 mt-2 shrink-0" />
-                                                <span><strong className="text-white font-medium">Messaggi Promozionali:</strong> I nostri speaker professionisti li registreranno per te!</span>
-                                            </li>
-                                            <li className="flex items-start gap-3">
-                                                <div className="w-1.5 h-1.5 rounded-full bg-amber-400 mt-2 shrink-0" />
-                                                <span><strong className="text-white font-medium">Automazione:</strong> Verranno inserite in rotazione direttamente nel canale principale.</span>
-                                            </li>
-                                        </ul>
-
-                                        <div className="pt-2">
-                                            <p className="text-xs font-medium text-amber-500/50 uppercase tracking-widest">
-                                                LA RADIO UFFICIALE DEL TUO SALONE
+                                            <p className="text-base md:text-xl text-zinc-300 font-medium leading-relaxed max-w-sm mx-auto mb-8">
+                                                I servizi e le opportunità <span className="text-white font-bold">BeautiFy</span> sono in continuo ampliamento.
                                             </p>
+
+                                            <div className="flex flex-col gap-3 items-center">
+                                                <div className="px-5 py-2 rounded-full border border-white/10 bg-white/5 backdrop-blur-md text-sm md:text-base text-zinc-400 font-semibold tracking-wide uppercase">
+                                                    Prossimamente in arrivo:
+                                                </div>
+                                                <div className="flex flex-wrap justify-center gap-4 mt-2">
+                                                    <span className="text-lg md:text-xl font-bold text-white tracking-tight">Laser Channel</span>
+                                                    <span className="text-zinc-600 font-black text-xl">•</span>
+                                                    <span className="text-lg md:text-xl font-bold text-white tracking-tight">Cosmetic Channel</span>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

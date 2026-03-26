@@ -156,17 +156,11 @@ export default async function AreaClientePage2(props: {
 
                             <div className="flex flex-col sm:flex-row items-center gap-6 md:gap-10 relative z-10 w-full">
                                 <div className="text-center sm:text-left flex-1">
-                                    <span className="text-zinc-400 text-xs md:text-sm uppercase tracking-[0.2em] font-medium block mb-1">
-                                        Il Tuo Piano
-                                    </span>
-                                    <h3 className="text-3xl md:text-5xl font-black text-purple-400 uppercase tracking-wider leading-none mb-2 drop-shadow-lg">
-                                        FREE TRIAL
+                                    <h3 className="text-2xl md:text-3xl font-bold text-white mb-2 leading-tight">
+                                        La tua formula Free Trial è stata attivata.
                                     </h3>
-                                    <span className="text-purple-400/80 text-sm md:text-base font-bold block mb-1">
-                                        E' STATO ATTIVATO
-                                    </span>
-                                    <span className="text-zinc-400 text-sm md:text-base italic block mt-3 leading-tight">
-                                        <span className="text-purple-400 font-bold text-lg md:text-xl">{daysLeft}</span> {daysLeft === 1 ? 'giorno' : 'giorni'} alla scadenza<br className="hidden sm:block" /> della tua prova gratuita
+                                    <span className="text-zinc-400 text-sm md:text-base italic block mt-1 leading-tight">
+                                        <span className="text-purple-400 font-bold text-lg md:text-xl">{daysLeft}</span> {daysLeft === 1 ? 'giorno' : 'giorni'} alla scadenza della tua prova gratuita
                                     </span>
                                 </div>
                                 <a
@@ -178,8 +172,6 @@ export default async function AreaClientePage2(props: {
                             </div>
                         </div>
 
-
-
                         {/* Elegant Divider */}
                         <div className="flex items-center justify-center w-full mt-8 md:mt-12 relative">
                             {/* Core line */}
@@ -188,12 +180,11 @@ export default async function AreaClientePage2(props: {
                             <div className="absolute w-[95%] max-w-6xl h-[8px] blur-[6px] rounded-full bg-gradient-to-r from-transparent via-white/20 to-transparent" />
                         </div>
 
-                        {/* THE AREA RISERVATA BLOCK WAS REMOVED AS REQUESTED */}
-
                         {/* QUESTO E IL TUO CANALE AUDIO PRINCIPALE */}
                         <div className="mt-16 mb-0 flex flex-col items-center">
-                            <h3 className="text-zinc-400 font-semibold tracking-widest uppercase text-center text-3xl md:text-5xl mb-8 drop-shadow-[0_0_20px_rgba(255,255,255,0.5)]">
-                                Questo e' il tuo canale audio principale
+                            <h3 className="text-zinc-400 font-medium tracking-tight text-center text-base md:text-xl lg:text-2xl mb-8 drop-shadow-[0_0_15px_rgba(255,255,255,0.1)] max-w-4xl mx-auto leading-relaxed">
+                                QUESTO È IL TUO CANALE PRIMARIO (multitematico). <br className="hidden md:block" />
+                                Ma in momenti particolari potrai utilizzare i 6 canali monotematici che trovi qui sotto, selezionando altri mood musicali.
                             </h3>
                             <div className="w-16 h-16 rounded-full border-2 border-zinc-400/50 flex items-center justify-center bg-zinc-400/10 backdrop-blur-md shadow-[0_0_40px_rgba(255,255,255,0.1)] animate-bounce">
                                 <ArrowDown className="w-8 h-8 text-zinc-400" />
@@ -251,8 +242,9 @@ export default async function AreaClientePage2(props: {
 
                         {/* QUESTO E IL TUO CANALE AUDIO PRINCIPALE */}
                         <div className="mt-16 mb-0 flex flex-col items-center">
-                            <h3 className="text-zinc-400 font-semibold tracking-widest uppercase text-center text-3xl md:text-5xl mb-8 drop-shadow-[0_0_20px_rgba(255,255,255,0.5)]">
-                                Questo e' il tuo canale audio principale
+                            <h3 className="text-zinc-400 font-medium tracking-tight text-center text-base md:text-xl lg:text-2xl mb-8 drop-shadow-[0_0_15px_rgba(255,255,255,0.1)] max-w-4xl mx-auto leading-relaxed">
+                                QUESTO È IL TUO CANALE PRIMARIO (multitematico). <br className="hidden md:block" />
+                                Ma in momenti particolari potrai utilizzare i 6 canali monotematici che trovi qui sotto, selezionando altri mood musicali.
                             </h3>
                             <div className="w-16 h-16 rounded-full border-2 border-zinc-400/50 flex items-center justify-center bg-zinc-400/10 backdrop-blur-md shadow-[0_0_40px_rgba(255,255,255,0.1)] animate-bounce">
                                 <ArrowDown className="w-8 h-8 text-zinc-400" />

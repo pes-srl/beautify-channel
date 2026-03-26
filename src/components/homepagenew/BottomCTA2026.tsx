@@ -111,7 +111,7 @@ export function BottomCTA2026({ hasSession }: { hasSession?: boolean }) {
                     transition={{ duration: 0.8 }}
                     className="pt-8 flex justify-center w-full"
                 >
-                    <div className="w-full max-w-4xl relative z-10">
+                    <div className="w-full max-w-5xl relative z-10">
                         <div className="text-center mb-10">
                             <div className="inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-[#D8B2A3]/10 border border-[#D8B2A3]/20 backdrop-blur-md mb-6 shadow-[0_0_30px_rgba(216,178,163,0.2)]">
                                 <Sparkles className="w-8 h-8 text-[#D8B2A3]" />
@@ -182,7 +182,7 @@ export function BottomCTA2026({ hasSession }: { hasSession?: boolean }) {
                                                 />
                                             </div>
 
-                                            <div className="space-y-2">
+                                            <div className="space-y-2 md:col-span-2">
                                                 <Label htmlFor="partitaIva" className="text-[#ECE0D4] font-medium ml-1">Partita IVA</Label>
                                                 <Input
                                                     id="partitaIva"
@@ -194,8 +194,8 @@ export function BottomCTA2026({ hasSession }: { hasSession?: boolean }) {
                                                     maxLength={11}
                                                     className="h-14 bg-black/40 border-white/10 text-white placeholder:text-zinc-500 focus-visible:ring-[#AB7169]/50 rounded-[35px] text-[15px]"
                                                 />
-                                                <p className="text-xs text-zinc-400 ml-1 mt-1">
-                                                    Obbligatorio per convalidare la conformità della registrazione.
+                                                <p className="text-[13px] leading-relaxed text-zinc-400 ml-1 mt-2">
+                                                    BeautiFy Channel è un servizio riservato esclusivamente ai professionisti del benessere. La Partita IVA ci aiuta a confermare che sei il titolare di un’attività e a sbloccare i palinsesti audio dedicati al tuo salone.
                                                 </p>
                                             </div>
 

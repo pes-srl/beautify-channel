@@ -58,7 +58,7 @@ export function BasicHeroChannel({ channel, planType }: BasicHeroChannelProps) {
                     <div className="flex items-center gap-3 mb-6">
                         <div className={`flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest border backdrop-blur-md ${isPremium ? 'bg-transparent text-white border-white/10' : planType === 'basic' ? 'bg-white/20 border-white/30 text-[#5B21B6]' : 'bg-white/10 border-white/20 text-white'}`}>
                             <Sparkles className={`w-3.5 h-3.5 ${isPremium ? 'text-[#C69C85]' : planType === 'free_trial' ? 'text-purple-300' : planType === 'basic' ? 'text-[#5B21B6]' : 'text-sky-400'}`} />
-                            <span>CANALE PRINCIPALE</span>
+                            <span>CANALE PRIMARIO</span>
                         </div>
                         {isActive && (
                             <div className={`flex items-center gap-2 border px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest ${isPremium ? 'bg-[#C69C85]/10 text-[#C69C85] border-[#C69C85]/20' : planType === 'free_trial' ? 'bg-purple-500/20 text-purple-300 border-purple-500/30' : planType === 'basic' ? 'bg-white/20 text-white border-white/30 drop-shadow-sm' : 'bg-sky-500/20 text-sky-400 border-sky-500/30'}`}>
@@ -87,12 +87,12 @@ export function BasicHeroChannel({ channel, planType }: BasicHeroChannelProps) {
                     <div className={`max-w-xl leading-relaxed mb-8 ${planType === 'basic' ? 'text-white/95 font-medium' : 'text-zinc-300'}`}>
                         {isPremium ? (
                             <p className="text-lg md:text-lg">
-                                Questo è il <span className="text-xl md:text-xl"><strong className="text-white font-black">CANALE AUDIO PRINCIPALE</strong> che contiene tutte le <strong className="text-[#C69C85] font-black">TUE PROMO PERSONALIZZATE</strong></span> dei prossimi mesi e che trasforma radicalmente l'atmosfera del tuo istituto!<br />Sotto altri canali settoriali!
+                                Questo è il <span className="text-xl md:text-xl"><strong className="text-white font-black">CANALE AUDIO PRIMARIO</strong> che contiene tutte le <strong className="text-[#C69C85] font-black">TUE PROMO PERSONALIZZATE</strong></span> dei prossimi mesi e che trasforma radicalmente l'atmosfera del tuo istituto!<br />Sotto altri canali settoriali!
                             </p>
                         ) : planType === 'basic' ? (
                             <>
                                 <p className="text-lg md:text-xl font-light leading-snug drop-shadow-sm">
-                                    Questo è il <strong className="font-black text-[#5B21B6]">CANALE AUDIO PRINCIPALE</strong> che trasforma <strong className="font-black text-[#5B21B6]">RADICALMENTE</strong> l'atmosfera del tuo istituto!
+                                    Questo è il <strong className="font-black text-[#5B21B6]">CANALE AUDIO PRIMARIO</strong> che trasforma <strong className="font-black text-[#5B21B6]">RADICALMENTE</strong> l'atmosfera del tuo istituto!
                                 </p>
                                 <p className="text-base md:text-lg font-medium mt-3 text-white/90">
                                     Sotto altri canali settoriali!
@@ -100,7 +100,7 @@ export function BasicHeroChannel({ channel, planType }: BasicHeroChannelProps) {
                             </>
                         ) : (
                             <p className="text-lg md:text-lg">
-                                Questo è il <strong className="font-black text-[#FF4D79]">CANALE AUDIO PRINCIPALE</strong> che trasforma <strong className="font-black text-[#FF4D79]">RADICALMENTE</strong> l'atmosfera del tuo istituto!<br />Sotto altri canali settoriali!
+                                Questo è il <strong className="font-black text-[#FF4D79]">CANALE AUDIO PRIMARIO</strong> che trasforma <strong className="font-black text-[#FF4D79]">RADICALMENTE</strong> l'atmosfera del tuo istituto!<br />Sotto altri canali settoriali!
                             </p>
                         )}
                     </div>

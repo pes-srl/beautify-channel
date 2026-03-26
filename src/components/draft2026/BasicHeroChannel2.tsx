@@ -59,7 +59,7 @@ export function BasicHeroChannel2({ channel, planType }: BasicHeroChannel2Props)
                     <div className="flex flex-wrap items-center gap-2 mb-4">
                         <div className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[10px] uppercase font-bold tracking-widest border backdrop-blur-md bg-transparent border-white/10 ${isPremium ? 'text-white' : planType === 'basic' ? 'text-[#ff7393]' : 'text-white'}`}>
                             <Sparkles className={`w-3.5 h-3.5 ${isPremium ? 'text-amber-400' : planType === 'basic' ? 'text-[#ff7393]' : 'text-fuchsia-400'}`} />
-                            <span>CANALE AUDIO PRINCIPALE</span>
+                            <span>CANALE AUDIO PRIMARIO</span>
                         </div>
                         {isActive && (
                             <div className={`flex items-center gap-2 border px-3 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-widest ${isPremium ? 'bg-amber-500/10 text-amber-400 border-amber-500/20' : 'bg-fuchsia-500/10 text-fuchsia-400 border-fuchsia-500/20'}`}>
@@ -88,17 +88,17 @@ export function BasicHeroChannel2({ channel, planType }: BasicHeroChannel2Props)
                     <div className={`max-w-lg leading-relaxed mb-4 text-zinc-300`}>
                         {isPremium ? (
                             <p className="text-base md:text-lg">
-                                Questo è il <span><strong className="text-white font-black">CANALE AUDIO PRINCIPALE</strong> che contiene tutte le <strong className="text-amber-400 font-black">TUE PROMO PERSONALIZZATE</strong></span> dei prossimi mesi e che trasforma radicalmente l'atmosfera del tuo istituto.<br />Sotto altri canali settoriali!
+                                Questo è il <span><strong className="text-white font-black">CANALE AUDIO PRIMARIO</strong> che contiene tutte le <strong className="text-amber-400 font-black">TUE PROMO PERSONALIZZATE</strong></span> dei prossimi mesi e che trasforma radicalmente l'atmosfera del tuo istituto.<br />Sotto altri canali settoriali!
                             </p>
                         ) : planType === 'free_trial' ? (
                             <p className="text-base md:text-lg">
-                                <strong className="text-white font-black block mb-1 text-xl">BENVENUTA</strong>
-                                Grazie per aver scelto di provare l'esperienza <strong className="text-fuchsia-400 font-bold">BeautiFy!</strong><br />
-                                <span className="italic mt-1 block">Buon ascolto!</span>
+                                Grazie per aver scelto di provare l’esperienza della <br />
+                                <strong className="text-fuchsia-400 font-bold text-lg md:text-xl mt-2 block italic">Beauty Routine Sonora.</strong>
+                                <span className="italic mt-2 block text-zinc-400">Buon ascolto…</span>
                             </p>
                         ) : (
                             <p className="text-base md:text-lg">
-                                Questo è il <strong className={`${planType === 'basic' ? 'text-[#ff7393]' : 'text-white'} font-black`}>CANALE AUDIO PRINCIPALE</strong> che trasforma radicalmente l'atmosfera del tuo istituto.<br />Sotto altri canali settoriali!
+                                Questo è il <strong className={`${planType === 'basic' ? 'text-[#ff7393]' : 'text-white'} font-black`}>CANALE AUDIO PRIMARIO</strong> che trasforma radicalmente l'atmosfera del tuo istituto.<br />Sotto altri canali settoriali!
                             </p>
                         )}
                     </div>
