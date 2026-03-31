@@ -34,10 +34,16 @@ export default async function OrdiniPage() {
     const portalUrl = portalRes?.url;
 
     return (
-        <div className="min-h-screen bg-[#09090b] text-zinc-100">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20">
+        <div className="pt-[7rem] pb-32 min-h-[100dvh] relative w-full bg-[#0f0518] selection:bg-[#D8B2A3]/30">
+            {/* Dynamic Background identico alla Home Page */}
+            <div className="fixed inset-0 z-0 flex justify-center pointer-events-none">
+                <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] bg-[#AB7169]/10 blur-[120px] rounded-full mix-blend-screen" />
+                <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[60%] bg-[#5D6676]/10 blur-[120px] rounded-full mix-blend-screen" />
+            </div>
+
+            <div className="relative z-10 text-white w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="max-w-4xl mx-auto">
-                    <div className="mb-8 flex justify-between items-end">
+                    <div className="mb-8 flex flex-col md:flex-row md:justify-between items-start md:items-end gap-6">
                         <div>
                             <h1 className="text-3xl md:text-5xl font-bold font-['Montserrat'] tracking-tight mb-4">
                                 I Miei <span className="text-amber-500">Ordini</span>
@@ -57,9 +63,9 @@ export default async function OrdiniPage() {
                     </div>
 
                     {!hasOrders ? (
-                        <div className="bg-zinc-900/50 border border-white/10 rounded-3xl p-8">
+                        <div className="bg-white/5 backdrop-blur-xl border border-white/10 shadow-2xl rounded-3xl p-8">
                             <div className="flex flex-col items-center text-center space-y-6 py-8">
-                                <div className="w-20 h-20 rounded-full bg-zinc-800 flex items-center justify-center border border-zinc-700">
+                                <div className="w-20 h-20 rounded-full bg-white/5 flex items-center justify-center border border-white/10">
                                     <AlertCircle className="w-10 h-10 text-zinc-400" />
                                 </div>
                                 <div>
@@ -91,7 +97,7 @@ export default async function OrdiniPage() {
                                 });
 
                                 return (
-                                    <div key={order.id} className="bg-zinc-900/50 border border-white/10 rounded-2xl p-6 transition-all hover:bg-zinc-900 ml-0 mr-0">
+                                    <div key={order.id} className="bg-white/5 backdrop-blur-xl border border-white/10 shadow-xl rounded-2xl p-6 transition-all hover:bg-white/10">
                                         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
                                             <div className="space-y-2">
                                                 <div className="flex items-center gap-3">

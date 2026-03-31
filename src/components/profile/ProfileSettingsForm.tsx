@@ -38,7 +38,7 @@ export function ProfileSettingsForm({ fullName, salonName, partitaIva, email }: 
     }
 
     return (
-        <form action={handleSubmit} className="space-y-6 bg-[#2b2730] p-6 md:p-8 rounded-2xl border border-white/5 shadow-xl relative overflow-hidden">
+        <form action={handleSubmit} className="space-y-6 bg-white/5 backdrop-blur-xl p-6 md:p-8 rounded-2xl border border-white/10 shadow-2xl relative overflow-hidden">
             <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#AB7169] via-[#D8B2A3] to-[#5D6676]" />
             
             <div>

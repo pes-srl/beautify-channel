@@ -69,7 +69,7 @@ export function UpdatePasswordForm({ email }: UpdatePasswordFormProps) {
     }
 
     return (
-        <form id="passwordForm" action={handleSubmit} className="space-y-6 bg-[#2b2730] p-6 md:p-8 rounded-2xl border border-white/5 shadow-xl relative overflow-hidden mt-8">
+        <form id="passwordForm" action={handleSubmit} className="space-y-6 bg-white/5 backdrop-blur-xl p-6 md:p-8 rounded-2xl border border-white/10 shadow-2xl relative overflow-hidden mt-8">
             <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#AB7169] via-[#D8B2A3] to-[#5D6676]" />
             
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-2">

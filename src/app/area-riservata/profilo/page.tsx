@@ -25,9 +25,9 @@ export default async function ProfiloPage() {
     const email = user.email || "";
 
     return (
-        <div className="pt-[7rem] pb-32 min-h-[90vh] relative w-full selection:bg-[#D8B2A3]/30">
+        <div className="pt-[7rem] pb-32 min-h-[100dvh] relative w-full bg-[#0f0518] selection:bg-[#D8B2A3]/30">
             {/* Dynamic Background identico alla Home Page */}
-            <div className="fixed inset-0 z-0 flex justify-center bg-zinc-950 pointer-events-none">
+            <div className="fixed inset-0 z-0 flex justify-center pointer-events-none">
                 <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] bg-[#AB7169]/10 blur-[120px] rounded-full mix-blend-screen" />
                 <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[60%] bg-[#5D6676]/10 blur-[120px] rounded-full mix-blend-screen" />
             </div>
