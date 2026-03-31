@@ -209,7 +209,7 @@ export function UpgradeCheckoutForm({ userEmail, userVat, userSalonName, planTyp
                                 <h3 className="text-xl font-bold text-white tracking-widest uppercase flex items-center gap-2">Premium <Sparkles className="w-5 h-5 text-purple-400" /></h3>
                                 <CheckCircle2 className="w-6 h-6 text-purple-400" />
                             </div>
-                            <p className="text-sm text-zinc-400 font-light mb-4 text-center md:text-left">Con il piano Premium hai a disposizione 2 suggerimenti vocali personalizzati al mese, per promuovere i tuoi servizi e le tue promozioni mensili</p>
+                            <p className="text-sm text-zinc-400 font-light mb-4 text-center md:text-left">Con il piano Premium, hai a disposizione <span className="text-purple-400 font-medium">2 promo sonore personalizzate</span> al mese per promuovere i tuoi servizi e le tue promozioni mensili</p>
                             <div className="mt-auto flex flex-col w-full items-start">
                                 <div>
                                     <span className="text-2xl md:text-3xl font-black text-white">€ 38,90</span><span className="text-zinc-500 text-sm md:text-base"> / mese</span>
