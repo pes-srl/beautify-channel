@@ -38,7 +38,7 @@ export function AudioPlayer() {
 
             {/* The Visible UI Overlay */}
             {currentChannel && (
-                <div className="fixed bottom-0 left-0 right-0 h-24 bg-zinc-950/80 backdrop-blur-xl border-t border-white/10 flex items-center px-6 z-50 shadow-2xl">
+                <div className="fixed bottom-0 left-0 right-0 h-24 bg-zinc-950 border-t border-white/10 flex items-center px-6 z-50 shadow-2xl">
                     <div className="flex items-center justify-between w-full max-w-7xl mx-auto gap-4">
 
                         {/* Left: Track Info */}

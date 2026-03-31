@@ -92,8 +92,9 @@ export function BasicHeroChannel2({ channel, planType }: BasicHeroChannel2Props)
                             </p>
                         ) : planType === 'free_trial' ? (
                             <p className="text-base md:text-lg">
-                                Grazie per aver scelto di provare l’esperienza della <br />
-                                <strong className="text-fuchsia-400 font-bold text-lg md:text-xl mt-2 block italic">Beauty Routine Sonora.</strong>
+                                Grazie per aver scelto di provare l’esperienza della{" "}
+                                <br className="hidden md:block" />
+                                <strong className="text-fuchsia-400 font-bold text-lg md:text-xl inline md:block md:mt-2 italic">Beauty Routine Sonora.</strong>
                                 <span className="italic mt-2 block text-zinc-400">Buon ascolto…</span>
                             </p>
                         ) : (

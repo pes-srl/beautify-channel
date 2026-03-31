@@ -28,6 +28,7 @@ import { FooterNew } from "@/components/homepagenew/FooterNew";
 import { AuthHashCatcher } from "@/components/AuthHashCatcher";
 import { Toaster } from "@/components/ui/sonner";
 import { PresencePing } from "@/components/PresencePing";
+import { AudioPlayer } from "@/components/player/AudioPlayer";
 
 import { createClient } from "@/utils/supabase/server";
 
@@ -79,6 +80,7 @@ export default async function RootLayout({
           {children}
         </div>
         <FooterNew />
+        <AudioPlayer />
         <Toaster position="bottom-right" richColors theme="dark" />
       </body>
     </html>

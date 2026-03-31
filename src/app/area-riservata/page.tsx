@@ -9,7 +9,6 @@ import { Button } from "@/components/ui/button";
 import { Paywall } from "./Paywall";
 import { UpgradeCheckoutForm } from "@/components/draft2026/UpgradeCheckoutForm";
 import { AreaRiservataTabs } from "@/components/draft2026/AreaRiservataTabs";
-import { AudioPlayer } from "@/components/player/AudioPlayer";
 import { PollActivation } from "@/components/draft2026/PollActivation";
 
 export const dynamic = "force-dynamic";
@@ -112,9 +111,9 @@ export default async function AreaClientePage2(props: {
     }
 
     return (
-        <div className="pt-[7rem] pb-6 md:pb-32 min-h-screen relative w-full bg-[#0f0518] selection:bg-[#D8B2A3]/30">
+        <div className="pt-[7rem] pb-6 md:pb-32 min-h-[100dvh] relative w-full bg-[#0f0518] selection:bg-[#D8B2A3]/30">
             {/* Dynamic Background identico alla Home Page */}
-            <div className="fixed inset-0 z-0 flex justify-center bg-[#0f0518] pointer-events-none">
+            <div className="fixed inset-0 z-0 flex justify-center pointer-events-none">
                 <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] bg-[#AB7169]/10 blur-[120px] rounded-full mix-blend-screen" />
                 <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[60%] bg-[#5D6676]/10 blur-[120px] rounded-full mix-blend-screen" />
             </div>
@@ -328,8 +327,6 @@ export default async function AreaClientePage2(props: {
                         {/* TABS CONTAINER */}
                         <AreaRiservataTabs profile={profile} channels={channels} channelsError={channelsError} user={user} isAdmin={isAdmin} />
                         {/* END TABS CONTAINER */}
-
-                        <AudioPlayer />
                     </>
                 ) : (
                     <Paywall salonName={profile?.salon_name || user.email || 'Utente'} userEmail={user.email} />
