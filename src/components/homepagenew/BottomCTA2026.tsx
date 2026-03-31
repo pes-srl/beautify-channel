@@ -195,7 +195,7 @@ export function BottomCTA2026({ hasSession }: { hasSession?: boolean }) {
                                                     className="h-14 bg-black/40 border-white/10 text-white placeholder:text-zinc-500 focus-visible:ring-[#AB7169]/50 rounded-[35px] text-[15px]"
                                                 />
                                                 <p className="text-[13px] leading-relaxed text-zinc-400 ml-1 mt-2">
-                                                    BeautiFy Channel è un servizio riservato esclusivamente ai professionisti del benessere. La Partita IVA ci aiuta a confermare che sei il titolare di un’attività e a sbloccare i palinsesti audio dedicati al tuo salone.
+                                                    BeautiFy Channel è un servizio riservato esclusivamente ai professionisti del benessere. La Partita IVA ci aiuta a confermare che sei il titolare di un’attività e ad attivare i canali audio dedicati al tuo salone.
                                                 </p>
                                             </div>
 

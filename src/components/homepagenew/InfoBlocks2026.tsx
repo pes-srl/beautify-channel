@@ -246,46 +246,16 @@ export function InfoBlocks2026() {
                     className="flex flex-col items-center justify-center text-center max-w-6xl mx-auto -mt-8 md:-mt-12 py-8 md:py-24 space-y-12"
                 >
                     <div className="space-y-4">
-                        <h2 className={`text-4xl md:text-6xl font-semibold text-[#5D6676] tracking-tighter uppercase ${montserrat.className}`}>
+                        <h2 className={`text-5xl md:text-7xl font-semibold text-[#5D6676] tracking-tighter uppercase ${montserrat.className}`}>
                             COME?
                         </h2>
-                        <p className={`text-xl md:text-2xl text-[#5D6676]/80 font-normal leading-relaxed max-w-3xl mx-auto ${inter.className}`}>
-                            Con un semplice clic per accendere BeautiFy Channel!
+                        <p className={`text-2xl md:text-3xl text-[#5D6676]/80 font-normal leading-relaxed max-w-3xl mx-auto ${inter.className}`}>
+                            Con un semplice clic per accendere<br />BeautiFy Channel!
                         </p>
                     </div>
 
-                    {/* Glassmorphism Demo Card */}
-                    <div className="relative w-full max-w-4xl p-[1px] rounded-[35px] bg-gradient-to-br from-white/40 to-white/10 shadow-3xl">
-                        <div className="bg-white/10 backdrop-blur-2xl rounded-[35px] p-8 md:p-12 flex flex-col items-center justify-between gap-8 border border-white/20">
-                            <div className="flex flex-col md:flex-row items-center justify-between w-full gap-10">
-                                <div className="flex-1 text-center space-y-4">
-                                    <h3 className={`text-[#5D6676] text-2xl md:text-3xl font-semibold leading-tight uppercase tracking-tight ${montserrat.className}`}>
-                                        Ascolta una demo<br />del Mood BeautiFy
-                                    </h3>
-                                    <p className={`text-[#5D6676]/70 text-lg font-normal ${inter.className}`}>
-                                        Goditi l’atmosfera della Beauty Routine Sonora.
-                                    </p>
-                                </div>
-
-                                <div className="relative group mt-6 md:mt-0">
-                                    {/* Pulse Effect Background */}
-                                    <div className="absolute inset-0 bg-[#AB7169]/20 rounded-full blur-3xl group-hover:bg-[#AB7169]/30 transition-all duration-500 animate-pulse"></div>
-                                    <AudioPlayerMinimal src="/audio/beautify-demo.mp3" />
-                                </div>
-                            </div>
-                            <p className={`text-xs md:text-sm text-[#5D6676] font-semibold italic text-center max-w-3xl mt-2 ${inter.className}`}>
-                                *In questa demo audio, le canzoni sono state accorciate e le promo sonore sono più presenti per offrirti una panoramica immediata. Nel servizio reale, si inseriscono in modo discreto ed elegante ogni 15–20 minuti.
-                            </p>
-                        </div>
-
-                        {/* Decorative floating icon */}
-                        <div className="absolute -top-6 -right-6 w-12 h-12 bg-white rounded-2xl shadow-xl flex items-center justify-center rotate-12 hidden md:flex">
-                            <ArrowRight className="text-[#AB7169] w-6 h-6 rotate-[160deg]" />
-                        </div>
-                    </div>
-
                     {/* Refined Integrated Info Blocks */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-6xl pt-32 md:pt-48 pb-0 mx-auto relative z-10">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-6xl pt-16 md:pt-24 pb-0 mx-auto relative z-10">
 
                         {/* Block 1 */}
                         <motion.div
@@ -345,6 +315,35 @@ export function InfoBlocks2026() {
                         </motion.div>
                     </div>
 
+                    {/* Glassmorphism Demo Card */}
+                    <div className="relative w-full max-w-4xl p-[1px] rounded-[35px] bg-gradient-to-br from-white/40 to-white/10 shadow-3xl mt-16 md:mt-24">
+                        <div className="bg-white/10 backdrop-blur-2xl rounded-[35px] p-8 md:p-12 flex flex-col items-center justify-between gap-8 border border-white/20">
+                            <div className="flex flex-col md:flex-row items-center justify-between w-full gap-10">
+                                <div className="flex-1 text-center space-y-4">
+                                    <h3 className={`text-[#5D6676] text-2xl md:text-3xl font-semibold leading-tight uppercase tracking-tight ${montserrat.className}`}>
+                                        Ascolta una demo<br />del Mood BeautiFy
+                                    </h3>
+                                    <p className={`text-[#5D6676]/70 text-lg font-normal ${inter.className}`}>
+                                        Goditi l’atmosfera della Beauty Routine Sonora.
+                                    </p>
+                                </div>
+
+                                <div className="relative group mt-6 md:mt-0">
+                                    {/* Pulse Effect Background */}
+                                    <div className="absolute inset-0 bg-[#AB7169]/20 rounded-full blur-3xl group-hover:bg-[#AB7169]/30 transition-all duration-500 animate-pulse"></div>
+                                    <AudioPlayerMinimal src="/audio/beautify-demo.mp3" />
+                                </div>
+                            </div>
+                            <p className={`text-xs md:text-sm text-[#5D6676] font-semibold italic text-center max-w-3xl mt-2 ${inter.className}`}>
+                                *In questa demo audio, le canzoni sono state accorciate e le promo sonore sono più presenti per offrirti una panoramica immediata. Nel servizio reale, si inseriscono in modo discreto ed elegante ogni 15–20 minuti.
+                            </p>
+                        </div>
+
+                        {/* Decorative floating icon */}
+                        <div className="absolute -top-6 -right-6 w-12 h-12 bg-white rounded-2xl shadow-xl flex items-center justify-center rotate-12 hidden md:flex">
+                            <ArrowRight className="text-[#AB7169] w-6 h-6 rotate-[160deg]" />
+                        </div>
+                    </div>
 
                 </motion.div>
             </div>
