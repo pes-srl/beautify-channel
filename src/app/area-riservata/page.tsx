@@ -112,7 +112,7 @@ export default async function AreaClientePage2(props: {
     }
 
     return (
-        <div className="pt-[7rem] pb-32 min-h-screen relative w-full bg-[#0f0518] selection:bg-[#D8B2A3]/30">
+        <div className="pt-[7rem] pb-6 md:pb-32 min-h-screen relative w-full bg-[#0f0518] selection:bg-[#D8B2A3]/30">
             {/* Dynamic Background identico alla Home Page */}
             <div className="fixed inset-0 z-0 flex justify-center bg-[#0f0518] pointer-events-none">
                 <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] bg-[#AB7169]/10 blur-[120px] rounded-full mix-blend-screen" />
@@ -148,9 +148,9 @@ export default async function AreaClientePage2(props: {
 
                 {/* 1. DYNAMIC WELCOME BANNER */}
                 {!isAdmin && profile?.plan_type === 'free_trial' && !isExpired && (
-                    <div className="w-full max-w-4xl mx-auto mt-24 mb-16 flex flex-col gap-6 items-center px-4">
+                    <div className="w-full max-w-4xl mx-auto mt-4 md:mt-24 mb-12 md:mb-16 flex flex-col gap-6 items-center px-4">
                         {/* SLEEK HORIZONTAL WELCOME BANNER (NOW ONLY THE BADGE) */}
-                        <div className="w-full sm:w-[550px] md:w-[650px] mx-auto bg-gradient-to-r from-[#0f0518]/80 via-[#2a1154]/60 to-[#ff5a7e]/10 border border-white/5 rounded-[2rem] p-6 md:p-10 text-left shadow-2xl flex flex-col items-center justify-center gap-6 backdrop-blur-xl relative overflow-hidden mt-8 md:mt-12">
+                        <div className="w-full sm:w-[550px] md:w-[650px] mx-auto bg-gradient-to-r from-[#0f0518]/80 via-[#2a1154]/60 to-[#ff5a7e]/10 border border-white/5 rounded-[2rem] p-6 md:p-10 text-left shadow-2xl flex flex-col items-center justify-center gap-6 backdrop-blur-xl relative overflow-hidden mt-0 md:mt-12">
                             {/* Decorative background glow */}
                             <div className="absolute inset-0 bg-[#ff5a7e]/5 blur-[80px] rounded-full pointer-events-none" />
 
@@ -195,10 +195,10 @@ export default async function AreaClientePage2(props: {
                 
                 {/* HEADERS FOR BASIC USERS ONLY */}
                 {!isAdmin && profile?.plan_type === 'basic' && !isExpired && (
-                    <div className="w-full max-w-4xl mx-auto mt-24 mb-16 flex flex-col gap-6 items-center px-4">
+                    <div className="w-full max-w-4xl mx-auto mt-4 md:mt-24 mb-12 md:mb-16 flex flex-col gap-6 items-center px-4">
                         
                         {/* SLEEK HORIZONTAL BANNER FOR BASIC */}
-                        <div className="w-full sm:w-[550px] md:w-[650px] mx-auto bg-gradient-to-r from-[#0f0518]/80 via-zinc-900/60 to-[#ff7393]/10 border border-white/5 rounded-[2rem] p-6 md:p-10 text-left shadow-2xl flex flex-col items-center justify-center gap-6 backdrop-blur-xl relative overflow-hidden mt-8 md:mt-12">
+                        <div className="w-full sm:w-[550px] md:w-[650px] mx-auto bg-gradient-to-r from-[#0f0518]/80 via-zinc-900/60 to-[#ff7393]/10 border border-white/5 rounded-[2rem] p-6 md:p-10 text-left shadow-2xl flex flex-col items-center justify-center gap-6 backdrop-blur-xl relative overflow-hidden mt-0 md:mt-12">
                             {/* Decorative background glow */}
                             <div className="absolute inset-0 bg-[#ff7393]/5 blur-[80px] rounded-full pointer-events-none" />
 

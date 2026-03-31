@@ -256,21 +256,26 @@ export function InfoBlocks2026() {
 
                     {/* Glassmorphism Demo Card */}
                     <div className="relative w-full max-w-4xl p-[1px] rounded-[35px] bg-gradient-to-br from-white/40 to-white/10 shadow-3xl">
-                        <div className="bg-white/10 backdrop-blur-2xl rounded-[35px] p-8 md:p-12 flex flex-col md:flex-row items-center justify-between gap-10 border border-white/20">
-                            <div className="flex-1 text-center space-y-4">
-                                <h3 className={`text-[#5D6676] text-2xl md:text-3xl font-semibold leading-tight uppercase tracking-tight ${montserrat.className}`}>
-                                    Ascolta una demo<br />del Mood BeautiFy
-                                </h3>
-                                <p className={`text-[#5D6676]/70 text-lg font-normal ${inter.className}`}>
-                                    Goditi l’atmosfera della Beauty Routine Sonora.
-                                </p>
-                            </div>
+                        <div className="bg-white/10 backdrop-blur-2xl rounded-[35px] p-8 md:p-12 flex flex-col items-center justify-between gap-8 border border-white/20">
+                            <div className="flex flex-col md:flex-row items-center justify-between w-full gap-10">
+                                <div className="flex-1 text-center space-y-4">
+                                    <h3 className={`text-[#5D6676] text-2xl md:text-3xl font-semibold leading-tight uppercase tracking-tight ${montserrat.className}`}>
+                                        Ascolta una demo<br />del Mood BeautiFy
+                                    </h3>
+                                    <p className={`text-[#5D6676]/70 text-lg font-normal ${inter.className}`}>
+                                        Goditi l’atmosfera della Beauty Routine Sonora.
+                                    </p>
+                                </div>
 
-                            <div className="relative group mt-6 md:mt-0">
-                                {/* Pulse Effect Background */}
-                                <div className="absolute inset-0 bg-[#AB7169]/20 rounded-full blur-3xl group-hover:bg-[#AB7169]/30 transition-all duration-500 animate-pulse"></div>
-                                <AudioPlayerMinimal src="/audio/beautify-demo.mp3" />
+                                <div className="relative group mt-6 md:mt-0">
+                                    {/* Pulse Effect Background */}
+                                    <div className="absolute inset-0 bg-[#AB7169]/20 rounded-full blur-3xl group-hover:bg-[#AB7169]/30 transition-all duration-500 animate-pulse"></div>
+                                    <AudioPlayerMinimal src="/audio/beautify-demo.mp3" />
+                                </div>
                             </div>
+                            <p className={`text-xs md:text-sm text-[#5D6676] font-semibold italic text-center max-w-3xl mt-2 ${inter.className}`}>
+                                *In questa demo audio, le canzoni sono state accorciate e le promo sonore sono più presenti per offrirti una panoramica immediata. Nel servizio reale, si inseriscono in modo discreto ed elegante ogni 15–20 minuti.
+                            </p>
                         </div>
 
                         {/* Decorative floating icon */}

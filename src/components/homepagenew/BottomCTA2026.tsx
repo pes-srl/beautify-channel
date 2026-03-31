@@ -337,12 +337,12 @@ export function BottomCTA2026({ hasSession }: { hasSession?: boolean }) {
                                 className={`text-zinc-300 text-lg md:text-2xl lg:text-3xl font-light leading-relaxed ${inter.className}`}
                             >
                                 Prossimamente in arrivo
-                                <span className="mt-4 flex flex-col sm:flex-row items-center justify-center gap-3 md:gap-4">
-                                    <span className="inline-flex items-center justify-center px-5 py-2 rounded-full border border-fuchsia-400/30 bg-fuchsia-500/20 text-fuchsia-50 font-normal text-xs md:text-sm tracking-wide shadow-inner">
+                                <span className="mt-4 flex flex-col sm:flex-row items-center justify-center gap-3 md:gap-5">
+                                    <span className="inline-flex items-center justify-center px-6 py-2.5 md:px-8 md:py-3 rounded-full border border-fuchsia-400/30 bg-fuchsia-500/20 text-white font-medium text-sm md:text-base tracking-wide shadow-inner">
                                         Laser Channel
                                     </span>
-                                    <span className="hidden sm:inline-block text-zinc-300 font-light italic text-sm md:text-base">e</span>
-                                    <span className="inline-flex items-center justify-center px-5 py-2 rounded-full border border-fuchsia-400/30 bg-fuchsia-500/20 text-fuchsia-50 font-normal text-xs md:text-sm tracking-wide shadow-inner">
+                                    <span className="hidden sm:inline-block text-zinc-300 font-light italic text-base md:text-lg">e</span>
+                                    <span className="inline-flex items-center justify-center px-6 py-2.5 md:px-8 md:py-3 rounded-full border border-fuchsia-400/30 bg-fuchsia-500/20 text-white font-medium text-sm md:text-base tracking-wide shadow-inner">
                                         Cosmetic Channel
                                     </span>
                                 </span>

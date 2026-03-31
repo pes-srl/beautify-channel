@@ -25,7 +25,7 @@ export function AreaRiservataTabs({ profile, channels, channelsError, user, isAd
     const hoverColor = profile?.plan_type === 'free_trial' ? 'group-hover:text-purple-400' : 'group-hover:text-white';
 
     return (
-        <div className="w-full max-w-4xl mx-auto mt-6 mb-24 px-4">
+        <div className="w-full max-w-4xl mx-auto mt-6 mb-4 md:mb-24 px-4">
             <div className="flex flex-col border-t border-white/10">
 
                 {/* 1. COME FUNZIONA */}
@@ -154,7 +154,7 @@ export function AreaRiservataTabs({ profile, channels, channelsError, user, isAd
                                         <div className="absolute inset-0 bg-amber-500/5 blur-[60px] rounded-full pointer-events-none" />
                                         
                                         <div className="relative z-10">
-                                            <h3 className="text-3xl md:text-5xl font-black italic tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-amber-200 to-amber-500 mb-6 drop-shadow-2xl">
+                                            <h3 className="text-3xl md:text-5xl font-black italic tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-[#F8BBD0] to-[#DDA0DD] mb-6 drop-shadow-2xl">
                                                 STAY TUNED!
                                             </h3>
 
@@ -168,7 +168,6 @@ export function AreaRiservataTabs({ profile, channels, channelsError, user, isAd
                                                 </div>
                                                 <div className="flex flex-wrap justify-center gap-4 mt-2">
                                                     <span className="text-lg md:text-xl font-bold text-white tracking-tight">Laser Channel</span>
-                                                    <span className="text-zinc-600 font-black text-xl">•</span>
                                                     <span className="text-lg md:text-xl font-bold text-white tracking-tight">Cosmetic Channel</span>
                                                 </div>
                                             </div>
