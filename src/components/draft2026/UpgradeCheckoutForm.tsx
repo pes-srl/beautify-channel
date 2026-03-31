@@ -170,7 +170,7 @@ export function UpgradeCheckoutForm({ userEmail, userVat, userSalonName, planTyp
             <div className="relative z-10 max-w-4xl mx-auto">
                 <div className="text-center mb-10">
                     <h2 className="text-3xl font-semibold text-white mb-3 uppercase tracking-wide">
-                        AGGIORNA L'ESPERIENZA CON IL PIANO <span className="text-[#ff7393]">BASIC</span>
+                        AGGIORNA L'ESPERIENZA CON IL PIANO <span className={selectedPlan === 'basic' ? 'text-[#ff7393]' : 'text-purple-400'}>{selectedPlan.toUpperCase()}</span>
                     </h2>
                 </div>
 
@@ -209,7 +209,7 @@ export function UpgradeCheckoutForm({ userEmail, userVat, userSalonName, planTyp
                                 <h3 className="text-xl font-bold text-white tracking-widest uppercase flex items-center gap-2">Premium <Sparkles className="w-5 h-5 text-purple-400" /></h3>
                                 <CheckCircle2 className="w-6 h-6 text-purple-400" />
                             </div>
-                            <p className="text-sm text-zinc-400 font-light mb-4 text-center md:text-left">Tutta la libreria musicale, più spot sonori personalizzati e creati su misura per te.</p>
+                            <p className="text-sm text-zinc-400 font-light mb-4 text-center md:text-left">Con il piano Premium hai a disposizione 2 suggerimenti vocali personalizzati al mese, per promuovere i tuoi servizi e le tue promozioni mensili</p>
                             <div className="mt-auto flex flex-col w-full items-start">
                                 <div>
                                     <span className="text-2xl md:text-3xl font-black text-white">€ 38,90</span><span className="text-zinc-500 text-sm md:text-base"> / mese</span>

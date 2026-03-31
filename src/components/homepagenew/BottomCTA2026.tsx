@@ -310,8 +310,8 @@ export function BottomCTA2026({ hasSession }: { hasSession?: boolean }) {
                 >
                     <div className="relative w-full max-w-3xl rounded-3xl border border-white/10 bg-white/5 backdrop-blur-md shadow-lg">
                         <div className="px-6 py-8 md:px-10 md:py-12 flex flex-col items-center justify-center text-center">
-                            
-                            <motion.h3 
+
+                            <motion.h3
                                 initial={{ opacity: 0 }}
                                 whileInView={{ opacity: 1 }}
                                 transition={{ duration: 0.8, delay: 0.2 }}
@@ -320,17 +320,17 @@ export function BottomCTA2026({ hasSession }: { hasSession?: boolean }) {
                                 Stay Tuned
                             </motion.h3>
 
-                            <motion.p 
+                            <motion.p
                                 initial={{ opacity: 0, y: 15 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 transition={{ duration: 0.8, delay: 0.4 }}
                                 className={`text-white text-lg md:text-2xl lg:text-3xl font-light leading-relaxed max-w-2xl mb-6 md:mb-8 ${montserrat.className}`}
                             >
-                                I servizi e le opportunità BeautiFy <br className="hidden md:block"/>
+                                I servizi e le opportunità BeautiFy <br className="hidden md:block" />
                                 <span className="italic text-zinc-400">sono in continuo ampliamento.</span>
                             </motion.p>
 
-                            <motion.p 
+                            <motion.p
                                 initial={{ opacity: 0, y: 15 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 transition={{ duration: 0.8, delay: 0.6 }}
