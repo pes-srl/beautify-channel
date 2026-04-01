@@ -191,11 +191,11 @@ export default async function AreaClientePage2(props: {
                         </div>
                     </div>
                 )}
-                
+
                 {/* HEADERS FOR BASIC USERS ONLY */}
                 {!isAdmin && profile?.plan_type === 'basic' && !isExpired && (
                     <div className="w-full max-w-4xl mx-auto mt-4 md:mt-24 mb-12 md:mb-16 flex flex-col gap-6 items-center px-4">
-                        
+
                         {/* SLEEK HORIZONTAL BANNER FOR BASIC */}
                         <div className="w-full sm:w-[550px] md:w-[650px] mx-auto bg-gradient-to-r from-[#0f0518]/80 via-zinc-900/60 to-[#ff7393]/10 border border-white/5 rounded-[2rem] p-6 md:p-10 text-left shadow-2xl flex flex-col items-center justify-center gap-6 backdrop-blur-xl relative overflow-hidden mt-0 md:mt-12">
                             {/* Decorative background glow */}
@@ -288,7 +288,7 @@ export default async function AreaClientePage2(props: {
                         <p className="text-lg md:text-xl text-zinc-300 max-w-2xl leading-relaxed mb-8">
                             Grazie per aver completato la tua richiesta di addebito. Essendo un bonifico bancario (SEPA), la rete interbancaria impiegherà dai <strong>2 ai 5 giorni lavorativi</strong> per confermare il primo trasferimento.
                         </p>
-                        
+
                         <div className="bg-white/5 border border-white/10 rounded-2xl p-6 md:p-8 text-left max-w-lg w-full backdrop-blur-sm shadow-2xl relative overflow-hidden">
                             <div className="absolute top-0 right-0 w-32 h-32 bg-amber-500/10 blur-[50px] rounded-full pointer-events-none" />
                             <h3 className="text-white font-bold text-xl mb-6 flex items-center gap-2">

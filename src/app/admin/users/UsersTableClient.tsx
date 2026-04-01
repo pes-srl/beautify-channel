@@ -173,10 +173,10 @@ export function UsersTableClient({ initialProfiles }: { initialProfiles: any[] }
                                     <TableCell>
                                         <Badge variant="outline" className={`px-2 py-1 flex items-center gap-1.5 rounded-full text-[10px] font-bold uppercase tracking-wider border backdrop-blur-md whitespace-nowrap overflow-hidden
                                             ${computedPlanType === 'premiumcustomizzato' ? 'text-emerald-400 border-emerald-400/50' :
-                                            computedPlanType === 'premium' ? 'text-amber-400 border-amber-400/50' :
-                                            computedPlanType === 'basic' ? 'text-[#ff7393] border-[#ff7393]/50' :
-                                            computedPlanType === 'free_trial' ? 'text-purple-400 border-purple-400/50' :
-                                                'text-red-500 border-red-500/50'}
+                                                computedPlanType === 'premium' ? 'text-amber-400 border-amber-400/50' :
+                                                    computedPlanType === 'basic' ? 'text-[#ff7393] border-[#ff7393]/50' :
+                                                        computedPlanType === 'free_trial' ? 'text-purple-400 border-purple-400/50' :
+                                                            'text-red-500 border-red-500/50'}
                                         `}>
                                             {computedPlanType ? computedPlanType.replace('_', ' ') : 'free'}
                                         </Badge>

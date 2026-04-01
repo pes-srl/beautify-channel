@@ -103,8 +103,10 @@ export function HeaderNew({
                         const daysLeft = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
                         if (daysLeft < 0) pType = 'free';
                     }
-                    setProfile({ role: profileData.role, plan_type: pType, salon_name: profileData.salon_name, trial_ends_at: profileData.trial_ends_at, store_license_url: profileData.store_license_url,
-                        store_contract_url: profileData.store_contract_url });
+                    setProfile({
+                        role: profileData.role, plan_type: pType, salon_name: profileData.salon_name, trial_ends_at: profileData.trial_ends_at, store_license_url: profileData.store_license_url,
+                        store_contract_url: profileData.store_contract_url
+                    });
                 }
             } catch (err) {
                 console.error("Error in HeaderNew fetchUser:", err);
@@ -135,8 +137,10 @@ export function HeaderNew({
                             const daysLeft = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
                             if (daysLeft < 0) pType = 'free';
                         }
-                        setProfile({ role: profileData.role, plan_type: pType, salon_name: profileData.salon_name, trial_ends_at: profileData.trial_ends_at, store_license_url: profileData.store_license_url,
-                        store_contract_url: profileData.store_contract_url });
+                        setProfile({
+                            role: profileData.role, plan_type: pType, salon_name: profileData.salon_name, trial_ends_at: profileData.trial_ends_at, store_license_url: profileData.store_license_url,
+                            store_contract_url: profileData.store_contract_url
+                        });
                     }
                 } else {
                     setProfile(null);
@@ -155,15 +159,15 @@ export function HeaderNew({
         if (typeof window === 'undefined') return;
         const searchParams = new URLSearchParams(window.location.search);
         const upgradeParam = searchParams.get('upgrade');
-        
+
         if (upgradeParam !== 'success' || !user || !profile) return;
-        
+
         // Only poll if it still looks like a trial/free plan but user just paid
         if (profile.plan_type !== 'free_trial' && profile.plan_type !== 'free') return;
 
         let pollingCount = 0;
         const maxPolls = 8; // Poll for about 12 seconds total
-        
+
         const pollTimer = setInterval(async () => {
             pollingCount++;
             try {
@@ -172,16 +176,16 @@ export function HeaderNew({
                     .select('role, plan_type, salon_name, trial_ends_at, store_license_url, store_contract_url')
                     .eq('id', user.id)
                     .single();
-                    
+
                 if (profileData && profileData.plan_type !== 'free_trial' && profileData.plan_type !== 'free') {
                     // Plan has finally updated securely!
-                    setProfile({ 
-                        role: profileData.role, 
-                        plan_type: profileData.plan_type, 
-                        salon_name: profileData.salon_name, 
-                        trial_ends_at: profileData.trial_ends_at, 
+                    setProfile({
+                        role: profileData.role,
+                        plan_type: profileData.plan_type,
+                        salon_name: profileData.salon_name,
+                        trial_ends_at: profileData.trial_ends_at,
                         store_license_url: profileData.store_license_url,
-                        store_contract_url: profileData.store_contract_url 
+                        store_contract_url: profileData.store_contract_url
                     });
                     clearInterval(pollTimer);
                 } else if (pollingCount >= maxPolls) {
@@ -336,20 +340,20 @@ export function HeaderNew({
                                 </DropdownMenuItem>
                                 <DropdownMenuItem asChild className="cursor-pointer focus:bg-white/10 rounded-lg px-3 py-2.5 mt-1">
                                     <Link href="/area-riservata/profilo" className="flex items-center gap-3 w-full">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-zinc-400"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-zinc-400"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" /><circle cx="12" cy="7" r="4" /></svg>
                                         <span className="text-zinc-200">Il Mio Profilo</span>
                                     </Link>
                                 </DropdownMenuItem>
                                 <DropdownMenuItem asChild className="cursor-pointer focus:bg-white/10 rounded-lg px-3 py-2.5 mt-1">
                                     <Link href="/area-riservata/ordini" className="flex items-center gap-3 w-full">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-zinc-400"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-zinc-400"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z" /><path d="M3 6h18" /><path d="M16 10a4 4 0 0 1-8 0" /></svg>
                                         <span className="text-zinc-200">I Miei Ordini</span>
                                     </Link>
                                 </DropdownMenuItem>
                                 {(profile?.store_license_url || profile?.store_contract_url) && (
                                     <DropdownMenuItem asChild className="cursor-pointer focus:bg-white/10 rounded-lg px-3 py-2.5 mt-1">
                                         <Link href="/area-riservata/documenti" className="flex items-center gap-3 w-full">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-zinc-400"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-zinc-400"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z" /><polyline points="14 2 14 8 20 8" /></svg>
                                             <span className="text-zinc-200">Documenti e Licenza</span>
                                         </Link>
                                     </DropdownMenuItem>
@@ -442,7 +446,7 @@ export function HeaderNew({
                                 </Link>
                                 <Link href="/area-riservata/profilo" onClick={() => setIsMobileMenuOpen(false)}>
                                     <Button variant="outline" className="w-full border-white/20 text-white bg-transparent flex items-center justify-center gap-2 rounded-[35px]">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" /><circle cx="12" cy="7" r="4" /></svg>
                                         Il Mio Profilo
                                     </Button>
                                 </Link>
