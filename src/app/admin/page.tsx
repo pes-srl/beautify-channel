@@ -7,25 +7,50 @@ export const dynamic = "force-dynamic";
 
 export default async function AdminOverview() {
     const supabase = await createClient();
+    const now = new Date();
 
-    // Fetch counts for all plan types concurrently for performance
-    const [
-        { count: freeTrialCount },
-        { count: basicCount },
-        { count: premiumCount },
-        { count: freeCount }
-    ] = await Promise.all([
-        supabase.from('profiles').select('*', { count: 'exact', head: true }).eq('plan_type', 'free_trial'),
-        supabase.from('profiles').select('*', { count: 'exact', head: true }).eq('plan_type', 'basic'),
-        supabase.from('profiles').select('*', { count: 'exact', head: true }).eq('plan_type', 'premium'),
-        supabase.from('profiles').select('*', { count: 'exact', head: true }).eq('plan_type', 'free')
-    ]);
+    // Fetch all profiles to calculate dynamic stats based on dates
+    const { data: profiles } = await supabase
+        .from('profiles')
+        .select('id, plan_type, trial_ends_at, subscription_expiration');
+
+    let activeFreeTrial = 0;
+    let activeBasic = 0;
+    let activePremiumManual = 0;
+    let expiredOrFree = 0;
+
+    profiles?.forEach(user => {
+        let isExpired = false;
+        const pType = user.plan_type;
+
+        if (pType === 'free_trial') {
+            if (user.trial_ends_at && new Date(user.trial_ends_at) < now) {
+                isExpired = true;
+            } else {
+                activeFreeTrial++;
+            }
+        } else if (pType === 'basic' || pType === 'premium' || pType === 'premiumcustomizzato') {
+            if (user.subscription_expiration && new Date(user.subscription_expiration) < now) {
+                isExpired = true;
+            } else {
+                if (pType === 'basic') activeBasic++;
+                else activePremiumManual++;
+            }
+        } else {
+            // Plan is 'free' or null
+            isExpired = true;
+        }
+
+        if (isExpired) {
+            expiredOrFree++;
+        }
+    });
 
     const stats = [
-        { label: "In Prova 7 Giorni", value: freeTrialCount?.toString() || "0", trend: "Piano Free Trial", icon: Users, color: "text-amber-400" },
-        { label: "Utenti Basic", value: basicCount?.toString() || "0", trend: "Piano Basic", icon: UserCheck, color: "text-[#ff7393]" },
-        { label: "Utenti Premium", value: premiumCount?.toString() || "0", trend: "Piano Premium", icon: Crown, color: "text-fuchsia-400" },
-        { label: "Prova Scaduta", value: freeCount?.toString() || "0", trend: "Piano Free (Inattivi)", icon: UserPlus, color: "text-red-400" },
+        { label: "In Prova 7 Giorni", value: activeFreeTrial.toString(), trend: "Account Attivi", icon: Users, color: "text-amber-400" },
+        { label: "Utenti Basic", value: activeBasic.toString(), trend: "Abbonati Attivi", icon: UserCheck, color: "text-[#ff7393]" },
+        { label: "Utenti Premium", value: activePremiumManual.toString(), trend: "Abbonati Attivi", icon: Crown, color: "text-fuchsia-400" },
+        { label: "Prova Scaduta", value: expiredOrFree.toString(), trend: "Account Inattivi", icon: UserPlus, color: "text-red-400" },
     ];
 
     return (

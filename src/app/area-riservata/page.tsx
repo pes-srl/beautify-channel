@@ -48,28 +48,30 @@ export default async function AreaClientePage2(props: {
 
     // Calculate Trial State
     const isAdmin = profile?.role === 'Admin';
-    let isExpired = profile?.plan_type === 'free';
+    const now = new Date();
+    let isExpired = profile?.plan_type === 'free' || !profile?.plan_type;
     let daysLeft = 0;
 
     if (profile?.plan_type === 'free_trial') {
         if (profile?.trial_ends_at) {
             const trialEndDate = new Date(profile.trial_ends_at);
-            const now = new Date();
             const diffTime = trialEndDate.getTime() - now.getTime();
-            daysLeft = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-
-            // Allow 1 day grace period for timezone issues and immediate signup edge case
-            if (daysLeft < 0) {
+            
+            if (trialEndDate < now) {
                 isExpired = true;
                 profile.plan_type = 'free';
                 daysLeft = 0;
-            } else if (daysLeft === 0 && diffTime > -86400000) {
-                // still active, just < 24h left
-                daysLeft = 1;
+            } else {
+                daysLeft = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+                if (daysLeft < 1) daysLeft = 1;
             }
         } else {
             // Fallback for new accounts where triggers might be delayed: give 7 days visual
             daysLeft = 7;
+        }
+    } else if (['basic', 'premium', 'premiumcustomizzato'].includes(profile?.plan_type)) {
+        if (profile?.subscription_expiration && new Date(profile.subscription_expiration) < now) {
+            isExpired = true;
         }
     }
 
