@@ -14,7 +14,7 @@ const plans = [
         name: "Basic",
         headerColor: "bg-[#5D6676]",
         headerTextColor: "text-white",
-        subtitle: "Il piano entry level che cambia l'atmosfera del tuo istituto.\nCompresi eleganti suggerimenti vocali per stimolare le vendite",
+        subtitle: "Il piano entry level che cambia l’atmosfera del tuo istituto.\nSono comprese le promo sonore, gli eleganti messaggi vocali studiati per aumentare le tue vendite.",
         price: "20,90",
         period: "/mese",
         features: [
