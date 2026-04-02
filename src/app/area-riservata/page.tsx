@@ -75,11 +75,34 @@ export default async function AreaClientePage2(props: {
         }
     }
 
-    let formattedBasicExpiration = null;
-    if (profile?.plan_type === 'basic' && profile?.subscription_expiration) {
-        const expDate = new Date(profile.subscription_expiration);
-        // Format as DD/MM/YYYY
-        formattedBasicExpiration = new Intl.DateTimeFormat('it-IT', { day: '2-digit', month: '2-digit', year: 'numeric' }).format(expDate);
+    let formattedExpiration = null;
+    if (['basic', 'premium', 'premiumcustomizzato'].includes(profile?.plan_type)) {
+        let expDate = null;
+        if (profile?.subscription_expiration) {
+            expDate = new Date(profile.subscription_expiration);
+        } else {
+            // Fallback: Fetch latest approved request to calculate expiration
+            const { data: latestApprovedRequest } = await supabase
+                .from('upgrade_requests')
+                .select('created_at, billing_details')
+                .eq('user_id', user.id)
+                .eq('status', 'approved')
+                .order('created_at', { ascending: false })
+                .limit(1)
+                .maybeSingle();
+
+            if (latestApprovedRequest) {
+                const durationStr = latestApprovedRequest.billing_details?.durata_abbonamento || '6 mesi';
+                const duration = durationStr.includes('12') ? 12 : 6;
+                expDate = new Date(latestApprovedRequest.created_at);
+                expDate.setMonth(expDate.getMonth() + duration);
+            }
+        }
+
+        if (expDate) {
+            // Format as DD/MM/YYYY
+            formattedExpiration = new Intl.DateTimeFormat('it-IT', { day: '2-digit', month: '2-digit', year: 'numeric' }).format(expDate);
+        }
     }
 
     // Server-side fetching of channels to prevent client-side lock contention
@@ -197,8 +220,8 @@ export default async function AreaClientePage2(props: {
                             {/* Decorative background glow */}
                             <div className="absolute inset-0 bg-[#ff7393]/5 blur-[80px] rounded-full pointer-events-none" />
 
-                            <div className="flex flex-col md:flex-row items-center gap-6 lg:gap-10 relative z-10 w-full">
-                                <div className="text-center md:text-left flex-1 w-full">
+                            <div className="flex flex-col items-center relative z-10 w-full text-center">
+                                <div className="flex-1 w-full">
                                     <span className="text-zinc-400 text-xs md:text-sm uppercase tracking-[0.2em] font-medium block mb-1">
                                         Il Tuo Piano
                                     </span>
@@ -208,9 +231,9 @@ export default async function AreaClientePage2(props: {
                                     <span className="text-[#ff7393]/80 text-sm md:text-base font-bold block mb-1">
                                         E' ATTIVO
                                     </span>
-                                    {formattedBasicExpiration ? (
+                                    {formattedExpiration ? (
                                         <span className="text-zinc-400 text-sm md:text-base italic block mt-3 leading-tight">
-                                            Scade il <span className="text-[#ff7393] font-bold text-lg md:text-xl">{formattedBasicExpiration}</span>
+                                            Scade il <span className="text-[#ff7393] font-bold text-lg md:text-xl">{formattedExpiration}</span>
                                         </span>
                                     ) : (
                                         <span className="text-zinc-400 text-sm md:text-base italic block mt-3 leading-tight">
@@ -218,12 +241,6 @@ export default async function AreaClientePage2(props: {
                                         </span>
                                     )}
                                 </div>
-                                <a
-                                    href="#scegli-piano-section"
-                                    className="bg-white text-black font-bold uppercase tracking-widest text-xs md:text-sm px-6 py-4 md:px-8 md:py-5 rounded-full hover:scale-105 transition-transform flex items-center justify-center shrink-0 w-full md:w-auto mt-4 md:mt-0 shadow-xl shadow-white/20"
-                                >
-                                    Fai Upgrade a PREMIUM
-                                </a>
                             </div>
                         </div>
 
@@ -262,12 +279,18 @@ export default async function AreaClientePage2(props: {
                             <span className="text-xl md:text-2xl font-bold text-white">
                                 {profile?.salon_name || user.email}
                             </span>
-                            <div className="flex bg-white/5 border border-white/10 rounded-full px-4 py-1.5 items-center gap-2 backdrop-blur-sm">
+                            <div className="flex bg-white/5 border border-white/10 rounded-full px-4 py-1.5 items-center gap-2 backdrop-blur-sm mb-4">
                                 <span className={`w-2 h-2 rounded-full animate-pulse bg-amber-400`} />
                                 <span className="text-sm font-semibold uppercase tracking-wider text-zinc-300">
                                     {`Piano: ${profile.plan_type === 'basic' ? 'Basic' : 'Premium'}`}
                                 </span>
                             </div>
+
+                            {formattedExpiration && (
+                                <span className="text-zinc-400 text-sm italic block leading-tight">
+                                    Abbonamento attivo fino al <span className="text-amber-400 font-bold">{formattedExpiration}</span>
+                                </span>
+                            )}
                         </div>
                     </div>
                 )}
