@@ -215,8 +215,8 @@ export default async function AreaClientePage2(props: {
                 {!isAdmin && profile?.plan_type === 'basic' && !isExpired && (
                     <div className="w-full max-w-4xl mx-auto mt-4 md:mt-24 mb-12 md:mb-16 flex flex-col gap-6 items-center px-4">
 
-                        {/* SLEEK HORIZONTAL BANNER FOR BASIC */}
-                        <div className="w-[92%] md:max-w-2xl lg:max-w-3xl mx-auto bg-gradient-to-r from-[#0f0518]/80 via-zinc-900/60 to-[#ff7393]/10 border border-white/5 rounded-[2rem] p-6 md:p-8 lg:p-10 text-left shadow-2xl flex flex-col items-center justify-center gap-6 backdrop-blur-xl relative overflow-hidden mt-0 md:mt-12">
+                        {/* SLEEK HORIZONTAL BANNER FOR BASIC - HIDDEN ON PC AS IT IS IN HEADER */}
+                        <div className="md:hidden w-[92%] md:max-w-2xl lg:max-w-3xl mx-auto bg-gradient-to-r from-[#0f0518]/80 via-zinc-900/60 to-[#ff7393]/10 border border-white/5 rounded-[2rem] p-6 md:p-8 lg:p-10 text-left shadow-2xl flex flex-col items-center justify-center gap-6 backdrop-blur-xl relative overflow-hidden mt-0 md:mt-12">
                             {/* Decorative background glow */}
                             <div className="absolute inset-0 bg-[#ff7393]/5 blur-[80px] rounded-full pointer-events-none" />
 
@@ -244,8 +244,8 @@ export default async function AreaClientePage2(props: {
                             </div>
                         </div>
 
-                        {/* Elegant Divider */}
-                        <div className="flex items-center justify-center w-full mt-8 md:mt-12 relative">
+                        {/* Elegant Divider - PC HIDDEN */}
+                        <div className="md:hidden flex items-center justify-center w-full mt-8 md:mt-12 relative">
                             {/* Core line */}
                             <div className="w-[95%] max-w-6xl h-[2px] rounded-full z-10 bg-gradient-to-r from-transparent via-white/40 to-transparent" />
                             {/* Glow effect */}

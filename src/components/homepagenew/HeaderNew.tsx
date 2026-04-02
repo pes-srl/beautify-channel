@@ -21,7 +21,7 @@ export function HeaderNew({
     initialProfile = null
 }: {
     initialUser?: SupabaseUser | null;
-    initialProfile?: { role: string | null; plan_type: string | null; salon_name: string | null; trial_ends_at?: string | null; store_license_url?: string | null; store_contract_url?: string | null } | null;
+    initialProfile?: { role: string | null; plan_type: string | null; salon_name: string | null; trial_ends_at?: string | null; subscription_expiration?: string | null; store_license_url?: string | null; store_contract_url?: string | null } | null;
 } = {}) {
     const pathname = usePathname();
 
@@ -30,7 +30,7 @@ export function HeaderNew({
 
     // Seed state with SSR props if available, otherwise fetch
     const [user, setUser] = useState<SupabaseUser | null>(initialUser);
-    const [profile, setProfile] = useState<{ role: string | null; plan_type: string | null; salon_name: string | null; trial_ends_at?: string | null; store_license_url?: string | null; store_contract_url?: string | null } | null>(initialProfile);
+    const [profile, setProfile] = useState<{ role: string | null; plan_type: string | null; salon_name: string | null; trial_ends_at?: string | null; subscription_expiration?: string | null; store_license_url?: string | null; store_contract_url?: string | null } | null>(initialProfile);
 
     // If we already have a user from SSR, we are not loading.
     const [isLoading, setIsLoading] = useState(!initialUser);
@@ -65,8 +65,7 @@ export function HeaderNew({
     // Use the state values, which correctly reflect SSR or Client hydration
     const initials = getInitials(profile?.salon_name || null, user?.email || "");
     
-    // --- CALCOLO GIORNI TRIAL ---
-    // If we have a trial_ends_at, calculate days left for the header badge
+    // --- CALCOLO GIORNI TRIAL / SCADENZA ABBONAMENTO ---
     let daysLeft = 0;
     if (profile?.plan_type === 'free_trial' && profile?.trial_ends_at) {
         const trialEndDate = new Date(profile.trial_ends_at);
@@ -74,6 +73,12 @@ export function HeaderNew({
         const diffTime = trialEndDate.getTime() - now.getTime();
         daysLeft = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
         if (daysLeft < 1 && diffTime > 0) daysLeft = 1;
+    }
+
+    let formattedExpiration = "";
+    if (['basic', 'premium', 'premiumcustomizzato'].includes(profile?.plan_type || '') && profile?.subscription_expiration) {
+        const expDate = new Date(profile.subscription_expiration);
+        formattedExpiration = new Intl.DateTimeFormat('it-IT', { day: '2-digit', month: '2-digit', year: 'numeric' }).format(expDate);
     }
 
     useEffect(() => {
@@ -101,7 +106,7 @@ export function HeaderNew({
 
                 const { data: profileData, error: profileError } = await supabase
                     .from('profiles')
-                    .select('role, plan_type, salon_name, trial_ends_at, store_license_url, store_contract_url')
+                    .select('role, plan_type, salon_name, trial_ends_at, subscription_expiration, store_license_url, store_contract_url')
                     .eq('id', authUser.id)
                     .single();
 
@@ -115,7 +120,12 @@ export function HeaderNew({
                         if (daysLeft < 0) pType = 'free';
                     }
                     setProfile({
-                        role: profileData.role, plan_type: pType, salon_name: profileData.salon_name, trial_ends_at: profileData.trial_ends_at, store_license_url: profileData.store_license_url,
+                        role: profileData.role, 
+                        plan_type: pType, 
+                        salon_name: profileData.salon_name, 
+                        trial_ends_at: profileData.trial_ends_at, 
+                        subscription_expiration: profileData.subscription_expiration,
+                        store_license_url: profileData.store_license_url,
                         store_contract_url: profileData.store_contract_url
                     });
                 }
@@ -136,7 +146,7 @@ export function HeaderNew({
                 if (currentUser) {
                     const { data: profileData } = await supabase
                         .from('profiles')
-                        .select('role, plan_type, salon_name, trial_ends_at, store_license_url, store_contract_url')
+                        .select('role, plan_type, salon_name, trial_ends_at, subscription_expiration, store_license_url, store_contract_url')
                         .eq('id', currentUser.id)
                         .single();
                     if (profileData) {
@@ -149,7 +159,12 @@ export function HeaderNew({
                             if (daysLeft < 0) pType = 'free';
                         }
                         setProfile({
-                            role: profileData.role, plan_type: pType, salon_name: profileData.salon_name, trial_ends_at: profileData.trial_ends_at, store_license_url: profileData.store_license_url,
+                            role: profileData.role, 
+                            plan_type: pType, 
+                            salon_name: profileData.salon_name, 
+                            trial_ends_at: profileData.trial_ends_at, 
+                            subscription_expiration: profileData.subscription_expiration,
+                            store_license_url: profileData.store_license_url,
                             store_contract_url: profileData.store_contract_url
                         });
                     }
@@ -184,7 +199,7 @@ export function HeaderNew({
             try {
                 const { data: profileData } = await supabase
                     .from('profiles')
-                    .select('role, plan_type, salon_name, trial_ends_at, store_license_url, store_contract_url')
+                    .select('role, plan_type, salon_name, trial_ends_at, subscription_expiration, store_license_url, store_contract_url')
                     .eq('id', user.id)
                     .single();
 
@@ -195,6 +210,7 @@ export function HeaderNew({
                         plan_type: profileData.plan_type,
                         salon_name: profileData.salon_name,
                         trial_ends_at: profileData.trial_ends_at,
+                        subscription_expiration: profileData.subscription_expiration,
                         store_license_url: profileData.store_license_url,
                         store_contract_url: profileData.store_contract_url
                     });
@@ -334,11 +350,30 @@ export function HeaderNew({
                                 <div className="hidden md:flex items-center gap-3 bg-gradient-to-r from-purple-500/20 via-[#2a1154]/40 to-[#ff5a7e]/10 border border-white/20 px-6 py-2.5 rounded-2xl backdrop-blur-xl shadow-2xl shadow-purple-950/20 whitespace-nowrap">
                                     <Sparkles className="w-5 h-5 text-purple-400 animate-pulse shrink-0" />
                                     <div className="flex flex-col items-start gap-0.5">
-                                        <span className="text-xs lg:text-[13px] font-bold text-white uppercase tracking-wider leading-tight">
+                                        <span className="text-[11px] lg:text-[13px] font-bold text-white uppercase tracking-wider leading-tight">
                                             La tua formula Free Trial è stata attivata
                                         </span>
-                                        <span className="text-[10px] lg:text-[11px] font-medium text-zinc-400 italic leading-tight">
+                                        <span className="text-[9px] lg:text-[11px] font-medium text-zinc-400 italic leading-tight">
                                             <span className="text-purple-400 font-bold">{daysLeft}</span> {daysLeft === 1 ? 'giorno' : 'giorni'} alla scadenza della tua prova gratuita
+                                        </span>
+                                    </div>
+                                </div>
+                            )}
+
+                            {/* BASIC/PREMIUM Plan Badge (PC Only) */}
+                            {['basic', 'premium', 'premiumcustomizzato'].includes(profile?.plan_type || '') && (
+                                <div className={`hidden md:flex items-center gap-3 bg-gradient-to-r ${profile?.plan_type === 'basic' ? 'from-[#ff7393]/20 via-[#4e0f1e]/40 to-[#ff7393]/10 border border-white/20' : 'from-amber-500/20 via-[#4e3a0f]/40 to-amber-500/10 border border-white/20'} px-6 py-2.5 rounded-2xl backdrop-blur-xl shadow-2xl ${profile?.plan_type === 'basic' ? 'shadow-[#ff7393]/10' : 'shadow-amber-500/10'} whitespace-nowrap`}>
+                                    <Sparkles className={`w-5 h-5 ${profile?.plan_type === 'basic' ? 'text-[#ff7393]' : 'text-amber-400'} animate-pulse shrink-0`} />
+                                    <div className="flex flex-col items-start gap-0.5">
+                                        <span className="text-[11px] lg:text-[13px] font-bold text-white uppercase tracking-wider leading-tight">
+                                            Il Tuo Piano <span className={profile?.plan_type === 'basic' ? 'text-[#ff7393]' : 'text-amber-400'}>{profile?.plan_type === 'basic' ? 'BASIC' : 'PREMIUM'}</span> è ATTIVO
+                                        </span>
+                                        <span className="text-[9px] lg:text-[11px] font-medium text-zinc-400 italic leading-tight">
+                                            {formattedExpiration ? (
+                                                <>Scadenza prevista: <span className={`${profile?.plan_type === 'basic' ? 'text-[#ff7393]' : 'text-amber-400'} font-bold`}>{formattedExpiration}</span></>
+                                            ) : (
+                                                "Abbonamento in corso"
+                                            )}
                                         </span>
                                     </div>
                                 </div>
