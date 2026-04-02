@@ -151,17 +151,17 @@ export default async function AreaClientePage2(props: {
                 {!isAdmin && profile?.plan_type === 'free_trial' && !isExpired && (
                     <div className="w-full max-w-4xl mx-auto mt-4 md:mt-24 mb-12 md:mb-16 flex flex-col gap-6 items-center px-4">
                         {/* SLEEK HORIZONTAL WELCOME BANNER (NOW ONLY THE BADGE) - MOBILE ONLY AS IT IS IN HEADER ON PC */}
-                        <div className="md:hidden w-full sm:w-[550px] md:w-[650px] mx-auto bg-gradient-to-r from-[#0f0518]/80 via-[#2a1154]/60 to-[#ff5a7e]/10 border border-white/5 rounded-[2rem] p-6 md:p-10 text-left shadow-2xl flex flex-col items-center justify-center gap-6 backdrop-blur-xl relative overflow-hidden mt-0 md:mt-12">
+                        <div className="md:hidden w-full max-w-[320px] mx-auto bg-gradient-to-br from-[#0f0518]/80 via-[#2a1154]/40 to-[#ff5a7e]/5 border border-white/5 rounded-[1.5rem] p-5 text-center shadow-2xl flex flex-col items-center justify-center gap-2 backdrop-blur-xl relative overflow-hidden mt-0">
                             {/* Decorative background glow */}
-                            <div className="absolute inset-0 bg-[#ff5a7e]/5 blur-[80px] rounded-full pointer-events-none" />
+                            <div className="absolute inset-0 bg-[#ff5a7e]/5 blur-[60px] rounded-full pointer-events-none" />
 
-                            <div className="flex flex-col sm:flex-row items-center gap-6 md:gap-10 relative z-10 w-full">
+                            <div className="flex flex-col items-center gap-2 relative z-10 w-full text-center">
                                 <div className="text-center flex-1">
-                                    <h3 className="text-2xl md:text-3xl font-bold text-white mb-2 leading-tight">
-                                        La tua formula Free Trial è stata attivata.
-                                    </h3>
-                                    <span className="text-zinc-400 text-sm md:text-base italic block mt-1 leading-tight">
-                                        <span className="text-purple-400 font-bold text-lg md:text-xl">{daysLeft}</span> {daysLeft === 1 ? 'giorno' : 'giorni'} alla scadenza della tua prova gratuita
+                                    <p className="text-sm font-semibold text-zinc-400 mb-1 leading-tight uppercase tracking-wide">
+                                        La tua formula <span className="text-purple-400">Free Trial</span> è stata attivata.
+                                    </p>
+                                    <span className="text-zinc-400 text-xs italic block leading-tight">
+                                        <span className="text-purple-400 font-bold text-base">{daysLeft}</span> {daysLeft === 1 ? 'giorno' : 'giorni'} alla scadenza della tua prova gratuita
                                     </span>
                                 </div>
                             </div>
