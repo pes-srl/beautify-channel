@@ -21,6 +21,7 @@ Nessuna email utilizza più l'indirizzo di test `@resend.dev`.
 * **Stato:** ✅ **FUNZIONANTE SU VERCEL**
 * **Contenuto Riepilogativo:** 
   - Saluto personalizzato (`Ciao [Nome]`).
+  - **Credenziali di Accesso:** Email e Password in chiaro per l'utente.
   - Conferma dell'avvio dei 7 giorni di prova gratuita.
   - Spiegazione dei primi passi (Accedere all'area riservata, scegliere il canale, ecc.).
   - Pulsante CTA per entrare subito nell'Area Riservata.
@@ -36,22 +37,17 @@ Nessuna email utilizza più l'indirizzo di test `@resend.dev`.
 * **Oggetto:** `Mancano 2 giorni alla scadenza della prova gratuita ⏳`
 * **Stato:** ✅ **FUNZIONANTE SU VERCEL**
 
-### 3.2 Avviso: 1 Giorno alla fine della Prova Gratuita
-* **Trigger:** Tracciato a 1 giorno dalla fine del campo `trial_ends_at` (piano `free_trial`).
-* **Oggetto:** `Manca 1 giorno alla scadenza della prova gratuita ⏰`
-* **Stato:** ✅ **FUNZIONANTE SU VERCEL**
-
-### 3.3 Scadenza Prova Gratuita (Downgrade a Free)
+### 3.2 Scadenza Prova Gratuita (Downgrade a Free)
 * **Trigger:** Quando la data in `trial_ends_at` è superata o uguale a oggi per un `free_trial`.
 * **Oggetto:** `La tua prova è scaduta ⚠️ Riattiva Beautify Channel`
 * **Stato:** ✅ **FUNZIONANTE SU VERCEL**
 
-### 3.4 Avviso: 2 Giorni alla scadenza Abbonamento Basic/Premium
+### 3.3 Avviso: 2 Giorni alla scadenza Abbonamento Basic/Premium
 * **Trigger:** Tracciato a 2 giorni dal `subscription_expiration` (piani a pagamento).
 * **Oggetto:** `Il tuo abbonamento scade tra 2 giorni ⏳ Rinnovo richiesto`
 * **Stato:** ✅ **FUNZIONANTE SU VERCEL**
 
-### 3.5 Scadenza Abbonamento Basic/Premium (Downgrade a Free)
+### 3.4 Scadenza Abbonamento Basic/Premium (Downgrade a Free)
 * **Trigger:** Quando la data `subscription_expiration` è superata (piani a pagamento).
 * **Oggetto:** `Il tuo abbonamento è scaduto ⚠️ Riattiva Beautify Channel`
 * **Stato:** ✅ **FUNZIONANTE SU VERCEL**
