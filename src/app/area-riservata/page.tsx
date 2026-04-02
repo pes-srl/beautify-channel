@@ -216,27 +216,27 @@ export default async function AreaClientePage2(props: {
                     <div className="w-full max-w-4xl mx-auto mt-4 md:mt-24 mb-12 md:mb-16 flex flex-col gap-6 items-center px-4">
 
                         {/* SLEEK HORIZONTAL BANNER FOR BASIC - HIDDEN ON PC AS IT IS IN HEADER */}
-                        <div className="md:hidden w-[92%] md:max-w-2xl lg:max-w-3xl mx-auto bg-gradient-to-r from-[#0f0518]/80 via-zinc-900/60 to-[#ff7393]/10 border border-white/5 rounded-[2rem] p-6 md:p-8 lg:p-10 text-left shadow-2xl flex flex-col items-center justify-center gap-6 backdrop-blur-xl relative overflow-hidden mt-0 md:mt-12">
+                        <div className="md:hidden w-[90%] max-w-[320px] mx-auto bg-gradient-to-r from-[#0f0518]/80 via-zinc-900/60 to-[#ff7393]/10 border border-white/5 rounded-[1.5rem] p-5 text-center shadow-2xl flex flex-col items-center justify-center gap-3 backdrop-blur-xl relative overflow-hidden mt-0">
                             {/* Decorative background glow */}
-                            <div className="absolute inset-0 bg-[#ff7393]/5 blur-[80px] rounded-full pointer-events-none" />
+                            <div className="absolute inset-0 bg-[#ff7393]/5 blur-[60px] rounded-full pointer-events-none" />
 
                             <div className="flex flex-col items-center relative z-10 w-full text-center">
                                 <div className="flex-1 w-full">
-                                    <span className="text-zinc-400 text-xs md:text-sm uppercase tracking-[0.2em] font-medium block mb-1">
+                                    <span className="text-zinc-400 text-[10px] uppercase tracking-[0.2em] font-medium block mb-0.5">
                                         Il Tuo Piano
                                     </span>
-                                    <h3 className="text-3xl md:text-4xl lg:text-5xl font-black text-[#ff7393] uppercase tracking-wider leading-none mb-2 drop-shadow-lg">
+                                    <h3 className="text-2xl font-black text-[#ff7393] uppercase tracking-wider leading-none mb-1 drop-shadow-lg">
                                         BASIC
                                     </h3>
-                                    <span className="text-[#ff7393]/80 text-sm md:text-base font-bold block mb-1">
+                                    <span className="text-[#ff7393]/80 text-xs font-bold block mb-0.5">
                                         E' ATTIVO
                                     </span>
                                     {formattedExpiration ? (
-                                        <span className="text-zinc-400 text-sm md:text-base italic block mt-3 leading-tight">
-                                            Scade il <span className="text-[#ff7393] font-bold text-lg md:text-xl">{formattedExpiration}</span>
+                                        <span className="text-zinc-400 text-xs italic block mt-2 leading-tight">
+                                            Scade il <span className="text-[#ff7393] font-bold text-base">{formattedExpiration}</span>
                                         </span>
                                     ) : (
-                                        <span className="text-zinc-400 text-sm md:text-base italic block mt-3 leading-tight">
+                                        <span className="text-zinc-400 text-xs italic block mt-2 leading-tight">
                                             Abbonamento in corso
                                         </span>
                                     )}
