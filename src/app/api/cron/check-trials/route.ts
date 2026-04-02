@@ -19,7 +19,6 @@ export async function GET(request: Request) {
 
     try {
         const now = new Date();
-        const tomorrow = new Date(now.getTime() + 24 * 60 * 60 * 1000);
         const inTwoDays = new Date(now.getTime() + 48 * 60 * 60 * 1000);
         const inThreeDays = new Date(now.getTime() + 72 * 60 * 60 * 1000);
 
@@ -53,10 +52,11 @@ export async function GET(request: Request) {
                                     <img src="https://eufahlzjxbimyiwivoiq.supabase.co/storage/v1/object/public/bucket-assets/Logo-BeautiFyChannel.svg" alt="Beautify Channel" style="max-height: 40px; width: auto;" />
                                 </div>
                                 <div style="background-color: #FFFFFF; padding: 30px; border-radius: 0 0 12px 12px;">
-                                    <h1 style="color: #ef4444; margin-top: 0;">La musica si è fermata!</h1>
                                     <p style="font-size: 16px; line-height: 1.6; color: #444;">Ciao, la tua prova gratuita BeautiFy Channel è scaduta!</p>
-                                    <p style="font-size: 16px; line-height: 1.6; color: #444;">Ci piacerebbe rimanessi con noi, qui sotto puoi abbonarti al nostro piano BASIC!<br>In caso contrario, ci piacerebbe sapere cosa non ti ha convinto, feedback sempre super benvenuti.</p>
-                                    <p style="font-size: 16px; line-height: 1.6; color: #444; margin-top: 20px;">Grazie, speriamo di leggerti presto.<br><b>Il Team BeautiFy</b></p>
+                                    <p style="font-size: 16px; line-height: 1.6; color: #444;">Ci piacerebbe rimanessi con noi, qui sotto puoi abbonarti al nostro piano BASIC!</p>
+                                    <p style="font-size: 16px; line-height: 1.6; color: #444;">In caso contrario, ci piacerebbe sapere cosa non ti ha convinta, perché i feedback sono sempre super benvenuti.</p>
+                                    
+                                    <p style="font-size: 16px; line-height: 1.6; color: #444; margin-top: 20px;">Grazie, speriamo di sentirti presto.<br><b>Il Team BeautiFy</b></p>
                                     <a href="https://www.beautify-channel.com/area-riservata#pricing" style="background-color: #ef4444; color: #FFFFFF; text-decoration: none; padding: 12px 24px; border-radius: 8px; font-weight: bold; display: inline-block; margin-top: 20px;">Abbonati al piano BASIC</a>
                                 </div>
                             </div>
@@ -107,40 +107,6 @@ export async function GET(request: Request) {
             }
         }
 
-        // 2. SEND WARNINGS (trial_ends_at between NOW() and TOMORROW AND plan_type = 'free_trial')
-        const { data: warningUsers, error: warningError } = await supabase
-            .from('profiles')
-            .select('*')
-            .eq('plan_type', 'free_trial')
-            .gt('trial_ends_at', now.toISOString())
-            .lte('trial_ends_at', tomorrow.toISOString());
-
-        if (warningError) throw warningError;
-
-        if (warningUsers && warningUsers.length > 0) {
-            for (const user of warningUsers) {
-                if (user.email) {
-                    await resend.emails.send({
-                        from: process.env.RESEND_FROM_EMAIL || 'Beautify Channel <info@beautify-channel.com>',
-                        to: user.email,
-                        subject: 'Manca 1 giorno alla scadenza della prova gratuita ⏰',
-                        html: `
-                            <div style="font-family: Arial, sans-serif; max-w: 600px; margin: 0 auto; color: #333; background-color: #FAFAFA; padding: 0; border-radius: 12px; border: 1px solid #EAEAEA; overflow: hidden;">
-                                <div style="background-color: #09090b; padding: 30px 20px; text-align: center;">
-                                    <img src="https://eufahlzjxbimyiwivoiq.supabase.co/storage/v1/object/public/bucket-assets/Logo-BeautiFyChannel.svg" alt="Beautify Channel" style="max-height: 40px; width: auto;" />
-                                </div>
-                                <div style="background-color: #FFFFFF; padding: 30px; border-radius: 0 0 12px 12px;">
-                                    <h1 style="color: #f59e0b; margin-top: 0;">Ultimo giorno di musica!</h1>
-                                    <p style="font-size: 16px; line-height: 1.6; color: #444;">Ciao ${user.salon_name || 'Amico'}, ti ricordiamo che la tua prova di 7 giorni per Beautify Channel scadrà a breve (domani).</p>
-                                    <p style="font-size: 16px; line-height: 1.6; color: #444;">Non lasciare il tuo salone in silenzio. Passa a un piano Premium per non interrompere il servizio.</p>
-                                    <a href="https://www.beautify-channel.com/area-riservata#pricing" style="background-color: #f59e0b; color: #FFFFFF; text-decoration: none; padding: 12px 24px; border-radius: 8px; font-weight: bold; display: inline-block; margin-top: 20px;">Scopri i Piani</a>
-                                </div>
-                            </div>
-                        `
-                    });
-                }
-            }
-        }
 
         // 3. SEND WARNINGS: 2 DAYS LEFT ON FREE TRIAL
         const { data: twoDaysTrialUsers, error: twoDaysTrialError } = await supabase
@@ -165,9 +131,15 @@ export async function GET(request: Request) {
                                     <img src="https://eufahlzjxbimyiwivoiq.supabase.co/storage/v1/object/public/bucket-assets/Logo-BeautiFyChannel.svg" alt="Beautify Channel" style="max-height: 40px; width: auto;" />
                                 </div>
                                 <div style="background-color: #FFFFFF; padding: 30px; border-radius: 0 0 12px 12px;">
-                                    <h1 style="color: #f59e0b; margin-top: 0;">Il tempo stringe!</h1>
-                                    <p style="font-size: 16px; line-height: 1.6; color: #444;">Ciao, ti sta piacendo l'esperienza BeautiFy Channel?<br>Come ti stai trovando?</p>
-                                    <p style="font-size: 16px; line-height: 1.6; color: #444;">Ti ricordiamo che tra 2 giorni scadrà la prova gratuita.<br>Dopo la scadenza potrai scegliere il nostro piano BASIC ma intanto...</p>
+                                    <p style="font-size: 16px; line-height: 1.6; color: #444;">
+                                        Ciao, ti sta piacendo l'esperienza BeautiFy Channel?<br>
+                                        Come ti stai trovando?
+                                    </p>
+                                    <p style="font-size: 16px; line-height: 1.6; color: #444;">
+                                        Ti ricordiamo che tra 2 giorni scadrà la prova gratuita.<br>
+                                        Dopo la scadenza potrai scegliere il nostro piano BASIC, ma intanto...
+                                    </p>
+                                    
                                     <h3 style="font-size: 18px; color: #f59e0b; margin-top: 20px;">Continua a goderti BeautiFy Channel!</h3>
                                     <p style="font-size: 16px; line-height: 1.6; color: #444; font-weight: bold;">Il Team BeautiFy</p>
                                     <a href="https://www.beautify-channel.com/area-riservata#pricing" style="background-color: #f59e0b; color: #FFFFFF; text-decoration: none; padding: 12px 24px; border-radius: 8px; font-weight: bold; display: inline-block; margin-top: 20px;">Scopri i Piani</a>
@@ -218,7 +190,6 @@ export async function GET(request: Request) {
             success: true,
             expiredProcessed: expiredUsers?.length || 0,
             expiredSubsProcessed: expiredSubs?.length || 0,
-            warned1DayProcessed: warningUsers?.length || 0,
             warned2DaysTrialProcessed: twoDaysTrialUsers?.length || 0,
             warned2DaysSubProcessed: twoDaysSubUsers?.length || 0
         });
