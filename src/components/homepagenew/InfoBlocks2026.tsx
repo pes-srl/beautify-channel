@@ -108,7 +108,7 @@ function AudioPlayerMinimal({ src }: { src: string }) {
 }
 
 export function InfoBlocks2026() {
-    const [activeExample, setActiveExample] = useState<{ title: string, intro: string, quote: string } | null>(null);
+    const [activeExample, setActiveExample] = useState<{ title: string, intro: string, subIntro?: string, quote: string } | null>(null);
     const handleScrollTo = (e: React.MouseEvent, href: string) => {
         e.preventDefault();
         const id = href.replace("#", "");
@@ -280,8 +280,9 @@ export function InfoBlocks2026() {
                             </div>
                             <button
                                 onClick={() => setActiveExample({
-                                    title: "Promozione discreta ed elegante",
+                                    title: "",
                                     intro: "Ti è appena arrivata una nuovissima crema per pelli over 50 e vorresti promuoverla in modo discreto ed elegante alle tue clienti mentre stanno facendo altri trattamenti…",
+                                    subIntro: "Prendi spunto dalle promo sonore come:",
                                     quote: "“La tua pelle sembra spenta e opaca? I nostri trattamenti rivitalizzano e nutrono la pelle, restituendole freschezza e luminosità. Ideali per dare un boost di vitalità. Chiedi al nostro staff la migliore soluzione per te.”"
                                 })}
                                 className="group flex items-center gap-2 text-sm md:text-base font-semibold text-[#AB7169] hover:text-[#DDA0DD] transition-colors mt-auto pb-2"
@@ -307,8 +308,9 @@ export function InfoBlocks2026() {
                             </div>
                             <button
                                 onClick={() => setActiveExample({
-                                    title: "Incentivo all'Acquisto d'impulso",
+                                    title: "",
                                     intro: "Vorresti promuovere, senza risultare invadente, la tua esclusiva linea di prodotti solari per spingerne l’acquisto d’impulso in vista dell’estate…",
+                                    subIntro: "Prendi spunto dalle promo sonore come:",
                                     quote: "“Il sole può essere un alleato, se la pelle è pronta ad accoglierlo. Idratazione profonda e trattamenti nutrienti sono il miglior punto di partenza. Chiedi info al nostro staff.”"
                                 })}
                                 className="group flex items-center gap-2 text-sm md:text-base font-semibold text-[#AB7169] hover:text-[#DDA0DD] transition-colors mt-auto pb-2"
@@ -348,10 +350,10 @@ export function InfoBlocks2026() {
                     </div>
 
                     {/* Glassmorphism Demo Card */}
-                    <div className="relative w-full max-w-4xl p-[1px] rounded-[35px] bg-gradient-to-br from-white/40 to-white/10 shadow-3xl mt-16 md:mt-24">
+                    <div className="relative w-full max-w-4xl p-[1px] rounded-[35px] bg-gradient-to-br from-white/40 to-white/10 shadow-3xl mt-12 md:mt-32">
                         <div className="bg-white/10 backdrop-blur-2xl rounded-[35px] p-8 md:p-12 flex flex-col items-center justify-between gap-8 border border-white/20">
-                            <div className="flex flex-col md:flex-row items-center justify-between w-full gap-10">
-                                <div className="flex-1 text-center space-y-4">
+                            <div className="flex flex-col md:flex-row items-center justify-center w-full gap-10 md:gap-24">
+                                <div className="text-center md:text-left space-y-4">
                                     <h3 className={`text-[#5D6676] text-2xl md:text-3xl font-semibold leading-tight uppercase tracking-tight ${montserrat.className}`}>
                                         Ascolta una demo<br />del Mood BeautiFy
                                     </h3>
@@ -398,7 +400,7 @@ export function InfoBlocks2026() {
                             animate={{ scale: 1, opacity: 1, y: 0 }}
                             exit={{ scale: 0.9, opacity: 0, y: 30 }}
                             transition={{ type: "spring", damping: 25, stiffness: 300 }}
-                            className="relative w-full max-w-2xl bg-gradient-to-br from-white/95 via-white to-[#FAFAF8] rounded-[3rem] p-8 md:p-12 shadow-[0_32px_64px_-16px_rgba(0,0,0,0.3),_0_0_100px_rgba(248,187,208,0.2)] border border-white overflow-hidden"
+                            className="relative w-full max-w-2xl bg-gradient-to-br from-white/95 via-white to-[#FAFAF8] rounded-[2rem] md:rounded-[3rem] px-5 pt-4 pb-2 md:px-12 md:pt-8 md:pb-4 shadow-[0_32px_64px_-16px_rgba(0,0,0,0.3),_0_0_100px_rgba(248,187,208,0.2)] border border-white overflow-hidden scrollbar-hide"
                         >
                             {/* Decorative background circles */}
                             <div className="absolute -top-24 -right-24 w-64 h-64 bg-[#F8BBD0]/20 blur-[80px] rounded-full pointer-events-none" />
@@ -406,46 +408,54 @@ export function InfoBlocks2026() {
 
                             <button
                                 onClick={() => setActiveExample(null)}
-                                className="absolute top-6 right-6 md:top-8 md:right-8 p-3 rounded-full hover:bg-zinc-100 transition-all group z-10"
+                                className="absolute top-4 right-4 md:top-8 md:right-8 p-3 rounded-full hover:bg-zinc-100 transition-all group z-[100]"
                                 aria-label="Chiudi"
                             >
-                                <X className="w-6 h-6 text-zinc-400 group-hover:text-[#5D6676]" />
+                                <X className="w-5 h-5 md:w-6 md:h-6 text-zinc-400 group-hover:text-[#5D6676]" />
                             </button>
 
-                            <div className="relative z-10 space-y-8">
-                                <div className="space-y-2">
-                                    <div className="flex items-center gap-3 text-[#AB7169] mb-4">
-                                        <div className="w-10 h-10 rounded-2xl bg-[#AB7169]/10 flex items-center justify-center">
-                                            <Sparkles className="w-5 h-5 animate-pulse" />
+                            <div className="relative z-10 space-y-3 md:space-y-6">
+                                <div className="space-y-1.5 md:space-y-2">
+                                    <div className="flex items-center gap-2 md:gap-3 text-[#AB7169] mb-1.5 md:mb-3">
+                                        <div className="w-7 h-7 md:w-10 md:h-10 rounded-lg md:rounded-2xl bg-[#AB7169]/10 flex items-center justify-center">
+                                            <Sparkles className="w-3.5 h-3.5 md:w-5 md:h-5 animate-pulse" />
                                         </div>
-                                        <span className="text-sm font-bold tracking-[0.2em] uppercase">Esempio Pratico</span>
+                                        <span className="text-[11px] md:text-base font-bold tracking-[0.2em] uppercase">Esempio Pratico</span>
                                     </div>
-                                    <h3 className={`text-2xl md:text-3xl font-semibold text-[#5D6676] leading-tight ${montserrat.className}`}>
-                                        {activeExample.title}
-                                    </h3>
+                                    {activeExample.title && (
+                                        <h3 className={`text-lg md:text-2xl font-semibold text-[#5D6676] leading-tight ${montserrat.className}`}>
+                                            {activeExample.title}
+                                        </h3>
+                                    )}
                                 </div>
 
-                                <div className={`space-y-6 text-[#5D6676] text-lg md:text-xl leading-relaxed font-light ${inter.className}`}>
-                                    <p className="border-l-4 border-[#F8BBD0] pl-6 py-2 italic bg-[#F8BBD0]/5 rounded-r-2xl">
+                                <div className={`space-y-3 md:space-y-5 text-[#5D6676] text-sm md:text-lg leading-relaxed font-light ${inter.className}`}>
+                                    <p className="border-l-[3px] md:border-l-4 border-[#F8BBD0] pl-4 md:pl-6 py-1.5 md:py-2 italic bg-[#F8BBD0]/5 rounded-r-xl md:rounded-r-2xl">
                                         {activeExample.intro}
                                     </p>
 
-                                    <div className="bg-white/40 p-6 md:p-8 rounded-[2rem] border border-[#DDA0DD]/20 shadow-sm relative overflow-hidden group">
+                                    {activeExample.subIntro && (
+                                        <p className="text-[11px] md:text-base font-semibold text-[#AB7169]/80 uppercase tracking-widest pl-1 md:pl-2">
+                                            {activeExample.subIntro}
+                                        </p>
+                                    )}
+
+                                    <div className="bg-white/40 p-4 md:p-8 rounded-[1.2rem] md:rounded-[2rem] border border-[#DDA0DD]/20 shadow-sm relative overflow-hidden group">
                                         <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-[#F8BBD0] to-[#DDA0DD]" />
-                                        <p className="font-normal italic">
+                                        <p className="font-normal italic text-[13px] md:text-lg">
                                             {activeExample.quote}
                                         </p>
                                     </div>
 
-                                    <p className="text-base text-zinc-400 text-center font-medium">
-                                        L'assistente interviene così, ogni 15-20 minuti,<br />senza mai disturbare il relax.
+                                    <p className="text-[10px] md:text-sm text-zinc-400 text-center font-medium">
+                                        L'assistente BeautiFy interviene così, ogni 15-20 minuti,<br className="hidden md:block" />senza mai disturbare il relax.
                                     </p>
                                 </div>
 
-                                <div className="pt-4">
+                                <div className="pt-2 md:pt-4">
                                     <Button
                                         onClick={() => setActiveExample(null)}
-                                        className="w-full bg-zinc-900 hover:bg-zinc-800 text-white font-bold py-4 rounded-2xl transition-all shadow-lg"
+                                        className="w-full bg-[#AB7169] hover:bg-[#AB7169]/90 text-white font-bold py-4 md:py-5 rounded-xl md:rounded-2xl transition-all shadow-lg text-sm md:text-base uppercase tracking-widest"
                                     >
                                         HO CAPITO, GRAZIE
                                     </Button>
