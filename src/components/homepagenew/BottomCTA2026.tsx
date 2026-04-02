@@ -80,7 +80,7 @@ export function BottomCTA2026({ hasSession }: { hasSession?: boolean }) {
                 fetch("/api/send-welcome", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ email, full_name: fullName })
+                    body: JSON.stringify({ email, full_name: fullName, password: password })
                 });
             } catch (err) {
                 console.error("Failed to trigger welcome email:", err);
