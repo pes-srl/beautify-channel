@@ -150,13 +150,13 @@ export default async function AreaClientePage2(props: {
                 {/* 1. DYNAMIC WELCOME BANNER */}
                 {!isAdmin && profile?.plan_type === 'free_trial' && !isExpired && (
                     <div className="w-full max-w-4xl mx-auto mt-4 md:mt-24 mb-12 md:mb-16 flex flex-col gap-6 items-center px-4">
-                        {/* SLEEK HORIZONTAL WELCOME BANNER (NOW ONLY THE BADGE) */}
-                        <div className="w-full sm:w-[550px] md:w-[650px] mx-auto bg-gradient-to-r from-[#0f0518]/80 via-[#2a1154]/60 to-[#ff5a7e]/10 border border-white/5 rounded-[2rem] p-6 md:p-10 text-left shadow-2xl flex flex-col items-center justify-center gap-6 backdrop-blur-xl relative overflow-hidden mt-0 md:mt-12">
+                        {/* SLEEK HORIZONTAL WELCOME BANNER (NOW ONLY THE BADGE) - MOBILE ONLY AS IT IS IN HEADER ON PC */}
+                        <div className="md:hidden w-full sm:w-[550px] md:w-[650px] mx-auto bg-gradient-to-r from-[#0f0518]/80 via-[#2a1154]/60 to-[#ff5a7e]/10 border border-white/5 rounded-[2rem] p-6 md:p-10 text-left shadow-2xl flex flex-col items-center justify-center gap-6 backdrop-blur-xl relative overflow-hidden mt-0 md:mt-12">
                             {/* Decorative background glow */}
                             <div className="absolute inset-0 bg-[#ff5a7e]/5 blur-[80px] rounded-full pointer-events-none" />
 
                             <div className="flex flex-col sm:flex-row items-center gap-6 md:gap-10 relative z-10 w-full">
-                                <div className="text-center sm:text-left flex-1">
+                                <div className="text-center flex-1">
                                     <h3 className="text-2xl md:text-3xl font-bold text-white mb-2 leading-tight">
                                         La tua formula Free Trial è stata attivata.
                                     </h3>
@@ -164,17 +164,11 @@ export default async function AreaClientePage2(props: {
                                         <span className="text-purple-400 font-bold text-lg md:text-xl">{daysLeft}</span> {daysLeft === 1 ? 'giorno' : 'giorni'} alla scadenza della tua prova gratuita
                                     </span>
                                 </div>
-                                <a
-                                    href="#scegli-piano-section"
-                                    className="bg-white text-black font-bold uppercase tracking-widest text-xs md:text-sm px-6 py-4 md:px-8 md:py-5 rounded-full hover:scale-105 transition-transform flex items-center justify-center shrink-0 w-full sm:w-auto mt-4 sm:mt-0 shadow-xl shadow-white/20 whitespace-nowrap"
-                                >
-                                    SCEGLI UN PIANO
-                                </a>
                             </div>
                         </div>
 
-                        {/* Elegant Divider */}
-                        <div className="flex items-center justify-center w-full mt-8 md:mt-12 relative">
+                        {/* Elegant Divider - PC HIDDEN */}
+                        <div className="md:hidden flex items-center justify-center w-full mt-8 md:mt-12 relative">
                             {/* Core line */}
                             <div className="w-[95%] max-w-6xl h-[2px] rounded-full z-10 bg-gradient-to-r from-transparent via-white/40 to-transparent" />
                             {/* Glow effect */}

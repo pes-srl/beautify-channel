@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
-import { Menu, X, User, LogOut, Settings } from "lucide-react";
+import { Menu, X, User, LogOut, Settings, Sparkles } from "lucide-react";
 import { createClient } from "@/utils/supabase/client";
 import { User as SupabaseUser } from "@supabase/supabase-js";
 import {
@@ -64,6 +64,17 @@ export function HeaderNew({
 
     // Use the state values, which correctly reflect SSR or Client hydration
     const initials = getInitials(profile?.salon_name || null, user?.email || "");
+    
+    // --- CALCOLO GIORNI TRIAL ---
+    // If we have a trial_ends_at, calculate days left for the header badge
+    let daysLeft = 0;
+    if (profile?.plan_type === 'free_trial' && profile?.trial_ends_at) {
+        const trialEndDate = new Date(profile.trial_ends_at);
+        const now = new Date();
+        const diffTime = trialEndDate.getTime() - now.getTime();
+        daysLeft = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+        if (daysLeft < 1 && diffTime > 0) daysLeft = 1;
+    }
 
     useEffect(() => {
         const handleScroll = () => {
@@ -317,11 +328,32 @@ export function HeaderNew({
                 {/* Right Side Buttons & Avatar */}
                 <div className="flex items-center gap-4 ml-auto md:ml-0 flex-1 justify-end">
                     {!isLoading && user ? (
-                        <DropdownMenu>
+                        <div className="flex items-center gap-3">
+                            {/* Prova Gratuita Badge (PC Only) */}
+                            {profile?.plan_type === 'free_trial' && daysLeft > 0 && (
+                                <div className="hidden md:flex items-center gap-3 bg-gradient-to-r from-purple-500/20 via-[#2a1154]/40 to-[#ff5a7e]/10 border border-white/20 px-6 py-2.5 rounded-2xl backdrop-blur-xl shadow-2xl shadow-purple-950/20 whitespace-nowrap">
+                                    <Sparkles className="w-5 h-5 text-purple-400 animate-pulse shrink-0" />
+                                    <div className="flex flex-col items-start gap-0.5">
+                                        <span className="text-xs lg:text-[13px] font-bold text-white uppercase tracking-wider leading-tight">
+                                            La tua formula Free Trial è stata attivata
+                                        </span>
+                                        <span className="text-[10px] lg:text-[11px] font-medium text-zinc-400 italic leading-tight">
+                                            <span className="text-purple-400 font-bold">{daysLeft}</span> {daysLeft === 1 ? 'giorno' : 'giorni'} alla scadenza della tua prova gratuita
+                                        </span>
+                                    </div>
+                                </div>
+                            )}
+
+                            <DropdownMenu>
                             <DropdownMenuTrigger asChild>
-                                <Button variant="ghost" className="relative h-10 w-10 p-0 rounded-full border border-white/10 bg-black/50 hover:bg-white/10 flex items-center justify-center transition-colors outline-none focus-visible:ring-2 focus-visible:ring-fuchsia-500">
-                                    <div className={`w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm uppercase shadow-inner ${profile?.plan_type === 'premium' ? 'bg-amber-500 text-zinc-950' : profile?.plan_type === 'basic' ? 'bg-[#ff7393] text-zinc-950' : profile?.plan_type === 'free_trial' ? 'bg-purple-400 text-zinc-950' : profile?.plan_type === 'free' ? 'bg-red-500 text-white' : 'bg-zinc-800 text-zinc-300'}`}>
-                                        {initials}</div>
+                                <Button variant="ghost" className="relative group flex items-center justify-center h-10 w-10 md:w-auto md:px-3 rounded-full border border-white/10 bg-black/50 hover:bg-white/10 transition-all outline-none focus-visible:ring-2 focus-visible:ring-fuchsia-500">
+                                    <div className={`w-8 h-8 rounded-full flex items-center justify-center font-bold text-[11px] uppercase shadow-inner shrink-0 ${profile?.plan_type === 'premium' ? 'bg-amber-500 text-zinc-950' : profile?.plan_type === 'basic' ? 'bg-[#ff7393] text-zinc-950' : profile?.plan_type === 'free_trial' ? 'bg-purple-400 text-zinc-950' : profile?.plan_type === 'free' ? 'bg-red-500 text-white' : 'bg-zinc-800 text-zinc-300'}`}>
+                                        {initials}
+                                    </div>
+                                    <div className="hidden md:flex flex-col items-start ml-2.5 leading-none pr-1">
+                                        <span className="text-[10px] font-bold text-white uppercase tracking-widest mb-0.5">Account</span>
+                                        <span className="text-[8px] font-medium text-zinc-500 group-hover:text-purple-400 transition-colors uppercase tracking-widest">Impostazioni</span>
+                                    </div>
                                 </Button>
                             </DropdownMenuTrigger>
                             <DropdownMenuContent align="end" className="w-64 bg-zinc-950 border border-white/10 shadow-2xl rounded-xl p-2 mt-2">
@@ -350,7 +382,7 @@ export function HeaderNew({
                                         <span className="text-zinc-200">I Miei Ordini</span>
                                     </Link>
                                 </DropdownMenuItem>
-                                {(profile?.store_license_url || profile?.store_contract_url) && (
+                                {profile?.plan_type !== 'free_trial' && (profile?.store_license_url || profile?.store_contract_url) && (
                                     <DropdownMenuItem asChild className="cursor-pointer focus:bg-white/10 rounded-lg px-3 py-2.5 mt-1">
                                         <Link href="/area-riservata/documenti" className="flex items-center gap-3 w-full">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-zinc-400"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z" /><polyline points="14 2 14 8 20 8" /></svg>
@@ -378,7 +410,8 @@ export function HeaderNew({
                                     </div>
                                 </DropdownMenuItem>
                             </DropdownMenuContent>
-                        </DropdownMenu>
+                            </DropdownMenu>
+                        </div>
                     ) : !isLoading ? (
                         <>
                             <Link

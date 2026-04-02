@@ -34,6 +34,7 @@ export async function updatePresence() {
 
         const updateData: any = {
             last_ping_at: now.toISOString(),
+            last_seen: now.toISOString(),
             is_online: true
         }
 

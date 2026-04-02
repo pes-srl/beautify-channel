@@ -81,11 +81,16 @@ export function UsersTableClient({ initialProfiles }: { initialProfiles: any[] }
 
                             const isOnline = isDbOnline && isPingRecent;
 
-                            let lastSeenText = "Mai connesso";
+                            // --- CALCOLO ULTIMO ACCESSO (usa il momento più recente tra logout e heartbeat) ---
+                            const lastSeenDate = user.last_seen ? parseISO(user.last_seen) : null;
+                            let effectiveLastSeen = lastSeenDate;
+                            if (lastPingDate && (!effectiveLastSeen || lastPingDate > effectiveLastSeen)) {
+                                effectiveLastSeen = lastPingDate;
+                            }
 
-                            if (user.last_seen) {
-                                const lastSeenDate = parseISO(user.last_seen);
-                                lastSeenText = formatDistanceToNow(lastSeenDate, { addSuffix: true, locale: it });
+                            let lastSeenText = "Mai connesso";
+                            if (effectiveLastSeen) {
+                                lastSeenText = formatDistanceToNow(effectiveLastSeen, { addSuffix: true, locale: it });
                             }
 
                             // --- CALCOLO STATUS ABBONAMENTO ---
@@ -207,8 +212,8 @@ export function UsersTableClient({ initialProfiles }: { initialProfiles: any[] }
                                                     {isOnline ? 'Online' : 'Offline'}
                                                 </span>
                                             </div>
-                                            {!isOnline && user.last_seen && (
-                                                <span className="text-xs text-zinc-500 ml-4 truncate max-w-[150px]" title={new Date(user.last_seen).toLocaleString('it-IT')}>
+                                            {!isOnline && effectiveLastSeen && (
+                                                <span className="text-xs text-zinc-500 ml-4 truncate max-w-[150px]" title={effectiveLastSeen.toLocaleString('it-IT')}>
                                                     {lastSeenText}
                                                 </span>
                                             )}
