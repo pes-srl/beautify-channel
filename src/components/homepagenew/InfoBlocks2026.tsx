@@ -1,10 +1,10 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { useState, useRef, useEffect, useId } from "react";
-import { Play, Pause, ArrowRight } from "lucide-react";
+import { Play, Pause, ArrowRight, X, Sparkles } from "lucide-react";
 import { Montserrat, Inter } from "next/font/google";
 import Image from "next/image";
 
@@ -108,6 +108,7 @@ function AudioPlayerMinimal({ src }: { src: string }) {
 }
 
 export function InfoBlocks2026() {
+    const [activeExample, setActiveExample] = useState<{ title: string, intro: string, quote: string } | null>(null);
     const handleScrollTo = (e: React.MouseEvent, href: string) => {
         e.preventDefault();
         const id = href.replace("#", "");
@@ -197,8 +198,7 @@ export function InfoBlocks2026() {
                         </h2>
                         <p className={`text-zinc-700 text-xl md:text-2xl leading-relaxed font-light ${inter.className}`}>
                             BeautiFy Channel è un’eccellenza nell’intrattenimento in istituto, in grado di arricchire un raffinato sottofondo
-                            sonoro - scelto in perfetta coerenza con il settore - con efficaci input informativi e
-                            promozionali.
+                            sonoro - scelto in perfetta coerenza con il settore - con un’accurata selezione di promo sonore, eleganti messaggi informativi e promozionali.
                         </p>
                         <p className={`text-zinc-700 text-xl md:text-2xl leading-relaxed font-light ${inter.className}`}>
                             Una potente combo creata per regalare alle tue clienti momenti di immediate e coinvolgenti
@@ -245,13 +245,19 @@ export function InfoBlocks2026() {
                     transition={{ duration: 0.8 }}
                     className="flex flex-col items-center justify-center text-center max-w-6xl mx-auto -mt-8 md:-mt-12 py-8 md:py-24 space-y-12"
                 >
-                    <div className="space-y-4">
+                    <div className="space-y-8">
                         <h2 className={`text-5xl md:text-7xl font-semibold text-[#5D6676] tracking-tighter uppercase ${montserrat.className}`}>
                             COME?
                         </h2>
                         <p className={`text-2xl md:text-3xl text-[#5D6676]/80 font-normal leading-relaxed max-w-3xl mx-auto ${inter.className}`}>
                             Con un semplice clic per accendere<br />BeautiFy Channel!
                         </p>
+                    </div>
+
+                    <div className="pt-0">
+                        <h2 className={`text-5xl md:text-7xl font-semibold text-[#5D6676] tracking-tighter uppercase ${montserrat.className}`}>
+                            IN SINTESI?
+                        </h2>
                     </div>
 
                     {/* Refined Integrated Info Blocks */}
@@ -265,11 +271,24 @@ export function InfoBlocks2026() {
                             viewport={{ once: true, margin: "-50px" }}
                             transition={{ duration: 0.5, delay: 0.1 }}
                             whileHover={{ y: -5, scale: 1.01 }}
-                            className="bg-[#FAFAF8] rounded-[2rem] p-8 md:p-10 shadow-xl border border-[#D8B2A3]/20 flex flex-col items-center justify-center text-center gap-6 transition-all duration-300 min-h-[180px]"
+                            className="bg-[#FAFAF8] rounded-[2rem] p-8 md:p-10 shadow-xl border border-[#D8B2A3]/20 flex flex-col items-center text-center gap-6 transition-all duration-300 min-h-[280px]"
                         >
-                            <p className={`text-[#5D6676] text-xl md:text-2xl font-light leading-relaxed ${inter.className}`}>
-                                Nel corso di un intrattenimento musicale dal sound ricercato, l’assistente digitale <span className="text-[#AB7169] font-bold">BeautiFy</span> interviene, con dolcezza e professionalità, per offrire spunti generici legati al mondo della bellezza e del benessere.
-                            </p>
+                            <div className="flex-1 flex items-center justify-center">
+                                <p className={`text-[#5D6676] text-xl md:text-2xl font-light leading-relaxed ${inter.className}`}>
+                                    Nel corso di un intrattenimento musicale dal sound ricercato, l’assistente digitale <span className="text-[#AB7169] font-bold">BeautiFy</span> interviene, con dolcezza e professionalità, per offrire eleganti messaggi vocali legati al mondo della bellezza e del benessere.
+                                </p>
+                            </div>
+                            <button
+                                onClick={() => setActiveExample({
+                                    title: "Promozione discreta ed elegante",
+                                    intro: "Ti è appena arrivata una nuovissima crema per pelli over 50 e vorresti promuoverla in modo discreto ed elegante alle tue clienti mentre stanno facendo altri trattamenti…",
+                                    quote: "“La tua pelle sembra spenta e opaca? I nostri trattamenti rivitalizzano e nutrono la pelle, restituendole freschezza e luminosità. Ideali per dare un boost di vitalità. Chiedi al nostro staff la migliore soluzione per te.”"
+                                })}
+                                className="group flex items-center gap-2 text-sm md:text-base font-semibold text-[#AB7169] hover:text-[#DDA0DD] transition-colors mt-auto pb-2"
+                            >
+                                <Sparkles className="w-4 h-4" />
+                                <span className="border-b border-[#AB7169]/30 group-hover:border-[#DDA0DD]/50 uppercase tracking-wider">VEDI UN ESEMPIO PRATICO</span>
+                            </button>
                         </motion.div>
 
                         {/* Block 2 */}
@@ -279,11 +298,24 @@ export function InfoBlocks2026() {
                             viewport={{ once: true, margin: "-50px" }}
                             transition={{ duration: 0.5, delay: 0.2 }}
                             whileHover={{ y: -5, scale: 1.01 }}
-                            className="bg-[#FAFAF8] rounded-[2rem] p-8 md:p-10 shadow-xl border border-[#D8B2A3]/20 flex flex-col items-center justify-center text-center gap-6 transition-all duration-300 min-h-[180px]"
+                            className="bg-[#FAFAF8] rounded-[2rem] p-8 md:p-10 shadow-xl border border-[#D8B2A3]/20 flex flex-col items-center text-center gap-6 transition-all duration-300 min-h-[280px]"
                         >
-                            <p className={`text-[#5D6676] text-xl md:text-2xl font-light leading-relaxed ${inter.className}`}>
-                                Questo stimola efficacemente l’interesse delle clienti e sollecita la loro richiesta di informazioni su <span className="text-[#AB7169] font-bold">prodotti e trattamenti</span> proprio mentre sono nel tuo salone.
-                            </p>
+                            <div className="flex-1 flex items-center justify-center">
+                                <p className={`text-[#5D6676] text-xl md:text-2xl font-light leading-relaxed ${inter.className}`}>
+                                    Questo stimola efficacemente l’interesse delle clienti e sollecita la loro richiesta di informazioni su <span className="text-[#AB7169] font-bold">prodotti e trattamenti</span> proprio mentre sono nel tuo salone.
+                                </p>
+                            </div>
+                            <button
+                                onClick={() => setActiveExample({
+                                    title: "Incentivo all'Acquisto d'impulso",
+                                    intro: "Vorresti promuovere, senza risultare invadente, la tua esclusiva linea di prodotti solari per spingerne l’acquisto d’impulso in vista dell’estate…",
+                                    quote: "“Il sole può essere un alleato, se la pelle è pronta ad accoglierlo. Idratazione profonda e trattamenti nutrienti sono il miglior punto di partenza. Chiedi info al nostro staff.”"
+                                })}
+                                className="group flex items-center gap-2 text-sm md:text-base font-semibold text-[#AB7169] hover:text-[#DDA0DD] transition-colors mt-auto pb-2"
+                            >
+                                <Sparkles className="w-4 h-4" />
+                                <span className="border-b border-[#AB7169]/30 group-hover:border-[#DDA0DD]/50 uppercase tracking-wider">VEDI UN ESEMPIO PRATICO</span>
+                            </button>
                         </motion.div>
 
                         {/* Block 3 */}
@@ -323,9 +355,6 @@ export function InfoBlocks2026() {
                                     <h3 className={`text-[#5D6676] text-2xl md:text-3xl font-semibold leading-tight uppercase tracking-tight ${montserrat.className}`}>
                                         Ascolta una demo<br />del Mood BeautiFy
                                     </h3>
-                                    <p className={`text-[#5D6676]/70 text-lg font-normal ${inter.className}`}>
-                                        Goditi l’atmosfera della Beauty Routine Sonora.
-                                    </p>
                                 </div>
 
                                 <div className="relative group mt-6 md:mt-0">
@@ -334,9 +363,6 @@ export function InfoBlocks2026() {
                                     <AudioPlayerMinimal src="/audio/beautify-demo.mp3" />
                                 </div>
                             </div>
-                            <p className={`text-xs md:text-sm text-[#5D6676] font-semibold italic text-center max-w-3xl mt-2 ${inter.className}`}>
-                                *In questa demo audio, le canzoni sono state accorciate e le promo sonore sono più presenti per offrirti una panoramica immediata. Nel servizio reale, si inseriscono in modo discreto ed elegante ogni 15–20 minuti.
-                            </p>
                         </div>
 
                         {/* Decorative floating icon */}
@@ -347,6 +373,88 @@ export function InfoBlocks2026() {
 
                 </motion.div>
             </div>
+
+            {/* HIGH-END MODAL FOR EXAMPLE TEXT (DYNAMIC) */}
+            <AnimatePresence>
+                {activeExample && (
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-6"
+                    >
+                        {/* Backdrop with enhanced blur */}
+                        <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            onClick={() => setActiveExample(null)}
+                            className="absolute inset-0 bg-[#0f0518]/60 backdrop-blur-md"
+                        />
+
+                        {/* Modal Container */}
+                        <motion.div
+                            initial={{ scale: 0.9, opacity: 0, y: 30 }}
+                            animate={{ scale: 1, opacity: 1, y: 0 }}
+                            exit={{ scale: 0.9, opacity: 0, y: 30 }}
+                            transition={{ type: "spring", damping: 25, stiffness: 300 }}
+                            className="relative w-full max-w-2xl bg-gradient-to-br from-white/95 via-white to-[#FAFAF8] rounded-[3rem] p-8 md:p-12 shadow-[0_32px_64px_-16px_rgba(0,0,0,0.3),_0_0_100px_rgba(248,187,208,0.2)] border border-white overflow-hidden"
+                        >
+                            {/* Decorative background circles */}
+                            <div className="absolute -top-24 -right-24 w-64 h-64 bg-[#F8BBD0]/20 blur-[80px] rounded-full pointer-events-none" />
+                            <div className="absolute -bottom-24 -left-24 w-64 h-64 bg-[#DDA0DD]/20 blur-[80px] rounded-full pointer-events-none" />
+
+                            <button
+                                onClick={() => setActiveExample(null)}
+                                className="absolute top-6 right-6 md:top-8 md:right-8 p-3 rounded-full hover:bg-zinc-100 transition-all group z-10"
+                                aria-label="Chiudi"
+                            >
+                                <X className="w-6 h-6 text-zinc-400 group-hover:text-[#5D6676]" />
+                            </button>
+
+                            <div className="relative z-10 space-y-8">
+                                <div className="space-y-2">
+                                    <div className="flex items-center gap-3 text-[#AB7169] mb-4">
+                                        <div className="w-10 h-10 rounded-2xl bg-[#AB7169]/10 flex items-center justify-center">
+                                            <Sparkles className="w-5 h-5 animate-pulse" />
+                                        </div>
+                                        <span className="text-sm font-bold tracking-[0.2em] uppercase">Esempio Pratico</span>
+                                    </div>
+                                    <h3 className={`text-2xl md:text-3xl font-semibold text-[#5D6676] leading-tight ${montserrat.className}`}>
+                                        {activeExample.title}
+                                    </h3>
+                                </div>
+
+                                <div className={`space-y-6 text-[#5D6676] text-lg md:text-xl leading-relaxed font-light ${inter.className}`}>
+                                    <p className="border-l-4 border-[#F8BBD0] pl-6 py-2 italic bg-[#F8BBD0]/5 rounded-r-2xl">
+                                        {activeExample.intro}
+                                    </p>
+
+                                    <div className="bg-white/40 p-6 md:p-8 rounded-[2rem] border border-[#DDA0DD]/20 shadow-sm relative overflow-hidden group">
+                                        <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-[#F8BBD0] to-[#DDA0DD]" />
+                                        <p className="font-normal italic">
+                                            {activeExample.quote}
+                                        </p>
+                                    </div>
+
+                                    <p className="text-base text-zinc-400 text-center font-medium">
+                                        L'assistente interviene così, ogni 15-20 minuti,<br />senza mai disturbare il relax.
+                                    </p>
+                                </div>
+
+                                <div className="pt-4">
+                                    <Button
+                                        onClick={() => setActiveExample(null)}
+                                        className="w-full bg-zinc-900 hover:bg-zinc-800 text-white font-bold py-4 rounded-2xl transition-all shadow-lg"
+                                    >
+                                        HO CAPITO, GRAZIE
+                                    </Button>
+                                </div>
+                            </div>
+                        </motion.div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </section>
     );
 }
