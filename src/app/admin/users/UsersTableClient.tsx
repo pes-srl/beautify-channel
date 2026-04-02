@@ -16,21 +16,69 @@ import { formatDistanceToNow, differenceInMinutes, differenceInSeconds, parseISO
 import { it } from "date-fns/locale";
 import { Search, Clock } from "lucide-react";
 import { format } from "date-fns";
+import { createClient } from "@/utils/supabase/client";
 
 export function UsersTableClient({ initialProfiles }: { initialProfiles: any[] }) {
     const [searchTerm, setSearchTerm] = useState("");
     const [now, setNow] = useState(new Date());
+    const [profiles, setProfiles] = useState(initialProfiles);
 
-    // Update 'now' every 30 seconds to keep the session timing and online status fresh
+    // Keep state in sync with server-side props
+    useEffect(() => {
+        setProfiles(initialProfiles);
+    }, [initialProfiles]);
+
+    // Update 'now' every 20s to ensure "effectiveLastSeen" and "isPingRecent" stay fresh
     useEffect(() => {
         const timer = setInterval(() => {
             setNow(new Date());
-        }, 30000);
+        }, 20000);
         return () => clearInterval(timer);
     }, []);
 
+    // REAL-TIME SUBSCRIPTION: Monitor profiles status changes (if enabled in DB)
+    useEffect(() => {
+        const supabase = createClient();
+        
+        const channel = supabase
+            .channel('admin-profiles-presence')
+            .on('postgres_changes', 
+                { event: 'UPDATE', schema: 'public', table: 'profiles' }, 
+                (payload) => {
+                    const updatedUser = payload.new;
+                    setProfiles((curr) => 
+                        curr.map(u => u.id === updatedUser.id ? { ...u, ...updatedUser } : u)
+                    );
+                }
+            )
+            .subscribe();
+
+        return () => {
+            supabase.removeChannel(channel);
+        };
+    }, []);
+
+    // POLLING FALLBACK: Periodically refresh all profiles to ensure state is fresh
+    // even if Realtime is not active on the profiles table.
+    useEffect(() => {
+        const pollProfiles = async () => {
+            const supabase = createClient();
+            const { data, error } = await supabase
+                .from('profiles')
+                .select('*')
+                .order('salon_name', { ascending: true });
+
+            if (!error && data) {
+                setProfiles(data);
+            }
+        };
+
+        const interval = setInterval(pollProfiles, 40000); // Poll every 40 seconds
+        return () => clearInterval(interval);
+    }, []);
+
     // Filter profiles based on searchTerm (checking salon_name and email)
-    const filteredProfiles = initialProfiles.filter((user) => {
+    const filteredProfiles = profiles.filter((user) => {
         const searchUpper = searchTerm.toUpperCase();
         const salonMatch = user.salon_name?.toUpperCase().includes(searchUpper);
         const emailMatch = user.email?.toUpperCase().includes(searchUpper);
