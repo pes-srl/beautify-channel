@@ -43,7 +43,7 @@ export function BasicHeroChannel2({ channel, planType }: BasicHeroChannel2Props)
     };
 
     return (
-        <div className={`relative w-full md:w-2/3 lg:w-3/5 mx-auto rounded-3xl overflow-hidden shadow-2xl mb-12 group transition-all duration-700 ${isPremium ? 'shadow-amber-500/20 border border-amber-500/10' : 'shadow-fuchsia-500/20 border border-fuchsia-500/10'}`}>
+        <div className={`relative w-full md:w-[90%] lg:w-[85%] xl:w-3/5 mx-auto rounded-3xl overflow-hidden shadow-2xl mb-12 group transition-all duration-700 ${isPremium ? 'shadow-amber-500/20 border border-amber-500/10' : 'shadow-fuchsia-500/20 border border-fuchsia-500/10'}`}>
             {/* Animated Gradient Background */}
             <div className={`absolute inset-0 z-0 bg-gradient-to-r ${isPremium ? 'from-amber-900 via-zinc-950 to-black' : 'from-fuchsia-900 via-purple-950 to-black'}`} />
 
@@ -52,7 +52,7 @@ export function BasicHeroChannel2({ channel, planType }: BasicHeroChannel2Props)
             <div className={`absolute bottom-0 left-0 w-[200px] h-[200px] blur-[80px] rounded-full mix-blend-screen translate-y-1/2 -translate-x-1/3 pointer-events-none ${isPremium ? 'bg-amber-700/10' : 'bg-purple-500/10'}`} />
 
             {/* Content Container */}
-        <div className="relative z-10 flex flex-col md:flex-row items-center border border-white/5 rounded-3xl bg-transparent">
+        <div className="relative z-10 flex flex-col lg:flex-row items-center border border-white/5 rounded-3xl bg-transparent">
 
                 {/* Left side: Premium Badge & Info */}
                 <div className="flex-1 p-6 md:p-8 flex flex-col justify-center">
@@ -107,7 +107,7 @@ export function BasicHeroChannel2({ channel, planType }: BasicHeroChannel2Props)
                 </div>
 
                 {/* Right side: Abstract Art / Vinyl Visualizer & Play Button */}
-                <div className="flex flex-col w-full md:w-[250px] lg:w-[300px] shrink-0 relative items-center justify-center p-6 md:p-8 border-t md:border-t-0 md:border-l border-white/5 bg-transparent">
+                <div className="flex flex-col w-full lg:w-[300px] shrink-0 relative items-center justify-center p-6 md:p-8 border-t lg:border-t-0 lg:border-l border-white/5 bg-transparent">
                     <div className="absolute inset-0 bg-transparent pointer-events-none" />
 
                     {/* Pulsing rings if active */}
@@ -130,7 +130,7 @@ export function BasicHeroChannel2({ channel, planType }: BasicHeroChannel2Props)
                     <div
                         onClick={handlePlayClick}
                         className={`
-                        relative w-3/4 aspect-square rounded-full flex items-center justify-center cursor-pointer transition-transform duration-300 hover:scale-[1.02] mb-6
+                        relative w-48 h-48 md:w-64 md:h-64 lg:w-3/4 lg:h-auto lg:aspect-square rounded-full flex items-center justify-center cursor-pointer transition-transform duration-300 hover:scale-[1.02] mb-6
                         bg-linear-to-br from-zinc-800 to-black border-2 border-zinc-700/50 shadow-2xl
                         ${isCurrentlyPlaying ? 'animate-[spin_20s_linear_infinite]' : ''}
                     `}>
@@ -153,7 +153,7 @@ export function BasicHeroChannel2({ channel, planType }: BasicHeroChannel2Props)
                     <button
                         onClick={handlePlayClick}
                         className={`
-                            flex items-center justify-center gap-3 w-3/4
+                            flex items-center justify-center gap-3 w-48 md:w-64 lg:w-3/4
                             px-8 py-4 rounded-2xl font-semibold font-[family-name:var(--font-montserrat)] text-xl transition-all duration-300 shadow-xl relative z-20 
                             bg-white text-zinc-800 hover:bg-zinc-100
                             ${isActive ? 'hover:bg-zinc-200' : ''}

@@ -113,7 +113,7 @@ export default async function AreaClientePage2(props: {
     }
 
     return (
-        <div className="pt-[7rem] pb-6 md:pb-32 min-h-[100dvh] relative w-full bg-[#0f0518] selection:bg-[#D8B2A3]/30">
+        <div className="pt-[7rem] pb-6 md:pb-32 min-h-[100dvh] relative w-full bg-[#0f0518] selection:bg-[#D8B2A3]/30 overflow-x-hidden">
             {/* Dynamic Background identico alla Home Page */}
             <div className="fixed inset-0 z-0 flex justify-center pointer-events-none">
                 <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] bg-[#AB7169]/10 blur-[120px] rounded-full mix-blend-screen" />
@@ -151,7 +151,7 @@ export default async function AreaClientePage2(props: {
                 {!isAdmin && profile?.plan_type === 'free_trial' && !isExpired && (
                     <div className="w-full max-w-4xl mx-auto mt-4 md:mt-24 mb-12 md:mb-16 flex flex-col gap-6 items-center px-4">
                         {/* SLEEK HORIZONTAL WELCOME BANNER (NOW ONLY THE BADGE) - MOBILE ONLY AS IT IS IN HEADER ON PC */}
-                        <div className="md:hidden w-full max-w-[320px] mx-auto bg-gradient-to-br from-[#0f0518]/80 via-[#2a1154]/40 to-[#ff5a7e]/5 border border-white/5 rounded-[1.5rem] p-5 text-center shadow-2xl flex flex-col items-center justify-center gap-2 backdrop-blur-xl relative overflow-hidden mt-0">
+                        <div className="md:hidden w-[92%] max-w-[320px] mx-auto bg-gradient-to-br from-[#0f0518]/80 via-[#2a1154]/40 to-[#ff5a7e]/5 border border-white/5 rounded-[1.5rem] p-5 text-center shadow-2xl flex flex-col items-center justify-center gap-2 backdrop-blur-xl relative overflow-hidden mt-0">
                             {/* Decorative background glow */}
                             <div className="absolute inset-0 bg-[#ff5a7e]/5 blur-[60px] rounded-full pointer-events-none" />
 
@@ -176,9 +176,9 @@ export default async function AreaClientePage2(props: {
                         </div>
 
                         {/* QUESTO E IL TUO CANALE AUDIO PRINCIPALE */}
-                        <div className="mt-16 mb-0 flex flex-col items-center">
+                        <div className="mt-16 mb-0 flex flex-col items-center w-full px-4 text-center">
                             <h3 className="text-zinc-400 font-medium tracking-tight text-center text-base md:text-xl lg:text-2xl mb-8 drop-shadow-[0_0_15px_rgba(255,255,255,0.1)] max-w-4xl mx-auto leading-relaxed">
-                                QUESTO È IL TUO CANALE PRIMARIO (multitematico). <br className="hidden md:block" />
+                                QUESTO È IL TUO CANALE PRIMARIO (multitematico). <br className="hidden lg:block" />
                                 Ma in momenti particolari potrai utilizzare i 6 canali monotematici che trovi qui sotto, selezionando altri mood musicali.
                             </h3>
                             <div className="w-16 h-16 rounded-full border-2 border-zinc-400/50 flex items-center justify-center bg-zinc-400/10 backdrop-blur-md shadow-[0_0_40px_rgba(255,255,255,0.1)] animate-bounce">
@@ -193,16 +193,16 @@ export default async function AreaClientePage2(props: {
                     <div className="w-full max-w-4xl mx-auto mt-4 md:mt-24 mb-12 md:mb-16 flex flex-col gap-6 items-center px-4">
 
                         {/* SLEEK HORIZONTAL BANNER FOR BASIC */}
-                        <div className="w-full sm:w-[550px] md:w-[650px] mx-auto bg-gradient-to-r from-[#0f0518]/80 via-zinc-900/60 to-[#ff7393]/10 border border-white/5 rounded-[2rem] p-6 md:p-10 text-left shadow-2xl flex flex-col items-center justify-center gap-6 backdrop-blur-xl relative overflow-hidden mt-0 md:mt-12">
+                        <div className="w-[92%] md:max-w-2xl lg:max-w-3xl mx-auto bg-gradient-to-r from-[#0f0518]/80 via-zinc-900/60 to-[#ff7393]/10 border border-white/5 rounded-[2rem] p-6 md:p-8 lg:p-10 text-left shadow-2xl flex flex-col items-center justify-center gap-6 backdrop-blur-xl relative overflow-hidden mt-0 md:mt-12">
                             {/* Decorative background glow */}
                             <div className="absolute inset-0 bg-[#ff7393]/5 blur-[80px] rounded-full pointer-events-none" />
 
-                            <div className="flex flex-col sm:flex-row items-center gap-6 md:gap-10 relative z-10 w-full">
-                                <div className="text-center sm:text-left flex-1">
+                            <div className="flex flex-col md:flex-row items-center gap-6 lg:gap-10 relative z-10 w-full">
+                                <div className="text-center md:text-left flex-1 w-full">
                                     <span className="text-zinc-400 text-xs md:text-sm uppercase tracking-[0.2em] font-medium block mb-1">
                                         Il Tuo Piano
                                     </span>
-                                    <h3 className="text-3xl md:text-5xl font-black text-[#ff7393] uppercase tracking-wider leading-none mb-2 drop-shadow-lg">
+                                    <h3 className="text-3xl md:text-4xl lg:text-5xl font-black text-[#ff7393] uppercase tracking-wider leading-none mb-2 drop-shadow-lg">
                                         BASIC
                                     </h3>
                                     <span className="text-[#ff7393]/80 text-sm md:text-base font-bold block mb-1">
@@ -220,7 +220,7 @@ export default async function AreaClientePage2(props: {
                                 </div>
                                 <a
                                     href="#scegli-piano-section"
-                                    className="bg-white text-black font-bold uppercase tracking-widest text-xs md:text-sm px-6 py-4 md:px-8 md:py-5 rounded-full hover:scale-105 transition-transform flex items-center justify-center shrink-0 w-full sm:w-auto mt-4 sm:mt-0 shadow-xl shadow-white/20 whitespace-nowrap"
+                                    className="bg-white text-black font-bold uppercase tracking-widest text-xs md:text-sm px-6 py-4 md:px-8 md:py-5 rounded-full hover:scale-105 transition-transform flex items-center justify-center shrink-0 w-full md:w-auto mt-4 md:mt-0 shadow-xl shadow-white/20"
                                 >
                                     Fai Upgrade a PREMIUM
                                 </a>
@@ -236,9 +236,9 @@ export default async function AreaClientePage2(props: {
                         </div>
 
                         {/* QUESTO E IL TUO CANALE AUDIO PRINCIPALE */}
-                        <div className="mt-16 mb-0 flex flex-col items-center">
+                        <div className="mt-16 mb-0 flex flex-col items-center w-full px-4 text-center">
                             <h3 className="text-zinc-400 font-medium tracking-tight text-center text-base md:text-xl lg:text-2xl mb-8 drop-shadow-[0_0_15px_rgba(255,255,255,0.1)] max-w-4xl mx-auto leading-relaxed">
-                                QUESTO È IL TUO CANALE PRIMARIO (multitematico). <br className="hidden md:block" />
+                                QUESTO È IL TUO CANALE PRIMARIO (multitematico). <br className="hidden lg:block" />
                                 Ma in momenti particolari potrai utilizzare i 6 canali monotematici che trovi qui sotto, selezionando altri mood musicali.
                             </h3>
                             <div className="w-16 h-16 rounded-full border-2 border-zinc-400/50 flex items-center justify-center bg-zinc-400/10 backdrop-blur-md shadow-[0_0_40px_rgba(255,255,255,0.1)] animate-bounce">

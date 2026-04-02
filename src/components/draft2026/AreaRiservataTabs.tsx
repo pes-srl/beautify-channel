@@ -25,7 +25,7 @@ export function AreaRiservataTabs({ profile, channels, channelsError, user, isAd
     const hoverColor = profile?.plan_type === 'free_trial' ? 'group-hover:text-purple-400' : 'group-hover:text-white';
 
     return (
-        <div className="w-full max-w-4xl mx-auto mt-6 mb-4 md:mb-24 px-4">
+        <div className="w-full max-w-4xl mx-auto mt-6 mb-4 md:mb-24 px-4 overflow-x-hidden">
             <div className="flex flex-col border-t border-white/10">
 
                 {/* 1. COME FUNZIONA */}
@@ -44,7 +44,7 @@ export function AreaRiservataTabs({ profile, channels, channelsError, user, isAd
                     </button>
 
                     <div className={`overflow-hidden transition-all duration-500 ease-in-out ${openSection === 'funziona' ? 'max-h-[2000px] opacity-100 pb-8' : 'max-h-0 opacity-0'}`}>
-                        <div className="px-4 py-4 md:px-12 md:py-8 bg-gradient-to-b from-white/[0.02] to-transparent rounded-2xl border border-white/5 relative">
+                        <div className="px-4 py-4 md:px-6 lg:px-12 md:py-8 bg-gradient-to-b from-white/[0.02] to-transparent rounded-2xl border border-white/5 relative">
                             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/2 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
                             <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16">
                                 {/* LEFT COLUMN */}
@@ -123,7 +123,7 @@ export function AreaRiservataTabs({ profile, channels, channelsError, user, isAd
                         </button>
 
                         <div className={`overflow-hidden transition-all duration-500 ease-in-out ${openSection === 'potenzia' ? 'max-h-[2000px] opacity-100 pb-8' : 'max-h-0 opacity-0'}`}>
-                            <div className="px-4 py-4 md:px-12 md:py-8 bg-gradient-to-b from-[#ff5a7e]/[0.02] to-transparent rounded-2xl border border-white/5 relative">
+                            <div className="px-4 py-4 md:px-6 lg:px-12 md:py-8 bg-gradient-to-b from-[#ff5a7e]/[0.02] to-transparent rounded-2xl border border-white/5 relative">
                                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16">
                                     {/* LEFT COLUMN */}
                                     <div className="text-base md:text-lg font-light leading-relaxed text-zinc-300 flex flex-col justify-center">
