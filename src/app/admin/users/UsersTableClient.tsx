@@ -242,9 +242,15 @@ export function UsersTableClient({ initialProfiles }: { initialProfiles: any[] }
                                     </TableCell>
                                     <TableCell>
                                         <span className="text-zinc-300 text-sm whitespace-nowrap">
-                                            {user.subscription_expiration
-                                                ? format(parseISO(user.subscription_expiration), "dd MMM yyyy", { locale: it })
-                                                : "-"}
+                                            {(() => {
+                                                const dateToDisplay = user.plan_type === 'free_trial' 
+                                                    ? user.trial_ends_at 
+                                                    : user.subscription_expiration;
+                                                
+                                                return dateToDisplay
+                                                    ? format(parseISO(dateToDisplay), "dd MMM yyyy", { locale: it })
+                                                    : "-";
+                                            })()}
                                         </span>
                                     </TableCell>
                                     <TableCell>

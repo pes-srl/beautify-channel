@@ -54,6 +54,18 @@ export async function updateUserProfile(userId: string, targetField: 'role' | 'p
         return { error: "Utente non trovato o aggiornamento fallito (RLS bypass error)." };
     }
 
+    // Sync Auth Metadata to avoid "robustness check" overrides in page.tsx
+    // or stale sessions on the client side.
+    const metaUpdate: any = {};
+    if (targetField === 'plan_type') metaUpdate.plan_type = newValue;
+    if (targetField === 'role') metaUpdate.role = newValue;
+
+    if (Object.keys(metaUpdate).length > 0) {
+        await supabaseAdmin.auth.admin.updateUserById(userId, {
+            user_metadata: metaUpdate
+        });
+    }
+
     revalidatePath('/admin/users');
     return { success: true };
 }
