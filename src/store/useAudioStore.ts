@@ -19,7 +19,7 @@ interface AudioState {
 export const useAudioStore = create<AudioState>((set) => ({
     currentChannel: null,
     isPlaying: false,
-    volume: 0.8,
+    volume: 0.5,
     bufferingState: 'idle',
 
     setChannel: (channel) => set({ currentChannel: channel, isPlaying: true, bufferingState: 'buffering' }),

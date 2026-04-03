@@ -134,7 +134,7 @@ export function BottomCTA2026({ hasSession }: { hasSession?: boolean }) {
                                     La tua postazione è configurata. Accedi direttamente alla tua area riservata per gestire canali o aggiungere servizi personalizzati.
                                 </p>
                                 <Link href="/area-riservata" className="w-full sm:w-auto">
-                                    <Button className="h-14 px-8 w-full bg-linear-to-r from-[#D8B2A3]/80 to-[#AB7169]/80 hover:from-[#D8B2A3] hover:to-[#AB7169] text-white text-lg font-semibold rounded-[35px] tracking-wider transition-all shadow-lg hover:shadow-xl hover:shadow-[#D8B2A3]/20 border-none">
+                                    <Button className="h-auto min-h-14 py-4 px-8 w-full bg-linear-to-r from-[#D8B2A3]/80 to-[#AB7169]/80 hover:from-[#D8B2A3] hover:to-[#AB7169] text-white text-lg font-semibold rounded-[35px] tracking-wider transition-all shadow-lg hover:shadow-xl hover:shadow-[#D8B2A3]/20 border-none whitespace-normal leading-tight">
                                         VAI ALL'AREA RISERVATA
                                     </Button>
                                 </Link>
@@ -251,7 +251,7 @@ export function BottomCTA2026({ hasSession }: { hasSession?: boolean }) {
                                         <Button
                                             type="submit"
                                             disabled={isLoading}
-                                            className="w-full h-16 mt-4 bg-white/10 hover:bg-white/20 text-white text-sm md:text-lg transition-all border border-white/30 rounded-[35px] tracking-wide"
+                                            className="w-full h-auto min-h-16 py-4 mt-4 bg-white/10 hover:bg-white/20 text-white text-[15px] md:text-lg transition-all border border-white/30 rounded-[35px] tracking-wide whitespace-normal leading-tight"
                                         >
                                             {isLoading ? "Creazione account in corso..." : "INIZIA SUBITO LA PROVA GRATUITA"}
                                         </Button>
