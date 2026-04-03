@@ -49,6 +49,8 @@ export default async function AreaClientePage2(props: {
     // Calculate Trial State
     const isAdmin = profile?.role === 'Admin';
     const now = new Date();
+    // Se non è un piano a pagamento (basic/premium), lo trattiamo come trial (o ex-trial) per il Paywall
+    const wasTrial = !['basic', 'premium', 'premiumcustomizzato'].includes(profile?.plan_type);
     let isExpired = profile?.plan_type === 'free' || !profile?.plan_type;
     let daysLeft = 0;
 
@@ -348,7 +350,11 @@ export default async function AreaClientePage2(props: {
                         {/* END TABS CONTAINER */}
                     </>
                 ) : (
-                    <Paywall salonName={profile?.salon_name || user.email || 'Utente'} userEmail={user.email} />
+                    <Paywall 
+                        salonName={profile?.salon_name || user.email || 'Utente'} 
+                        userEmail={user.email} 
+                        isTrial={wasTrial}
+                    />
                 )}
             </div>
         </div>

@@ -11,7 +11,7 @@ type DurationType = "6 mesi" | "12 mesi";
 type MetriQuadriType = "0-250" | "oltre";
 
 export function UpgradeCheckoutForm({ userEmail, userVat, userSalonName, planType }: { userEmail?: string, userVat?: string, userSalonName?: string, planType?: string }) {
-    const [selectedPlan, setSelectedPlan] = useState<PlanType>(planType === 'basic' ? "premium" : "basic");
+    const [selectedPlan, setSelectedPlan] = useState<PlanType>((planType as PlanType) || "basic");
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [metriQuadriOption, setMetriQuadriOption] = useState<MetriQuadriType>("0-250");
     const [durataAbbonamento, setDurataAbbonamento] = useState<DurationType>("6 mesi");
@@ -176,11 +176,11 @@ export function UpgradeCheckoutForm({ userEmail, userVat, userSalonName, planTyp
 
                 {/* Plan Selector */}
                 <div className="flex flex-col md:flex-row gap-4 mb-10 bg-black/20 p-2 md:p-3 rounded-2xl border border-white/5">
-                    {planType !== 'basic' && (
-                        <button
-                            type="button"
-                            onClick={() => { setSelectedPlan("basic"); setCurrentStep(1); }}
-                            className={`w-full relative overflow-hidden p-6 rounded-xl border text-left transition-all duration-500 flex flex-col items-start bg-white/10 border-[pink-300]/50 shadow-[0_0_20px_rgba(216,178,163,0.15)] cursor-pointer`}
+                    {/* If a planType is specified, we focus only on that one or show the target. 
+                        In Paywall context, if we pass 'basic', we want to SHOW basic. */}
+                    {(!planType || selectedPlan === "basic") && (
+                        <div
+                            className={`w-full relative overflow-hidden p-6 rounded-xl border text-left transition-all duration-500 flex flex-col items-start bg-white/10 border-[pink-300]/50 shadow-[0_0_20px_rgba(216,178,163,0.15)]`}
                         >
                             <div className="flex justify-between items-center w-full mb-2 mt-1">
                                 <h3 className="text-xl font-bold text-[#ff7393] tracking-widest uppercase">Basic</h3>
@@ -193,14 +193,12 @@ export function UpgradeCheckoutForm({ userEmail, userVat, userSalonName, planTyp
                                 </div>
                                 <span className="text-xs text-zinc-500 mt-1">Pagamento in unica soluzione</span>
                             </div>
-                        </button>
+                        </div>
                     )}
 
-                    {planType === 'basic' && (
-                        <button
-                            type="button"
-                            onClick={() => { setSelectedPlan("premium"); setCurrentStep(1); }}
-                            className={`w-full relative overflow-hidden p-6 rounded-xl border text-left transition-all duration-500 flex flex-col items-start bg-white/10 border-purple-500/50 shadow-[0_0_20px_rgba(192,38,211,0.15)] cursor-pointer`}
+                    {(!planType || selectedPlan === "premium") && (
+                        <div
+                            className={`w-full relative overflow-hidden p-6 rounded-xl border text-left transition-all duration-500 flex flex-col items-start bg-white/10 border-purple-500/50 shadow-[0_0_20px_rgba(192,38,211,0.15)]`}
                         >
                             <div className="absolute top-0 right-0 bg-purple-500 text-xs font-bold text-white px-3 py-1 rounded-bl-lg uppercase">
                                 + Promo Sonore
@@ -216,7 +214,7 @@ export function UpgradeCheckoutForm({ userEmail, userVat, userSalonName, planTyp
                                 </div>
                                 <span className="text-xs text-zinc-500 mt-1">Pagamento in unica soluzione</span>
                             </div>
-                        </button>
+                        </div>
                     )}
                 </div>
 
