@@ -267,7 +267,6 @@ export function HeaderNew({
     const renderRoleBadge = () => {
         const roleStr = profile?.role || "User";
         const planStr = profile?.plan_type || "Free";
-        const isSmall = true;
         const baseClass = "px-2 py-0.5 text-[9px] uppercase font-bold tracking-wider border-0";
 
         let planBadge = null;
@@ -301,8 +300,6 @@ export function HeaderNew({
         );
     };
 
-
-
     const navLinks = [
         { name: "Vantaggi", href: "/#vantaggi" },
         { name: "Servizio", href: "/#servizio" },
@@ -315,9 +312,8 @@ export function HeaderNew({
                 }`}
         >
             <div className="max-w-7xl mx-auto px-6 h-14 md:h-16 lg:h-20 flex items-center justify-between relative">
-                {/* Logo & Desktop Nav (Left Aligned) */}
-                <div className="flex items-center gap-10">
-                    {/* Logo */}
+                {/* 1. Logo & Desktop Nav (Left Aligned) */}
+                <div className="flex items-center gap-4 lg:gap-10 shrink-0">
                     <Link href="/" className="flex items-center gap-2 group">
                         <img
                             src="https://eufahlzjxbimyiwivoiq.supabase.co/storage/v1/object/public/bucket-assets/Logo-BeautiFyChannel.svg"
@@ -326,14 +322,13 @@ export function HeaderNew({
                         />
                     </Link>
 
-                    {/* Desktop Nav */}
-                    <nav className="hidden md:flex items-center gap-8">
+                    <nav className="hidden md:flex items-center gap-4 lg:gap-8">
                         {navLinks.map((link) => (
                             <Link
                                 key={link.name}
                                 href={link.href}
                                 onClick={(e) => handleScrollTo(e, link.href)}
-                                className="text-base font-medium text-zinc-300 hover:text-white transition-colors cursor-pointer"
+                                className="text-sm lg:text-base font-medium text-zinc-300 hover:text-white transition-colors cursor-pointer whitespace-nowrap"
                             >
                                 {link.name}
                             </Link>
@@ -341,110 +336,117 @@ export function HeaderNew({
                     </nav>
                 </div>
 
-                {/* Right Side Buttons & Avatar */}
-                <div className="flex items-center gap-4 ml-auto md:ml-0 flex-1 justify-end">
-                    {!isLoading && user ? (
-                        <div className="flex items-center gap-3">
-                            {/* Prova Gratuita Badge (PC Only) */}
+                {/* 2. Center: Subscription Badges (Centered in the remaining space) */}
+                {!isLoading && user && (
+                    <div className="hidden md:flex flex-1 items-center justify-center px-2 lg:px-4 overflow-hidden">
+                        <div className="contents">
+                            {/* Prova Gratuita Badge */}
                             {profile?.plan_type === 'free_trial' && daysLeft > 0 && (
-                                <div className="hidden md:flex items-center gap-3 bg-gradient-to-r from-purple-500/20 via-[#2a1154]/40 to-[#ff5a7e]/10 border border-white/20 px-6 py-2.5 rounded-2xl backdrop-blur-xl shadow-2xl shadow-purple-950/20 whitespace-nowrap">
-                                    <Sparkles className="w-5 h-5 text-purple-400 animate-pulse shrink-0" />
-                                    <div className="flex flex-col items-start gap-0.5">
-                                        <span className="text-[11px] lg:text-[13px] font-bold text-white uppercase tracking-wider leading-tight">
+                                <div className="flex items-center gap-2 lg:gap-3 bg-gradient-to-r from-purple-500/20 via-[#2a1154]/40 to-[#ff5a7e]/10 border border-white/20 px-3 lg:px-6 py-2 md:py-2.5 rounded-2xl backdrop-blur-xl shadow-2xl shadow-purple-950/20 whitespace-nowrap">
+                                    <Sparkles className="w-4 h-4 lg:w-5 lg:h-5 text-purple-400 animate-pulse shrink-0" />
+                                    <div className="flex flex-col items-start gap-0">
+                                        <span className="text-[10px] lg:text-[13px] font-bold text-white uppercase tracking-wider leading-tight">
                                             La tua formula Free Trial è stata attivata
                                         </span>
-                                        <span className="text-[9px] lg:text-[11px] font-medium text-zinc-400 italic leading-tight">
-                                            <span className="text-purple-400 font-bold">{daysLeft}</span> {daysLeft === 1 ? 'giorno' : 'giorni'} alla scadenza della tua prova gratuita
+                                        <span className="text-[8px] lg:text-[11px] font-medium text-zinc-400 italic leading-tight text-left">
+                                            <span className="text-purple-400 font-bold">{daysLeft}</span> {daysLeft === 1 ? 'giorno' : 'giorni'} alla scadenza
                                         </span>
                                     </div>
                                 </div>
                             )}
 
-                            {/* BASIC/PREMIUM Plan Badge (PC Only) */}
+                            {/* BASIC/PREMIUM Plan Badge */}
                             {['basic', 'premium', 'premiumcustomizzato'].includes(profile?.plan_type || '') && (
-                                <div className={`hidden md:flex items-center gap-3 bg-gradient-to-r ${profile?.plan_type === 'basic' ? 'from-[#ff7393]/20 via-[#4e0f1e]/40 to-[#ff7393]/10 border border-white/20' : 'from-amber-500/20 via-[#4e3a0f]/40 to-amber-500/10 border border-white/20'} px-6 py-2.5 rounded-2xl backdrop-blur-xl shadow-2xl ${profile?.plan_type === 'basic' ? 'shadow-[#ff7393]/10' : 'shadow-amber-500/10'} whitespace-nowrap`}>
-                                    <Sparkles className={`w-5 h-5 ${profile?.plan_type === 'basic' ? 'text-[#ff7393]' : 'text-amber-400'} animate-pulse shrink-0`} />
-                                    <div className="flex flex-col items-start gap-0.5">
-                                        <span className="text-[11px] lg:text-[13px] font-bold text-white uppercase tracking-wider leading-tight">
-                                            Il Tuo Piano <span className={profile?.plan_type === 'basic' ? 'text-[#ff7393]' : 'text-amber-400'}>{profile?.plan_type === 'basic' ? 'BASIC' : 'PREMIUM'}</span> è ATTIVO
+                                <div className={`flex items-center gap-2 lg:gap-3 bg-gradient-to-r ${profile?.plan_type === 'basic' ? 'from-[#ff7393]/20 via-[#4e0f1e]/40 to-[#ff7393]/10 border border-white/20' : 'from-amber-500/20 via-[#4e3a0f]/40 to-amber-500/10 border border-white/20'} px-3 lg:px-6 py-2 md:py-2.5 rounded-2xl backdrop-blur-xl shadow-2xl ${profile?.plan_type === 'basic' ? 'shadow-[#ff7393]/10' : 'shadow-amber-500/10'} whitespace-nowrap`}>
+                                    <Sparkles className={`w-4 h-4 lg:w-5 lg:h-5 ${profile?.plan_type === 'basic' ? 'text-[#ff7393]' : 'text-amber-400'} animate-pulse shrink-0`} />
+                                    <div className="flex flex-col items-start gap-0">
+                                        <span className="text-[10px] lg:text-[13px] font-bold text-white uppercase tracking-wider leading-tight">
+                                            Piano <span className={profile?.plan_type === 'basic' ? 'text-[#ff7393]' : 'text-amber-400'}>{profile?.plan_type === 'basic' ? 'BASIC' : 'PREMIUM'}</span> attivo
                                         </span>
-                                        <span className="text-[9px] lg:text-[11px] font-medium text-zinc-400 italic leading-tight">
+                                        <span className="text-[8px] lg:text-[11px] font-medium text-zinc-400 italic leading-tight text-left">
                                             {formattedExpiration ? (
-                                                <>Scadenza prevista: <span className={`${profile?.plan_type === 'basic' ? 'text-[#ff7393]' : 'text-amber-400'} font-bold`}>{formattedExpiration}</span></>
+                                                <>Scadenza: <span className={`${profile?.plan_type === 'basic' ? 'text-[#ff7393]' : 'text-amber-400'} font-bold`}>{formattedExpiration}</span></>
                                             ) : (
-                                                "Abbonamento in corso"
+                                                "Abbonamento attivo"
                                             )}
                                         </span>
                                     </div>
                                 </div>
                             )}
+                        </div>
+                    </div>
+                )}
 
+                {/* 3. Right Side Buttons & Avatar + Mobile Toggle */}
+                <div className="flex items-center gap-3 lg:gap-4 shrink-0">
+                    {!isLoading && user ? (
+                        <div className="flex items-center">
                             <DropdownMenu>
-                            <DropdownMenuTrigger asChild>
-                                <Button variant="ghost" className="relative group flex items-center justify-center h-10 w-10 md:w-auto md:px-3 rounded-full border border-white/10 bg-black/50 hover:bg-white/10 transition-all outline-none focus-visible:ring-2 focus-visible:ring-fuchsia-500">
-                                    <div className={`w-8 h-8 rounded-full flex items-center justify-center font-bold text-[11px] uppercase shadow-inner shrink-0 ${profile?.plan_type === 'premium' ? 'bg-amber-500 text-zinc-950' : profile?.plan_type === 'basic' ? 'bg-[#ff7393] text-zinc-950' : profile?.plan_type === 'free_trial' ? 'bg-purple-400 text-zinc-950' : profile?.plan_type === 'free' ? 'bg-red-500 text-white' : 'bg-zinc-800 text-zinc-300'}`}>
-                                        {initials}
+                                <DropdownMenuTrigger asChild>
+                                    <Button variant="ghost" className="relative group flex items-center justify-center h-10 w-10 md:w-auto md:px-3 rounded-full border border-white/10 bg-black/50 hover:bg-white/10 transition-all outline-none focus-visible:ring-2 focus-visible:ring-fuchsia-500">
+                                        <div className={`w-8 h-8 rounded-full flex items-center justify-center font-bold text-[11px] uppercase shadow-inner shrink-0 ${profile?.plan_type === 'premium' ? 'bg-amber-500 text-zinc-950' : profile?.plan_type === 'basic' ? 'bg-[#ff7393] text-zinc-950' : profile?.plan_type === 'free_trial' ? 'bg-purple-400 text-zinc-950' : profile?.plan_type === 'free' ? 'bg-red-500 text-white' : 'bg-zinc-800 text-zinc-300'}`}>
+                                            {initials}
+                                        </div>
+                                        <div className="hidden md:flex flex-col items-start ml-2 lg:ml-2.5 leading-none pr-1 text-left">
+                                            <span className="text-[10px] font-bold text-white uppercase tracking-widest mb-0.5">Account</span>
+                                            <span className="text-[8px] font-medium text-zinc-500 group-hover:text-purple-400 transition-colors uppercase tracking-widest">Impostazioni</span>
+                                        </div>
+                                    </Button>
+                                </DropdownMenuTrigger>
+                                <DropdownMenuContent align="end" className="w-64 bg-zinc-950 border border-white/10 shadow-2xl rounded-xl p-2 mt-2">
+                                    <div className="px-3 py-3 border-b border-white/5 mb-2">
+                                        <div className="flex items-center justify-between">
+                                            <span className="text-sm font-semibold text-white">Il mio account</span>
+                                            {renderRoleBadge()}
+                                        </div>
+                                        <p className="text-xs text-zinc-400 mt-1 truncate">{user.email}</p>
                                     </div>
-                                    <div className="hidden md:flex flex-col items-start ml-2.5 leading-none pr-1">
-                                        <span className="text-[10px] font-bold text-white uppercase tracking-widest mb-0.5">Account</span>
-                                        <span className="text-[8px] font-medium text-zinc-500 group-hover:text-purple-400 transition-colors uppercase tracking-widest">Impostazioni</span>
-                                    </div>
-                                </Button>
-                            </DropdownMenuTrigger>
-                            <DropdownMenuContent align="end" className="w-64 bg-zinc-950 border border-white/10 shadow-2xl rounded-xl p-2 mt-2">
-                                <div className="px-3 py-3 border-b border-white/5 mb-2">
-                                    <div className="flex items-center justify-between">
-                                        <span className="text-sm font-semibold text-white">Il mio account</span>
-                                        {renderRoleBadge()}
-                                    </div>
-                                    <p className="text-xs text-zinc-400 mt-1 truncate">{user.email}</p>
-                                </div>
-                                <DropdownMenuItem asChild className="cursor-pointer focus:bg-white/10 rounded-lg px-3 py-2.5">
-                                    <Link href="/area-riservata" className="flex items-center gap-3 w-full">
-                                        <User className="w-4 h-4 text-zinc-400" />
-                                        <span className="text-zinc-200">Area riservata</span>
-                                    </Link>
-                                </DropdownMenuItem>
-                                <DropdownMenuItem asChild className="cursor-pointer focus:bg-white/10 rounded-lg px-3 py-2.5 mt-1">
-                                    <Link href="/area-riservata/profilo" className="flex items-center gap-3 w-full">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-zinc-400"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" /><circle cx="12" cy="7" r="4" /></svg>
-                                        <span className="text-zinc-200">Il Mio Profilo</span>
-                                    </Link>
-                                </DropdownMenuItem>
-                                <DropdownMenuItem asChild className="cursor-pointer focus:bg-white/10 rounded-lg px-3 py-2.5 mt-1">
-                                    <Link href="/area-riservata/ordini" className="flex items-center gap-3 w-full">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-zinc-400"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z" /><path d="M3 6h18" /><path d="M16 10a4 4 0 0 1-8 0" /></svg>
-                                        <span className="text-zinc-200">I Miei Ordini</span>
-                                    </Link>
-                                </DropdownMenuItem>
-                                {profile?.plan_type !== 'free_trial' && (profile?.store_license_url || profile?.store_contract_url) && (
-                                    <DropdownMenuItem asChild className="cursor-pointer focus:bg-white/10 rounded-lg px-3 py-2.5 mt-1">
-                                        <Link href="/area-riservata/documenti" className="flex items-center gap-3 w-full">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-zinc-400"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z" /><polyline points="14 2 14 8 20 8" /></svg>
-                                            <span className="text-zinc-200">Documenti e Licenza</span>
+                                    <DropdownMenuItem asChild className="cursor-pointer focus:bg-white/10 rounded-lg px-3 py-2.5">
+                                        <Link href="/area-riservata" className="flex items-center gap-3 w-full">
+                                            <User className="w-4 h-4 text-zinc-400" />
+                                            <span className="text-zinc-200">Area riservata</span>
                                         </Link>
                                     </DropdownMenuItem>
-                                )}
-                                {profile?.role === 'Admin' && (
-                                    <>
-                                        <DropdownMenuSeparator className="bg-white/5 my-2" />
-                                        <div className="px-3 py-1.5 text-[10px] font-semibold text-zinc-500 tracking-wider uppercase">Amministrazione</div>
-                                        <DropdownMenuItem asChild className="cursor-pointer focus:bg-white/10 rounded-lg px-3 py-2.5">
-                                            <Link href="/admin" className="flex items-center gap-3 w-full">
-                                                <Settings className="w-4 h-4 text-zinc-400" />
-                                                <span className="text-zinc-200">Gestione Admin</span>
+                                    <DropdownMenuItem asChild className="cursor-pointer focus:bg-white/10 rounded-lg px-3 py-2.5 mt-1">
+                                        <Link href="/area-riservata/profilo" className="flex items-center gap-3 w-full">
+                                            <User className="w-4 h-4 text-zinc-400" />
+                                            <span className="text-zinc-200">Il Mio Profilo</span>
+                                        </Link>
+                                    </DropdownMenuItem>
+                                    <DropdownMenuItem asChild className="cursor-pointer focus:bg-white/10 rounded-lg px-3 py-2.5 mt-1">
+                                        <Link href="/area-riservata/ordini" className="flex items-center gap-3 w-full">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-zinc-400"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z" /><path d="M3 6h18" /><path d="M16 10a4 4 0 0 1-8 0" /></svg>
+                                            <span className="text-zinc-200">I Miei Ordini</span>
+                                        </Link>
+                                    </DropdownMenuItem>
+                                    {profile?.plan_type !== 'free_trial' && (profile?.store_license_url || profile?.store_contract_url) && (
+                                        <DropdownMenuItem asChild className="cursor-pointer focus:bg-white/10 rounded-lg px-3 py-2.5 mt-1">
+                                            <Link href="/area-riservata/documenti" className="flex items-center gap-3 w-full">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-zinc-400"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z" /><polyline points="14 2 14 8 20 8" /></svg>
+                                                <span className="text-zinc-200">Documenti e Licenza</span>
                                             </Link>
                                         </DropdownMenuItem>
-                                    </>
-                                )}
-                                <DropdownMenuSeparator className="bg-white/5 my-2" />
-                                <DropdownMenuItem onSelect={(e) => { e.preventDefault(); handleSignOut(); }} className="cursor-pointer focus:bg-red-500/20 rounded-lg px-3 py-2.5 text-red-100 focus:text-red-500">
-                                    <div className="flex items-center gap-3 w-full">
-                                        <LogOut className="w-4 h-4" />
-                                        <span>Logout</span>
-                                    </div>
-                                </DropdownMenuItem>
-                            </DropdownMenuContent>
+                                    )}
+                                    {profile?.role === 'Admin' && (
+                                        <>
+                                            <DropdownMenuSeparator className="bg-white/5 my-2" />
+                                            <div className="px-3 py-1.5 text-[10px] font-semibold text-zinc-500 tracking-wider uppercase">Amministrazione</div>
+                                            <DropdownMenuItem asChild className="cursor-pointer focus:bg-white/10 rounded-lg px-3 py-2.5">
+                                                <Link href="/admin" className="flex items-center gap-3 w-full">
+                                                    <Settings className="w-4 h-4 text-zinc-400" />
+                                                    <span className="text-zinc-200">Gestione Admin</span>
+                                                </Link>
+                                            </DropdownMenuItem>
+                                        </>
+                                    )}
+                                    <DropdownMenuSeparator className="bg-white/5 my-2" />
+                                    <DropdownMenuItem onSelect={(e) => { e.preventDefault(); handleSignOut(); }} className="cursor-pointer focus:bg-red-500/20 rounded-lg px-3 py-2.5 text-red-100 focus:text-red-500">
+                                        <div className="flex items-center gap-3 w-full">
+                                            <LogOut className="w-4 h-4" />
+                                            <span>Logout</span>
+                                        </div>
+                                    </DropdownMenuItem>
+                                </DropdownMenuContent>
                             </DropdownMenu>
                         </div>
                     ) : !isLoading ? (
@@ -460,7 +462,7 @@ export function HeaderNew({
                                     Prova GRATUITA
                                 </Button>
                             </Link>
-                            <Link href="/login" className="hidden md:inline-block">
+                            <Link href="/login" className="hidden md:inline-block ml-3">
                                 <Button className="bg-[#7B2CBF] hover:bg-[#6A25A3] text-white transition-all font-bold border-0 shadow-lg shadow-[#2D0A4E]/20 rounded-[35px] flex items-center gap-2">
                                     <User className="w-4 h-4 text-white" />
                                     Accedi
@@ -468,29 +470,30 @@ export function HeaderNew({
                             </Link>
                         </>
                     ) : null}
-                </div>
 
-                {/* Mobile Menu Toggle & Direct Access */}
-                <div className="md:hidden flex items-center gap-3">
-                    {!user && (
-                        <Link
-                            href="/login"
-                            className="text-zinc-300 hover:text-white p-1"
-                            aria-label="Accesso rapido"
+                    {/* Mobile Menu Toggle & Fast Login */}
+                    <div className="md:hidden flex items-center gap-3">
+                        {!user && (
+                            <Link
+                                href="/login"
+                                className="text-zinc-300 hover:text-white p-1"
+                                aria-label="Accesso rapido"
+                            >
+                                <User size={22} />
+                            </Link>
+                        )}
+                        <button
+                            className="text-zinc-300 hover:text-white"
+                            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                            aria-label="Menu"
                         >
-                            <User size={22} />
-                        </Link>
-                    )}
-                    <button
-                        className="text-zinc-300 hover:text-white"
-                        onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                    >
-                        {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-                    </button>
+                            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+                        </button>
+                    </div>
                 </div>
             </div>
 
-            {/* Mobile Nav */}
+            {/* Mobile Navigation Menu */}
             {isMobileMenuOpen && (
                 <div className="md:hidden absolute top-full left-0 right-0 bg-zinc-950 border-b border-white/10 p-6 flex flex-col gap-4 shadow-xl">
                     {navLinks.map((link) => (
@@ -514,7 +517,7 @@ export function HeaderNew({
                                 </Link>
                                 <Link href="/area-riservata/profilo" onClick={() => setIsMobileMenuOpen(false)}>
                                     <Button variant="outline" className="w-full border-white/20 text-white bg-transparent flex items-center justify-center gap-2 rounded-[35px]">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" /><circle cx="12" cy="7" r="4" /></svg>
+                                        <User size={18} />
                                         Il Mio Profilo
                                     </Button>
                                 </Link>

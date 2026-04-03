@@ -48,13 +48,13 @@ export function AreaRiservataTabs({ profile, channels, channelsError, user, isAd
                             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/2 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
                             <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16">
                                 {/* LEFT COLUMN */}
-                                <div className="text-base md:text-lg font-light leading-relaxed text-zinc-300 flex flex-col justify-center">
+                                <div className="text-base md:text-lg font-light leading-relaxed text-zinc-300 flex flex-col lg:justify-start lg:pt-4">
                                     <p className="mb-6">Nulla di più semplice!<br />
                                         Collega il tuo dispositivo all'<strong className="text-white">impianto audio</strong> o a delle <strong className="text-white">casse Bluetooth</strong>.</p>
-
+                                    
                                     <p className="mb-8">Premi play sul canale primario qui sopra, imposta il giusto volume in salone e <strong className="text-white">dimenticatene</strong>, il resto lo fa <strong className="text-white">BeautiFy</strong>.</p>
-
-                                    <div className={`pl-4 border-l ${profile?.plan_type === 'premium' ? 'border-amber-500/30' : 'border-white/20'} py-1`}>
+                                    
+                                    <div className={`pl-4 border-l ${profile?.plan_type === 'premium' ? 'border-amber-500/30' : 'border-white/20'} py-1 flex-grow`}>
                                         <p className="mb-6">
                                             I nostri canali propongono una raffinata selezione musicale, intervallata da eleganti suggerimenti vocali studiati per stimolare la curiosità delle clienti e l'acquisto.
                                         </p>
@@ -62,15 +62,15 @@ export function AreaRiservataTabs({ profile, channels, channelsError, user, isAd
                                 </div>
 
                                 {/* RIGHT COLUMN */}
-                                <div className="bg-black/20 rounded-xl p-6 md:p-8 relative border border-white/5">
+                                <div className="bg-black/20 rounded-xl p-6 md:p-8 relative border border-white/5 flex flex-col h-full">
                                     <h3 className="text-xl md:text-2xl font-medium text-white mb-2">Cambia il tuo Mood</h3>
                                     <p className="text-sm md:text-base text-zinc-400 font-light mb-6">
                                         Hai a disposizione altri 6 canali monotematici, per cambiare il genere musicale durante la giornata.
                                     </p>
-                                    <div className="space-y-4 mb-6 text-zinc-300 text-sm font-light">
+                                    <div className="space-y-4 mb-6 text-zinc-300 text-sm font-light flex-grow">
                                         <p>Prova <strong>DEEP SOFT</strong> nel weekend o <strong>JAZZ</strong> nel tardo pomeriggio oppure i temi <strong>RELAX</strong> e <strong>MASSAGE</strong>.</p>
                                     </div>
-                                    <div className="pt-2 flex items-center gap-2">
+                                    <div className="pt-2 flex items-center gap-2 mt-auto">
                                         <Radio className="w-4 h-4 text-white/50" />
                                         <p className="font-medium tracking-widest uppercase text-xs text-white/50">
                                             BUON ASCOLTO
@@ -131,25 +131,34 @@ export function AreaRiservataTabs({ profile, channels, channelsError, user, isAd
                                 <div className={`${(profile?.plan_type === 'basic' || profile?.plan_type === 'free_trial') ? 'w-full' : 'grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16'}`}>
                                     {/* LEFT COLUMN: Atmosphere / Service Benefits */}
                                 {(profile?.plan_type === 'free_trial' || profile?.plan_type === 'basic') ? (
-                                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 py-4">
+                                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 py-4 items-stretch">
                                         {/* Example 1: Crema Over 50 */}
-                                        <div className="bg-white/[0.03] border border-white/10 rounded-2xl p-6 md:p-8 relative overflow-hidden group hover:bg-white/[0.05] transition-all duration-500">
+                                        <div className="bg-white/[0.03] border border-white/10 rounded-2xl p-6 md:p-8 relative overflow-hidden group hover:bg-white/[0.05] transition-all duration-500 flex flex-col">
                                             <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
                                                 <Sparkles className="w-12 h-12 text-white" />
                                             </div>
-                                            <div className="relative z-10">
-                                                <span className={`inline-block px-3 py-1 rounded-full ${profile?.plan_type === 'basic' ? 'bg-[#ff7393]/20 text-[#ff7393]' : 'bg-purple-400/20 text-purple-400'} text-xs font-bold tracking-widest uppercase mb-4`}>Esempio Pratico</span>
-                                                <h4 className="text-xl font-bold text-white mb-4 leading-snug">Promozione Crema Over 50</h4>
-                                                <p className="text-zinc-400 text-sm md:text-base mb-6 font-light italic leading-relaxed">
-                                                    Ti è appena arrivata una nuovissima crema per pelli over 50 e vorresti promuoverla in modo discreto ed elegante alle tue clienti mentre stanno facendo altri trattamenti…
-                                                </p>
-                                                <div className={`text-[10px] md:text-xs font-bold tracking-[0.2em] uppercase ${profile?.plan_type === 'basic' ? 'text-[#ff7393]' : 'text-purple-400'} mb-4 ml-1`}>
-                                                    PRENDI SPUNTO DALLE PROMO SONORE COME:
+                                            <div className="relative z-10 flex flex-col flex-1 h-full">
+                                                <div>
+                                                    <span className={`inline-block px-3 py-1 rounded-full ${profile?.plan_type === 'basic' ? 'bg-[#ff7393]/20 text-[#ff7393]' : 'bg-purple-400/20 text-purple-400'} text-xs font-bold tracking-widest uppercase mb-4`}>Esempio Pratico</span>
+                                                    <h4 className="text-xl font-bold text-white mb-4 leading-snug">Promozione Crema Over 50</h4>
                                                 </div>
-                                                <div className={`bg-black/40 rounded-xl p-5 border-l-4 ${profile?.plan_type === 'basic' ? 'border-[#ff7393]/50' : 'border-purple-400/50'} mb-6 italic text-white/90 font-medium leading-relaxed`}>
-                                                    “La tua pelle sembra spenta e opaca? I nostri trattamenti rivitalizzano e nutrono la pelle, restituendole freschezza e luminosità. Ideali per dare un boost di vitalità. Chiedi al nostro staff la migliore soluzione per te.”
+                                                
+                                                <div className="mb-4">
+                                                    <p className="text-zinc-400 text-sm md:text-base mb-4 font-light italic leading-relaxed">
+                                                        Ti è appena arrivata una nuovissima crema per pelli over 50 e vorresti promuoverla in modo discreto ed elegante alle tue clienti mentre stanno facendo altri trattamenti…
+                                                    </p>
                                                 </div>
-                                                <div className="flex items-center gap-3 text-xs md:text-sm text-zinc-500 font-medium uppercase tracking-tighter">
+
+                                                <div className="mt-4">
+                                                    <div className={`text-[10px] md:text-xs font-bold tracking-[0.2em] uppercase ${profile?.plan_type === 'basic' ? 'text-[#ff7393]' : 'text-purple-400'} mb-4 ml-1`}>
+                                                        PRENDI SPUNTO DALLE PROMO SONORE COME:
+                                                    </div>
+                                                    <div className={`bg-black/40 rounded-xl p-5 border-l-4 ${profile?.plan_type === 'basic' ? 'border-[#ff7393]/50' : 'border-purple-400/50'} mb-6 italic text-white/90 font-medium leading-relaxed min-h-[120px]`}>
+                                                        “La tua pelle sembra spenta e opaca? I nostri trattamenti rivitalizzano e nutrono la pelle, restituendole freschezza e luminosità. Ideali per dare un boost di vitalità. Chiedi al nostro staff la migliore soluzione per te.”
+                                                    </div>
+                                                </div>
+
+                                                <div className="flex items-center gap-3 text-xs md:text-sm text-zinc-500 font-medium uppercase tracking-tighter mt-auto">
                                                     <Clock className={`w-4 h-4 ${profile?.plan_type === 'basic' ? 'text-[#ff7393]' : 'text-purple-400'}`} />
                                                     L'assistente BeautiFy interviene così, ogni 15-20 minuti.
                                                 </div>
@@ -157,23 +166,32 @@ export function AreaRiservataTabs({ profile, channels, channelsError, user, isAd
                                         </div>
 
                                         {/* Example 2: Prodotti Solari */}
-                                        <div className="bg-white/[0.03] border border-white/10 rounded-2xl p-6 md:p-8 relative overflow-hidden group hover:bg-white/[0.05] transition-all duration-500">
+                                        <div className="bg-white/[0.03] border border-white/10 rounded-2xl p-6 md:p-8 relative overflow-hidden group hover:bg-white/[0.05] transition-all duration-500 flex flex-col">
                                             <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
                                                 <Music className="w-12 h-12 text-white" />
                                             </div>
-                                            <div className="relative z-10">
-                                                <span className={`inline-block px-3 py-1 rounded-full ${profile?.plan_type === 'basic' ? 'bg-[#ff7393]/20 text-[#ff7393]' : 'bg-purple-400/20 text-purple-400'} text-xs font-bold tracking-widest uppercase mb-4`}>Esempio Pratico</span>
-                                                <h4 className="text-xl font-bold text-white mb-4 leading-snug">Spinta Vendita Solari</h4>
-                                                <p className="text-zinc-400 text-sm md:text-base mb-6 font-light italic leading-relaxed">
-                                                    Vorresti promuovere, senza risultare invadente, la tua esclusiva linea di prodotti solari per spingerne l’acquisto d’impulso in vista dell’estate…
-                                                </p>
-                                                <div className={`text-[10px] md:text-xs font-bold tracking-[0.2em] uppercase ${profile?.plan_type === 'basic' ? 'text-[#ff7393]' : 'text-purple-400'} mb-4 ml-1`}>
-                                                    PRENDI SPUNTO DALLE PROMO SONORE COME:
+                                            <div className="relative z-10 flex flex-col flex-1 h-full">
+                                                <div>
+                                                    <span className={`inline-block px-3 py-1 rounded-full ${profile?.plan_type === 'basic' ? 'bg-[#ff7393]/20 text-[#ff7393]' : 'bg-purple-400/20 text-purple-400'} text-xs font-bold tracking-widest uppercase mb-4`}>Esempio Pratico</span>
+                                                    <h4 className="text-xl font-bold text-white mb-4 leading-snug">Spinta Vendita Solari</h4>
                                                 </div>
-                                                <div className={`bg-black/40 rounded-xl p-5 border-l-4 ${profile?.plan_type === 'basic' ? 'border-[#ff7393]/50' : 'border-purple-400/50'} mb-6 italic text-white/90 font-medium leading-relaxed`}>
-                                                    “Il sole può essere un allyato, se la pelle è pronta ad accoglierlo. Idratazione profonda e trattamenti nutrienti sono il miglior punto di partenza. Chiedi info al nostro staff.”
+
+                                                <div className="mb-4">
+                                                    <p className="text-zinc-400 text-sm md:text-base mb-4 font-light italic leading-relaxed">
+                                                        Vorresti promuovere, senza risultare invadente, la tua esclusiva linea di prodotti solari per spingerne l’acquisto d’impulso in vista dell’estate…
+                                                    </p>
                                                 </div>
-                                                <div className="flex items-center gap-3 text-xs md:text-sm text-zinc-500 font-medium uppercase tracking-tighter">
+
+                                                <div className="mt-4">
+                                                    <div className={`text-[10px] md:text-xs font-bold tracking-[0.2em] uppercase ${profile?.plan_type === 'basic' ? 'text-[#ff7393]' : 'text-purple-400'} mb-4 ml-1`}>
+                                                        PRENDI SPUNTO DALLE PROMO SONORE COME:
+                                                    </div>
+                                                    <div className={`bg-black/40 rounded-xl p-5 border-l-4 ${profile?.plan_type === 'basic' ? 'border-[#ff7393]/50' : 'border-purple-400/50'} mb-6 italic text-white/90 font-medium leading-relaxed min-h-[120px]`}>
+                                                        “Il sole può essere un alleato, se la pelle è pronta ad accoglierlo. Idratazione profonda e trattamenti nutrienti sono il miglior punto di partenza. Chiedi info al nostro staff.”
+                                                    </div>
+                                                </div>
+
+                                                <div className="flex items-center gap-3 text-xs md:text-sm text-zinc-500 font-medium uppercase tracking-tighter mt-auto">
                                                     <Clock className={`w-4 h-4 ${profile?.plan_type === 'basic' ? 'text-[#ff7393]' : 'text-purple-400'}`} />
                                                     L'assistente BeautiFy interviene così, ogni 15-20 minuti.
                                                 </div>
