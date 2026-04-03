@@ -119,14 +119,27 @@ export function Paywall({ salonName, userEmail, isTrial = true }: PaywallProps) 
                                         </div>
                                     </div>
                                 ) : (
-                                    <div className="flex flex-col gap-8">
-                                        <span className="text-rose-500 font-bold italic block text-3xl md:text-4xl drop-shadow-sm">
-                                            "Non lasciare il tuo salone in silenzio..."
-                                        </span>
-                                        <p className="text-zinc-200 text-xl md:text-2xl font-light leading-relaxed">
+                                    <div className="flex flex-col gap-10">
+                                        <div className="space-y-4">
+                                            <Sparkles className="w-8 h-8 text-[#ff7393]/60 mx-auto mb-2 animate-pulse" />
+                                            <span className={`text-2xl md:text-4xl font-bold leading-tight text-white tracking-tight italic ${montserrat.className}`}>
+                                                "Non lasciare il tuo salone in silenzio..."
+                                            </span>
+                                        </div>
+
+                                        <p className="text-zinc-400 text-lg md:text-xl font-medium max-w-2xl mx-auto leading-relaxed border-t border-white/5 pt-10">
                                             Riattiva il piano <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#ff7393] to-red-500 font-black uppercase underline decoration-fuchsia-500/20 underline-offset-8">BASIC</span> per utilizzare tutti i <br className="hidden md:block" /> 
                                             <span className="text-white font-bold border-b border-rose-500/30">canali musicali profilati</span> e le promozioni sonore per il tuo istituto.
                                         </p>
+
+                                        <div className="pt-4 flex flex-col items-center gap-2">
+                                            <p className="text-zinc-500 text-lg md:text-xl italic font-light">
+                                                Speriamo di riaverti presto con noi.
+                                            </p>
+                                            <span className={`text-xl md:text-2xl font-semibold tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-zinc-400 to-zinc-600 uppercase ${montserrat.className}`}>
+                                                Il Team BeautiFy
+                                            </span>
+                                        </div>
                                     </div>
                                 )}
                             </div>
