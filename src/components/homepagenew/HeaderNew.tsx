@@ -76,8 +76,11 @@ export function HeaderNew({
     }
 
     let formattedExpiration = "";
+    let isSubscriptionExpired = false;
     if (['basic', 'premium', 'premiumcustomizzato'].includes(profile?.plan_type || '') && profile?.subscription_expiration) {
         const expDate = new Date(profile.subscription_expiration);
+        const now = new Date();
+        isSubscriptionExpired = expDate < now;
         formattedExpiration = new Intl.DateTimeFormat('it-IT', { day: '2-digit', month: '2-digit', year: 'numeric' }).format(expDate);
     }
 
@@ -357,15 +360,15 @@ export function HeaderNew({
 
                             {/* BASIC/PREMIUM Plan Badge */}
                             {['basic', 'premium', 'premiumcustomizzato'].includes(profile?.plan_type || '') && (
-                                <div className={`flex items-center gap-2 lg:gap-3 bg-gradient-to-r ${profile?.plan_type === 'basic' ? 'from-[#ff7393]/20 via-[#4e0f1e]/40 to-[#ff7393]/10 border border-white/20' : 'from-amber-500/20 via-[#4e3a0f]/40 to-amber-500/10 border border-white/20'} px-3 lg:px-6 py-2 md:py-2.5 rounded-2xl backdrop-blur-xl shadow-2xl ${profile?.plan_type === 'basic' ? 'shadow-[#ff7393]/10' : 'shadow-amber-500/10'} whitespace-nowrap`}>
-                                    <Sparkles className={`w-4 h-4 lg:w-5 lg:h-5 ${profile?.plan_type === 'basic' ? 'text-[#ff7393]' : 'text-amber-400'} animate-pulse shrink-0`} />
+                                <div className={`flex items-center gap-2 lg:gap-3 bg-gradient-to-r ${profile?.plan_type === 'basic' ? (isSubscriptionExpired ? 'from-red-600/20 via-red-950/40 to-red-600/10' : 'from-[#ff7393]/20 via-[#4e0f1e]/40 to-[#ff7393]/10') : (isSubscriptionExpired ? 'from-red-600/20 via-red-950/40 to-red-600/10' : 'from-amber-500/20 via-[#4e3a0f]/40 to-amber-500/10')} border border-white/20 px-3 lg:px-6 py-2 md:py-2.5 rounded-2xl backdrop-blur-xl shadow-2xl ${profile?.plan_type === 'basic' ? (isSubscriptionExpired ? 'shadow-red-500/10' : 'shadow-[#ff7393]/10') : (isSubscriptionExpired ? 'shadow-red-500/10' : 'shadow-amber-500/10')} whitespace-nowrap`}>
+                                    <Sparkles className={`w-4 h-4 lg:w-5 lg:h-5 ${isSubscriptionExpired ? 'text-red-500' : (profile?.plan_type === 'basic' ? 'text-[#ff7393]' : 'text-amber-400')} animate-pulse shrink-0`} />
                                     <div className="flex flex-col items-start gap-0">
                                         <span className="text-[10px] lg:text-[13px] font-bold text-white uppercase tracking-wider leading-tight">
-                                            Piano <span className={profile?.plan_type === 'basic' ? 'text-[#ff7393]' : 'text-amber-400'}>{profile?.plan_type === 'basic' ? 'BASIC' : 'PREMIUM'}</span> attivo
+                                            Piano <span className={isSubscriptionExpired ? 'text-red-500' : (profile?.plan_type === 'basic' ? 'text-[#ff7393]' : 'text-amber-400')}>{profile?.plan_type === 'basic' ? 'BASIC' : 'PREMIUM'}</span> {isSubscriptionExpired ? 'SCADUTO' : 'ATTIVO'}
                                         </span>
                                         <span className="text-[8px] lg:text-[11px] font-medium text-zinc-400 italic leading-tight text-left">
                                             {formattedExpiration ? (
-                                                <>Scadenza: <span className={`${profile?.plan_type === 'basic' ? 'text-[#ff7393]' : 'text-amber-400'} font-bold`}>{formattedExpiration}</span></>
+                                                <>{isSubscriptionExpired ? 'Scaduto il: ' : 'Scadenza: '} <span className={`${isSubscriptionExpired ? 'text-red-500' : (profile?.plan_type === 'basic' ? 'text-[#ff7393]' : 'text-amber-400')} font-bold`}>{formattedExpiration}</span></>
                                             ) : (
                                                 "Abbonamento attivo"
                                             )}

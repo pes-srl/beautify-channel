@@ -51,8 +51,8 @@ export function Paywall({ salonName, userEmail, isTrial = true }: PaywallProps) 
                             </>
                         ) : (
                             <>
-                                <span className="text-rose-500 font-bold italic mr-1">"Non lasciare il tuo salone in silenzio..."</span>
-                                Scegli un piano per riattivare immediatamente l'accesso a tutti i <span className="text-white font-bold border-b-2 border-rose-500/50">canali musicali profilati</span> e alle promozioni sonore per il tuo istituto.
+                                <span className="text-rose-500 font-bold italic mr-1 block mb-2 text-2xl md:text-3xl">"Non lasciare il tuo salone in silenzio..."</span>
+                                Riattiva il piano <span className="text-[#ff7393] font-black underline decoration-fuchsia-500/30 underline-offset-4 uppercase">BASIC</span> per utilizzare tutti i <span className="text-white font-bold border-b-2 border-rose-500/50">canali musicali profilati</span> e le promozioni sonore per il tuo istituto.
                             </>
                         )}
                     </p>
