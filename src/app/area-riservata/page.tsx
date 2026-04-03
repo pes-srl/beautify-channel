@@ -138,7 +138,7 @@ export default async function AreaClientePage2(props: {
     }
 
     return (
-        <div className="pt-[7rem] pb-6 md:pb-32 min-h-[100dvh] relative w-full bg-[#0f0518] selection:bg-[#D8B2A3]/30 overflow-x-hidden">
+        <div className={`${(!isAdmin && isExpired) ? 'pt-0' : 'pt-[7rem]'} pb-6 md:pb-32 min-h-[100dvh] relative w-full bg-[#0f0518] selection:bg-[#D8B2A3]/30 overflow-x-hidden`}>
             {/* Dynamic Background identico alla Home Page */}
             <div className="fixed inset-0 z-0 flex justify-center pointer-events-none">
                 <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] bg-[#AB7169]/10 blur-[120px] rounded-full mix-blend-screen" />
