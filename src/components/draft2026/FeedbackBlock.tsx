@@ -74,24 +74,24 @@ export function FeedbackBlock({ userEmail }: FeedbackBlockProps) {
                 </p>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 md:gap-4">
                 {FEEDBACK_OPTIONS.map((option) => (
                     <button
                         key={option.id}
                         onClick={() => toggleOption(option.label)}
                         disabled={isSubmitting}
-                        className={`group relative flex flex-col items-center justify-center text-center gap-1 p-6 md:p-8 rounded-3xl border transition-all duration-500 ${
+                        className={`group relative flex flex-col items-center justify-center text-center gap-1 p-4 md:p-8 rounded-[1.5rem] md:rounded-3xl border transition-all duration-500 ${
                             selected.includes(option.label) 
                             ? 'bg-white/10 border-[#ff7393]/50 shadow-[0_0_20px_rgba(255,115,147,0.2)]' 
                             : 'bg-white/[0.03] border-white/10 hover:bg-white/[0.06] hover:border-white/20'
-                        } overflow-hidden min-h-[100px] md:min-h-[120px]`}
+                        } overflow-hidden min-h-[80px] md:min-h-[110px]`}
                     >
                         {/* Selected Indicator */}
-                        <div className={`absolute top-0 right-0 p-3 transition-opacity duration-500 ${selected.includes(option.label) ? 'opacity-100' : 'opacity-0'}`}>
-                            <CheckCircle2 className="w-5 h-5 text-[#ff7393]" />
+                        <div className={`absolute top-0 right-0 p-2 md:p-3 transition-opacity duration-500 ${selected.includes(option.label) ? 'opacity-100' : 'opacity-0'}`}>
+                            <CheckCircle2 className="w-4 h-4 md:w-5 md:h-5 text-[#ff7393]" />
                         </div>
 
-                        <span className={`text-white font-bold text-lg md:text-xl tracking-tight ${montserrat.className}`}>
+                        <span className={`text-white font-bold text-base md:text-xl tracking-tight ${montserrat.className}`}>
                             {option.label}
                         </span>
 
