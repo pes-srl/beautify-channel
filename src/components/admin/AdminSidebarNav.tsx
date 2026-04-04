@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { LayoutDashboard, Users, Radio, Settings, Image as ImageIcon, HandCoins, FileText } from "lucide-react";
+import { LayoutDashboard, Users, Radio, Settings, Image as ImageIcon, HandCoins, FileText, MessageSquare } from "lucide-react";
 
 export function AdminSidebarNav() {
     const pathname = usePathname();
@@ -32,6 +32,11 @@ export function AdminSidebarNav() {
             name: "Richieste",
             href: "/admin/richieste",
             icon: HandCoins
+        },
+        {
+            name: "Feedback",
+            href: "/admin/feedback",
+            icon: MessageSquare
         },
         {
             name: "Articoli Blog",
