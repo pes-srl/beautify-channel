@@ -51,14 +51,14 @@ export function Paywall({ salonName, userEmail, isTrial = true }: PaywallProps) 
                             {isTrial ? (
                                 <>
                                     <span className="opacity-60 whitespace-nowrap">Ciao, la tua prova gratuita di 7 giorni</span>
-                                    <span className="font-black text-transparent bg-clip-text bg-gradient-to-r from-[#ff7393] to-rose-400 tracking-tight text-xl md:text-4xl lg:text-5xl h-auto flex items-center leading-none py-1">
+                                    <span className="font-black text-transparent bg-clip-text bg-gradient-to-r from-[#ff7393] to-rose-400 tracking-tight text-lg md:text-3xl lg:text-4xl h-auto flex items-center leading-none py-1">
                                         È SCADUTA!
                                     </span>
                                 </>
                             ) : (
                                 <>
                                     <span className="opacity-60 whitespace-nowrap">Il tuo abbonamento</span>
-                                    <span className="font-black text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-rose-500 tracking-tighter text-xl md:text-4xl lg:text-5xl h-auto flex items-center leading-none py-1">
+                                    <span className="font-black text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-rose-500 tracking-tighter text-lg md:text-3xl lg:text-4xl h-auto flex items-center leading-none py-1">
                                         È SCADUTO
                                     </span>
                                 </>
@@ -135,17 +135,17 @@ export function Paywall({ salonName, userEmail, isTrial = true }: PaywallProps) 
 
                 {/* SIGN-OFF BLOCK BETWEEN CARDS */}
                 <div className="w-full flex flex-col items-center gap-1.5 md:gap-2 mb-12 md:mb-16 animate-in fade-in duration-1000 delay-300 px-6">
-                    <p className="text-zinc-500 text-base md:text-xl italic font-light text-center">
+                    <p className="text-zinc-400 text-base md:text-xl italic font-light text-center">
                         {isTrial ? 'Grazie, speriamo di sentirti presto.' : 'Speriamo di riaverti presto con noi.'}
                     </p>
-                    <span className={`text-lg md:text-2xl font-semibold tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-zinc-400 to-zinc-600 uppercase ${montserrat.className}`}>
+                    <span className={`text-lg md:text-2xl font-semibold tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-zinc-300 to-zinc-500 uppercase ${montserrat.className}`}>
                         Il Team BeautiFy
                     </span>
                 </div>
 
                 {/* BLOCK 2: FEEDBACK (Only for Trial users) */}
                 {isTrial && (
-                    <div className="max-w-4xl w-full mx-auto px-0 md:px-4 mb-20 animate-in fade-in slide-in-from-bottom-12 duration-1000">
+                    <div className="max-w-4xl w-full mx-auto px-0 md:px-4 mb-10 animate-in fade-in slide-in-from-bottom-12 duration-1000">
                         <div className="relative bg-white/[0.015] backdrop-blur-3xl border border-white/5 rounded-[2rem] md:rounded-[2.5rem] p-6 md:p-12 shadow-2xl overflow-hidden group">
                             <div className="absolute top-0 left-0 w-24 h-24 bg-gradient-to-br from-white/5 to-transparent blur-xl pointer-events-none" />
                             <div className="relative z-10">
@@ -156,9 +156,9 @@ export function Paywall({ salonName, userEmail, isTrial = true }: PaywallProps) 
                 )}
 
                 {/* Permanent Footer Content */}
-                <div className="mt-10 w-full flex flex-col items-center gap-16 px-4">
-                    <div className="text-center flex flex-col items-center pb-20">
-                        <p className="text-zinc-400 text-[11px] md:text-[13px] uppercase tracking-[0.3em] font-light mb-6 opacity-80">
+                <div className="mt-4 w-full flex flex-col items-center gap-16 px-4">
+                    <div className="text-center flex flex-col items-center pb-4">
+                        <p className="text-white text-[11px] md:text-[13px] uppercase tracking-[0.3em] font-light mb-6">
                             Hai bisogno di assistenza?
                         </p>
                         <a 
