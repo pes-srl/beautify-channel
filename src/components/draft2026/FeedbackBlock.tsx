@@ -101,30 +101,43 @@ export function FeedbackBlock({ userEmail }: FeedbackBlockProps) {
                 ))}
             </div>
 
-            {/* SEND BUTTON - Appears when something is selected */}
-            <div className={`mt-10 flex justify-center transition-all duration-500 ${selected.length > 0 ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-4 scale-95 pointer-events-none'}`}>
-                <button
-                    onClick={handleSubmit}
-                    disabled={isSubmitting || selected.length === 0}
-                    className="group relative px-10 py-4 bg-gradient-to-r from-[#ff7393] to-rose-500 rounded-full text-white font-bold text-sm uppercase tracking-[0.2em] shadow-[0_10px_30px_rgba(255,115,147,0.3)] hover:scale-105 transition-all duration-500 active:scale-95 flex items-center gap-3 disabled:opacity-50"
-                >
-                    {isSubmitting ? (
-                        <>
-                            <div className="w-4 h-4 border-2 border-white/20 border-t-white rounded-full animate-spin" />
-                            <span>Invio in corso...</span>
-                        </>
-                    ) : (
-                        <>
-                            <span>Invia Feedback</span>
-                            <CheckCircle2 className="w-4 h-4 group-hover:scale-110 transition-transform" />
-                        </>
-                    )}
-                </button>
-            </div>
+            {/* DYNAMIC INSTRUCTION & SEND BOTTON FLOW */}
+            <div className="mt-8 flex flex-col items-center gap-8 md:gap-10">
+                {/* 1. Instruction Text - Higher up when no selection */}
+                {selected.length === 0 && (
+                    <p className="text-center text-zinc-400 text-lg italic animate-in fade-in duration-500">
+                        Puoi selezionare più opzioni e confermare con il pulsante.
+                    </p>
+                )}
 
-            <p className="text-center text-zinc-400 text-lg mt-8 italic">
-                Puoi selezionare più opzioni e confermare con il pulsante.
-            </p>
+                {/* 2. SEND BUTTON - Appears when something is selected */}
+                <div className={`flex justify-center transition-all duration-500 ${selected.length > 0 ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-4 scale-95 pointer-events-none h-0 overflow-hidden'}`}>
+                    <button
+                        onClick={handleSubmit}
+                        disabled={isSubmitting || selected.length === 0}
+                        className="group relative px-10 py-4 bg-gradient-to-r from-[#ff7393] to-rose-500 rounded-full text-white font-bold text-sm uppercase tracking-[0.2em] shadow-[0_10px_30px_rgba(255,115,147,0.3)] hover:scale-105 transition-all duration-500 active:scale-95 flex items-center gap-3 disabled:opacity-50"
+                    >
+                        {isSubmitting ? (
+                            <>
+                                <div className="w-4 h-4 border-2 border-white/20 border-t-white rounded-full animate-spin" />
+                                <span>Invio in corso...</span>
+                            </>
+                        ) : (
+                            <>
+                                <span>Invia Feedback</span>
+                                <CheckCircle2 className="w-4 h-4 group-hover:scale-110 transition-transform" />
+                            </>
+                        )}
+                    </button>
+                </div>
+
+                {/* 3. Instruction Text - Below the button when selection is active */}
+                {selected.length > 0 && (
+                    <p className="text-center text-zinc-400 text-lg italic animate-in fade-in slide-in-from-top-4 duration-500">
+                        Puoi selezionare più opzioni e confermare con il pulsante.
+                    </p>
+                )}
+            </div>
         </div>
     );
 }
